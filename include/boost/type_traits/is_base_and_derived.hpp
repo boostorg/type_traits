@@ -24,7 +24,11 @@ namespace boost {
 
 namespace detail {
 
-#if !defined(__BORLANDC__)
+#if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x570)) \
+ && !BOOST_WORKAROUND(__EDG_VERSION__, <= 238)
+                             // The EDG version number is a lower estimate.
+                             // It is not currently known which EDG version
+                             // exactly fixes the problem.
 
 /*************************************************************************
 
