@@ -334,7 +334,7 @@ template <typename T> struct is_pointer<T*> { static const bool value = true; };
 //* is a type T a reference type - is_reference<T>
 template <typename T> struct is_reference { static const bool value = false; };
 template <typename T> struct is_reference<T&> { static const bool value = true; };
-#if defined(__BORLANDC__) && (__BORLANDC__ <= 0x551)
+#if defined(__BORLANDC__) && (__BORLANDC__ <= 0x550)
 // these are illegal specialisations; cv-qualifies applied to
 // references have no effect according to [8.3.2p1],
 // C++ Builder requires them though as it treats cv-qualified
@@ -487,21 +487,17 @@ struct is_convertible<void, void>
 };
 //
 // get the alignment of some arbitrary type:
-namespace detail{
-// hack for MWCW:
-template <class T>
-class alignment_of_hack
-{
-   char c;
-   T t;
-   alignment_of_hack();
-};
-}
 template <class T>
 class alignment_of
 {
+   struct padded
+   {
+      char c;
+      T t;
+      padded();
+   };
 public:
-   static const unsigned value = sizeof(detail::alignment_of_hack<T>) - sizeof(T);
+   static const unsigned value = sizeof(padded) - sizeof(T);
 };
 //
 // references have to be treated specially, assume
@@ -607,7 +603,6 @@ public:
 #undef BOOST_HAS_TRIVIAL_DESTRUCTOR
 
 #endif // BOOST_DETAIL_TYPE_TRAITS_HPP
-
 
 
 
