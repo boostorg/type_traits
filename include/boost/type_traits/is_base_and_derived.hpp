@@ -24,7 +24,7 @@ namespace boost {
 namespace detail {
 
 #if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x581)) \
- && !BOOST_WORKAROUND(__SUNPRO_CC , BOOST_TESTED_AT(0x540)) \
+ && !BOOST_WORKAROUND(__SUNPRO_CC , <= 0x540) \
  && !BOOST_WORKAROUND(__EDG_VERSION__, <= 243) \
  && !BOOST_WORKAROUND(__DMC__, BOOST_TESTED_AT(0x840))
 
@@ -220,3 +220,4 @@ BOOST_TT_AUX_BOOL_TRAIT_PARTIAL_SPEC2_2(typename Base,typename Derived,is_base_a
 #include <boost/type_traits/detail/bool_trait_undef.hpp>
 
 #endif // BOOST_TT_IS_BASE_AND_DERIVED_HPP_INCLUDED
+
