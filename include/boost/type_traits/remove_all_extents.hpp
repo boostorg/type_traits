@@ -1,47 +1,48 @@
-// Copyright (C) 2004 Peder Holt
-// Use, modification and distribution is subject to the Boost Software
-// License, Version 1.0. (http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_TYPE_TRAITS_MSVC_REMOVE_ALL_EXTENT_HOLT_2004_0827
-#define BOOST_TYPE_TRAITS_MSVC_REMOVE_ALL_EXTENT_HOLT_2004_0827
+//  (C) Copyright John Maddock 2005.
+//  Use, modification and distribution are subject to the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt).
+//
+//  See http://www.boost.org/libs/type_traits for most recent version including documentation.
 
-#include <boost/type_traits/msvc/typeof.hpp>
-#include <boost/type_traits/is_array.hpp>
+#ifndef BOOST_TT_REMOVE_ALL_EXTENTS_HPP_INCLUDED
+#define BOOST_TT_REMOVE_ALL_EXTENTS_HPP_INCLUDED
+
+#include <boost/config.hpp>
+#include <cstddef>
+#include <boost/detail/workaround.hpp>
+
+#if BOOST_WORKAROUND(BOOST_MSVC,<=1300)
+#include <boost/type_traits/msvc/remove_all_extents.hpp>
+#endif
+
+// should be the last #include
+#include <boost/type_traits/detail/type_trait_def.hpp>
+
+#if !BOOST_WORKAROUND(BOOST_MSVC,<=1300)
 
 namespace boost {
-    template<typename T>
-    struct remove_all_extents;
 
-    namespace detail {
-        template<bool IsArray>
-        struct remove_all_extents_impl_typeof {
-            template<typename T,typename ID>
-            struct inner {
-                typedef T type;
-            };
-        };
-        template<>
-        struct remove_all_extents_impl_typeof<true> {
-            template<typename T,typename ID>
-            struct inner {
-                template<typename U>
-                static msvc_register_type<U,ID> test(U[]);
-                static msvc_register_type<T,ID> test(...);
-                BOOST_STATIC_CONSTANT(unsigned,register_test=sizeof(test( *((T*)NULL) ) ));
-                typedef typename msvc_extract_type<ID>::id2type::type reduced_type;
-                typedef typename remove_all_extents<reduced_type>::type type;
-            };
-        };
-    } //namespace detail
+BOOST_TT_AUX_TYPE_TRAIT_DEF1(remove_all_extents,T,T)
 
-    template<typename T>
-    struct remove_all_extents {
-        typedef typename detail::remove_all_extents_impl_typeof<
-            boost::is_array<T>::value                
-        >::template inner<T,remove_all_extents<T> >::type type;
-        BOOST_MPL_AUX_LAMBDA_SUPPORT(1,remove_all_extents,T)
-    };
-} //namespace boost
+#if !defined(BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION) && !defined(BOOST_NO_ARRAY_TYPE_SPECIALIZATIONS)
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_2(typename T,std::size_t N,remove_all_extents,T[N],typename boost::remove_all_extents<T>::type type)
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_2(typename T,std::size_t N,remove_all_extents,T const[N],typename boost::remove_all_extents<T const>::type type)
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_2(typename T,std::size_t N,remove_all_extents,T volatile[N],typename boost::remove_all_extents<T volatile>::type type)
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_2(typename T,std::size_t N,remove_all_extents,T const volatile[N],typename boost::remove_all_extents<T const volatile>::type type)
+#if !BOOST_WORKAROUND(__BORLANDC__, < 0x600) && !defined(__IBMCPP__) &&  !BOOST_WORKAROUND(__DMC__, BOOST_TESTED_AT(0x840))
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_1(typename T,remove_all_extents,T[],typename boost::remove_all_extents<T>::type)
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_1(typename T,remove_all_extents,T const[],typename boost::remove_all_extents<T const>::type)
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_1(typename T,remove_all_extents,T volatile[],typename boost::remove_all_extents<T volatile>::type)
+BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_1(typename T,remove_all_extents,T const volatile[],typename boost::remove_all_extents<T const volatile>::type)
+#endif
+#endif
 
-#endif //BOOST_TYPE_TRAITS_MSVC_REMOVE_BOUNDS_HOLT_2004_0827
+} // namespace boost
 
+#endif
+
+#include <boost/type_traits/detail/type_trait_undef.hpp>
+
+#endif // BOOST_TT_REMOVE_BOUNDS_HPP_INCLUDED
