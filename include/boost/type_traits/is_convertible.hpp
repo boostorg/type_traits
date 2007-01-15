@@ -340,7 +340,7 @@ struct is_convertible_impl_select<true, false, true>
 template <typename From, typename To>
 struct is_convertible_impl_dispatch_base
 {
-#ifndef __HP_aCC
+#if !BOOST_WORKAROUND(__HP_aCC, < 60700)
    typedef is_convertible_impl_select< 
       ::boost::is_arithmetic<From>::value, 
       ::boost::is_arithmetic<To>::value,
@@ -413,3 +413,4 @@ BOOST_TT_AUX_BOOL_TRAIT_DEF2(is_convertible,From,To,(::boost::detail::is_convert
 #include <boost/type_traits/detail/bool_trait_undef.hpp>
 
 #endif // BOOST_TT_IS_CONVERTIBLE_HPP_INCLUDED
+
