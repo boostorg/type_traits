@@ -95,6 +95,10 @@
 
 [section:intro Introduction]
 
+This documentation is 
+[@http://boost-consulting.com/vault/index.php?action=downloadfile&filename=boost_type_traits-1.34.pdf&directory=PDF%20Documentation& 
+also available in printer-friendly PDF format].
+
 The Boost type-traits library contains a 
 set of very specific traits classes, each of which encapsulate a single trait 
 from the C++ type system; for example, is a type a pointer or a reference type? 
@@ -2873,6 +2877,7 @@ should be directed to boost@lists.boost.org
 www.boost.org/more/mailing_lists.htm#main] for subscription details).
 
 [endsect]
+
 
 
 
