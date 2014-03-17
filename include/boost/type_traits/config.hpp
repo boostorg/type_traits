@@ -61,6 +61,12 @@
 #  define BOOST_TT_NO_CV_FUNC_TEST
 #endif
 
+//
+// Macros that have been deprecated, defined here for backwards compatibility:
+//
+#define BOOST_BROKEN_COMPILER_TYPE_TRAITS_SPECIALIZATION(x)
+#define BOOST_TT_BROKEN_COMPILER_SPEC(x)
+
 #endif // BOOST_TT_CONFIG_HPP_INCLUDED
 
 
