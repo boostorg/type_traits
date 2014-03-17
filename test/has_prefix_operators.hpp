@@ -6,6 +6,11 @@
 #ifndef TT_HAS_PREFIX_OPERATORS_HPP
 #define TT_HAS_PREFIX_OPERATORS_HPP
 
+#if defined(__GNUC__) && (__GNUC__*10000 + __GNUC_MINOR__*100 + __GNUC_PATCHLEVEL__ > 40900)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-function"
+#endif
+
 // test with one template parameter
 #define TEST_T(TYPE,RESULT) BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<TYPE>::value), RESULT)
 // test with one template parameter plus return value
@@ -124,5 +129,9 @@ void common() {
 }
 
 }
+
+#if defined(__GNUC__) && (__GNUC__*10000 + __GNUC_MINOR__*100 + __GNUC_PATCHLEVEL__ > 40900)
+#pragma GCC diagnostic pop
+#endif
 
 #endif
