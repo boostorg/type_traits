@@ -28,7 +28,7 @@ namespace detail{
 template <class T>
 struct rvalue_ref_filter_rem_cv
 {
-   typedef typename boost::detail::cv_traits_imp<T*>::unqualified_type type;
+   typedef typename boost::detail::cv_traits_imp<BOOST_TT_AUX_CV_TRAITS_IMPL_PARAM(T)>::unqualified_type type;
 };
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
