@@ -30,7 +30,9 @@
 #if defined(__MWERKS__)
 #include <boost/type_traits/remove_reference.hpp>
 #endif
-
+#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+#  include <boost/utility/declval.hpp>
+#endif
 #endif // BOOST_IS_CONVERTIBLE
 
 // should be always the last #include directive
@@ -52,7 +54,43 @@ namespace boost {
 
 namespace detail {
 
-#if defined(__BORLANDC__) && (__BORLANDC__ < 0x560)
+#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+
+   // This is a C++11 conforming version:
+
+   template <class A, class B, class C>
+   struct or_helper
+   {
+      static const bool value = (A::value || B::value || C::value);
+   };
+
+   template<typename From, typename To, bool b = or_helper<boost::is_void<From>, boost::is_function<To>, boost::is_array<To> >::value>
+   struct is_convertible_basic_impl
+   {
+      // Nothing converts to function or array, but void converts to void:
+      static const bool value = is_void<To>::value; 
+   };
+
+   template<typename From, typename To>
+   class is_convertible_basic_impl<From, To, false>
+   {
+      typedef char one;
+      typedef int  two;
+
+      template<typename To1>
+      static void test_aux(To1);
+
+      template<typename From1, typename To1>
+      static decltype(test_aux<To1>(boost::declval<From1>()), one()) test(int);
+
+      template<typename, typename>
+      static two test(...);
+
+   public:
+      static const bool value = sizeof(test<From, To>(0)) == 1;
+   };
+
+#elif defined(__BORLANDC__) && (__BORLANDC__ < 0x560)
 //
 // special version for Borland compilers
 // this version breaks when used for some

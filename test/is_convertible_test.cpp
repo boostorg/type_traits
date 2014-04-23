@@ -56,6 +56,20 @@ struct bug_5271b
 
 #endif
 
+#if ((!defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)) || defined(BOOST_IS_CONVERTIBLE)) && !defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
+struct bug9910
+{
+   bug9910() = default;
+   bug9910(const bug9910&) = delete; // or private: A(const A&) = default;
+};
+struct Ref_bug9910 
+{ 
+   // proxy reference to bug9910
+   operator bug9910& () { return *_ptr; }
+   bug9910* _ptr;
+};
+#endif
+
 TT_TEST_BEGIN(is_convertible)
 
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<Derived,Base>::value), true);
@@ -190,6 +204,13 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<test_bug_4530<A4530>,A4530>:
 #if defined(BOOST_MSVC) && (BOOST_MSVC > 1310)
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<int, bug_5271a>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<int, bug_5271b>::value), true);
+#endif
+
+#if ((!defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)) || defined(BOOST_IS_CONVERTIBLE)) && !defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
+#ifndef _MSC_VER
+// MSVC gives the wrong answer here, see https://connect.microsoft.com/VisualStudio/feedback/details/858956/std-is-convertible-returns-incorrect-value
+BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<Ref_bug9910, bug9910>::value), false);
+#endif
 #endif
 
 TT_TEST_END
