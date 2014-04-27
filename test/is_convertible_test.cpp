@@ -56,7 +56,7 @@ struct bug_5271b
 
 #endif
 
-#if ((!defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)) || defined(BOOST_IS_CONVERTIBLE)) && !defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
+#if (defined(BOOST_TT_CXX11_IS_CONVERTIBLE) || defined(BOOST_IS_CONVERTIBLE)) && !defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
 struct bug9910
 {
    bug9910() = default;
@@ -206,11 +206,13 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<int, bug_5271a>::value), fal
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<int, bug_5271b>::value), true);
 #endif
 
-#if ((!defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)) || defined(BOOST_IS_CONVERTIBLE)) && !defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
+#if (defined(BOOST_TT_CXX11_IS_CONVERTIBLE) || defined(BOOST_IS_CONVERTIBLE)) && !defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
 #ifndef _MSC_VER
 // MSVC gives the wrong answer here, see https://connect.microsoft.com/VisualStudio/feedback/details/858956/std-is-convertible-returns-incorrect-value
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<Ref_bug9910, bug9910>::value), false);
 #endif
+// From https://svn.boost.org/trac/boost/ticket/9910#comment:2:
+BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<int, incomplete_type[]>::value), false);
 #endif
 
 TT_TEST_END

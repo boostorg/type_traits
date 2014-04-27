@@ -56,7 +56,9 @@ namespace detail {
 
 #if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 
-   // This is a C++11 conforming version:
+   // This is a C++11 conforming version, place this first and use it wherever possible:
+
+#  define BOOST_TT_CXX11_IS_CONVERTIBLE
 
    template <class A, class B, class C>
    struct or_helper
@@ -416,7 +418,8 @@ struct is_convertible_impl_dispatch_base
    typedef is_convertible_impl_select< 
       ::boost::is_arithmetic<From>::value, 
       ::boost::is_arithmetic<To>::value,
-#ifndef BOOST_NO_IS_ABSTRACT
+#if !defined(BOOST_NO_IS_ABSTRACT) && !defined(BOOST_TT_CXX11_IS_CONVERTIBLE)
+      // We need to filter out abstract types, only if we don't have a strictly conforming C++11 version:
       ::boost::is_abstract<To>::value
 #else
       false
