@@ -42,7 +42,7 @@ template <typename T>
 struct remove_volatile_impl
 {
     typedef typename remove_volatile_helper<
-          typename cv_traits_imp<T*>::unqualified_type
+       typename cv_traits_imp<BOOST_TT_AUX_CV_TRAITS_IMPL_PARAM(T)>::unqualified_type
         , ::boost::is_const<T>::value
         >::type type;
 };

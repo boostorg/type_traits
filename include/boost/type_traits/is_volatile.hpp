@@ -41,7 +41,7 @@ struct is_volatile_rval_filter
 #if BOOST_WORKAROUND(BOOST_MSVC, < 1400)
    BOOST_STATIC_CONSTANT(bool, value = ::boost::detail::cv_traits_imp<typename boost::remove_bounds<T>::type*>::is_volatile);
 #else
-   BOOST_STATIC_CONSTANT(bool, value = ::boost::detail::cv_traits_imp<T*>::is_volatile);
+   BOOST_STATIC_CONSTANT(bool, value = ::boost::detail::cv_traits_imp<BOOST_TT_AUX_CV_TRAITS_IMPL_PARAM(T)>::is_volatile);
 #endif
 };
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
