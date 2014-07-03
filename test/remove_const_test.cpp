@@ -33,7 +33,7 @@ BOOST_DECL_TRANSFORM_TEST(remove_const_test_19, ::tt::remove_const, (*const), (*
 struct S
 {
    template<typename T>
-   typename boost::remove_const<T>::type *operator=(T const &) const { return 0; }
+   typename ::tt::remove_const<T>::type *operator=(T const &) const { return 0; }
 };
 
 void bar() {}
