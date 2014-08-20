@@ -238,6 +238,9 @@
       // old implementation instead in that case:
 #     define BOOST_ALIGNMENT_OF(T) __alignof__(T)
 #   endif
+#   if (__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 7))
+#     define BOOST_IS_FINAL(T) __is_final(T)
+#   endif
 
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
 #endif
@@ -265,10 +268,6 @@
 #   define BOOST_IS_ENUM(T) __is_enum(T)
 #   define BOOST_IS_POLYMORPHIC(T) __is_polymorphic(T)
 #   define BOOST_ALIGNMENT_OF(T) __alignof__(T)
-#   if (__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 7))
-#     define BOOST_IS_FINAL(T) __is_final(T)
-#   endif
-
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
 #endif
 
