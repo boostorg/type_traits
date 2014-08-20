@@ -30,9 +30,18 @@ TT_TEST_BEGIN(is_final)
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<f1>::value, false);
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<enum_UDT>::value, false);
 
-#if defined(BOOST_HAS_TYPE_TRAITS_INTRINSICS)
+#if !defined(BOOST_NO_CXX11_FINAL)
+   //
+   // These are "soft" checks: since we cannot implement this trait
+   // ourselves and instead rely on the compiler.
+   //
+#  ifndef BOOST_IS_FINAL
+   BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_final<final_UDT>::value, true, false);
+   BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_final<final_UDT const>::value, true, false);
+#  else
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<final_UDT>::value, true);
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<final_UDT const>::value, true);
+#  endif
 #else
    std::cout <<
    "\n<note>\n"
@@ -58,7 +67,6 @@ TT_TEST_BEGIN(is_final)
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<foo2_t>::value, false);
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<foo3_t>::value, false);
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<foo4_t>::value, false);
-   BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<incomplete_type>::value, false);
 
 TT_TEST_END
 
