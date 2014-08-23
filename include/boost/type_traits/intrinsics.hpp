@@ -181,8 +181,7 @@
 #     define BOOST_IS_CLASS(T) __is_class(T)
 #   endif
 #   if __has_feature(is_convertible_to)
-#     include <boost/type_traits/is_abstract.hpp>
-#     define BOOST_IS_CONVERTIBLE(T,U) (__is_convertible_to(T,U) && !::boost::is_abstract<U>::value)
+#     define BOOST_IS_CONVERTIBLE(T,U) __is_convertible_to(T,U)
 #   endif
 #   if __has_feature(is_enum)
 #     define BOOST_IS_ENUM(T) __is_enum(T)
