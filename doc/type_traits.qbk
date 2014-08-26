@@ -69,6 +69,7 @@
 [def __is_empty [link boost_typetraits.reference.is_empty is_empty]]
 [def __is_const [link boost_typetraits.reference.is_const is_const]]
 [def __is_copy_constructible [link boost_typetraits.reference.is_copy_constructible is_copy_constructible]]
+[def __is_copy_assignable [link boost_typetraits.reference.is_copy_assignable is_copy_assignable]]
 [def __is_volatile [link boost_typetraits.reference.is_volatile is_volatile]]
 [def __is_abstract [link boost_typetraits.reference.is_abstract is_abstract]]
 [def __is_polymorphic [link boost_typetraits.reference.is_polymorphic is_polymorphic]]
