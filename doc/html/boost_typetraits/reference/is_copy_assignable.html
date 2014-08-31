@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>is_copy_constructible</title>
+<title>is_copy_assignable</title>
 <link rel="stylesheet" href="../../../../../../doc/src/boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="../../index.html" title="Chapter&#160;1.&#160;Boost.TypeTraits">
 <link rel="up" href="../reference.html" title="Alphabetical Reference">
-<link rel="prev" href="is_convertible.html" title="is_convertible">
-<link rel="next" href="is_copy_assignable.html" title="is_copy_assignable">
+<link rel="prev" href="is_copy_constructible.html" title="is_copy_constructible">
+<link rel="next" href="is_empty.html" title="is_empty">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,18 +20,19 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="is_convertible.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="is_copy_assignable.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="is_copy_constructible.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="is_empty.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="boost_typetraits.reference.is_copy_constructible"></a><a class="link" href="is_copy_constructible.html" title="is_copy_constructible">is_copy_constructible</a>
+<a name="boost_typetraits.reference.is_copy_assignable"></a><a class="link" href="is_copy_assignable.html" title="is_copy_assignable">is_copy_assignable</a>
 </h3></div></div></div>
 <pre class="programlisting"><span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_copy_constructible</span> <span class="special">:</span> <span class="keyword">public</span> <em class="replaceable"><code><a class="link" href="integral_constant.html" title="integral_constant">true_type</a>-or-<a class="link" href="integral_constant.html" title="integral_constant">false_type</a></code></em> <span class="special">{};</span>
+<span class="keyword">struct</span> <span class="identifier">is_copy_assignable</span> <span class="special">:</span> <span class="keyword">public</span> <em class="replaceable"><code><a class="link" href="integral_constant.html" title="integral_constant">true_type</a>-or-<a class="link" href="integral_constant.html" title="integral_constant">false_type</a></code></em> <span class="special">{};</span>
 </pre>
 <p>
         <span class="bold"><strong>Inherits:</strong></span> If <code class="computeroutput"><span class="identifier">T</span></code>
-        is a (possibly cv-qualified) type with a copy constructor, then inherits
+        is <code class="computeroutput"><span class="identifier">CopyAssignable</span></code> (i.e. has
+        an accessible explicit or implicit copy assignment operator), then inherits
         from <a class="link" href="integral_constant.html" title="integral_constant">true_type</a>,
         otherwise inherits from <a class="link" href="integral_constant.html" title="integral_constant">false_type</a>.
         Type <code class="computeroutput"><span class="identifier">T</span></code> must be a complete
@@ -39,10 +40,11 @@
       </p>
 <p>
         In other words, inherits from <a class="link" href="integral_constant.html" title="integral_constant">true_type</a>
-        only if copy constructor of <code class="computeroutput"><span class="identifier">T</span></code>
-        not marked with <code class="computeroutput"><span class="special">=</span> <span class="keyword">delete</span></code>,
+        only if copy assignment of <code class="computeroutput"><span class="identifier">T</span></code>
+        from <code class="computeroutput"><span class="keyword">const</span> <span class="identifier">T</span>
+        <span class="special">&amp;</span></code> is not marked with <code class="computeroutput"><span class="special">=</span> <span class="keyword">delete</span></code>,
         <code class="computeroutput"><span class="identifier">T</span></code> does not derives from
-        <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span></code> and does not marked with <code class="computeroutput"><span class="identifier">BOOST_MOVABLE_BUT_NOT_COPYABLE</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span></code>.
+        <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span></code> and is not marked with <code class="computeroutput"><span class="identifier">BOOST_MOVABLE_BUT_NOT_COPYABLE</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span></code>.
       </p>
 <p>
         <span class="bold"><strong>Compiler Compatibility:</strong></span> If the compiler
@@ -51,23 +53,23 @@
       </p>
 <p>
         If your compiler does not support C++11 deleted functions (<code class="computeroutput"><span class="special">=</span> <span class="keyword">delete</span></code>)
-        or does not support SFINAE for the deleted constructors, then derive your
+        or does not support SFINAE for the deleted assignments, then derive your
         classes from <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span></code> or mark them with <code class="computeroutput"><span class="identifier">BOOST_MOVABLE_BUT_NOT_COPYABLE</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span></code> to show
-        that class is noncopyable.
+        that class is non-assignable.
       </p>
 <p>
         Trait does not care about access modifiers, so if you see errors like this:
       </p>
-<pre class="programlisting"><span class="char">'T::T(const T&amp;)'</span> <span class="identifier">is</span> <span class="keyword">private</span>
-<span class="identifier">boost</span><span class="special">/</span><span class="identifier">type_traits</span><span class="special">/</span><span class="identifier">is_copy_constructible</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">:</span><span class="number">68</span><span class="special">:</span><span class="number">5</span><span class="special">:</span> <span class="identifier">error</span><span class="special">:</span> <span class="identifier">within</span> <span class="keyword">this</span> <span class="identifier">context</span>
+<pre class="programlisting"><span class="char">'T::operator=(const T&amp;)'</span> <span class="identifier">is</span> <span class="keyword">private</span>
+<span class="identifier">boost</span><span class="special">/</span><span class="identifier">type_traits</span><span class="special">/</span><span class="identifier">is_copy_assignable</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">:</span><span class="number">68</span><span class="special">:</span><span class="number">5</span><span class="special">:</span> <span class="identifier">error</span><span class="special">:</span> <span class="identifier">within</span> <span class="keyword">this</span> <span class="identifier">context</span>
 </pre>
 <p>
-        then you are trying to call that macro for a structure with private constructor:
+        then you are trying to call that macro for a structure with private assignment:
       </p>
 <pre class="programlisting"><span class="keyword">struct</span> <span class="identifier">T</span> <span class="special">{</span>
     <span class="comment">// ...</span>
 <span class="keyword">private</span><span class="special">:</span>
-    <span class="identifier">T</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;);</span>
+    <span class="identifier">T</span> <span class="special">&amp;</span><span class="keyword">operator</span><span class="special">=(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;);</span>
     <span class="comment">// ...</span>
 <span class="special">};</span>
 </pre>
@@ -75,11 +77,12 @@
         To fix that you must modify your structure, explicitly marking it as noncopyable
         (<code class="computeroutput"><span class="special">=</span> <span class="keyword">delete</span></code>,
         <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span></code> or <code class="computeroutput"><span class="identifier">BOOST_MOVABLE_BUT_NOT_COPYABLE</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span></code>)
-        or explicitly <a class="link" href="../user_defined.html" title="User Defined Specializations">specialize trait</a>.
+        or explicitly <a class="link" href="../user_defined.html" title="User Defined Specializations">specializing
+        the trait</a>.
       </p>
 <p>
         <span class="bold"><strong>Header:</strong></span> <code class="computeroutput"> <span class="preprocessor">#include</span>
-        <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">type_traits</span><span class="special">/</span><span class="identifier">is_copy_constructible</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
+        <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">type_traits</span><span class="special">/</span><span class="identifier">is_copy_assignable</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         or <code class="computeroutput"> <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">type_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
       </p>
 </div>
@@ -97,7 +100,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="is_convertible.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="is_copy_assignable.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="is_copy_constructible.html"><img src="../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="is_empty.html"><img src="../../../../../../doc/src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

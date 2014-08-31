@@ -263,6 +263,7 @@ See __has_trivial_constructor.
 [include is_const.qbk]
 [include is_convertible.qbk]
 [include is_copy_constructible.qbk]
+[include is_copy_assignable.qbk]
 [include is_empty.qbk]
 [include is_enum.qbk]
 [include is_final.qbk]
