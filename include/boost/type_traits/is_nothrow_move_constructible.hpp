@@ -42,12 +42,7 @@ struct false_or_cpp11_noexcept_move_constructible <
 
 template <class T>
 struct is_nothrow_move_constructible_imp{
-   BOOST_STATIC_CONSTANT(bool, value = 
-        (::boost::type_traits::ice_and<
-            ::boost::type_traits::ice_not< ::boost::is_volatile<T>::value >::value,
-            ::boost::type_traits::ice_not< ::boost::is_reference<T>::value >::value,
-            ::boost::detail::false_or_cpp11_noexcept_move_constructible<T>::value
-        >::value));
+   BOOST_STATIC_CONSTANT(bool, value = ::boost::detail::false_or_cpp11_noexcept_move_constructible<T>::value);
 };
 
 template <class T>
@@ -56,6 +51,10 @@ template <class T>
 struct is_nothrow_move_constructible_imp<const volatile T> : public ::boost::false_type{};
 template <class T>
 struct is_nothrow_move_constructible_imp<T&> : public ::boost::false_type{};
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
+template <class T>
+struct is_nothrow_move_constructible_imp<T&&> : public ::boost::false_type{};
+#endif
 
 #else
 
