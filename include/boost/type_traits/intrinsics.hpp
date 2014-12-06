@@ -114,7 +114,7 @@
 #       define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) ((__has_trivial_move_constructor(T) || __is_pod(T)) && !::boost::is_volatile<T>::value && !::boost::is_reference<T>::value)
 #       define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) ((__has_trivial_move_assign(T) || __is_pod(T)) && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value && !::boost::is_reference<T>::value)
 #   endif
-#if _MSC_FULL_VER < 180020827
+#if _MSC_FULL_VER >= 180020827
 #   define BOOST_IS_NOTHROW_MOVE_ASSIGN(T) (__is_nothrow_assignable(T&, T&&))
 #   define BOOST_IS_NOTHROW_MOVE_CONSTRUCT(T) (__is_nothrow_constructible(T, T&&))
 #endif
