@@ -9,16 +9,12 @@
 #ifndef BOOST_TT_IS_COPY_CONSTRUCTIBLE_HPP_INCLUDED
 #define BOOST_TT_IS_COPY_CONSTRUCTIBLE_HPP_INCLUDED
 
-#include <boost/config.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_base_and_derived.hpp>
 #include <boost/type_traits/add_reference.hpp>
 #include <boost/type_traits/is_rvalue_reference.hpp>
 #include <boost/utility/declval.hpp>
 #include <boost/noncopyable.hpp>
-
-// should be the last #include
-#include <boost/type_traits/detail/bool_trait_def.hpp>
 
 namespace boost {
 
@@ -110,16 +106,14 @@ struct is_copy_constructible_impl {
 
 } // namespace detail
 
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_copy_constructible,T,::boost::detail::is_copy_constructible_impl<T>::value)
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(is_copy_constructible,void,false)
+template <class T> struct is_copy_constructible : public integral_constant<bool, ::boost::detail::is_copy_constructible_impl<T>::value>{};
+template <> struct is_copy_constructible<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(is_copy_constructible,void const,false)
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(is_copy_constructible,void const volatile,false)
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(is_copy_constructible,void volatile,false)
+template <> struct is_copy_constructible<void const> : public false_type{};
+template <> struct is_copy_constructible<void volatile> : public false_type{};
+template <> struct is_copy_constructible<void const volatile> : public false_type{};
 #endif
 
 } // namespace boost
-
-#include <boost/type_traits/detail/bool_trait_undef.hpp>
 
 #endif // BOOST_TT_IS_COPY_CONSTRUCTIBLE_HPP_INCLUDED
