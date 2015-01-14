@@ -13,6 +13,7 @@
 #define BOOST_TT_IS_CONVERTIBLE_HPP_INCLUDED
 
 #include <boost/type_traits/intrinsics.hpp>
+#include <boost/type_traits/integral_constant.hpp>
 #ifndef BOOST_IS_CONVERTIBLE
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/detail/config.hpp>

@@ -18,6 +18,9 @@
 #if defined(__GNUC__)
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
+#ifdef BOOST_INTEL
+#include <boost/type_traits/is_pod.hpp>
+#endif
 #endif
 
 namespace boost {

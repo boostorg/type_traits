@@ -17,6 +17,9 @@
 #if defined(BOOST_CLANG) || defined(__GNUC__) || defined(__ghs__) || defined(__CODEGEARC__)
 #include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/is_reference.hpp>
+#ifdef BOOST_INTEL
+#include <boost/type_traits/is_pod.hpp>
+#endif
 #elif defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_copy.hpp>
 #endif
