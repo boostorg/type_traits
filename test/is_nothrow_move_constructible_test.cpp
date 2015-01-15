@@ -6,6 +6,7 @@
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include "test.hpp"
+#include <boost/config.hpp>
 #include "check_integral_constant.hpp"
 #ifdef TEST_STD
 #  include <type_traits>
