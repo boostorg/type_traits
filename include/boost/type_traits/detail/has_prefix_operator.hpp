@@ -7,7 +7,7 @@
 //  See http://www.boost.org/libs/type_traits for most recent version including documentation.
 
 #include <boost/config.hpp>
-#include <boost/type_traits/ice.hpp>
+#include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_fundamental.hpp>
@@ -168,13 +168,7 @@ struct trait_impl1 < Rhs, Ret, true > {
 template < typename Rhs, typename Ret >
 struct trait_impl1 < Rhs, Ret, false > {
    BOOST_STATIC_CONSTANT(bool,
-      value = (
-         ::boost::type_traits::ice_and<
-            operator_exists < Rhs >::value,
-            operator_returns_Ret < Rhs, Ret, operator_returns_void < Rhs >::value >::value
-         >::value
-      )
-   );
+      value = (operator_exists < Rhs >::value && operator_returns_Ret < Rhs, Ret, operator_returns_void < Rhs >::value >::value));
 };
 
 // specialization needs to be declared for the special void case
