@@ -12,7 +12,7 @@
 #ifndef BOOST_CONFIG_HPP
 #include <boost/config.hpp>
 #endif
-
+#include <boost/version.hpp>
 #include <boost/detail/workaround.hpp>
 
 //
@@ -66,6 +66,18 @@
 //
 #define BOOST_BROKEN_COMPILER_TYPE_TRAITS_SPECIALIZATION(x)
 #define BOOST_TT_BROKEN_COMPILER_SPEC(x)
+
+#ifdef BOOST_NO_CXX11_INLINE_NAMESPACES
+
+#define BOOST_TT_INLINE_NS
+#define BOOST_TT_INLINE_NS_END
+
+#else
+
+#define BOOST_TT_INLINE_NS  inline namespace BOOST_JOIN(tt, BOOST_VERSION) {
+#define BOOST_TT_INLINE_NS_END }
+
+#endif
 
 #endif // BOOST_TT_CONFIG_HPP_INCLUDED
 

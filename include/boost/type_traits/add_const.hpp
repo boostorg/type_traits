@@ -10,9 +10,11 @@
 #ifndef BOOST_TT_ADD_CONST_HPP_INCLUDED
 #define BOOST_TT_ADD_CONST_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
+
+BOOST_TT_INLINE_NS
 
 // * convert a type T to const type - add_const<T>
 // this is not required since the result is always
@@ -41,6 +43,7 @@ namespace boost {
       typedef T& type;
    };
 
+BOOST_TT_INLINE_NS_END
 } // namespace boost
 
 #endif // BOOST_TT_ADD_CONST_HPP_INCLUDED
