@@ -21,6 +21,7 @@ namespace boost{
    {
       template <bool B> struct bool_;
       template <class I, I val> struct integral_c;
+      struct integral_c_tag;
    }
 }
 
@@ -30,7 +31,7 @@ namespace mpl_{
 
    template <bool B> struct bool_;
    template <class I, I val> struct integral_c;
-
+   struct integral_c_tag;
 }
 
 namespace boost
@@ -39,6 +40,7 @@ namespace boost
    {
       using ::mpl_::bool_;
       using ::mpl_::integral_c;
+      using ::mpl_::integral_c_tag;
    }
 }
 
@@ -49,6 +51,8 @@ namespace boost{
    template <class T, T val>
    struct integral_constant
    {
+      typedef mpl::integral_c_tag tag;
+      typedef T value_type;
       typedef integral_constant<T, val> type;
       static const T value = val;
 
