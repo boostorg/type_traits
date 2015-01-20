@@ -10,8 +10,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef BOOST_ALIGNED_STORAGE_HPP
-#define BOOST_ALIGNED_STORAGE_HPP
+#ifndef BOOST_TT_ALIGNED_STORAGE_HPP
+#define BOOST_TT_ALIGNED_STORAGE_HPP
 
 #include <cstddef> // for std::size_t
 
