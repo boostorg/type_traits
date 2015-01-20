@@ -61,6 +61,7 @@ namespace boost{
          static const char data = 0;
          return *reinterpret_cast<const mpl::integral_c<T, val>*>(&data);
       }
+      BOOST_CONSTEXPR operator T() { return val; }
    };
 
    template <bool val>
@@ -74,6 +75,7 @@ namespace boost{
          static const char data = 0;
          return *reinterpret_cast<const mpl::bool_<val>*>(&data);
       }
+      BOOST_CONSTEXPR operator bool() { return val; }
    };
 
    typedef integral_constant<bool, true> true_type;
