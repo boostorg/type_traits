@@ -13,6 +13,7 @@
 
 #include <boost/config.hpp>
 #include <cstddef>
+#include <boost/detail/workaround.hpp>
 
 namespace boost {
 
