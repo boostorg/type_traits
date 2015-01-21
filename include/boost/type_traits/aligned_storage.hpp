@@ -48,12 +48,12 @@ struct aligned_storage_imp
     } data_;
     void* address() const { return const_cast<aligned_storage_imp*>(this); }
 };
-template <std::size_t alignment_>
-struct aligned_storage_imp<std::size_t(-1), alignment_>
+template <std::size_t size>
+struct aligned_storage_imp<size, std::size_t(-1)>
 {
    union data_t
    {
-      char buf[1];
+      char buf[size];
       ::boost::detail::max_align align_;
    } data_;
    void* address() const { return const_cast<aligned_storage_imp*>(this); }
