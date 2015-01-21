@@ -138,6 +138,7 @@ template <> struct is_signed<const char> : public false_type{};
 template <> struct is_signed<volatile char> : public false_type{};
 template <> struct is_signed<const volatile char> : public false_type{};
 #endif
+#ifndef BOOST_NO_INTRINSIC_WCHAR_T
 #if defined(WCHAR_MIN) && (WCHAR_MIN != 0)
 template <> struct is_signed<wchar_t> : public true_type{};
 template <> struct is_signed<const wchar_t> : public true_type{};
@@ -149,7 +150,7 @@ template <> struct is_signed<const wchar_t> : public false_type{};
 template <> struct is_signed<volatile wchar_t> : public false_type{};
 template <> struct is_signed<const volatile wchar_t> : public false_type{};
 #endif
-
+#endif
 } // namespace boost
 
 #endif // BOOST_TT_IS_MEMBER_FUNCTION_POINTER_HPP_INCLUDED

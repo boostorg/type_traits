@@ -137,6 +137,7 @@ template <> struct is_unsigned<const char> : public false_type{};
 template <> struct is_unsigned<volatile char> : public false_type{};
 template <> struct is_unsigned<const volatile char> : public false_type{};
 #endif
+#ifndef BOOST_NO_INTRINSIC_WCHAR_T
 #if defined(WCHAR_MIN) && (WCHAR_MIN == 0) && !defined(BOOST_NO_INTRINSIC_WCHAR_T)
 template <> struct is_unsigned<wchar_t> : public true_type{};
 template <> struct is_unsigned<const wchar_t> : public true_type{};
@@ -148,7 +149,7 @@ template <> struct is_unsigned<const wchar_t> : public false_type{};
 template <> struct is_unsigned<volatile wchar_t> : public false_type{};
 template <> struct is_unsigned<const volatile wchar_t> : public false_type{};
 #endif
-
+#endif
 } // namespace boost
 
 #endif // BOOST_TT_IS_MEMBER_FUNCTION_POINTER_HPP_INCLUDED
