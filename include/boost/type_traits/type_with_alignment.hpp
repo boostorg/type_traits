@@ -13,6 +13,7 @@
 #include <boost/static_assert.hpp>
 #include <boost/config.hpp>
 #include <cstddef>
+#include <boost/detail/workaround.hpp>
 
 #ifdef BOOST_MSVC
 #   pragma warning(push)
