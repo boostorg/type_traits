@@ -67,6 +67,7 @@ namespace boost{
    template <bool val>
    struct integral_constant<bool, val>
    {
+      typedef mpl::integral_c_tag tag;
       typedef integral_constant<bool, val> type;
       static const bool value = val;
 
