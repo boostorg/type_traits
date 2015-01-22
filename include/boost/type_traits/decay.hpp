@@ -33,7 +33,7 @@ namespace boost
     private:
         typedef typename remove_reference<T>::type Ty;
     public:
-        typedef typename detail::decay_imp<T, boost::is_array<T>::value, boost::is_function<T>::value>::type type;
+        typedef typename detail::decay_imp<Ty, boost::is_array<Ty>::value, boost::is_function<Ty>::value>::type type;
     };
     
 } // namespace boost
