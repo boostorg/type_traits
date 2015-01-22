@@ -15,3 +15,17 @@ Lots of headers: https://github.com/boostorg/lambda/pull/4
 LEXICAL_CAST
 ~~~~~~~~~~~
 missing is_float.hpp in converter_numeric.hpp https://github.com/boostorg/lexical_cast/pull/8
+
+ANY
+~~~
+
+Missing mpl/if.hpp https://github.com/boostorg/any/pull/4
+
+
+
+
+Unexplained new failures
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Boost.Iterator: runtime failure.
+Boost.Bimap: issue with foreach dispatching?
