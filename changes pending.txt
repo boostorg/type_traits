@@ -21,6 +21,16 @@ ANY
 
 Missing mpl/if.hpp https://github.com/boostorg/any/pull/4
 
+FOREACH
+~~~~~~~
+
+Relies on conversion from integral_constant* to mpl::bool_*
+https://github.com/boostorg/foreach/pull/3
+
+GRAPH
+~~~~~
+
+Needs to remove ice_or usage: https://github.com/boostorg/graph/pull/30
 
 
 
@@ -28,4 +38,3 @@ Unexplained new failures
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Boost.Iterator: runtime failure.
-Boost.Bimap: issue with foreach dispatching?
