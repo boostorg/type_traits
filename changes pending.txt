@@ -32,9 +32,12 @@ GRAPH
 
 Needs to remove ice_or usage: https://github.com/boostorg/graph/pull/30
 
+RANDOM
+~~~~~~
+
+Missing #includes: https://github.com/boostorg/random/pull/13
+
 
 
 Unexplained new failures
 ~~~~~~~~~~~~~~~~~~~~~~~~
-
-Boost.Iterator: runtime failure.
