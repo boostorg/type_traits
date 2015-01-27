@@ -64,6 +64,9 @@ namespace boost{
       BOOST_CONSTEXPR operator T() { return val; }
    };
 
+   template <class T, T val>
+   T const integral_constant<T, val>::value;
+      
    template <bool val>
    struct integral_constant<bool, val>
    {
@@ -78,6 +81,9 @@ namespace boost{
       }
       BOOST_CONSTEXPR operator bool() { return val; }
    };
+
+   template <bool val>
+   bool const integral_constant<bool, val>::value;
 
    typedef integral_constant<bool, true> true_type;
    typedef integral_constant<bool, false> false_type;
