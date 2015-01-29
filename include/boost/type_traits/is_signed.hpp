@@ -62,8 +62,6 @@ struct is_signed_select_helper<false>
    };
 };
 
-}
-
 template <class T>
 struct is_signed
 {
@@ -72,6 +70,10 @@ struct is_signed
    typedef typename binder::type type;
    BOOST_STATIC_CONSTANT(bool, value = type::value);
 };
+
+}
+
+template <class T> struct is_signed : public integral_constant<bool, boost::detail::is_signed<T>::value> {};
 
 #else
 
