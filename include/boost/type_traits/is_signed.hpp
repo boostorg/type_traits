@@ -13,6 +13,7 @@
 #include <boost/type_traits/is_integral.hpp>
 #include <boost/type_traits/remove_cv.hpp>
 #include <boost/type_traits/is_enum.hpp>
+#include <climits>
 
 namespace boost {
 
@@ -129,7 +130,8 @@ template <> struct is_signed<const ::boost::ulong_long_type> : public false_type
 template <> struct is_signed<volatile ::boost::ulong_long_type> : public false_type{};
 template <> struct is_signed<const volatile ::boost::ulong_long_type> : public false_type{};
 #endif
-#if defined(CHAR_MIN) && (CHAR_MIN != 0)
+#if defined(CHAR_MIN) 
+#if CHAR_MIN != 0
 template <> struct is_signed<char> : public true_type{};
 template <> struct is_signed<const char> : public true_type{};
 template <> struct is_signed<volatile char> : public true_type{};
@@ -140,8 +142,9 @@ template <> struct is_signed<const char> : public false_type{};
 template <> struct is_signed<volatile char> : public false_type{};
 template <> struct is_signed<const volatile char> : public false_type{};
 #endif
-#ifndef BOOST_NO_INTRINSIC_WCHAR_T
-#if defined(WCHAR_MIN) && (WCHAR_MIN != 0)
+#endif
+#if defined(WCHAR_MIN) && !defined(BOOST_NO_INTRINSIC_WCHAR_T)
+#if WCHAR_MIN != 0
 template <> struct is_signed<wchar_t> : public true_type{};
 template <> struct is_signed<const wchar_t> : public true_type{};
 template <> struct is_signed<volatile wchar_t> : public true_type{};

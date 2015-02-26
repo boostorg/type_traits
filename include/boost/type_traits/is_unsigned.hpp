@@ -14,6 +14,8 @@
 #include <boost/type_traits/is_enum.hpp>
 #include <boost/type_traits/remove_cv.hpp>
 
+#include <climits>
+
 namespace boost {
 
 #if !defined( __CODEGEARC__ )
@@ -128,7 +130,8 @@ template <> struct is_unsigned<const ::boost::long_long_type> : public false_typ
 template <> struct is_unsigned<volatile ::boost::long_long_type> : public false_type{};
 template <> struct is_unsigned<const volatile ::boost::long_long_type> : public false_type{};
 #endif
-#if defined(CHAR_MIN) && (CHAR_MIN == 0)
+#if defined(CHAR_MIN) 
+#if CHAR_MIN == 0
 template <> struct is_unsigned<char> : public true_type{};
 template <> struct is_unsigned<const char> : public true_type{};
 template <> struct is_unsigned<volatile char> : public true_type{};
@@ -139,8 +142,9 @@ template <> struct is_unsigned<const char> : public false_type{};
 template <> struct is_unsigned<volatile char> : public false_type{};
 template <> struct is_unsigned<const volatile char> : public false_type{};
 #endif
-#ifndef BOOST_NO_INTRINSIC_WCHAR_T
-#if defined(WCHAR_MIN) && (WCHAR_MIN == 0) && !defined(BOOST_NO_INTRINSIC_WCHAR_T)
+#endif
+#if !defined(BOOST_NO_INTRINSIC_WCHAR_T) && defined(WCHAR_MIN)
+#if WCHAR_MIN == 0
 template <> struct is_unsigned<wchar_t> : public true_type{};
 template <> struct is_unsigned<const wchar_t> : public true_type{};
 template <> struct is_unsigned<volatile wchar_t> : public true_type{};
