@@ -55,11 +55,17 @@ namespace boost{
       typedef T value_type;
       typedef integral_constant<T, val> type;
       static const T value = val;
+      //
+      // This helper function is just to disable type-punning 
+      // warnings from GCC:
+      //
+      template <class T>
+      static T& dereference(T* p) { return *p; }
 
       operator const mpl::integral_c<T, val>& ()const
       {
-         static const char data = 0;
-         return *reinterpret_cast<const mpl::integral_c<T, val>*>(&data);
+         static const char data[sizeof(long)] = { 0 };
+         return dereference(reinterpret_cast<const mpl::integral_c<T, val>*>(&data));
       }
       BOOST_CONSTEXPR operator T() { return val; }
    };
@@ -73,11 +79,17 @@ namespace boost{
       typedef mpl::integral_c_tag tag;
       typedef integral_constant<bool, val> type;
       static const bool value = val;
+      //
+      // This helper function is just to disable type-punning 
+      // warnings from GCC:
+      //
+      template <class T>
+      static T& dereference(T* p) { return *p; }
 
       operator const mpl::bool_<val>& ()const
       {
          static const char data = 0;
-         return *reinterpret_cast<const mpl::bool_<val>*>(&data);
+         return dereference(reinterpret_cast<const mpl::bool_<val>*>(&data));
       }
       BOOST_CONSTEXPR operator bool() { return val; }
    };

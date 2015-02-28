@@ -66,7 +66,7 @@ struct is_signed_select_helper<false>
 template <class T>
 struct is_signed
 {
-   typedef detail::is_signed_select_helper< ::boost::is_integral<T>::value || ::boost::is_enum<T>::value> selector;
+   typedef ::boost::detail::is_signed_select_helper< ::boost::is_integral<T>::value || ::boost::is_enum<T>::value> selector;
    typedef typename selector::template rebind<T> binder;
    typedef typename binder::type type;
    BOOST_STATIC_CONSTANT(bool, value = type::value);

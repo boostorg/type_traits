@@ -50,7 +50,7 @@ namespace boost {
       };
 
 template <std::size_t Target, bool check> struct long_double_alignment{ typedef long double type; };
-template <std::size_t Target> struct long_double_alignment<Target, false>{ typedef detail::max_align type; };
+template <std::size_t Target> struct long_double_alignment<Target, false>{ typedef boost::detail::max_align type; };
 
 template <std::size_t Target, bool check> struct double_alignment{ typedef double type; };
 template <std::size_t Target> struct double_alignment<Target, false>{ typedef typename long_double_alignment<Target, boost::alignment_of<long double>::value >= Target>::type type; };
@@ -81,7 +81,7 @@ template <std::size_t Target> struct char_alignment<Target, false>{ typedef type
 template <std::size_t Align>
 struct type_with_alignment 
 {
-   typedef typename detail::char_alignment<Align, boost::alignment_of<char>::value >= Align>::type type;
+   typedef typename boost::detail::char_alignment<Align, boost::alignment_of<char>::value >= Align>::type type;
 };
 
 #if defined(__GNUC__) && !defined(BOOST_TT_DISABLE_INTRINSICS)
@@ -159,7 +159,7 @@ template<> struct type_with_alignment<8>
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 8,
       tt_align_ns::a8,
-      detail::char_alignment<8, false> >::type t1;
+      boost::detail::char_alignment<8, false> >::type t1;
 public: 
    typedef t1::type type;
 };
@@ -168,7 +168,7 @@ template<> struct type_with_alignment<16>
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 16,
       tt_align_ns::a16,
-      detail::char_alignment<16, false> >::type t1;
+      boost::detail::char_alignment<16, false> >::type t1;
 public: 
    typedef t1::type type;
 };
@@ -177,7 +177,7 @@ template<> struct type_with_alignment<32>
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 32,
       tt_align_ns::a32,
-      detail::char_alignment<32, false> >::type t1;
+      boost::detail::char_alignment<32, false> >::type t1;
 public: 
    typedef t1::type type;
 };
@@ -185,7 +185,7 @@ template<> struct type_with_alignment<64> {
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 64,
       tt_align_ns::a64,
-      detail::char_alignment<64, false> >::type t1;
+      boost::detail::char_alignment<64, false> >::type t1;
 public: 
    typedef t1::type type;
 };
@@ -193,7 +193,7 @@ template<> struct type_with_alignment<128> {
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 128,
       tt_align_ns::a128,
-      detail::char_alignment<128, false> >::type t1;
+      boost::detail::char_alignment<128, false> >::type t1;
 public: 
    typedef t1::type type;
 };
