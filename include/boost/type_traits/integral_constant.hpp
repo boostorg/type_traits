@@ -59,8 +59,8 @@ namespace boost{
       // This helper function is just to disable type-punning 
       // warnings from GCC:
       //
-      template <class T>
-      static T& dereference(T* p) { return *p; }
+      template <class U>
+      static U& dereference(U* p) { return *p; }
 
       operator const mpl::integral_c<T, val>& ()const
       {
