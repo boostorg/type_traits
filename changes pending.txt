@@ -42,6 +42,11 @@ FUNCTION
 
 Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/function/pull/5
 
+DETAIL
+------
+
+Remove unnecessary include for deprecated ice)xxx.hpp header: https://github.com/boostorg/detail/pull/6
+
 
 Unexplained new failures
 ~~~~~~~~~~~~~~~~~~~~~~~~
