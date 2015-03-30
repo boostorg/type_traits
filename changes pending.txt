@@ -37,6 +37,10 @@ RANDOM
 
 Missing #includes: https://github.com/boostorg/random/pull/13
 
+FUNCTION
+--------
+
+Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/function/pull/5
 
 
 Unexplained new failures
