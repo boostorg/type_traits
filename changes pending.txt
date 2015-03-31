@@ -11,10 +11,12 @@ LAMBDA
 Missing includes:
 ice.hpp see https://github.com/boostorg/lambda/pull/3
 Lots of headers: https://github.com/boostorg/lambda/pull/4
+Use mpl instead of ice_ functionality: https://github.com/boostorg/lambda/pull/8
 
 LEXICAL_CAST
 ~~~~~~~~~~~
 missing is_float.hpp in converter_numeric.hpp https://github.com/boostorg/lexical_cast/pull/8
+Use mpl instead of ice_ functionality: https://github.com/boostorg/lexical_cast/pull/11
 
 ANY
 ~~~
