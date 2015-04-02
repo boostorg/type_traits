@@ -50,9 +50,26 @@ DETAIL
 
 Remove unnecessary include for deprecated ice_xxx.hpp header: https://github.com/boostorg/detail/pull/6
 
-FUNTION_TYPES
+FUNCTION_TYPES
+--------------
 
 Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boostorg/function_types/pull/2
+
+RANGE
+-----
+
+Remove dependency on type traits ice_xxx.hpp headers, which are deprecated:
+https://github.com/boostorg/range/pull/27
+
+DETAIL
+------
+
+Remove dependency on deprecated type_trait headers: https://github.com/boostorg/detail/pull/8
+
+VARIANT
+-------
+
+Removed reliance on deprecated type_traits header: https://github.com/boostorg/variant/pull/12
 
 
 Unexplained new failures
