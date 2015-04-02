@@ -4,6 +4,7 @@ ITERATOR
 
 is_lvalue_iterator.hpp needs to include mpl/bool.hpp
 https://github.com/boostorg/iterator/pull/11
+Removed reliance on deprecated type traits headers: https://github.com/boostorg/iterator/pull/13
 
 LAMBDA
 ~~~~~~
@@ -47,7 +48,11 @@ Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/functio
 DETAIL
 ------
 
-Remove unnecessary include for deprecated ice)xxx.hpp header: https://github.com/boostorg/detail/pull/6
+Remove unnecessary include for deprecated ice_xxx.hpp header: https://github.com/boostorg/detail/pull/6
+
+FUNTION_TYPES
+
+Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boostorg/function_types/pull/2
 
 
 Unexplained new failures
