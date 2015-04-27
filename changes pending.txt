@@ -19,6 +19,8 @@ FUNCTION
 --------
 
 Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/function/pull/5
+Use ! operator directly rather than boost::mpl::not with Boost supported compilers:
+https://github.com/boostorg/function/pull/8
 
 FUNCTION_TYPES
 --------------
@@ -44,11 +46,16 @@ Missing includes:
 ice.hpp see https://github.com/boostorg/lambda/pull/3
 Lots of headers: https://github.com/boostorg/lambda/pull/4
 Use mpl instead of ice_ functionality: https://github.com/boostorg/lambda/pull/8
+Changes for type_traits Version2: https://github.com/boostorg/lambda/pull/9
 
 LEXICAL_CAST
 ~~~~~~~~~~~
 missing is_float.hpp in converter_numeric.hpp https://github.com/boostorg/lexical_cast/pull/8
 Use mpl instead of ice_ functionality: https://github.com/boostorg/lexical_cast/pull/11
+Change to use operators rather than mpl equivalents for constant boolean values, in the replacements
+eliminating dependency on deprecated type_traits headers:
+https://github.com/boostorg/lexical_cast/pull/15
+
 
 RANDOM
 ~~~~~~
@@ -60,6 +67,8 @@ RANGE
 
 Remove dependency on type traits ice_xxx.hpp headers, which are deprecated:
 https://github.com/boostorg/range/pull/27
+Use operator || rather than boost::mpl::or_ for constant boolean expression:
+https://github.com/boostorg/range/pull/31
 
 VARIANT
 -------
