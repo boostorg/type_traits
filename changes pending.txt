@@ -1,3 +1,34 @@
+ANY
+~~~
+
+Missing mpl/if.hpp https://github.com/boostorg/any/pull/4
+
+DETAIL
+------
+
+Remove unnecessary include for deprecated ice_xxx.hpp header: https://github.com/boostorg/detail/pull/6
+Remove dependency on deprecated type_trait headers: https://github.com/boostorg/detail/pull/8
+
+FOREACH
+~~~~~~~
+
+Relies on conversion from integral_constant* to mpl::bool_*
+https://github.com/boostorg/foreach/pull/3
+
+FUNCTION
+--------
+
+Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/function/pull/5
+
+FUNCTION_TYPES
+--------------
+
+Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boostorg/function_types/pull/2
+
+GRAPH
+~~~~~
+
+Needs to remove ice_or usage: https://github.com/boostorg/graph/pull/30
 
 ITERATOR
 ~~~~~~~~
@@ -19,41 +50,10 @@ LEXICAL_CAST
 missing is_float.hpp in converter_numeric.hpp https://github.com/boostorg/lexical_cast/pull/8
 Use mpl instead of ice_ functionality: https://github.com/boostorg/lexical_cast/pull/11
 
-ANY
-~~~
-
-Missing mpl/if.hpp https://github.com/boostorg/any/pull/4
-
-FOREACH
-~~~~~~~
-
-Relies on conversion from integral_constant* to mpl::bool_*
-https://github.com/boostorg/foreach/pull/3
-
-GRAPH
-~~~~~
-
-Needs to remove ice_or usage: https://github.com/boostorg/graph/pull/30
-
 RANDOM
 ~~~~~~
 
 Missing #includes: https://github.com/boostorg/random/pull/13
-
-FUNCTION
---------
-
-Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/function/pull/5
-
-DETAIL
-------
-
-Remove unnecessary include for deprecated ice_xxx.hpp header: https://github.com/boostorg/detail/pull/6
-
-FUNCTION_TYPES
---------------
-
-Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boostorg/function_types/pull/2
 
 RANGE
 -----
@@ -61,16 +61,10 @@ RANGE
 Remove dependency on type traits ice_xxx.hpp headers, which are deprecated:
 https://github.com/boostorg/range/pull/27
 
-DETAIL
-------
-
-Remove dependency on deprecated type_trait headers: https://github.com/boostorg/detail/pull/8
-
 VARIANT
 -------
 
 Removed reliance on deprecated type_traits header: https://github.com/boostorg/variant/pull/12
-
 
 Unexplained new failures
 ~~~~~~~~~~~~~~~~~~~~~~~~
