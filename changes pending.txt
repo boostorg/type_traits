@@ -1,3 +1,5 @@
+* = PR requests not yet applied to 'develop' branch
+
 ANY
 ~~~
 
@@ -30,14 +32,14 @@ Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boo
 GRAPH
 ~~~~~
 
-Needs to remove ice_or usage: https://github.com/boostorg/graph/pull/30
+* Needs to remove ice_or usage: https://github.com/boostorg/graph/pull/30
 
 ITERATOR
 ~~~~~~~~
 
-is_lvalue_iterator.hpp needs to include mpl/bool.hpp
+* is_lvalue_iterator.hpp needs to include mpl/bool.hpp
 https://github.com/boostorg/iterator/pull/11
-Removed reliance on deprecated type traits headers: https://github.com/boostorg/iterator/pull/13
+* Removed reliance on deprecated type traits headers: https://github.com/boostorg/iterator/pull/13
 
 LAMBDA
 ~~~~~~
@@ -69,6 +71,12 @@ Remove dependency on type traits ice_xxx.hpp headers, which are deprecated:
 https://github.com/boostorg/range/pull/27
 Use operator || rather than boost::mpl::or_ for constant boolean expression:
 https://github.com/boostorg/range/pull/31
+
+TEST
+----
+
+Add needed MPL header file:
+https://github.com/boostorg/test/pull/58
 
 VARIANT
 -------
