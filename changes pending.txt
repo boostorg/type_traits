@@ -75,7 +75,7 @@ https://github.com/boostorg/range/pull/31
 TEST
 ----
 
-* Add needed MPL header file:
+Add needed MPL header file:
 https://github.com/boostorg/test/pull/58
 
 VARIANT
