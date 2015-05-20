@@ -42,6 +42,9 @@
 #include <boost/type_traits/add_rvalue_reference.hpp>
 #endif
 
+#include <boost/type_traits/remove_cv.hpp>
+#include <boost/type_traits/decay.hpp>
+
 //----------------------------------------------------------------------------//
 //                                                                            //
 //                           C++03 implementation of                          //
@@ -52,6 +55,14 @@
 //----------------------------------------------------------------------------//
 
 namespace boost {
+
+    namespace type_traits_detail {
+
+        template <class T>
+        struct std_decay: boost::remove_cv<
+            typename boost::decay<T>::type> {};
+
+    }
 
 // prototype
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
@@ -78,7 +89,7 @@ namespace boost {
     {
         BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0, "The template arguments to common_type must be complete types");
     public:
-        typedef T type;
+        typedef typename type_traits_detail::std_decay<T>::type type;
     };
 
 // 2 args
@@ -93,13 +104,13 @@ namespace type_traits_detail {
 
 #if !defined(BOOST_NO_CXX11_DECLTYPE)
     public:
-        typedef decltype(declval<bool>() ? declval<T>() : declval<U>()) type;
+        typedef typename std_decay<decltype(declval<bool>() ? declval<T>() : declval<U>())>::type type;
 #elif defined(BOOST_COMMON_TYPE_USE_TYPEOF)
         static typename add_rvalue_reference<T>::type declval_T();  // workaround gcc bug; not required by std
         static typename add_rvalue_reference<U>::type declval_U();  // workaround gcc bug; not required by std
         static typename add_rvalue_reference<bool>::type declval_b();  
     public:
-        typedef __typeof__(declval_b() ? declval_T() : declval_U()) type;
+        typedef typename std_decay<__typeof__(declval_b() ? declval_T() : declval_U())>::type type;
 #elif defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
     public:
     typedef typename detail_type_traits_common_type::common_type_impl<
@@ -111,7 +122,7 @@ namespace type_traits_detail {
         static typename add_rvalue_reference<U>::type declval_U();  // workaround gcc bug; not required by std
         static typename add_rvalue_reference<bool>::type declval_b();
     public:
-        typedef BOOST_TYPEOF_TPL(declval_b() ? declval_T() : declval_U()) type;
+        typedef typename std_decay<BOOST_TYPEOF_TPL(declval_b() ? declval_T() : declval_U())>::type type;
 #endif
 
 #if defined(__GNUC__) && __GNUC__ == 3 && __GNUC_MINOR__ == 3
@@ -123,7 +134,7 @@ namespace type_traits_detail {
     template <class T>
     struct common_type_2<T, T>
     {
-        typedef T type;
+        typedef typename type_traits_detail::std_decay<T>::type type;
     };
     }
 
