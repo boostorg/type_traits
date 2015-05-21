@@ -24,10 +24,16 @@ Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/functio
 Use ! operator directly rather than boost::mpl::not with Boost supported compilers:
 https://github.com/boostorg/function/pull/8
 
+FUSION
+------
+
+Deprecated header usage: https://github.com/boostorg/fusion/pull/77
+
 FUNCTION_TYPES
 --------------
 
 Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boostorg/function_types/pull/2
+Remove use of deprecated header: https://github.com/boostorg/function_types/pull/4
 
 GRAPH
 ~~~~~
@@ -58,6 +64,11 @@ Change to use operators rather than mpl equivalents for constant boolean values,
 eliminating dependency on deprecated type_traits headers:
 https://github.com/boostorg/lexical_cast/pull/15
 
+
+PYTHON
+------
+
+deprecated header usage: https://github.com/boostorg/python/pull/23
 
 RANDOM
 ~~~~~~
