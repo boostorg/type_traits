@@ -97,6 +97,4 @@
 #include "boost/type_traits/promote.hpp"
 #endif
 
-#include "boost/type_traits/ice.hpp"
-
 #endif // BOOST_TYPE_TRAITS_HPP

@@ -20,11 +20,12 @@ project : requirements
    <toolset>intel:<warnings-as-errors>on
    <toolset>sun:<warnings-as-errors>on
    <toolset>msvc:<warnings-as-errors>on
+   <include>libs/tt2/light/include
 ;             
 
 rule all-tests {
      local result ;
-     for local source in [ glob *_test.cpp ] udt_specialisations.cpp
+     for local source in [ glob *_test*.cpp ]
      {
          result += [ run $(source) ] ;
      }
@@ -32,8 +33,5 @@ rule all-tests {
 }
             
 test-suite type_traits : [ all-tests ] ;
-
-compile-fail common_type_fail.cpp ;
-
 
 

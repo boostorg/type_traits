@@ -10,6 +10,7 @@
 #define BOOST_TYPE_TRAITS_COMMON_TYPE_HPP
 
 #include <boost/config.hpp>
+#include <boost/static_assert.hpp>
 
 #if defined(__SUNPRO_CC) && !defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
 #  define BOOST_COMMON_TYPE_DONT_USE_TYPEOF
@@ -18,40 +19,31 @@
 #  define BOOST_COMMON_TYPE_DONT_USE_TYPEOF
 #endif
 
+#ifdef __GNUC__
+// All supported GCC versions (and emulations thereof) support __typeof__
+#define BOOST_COMMON_TYPE_USE_TYPEOF
+#endif
+
 //----------------------------------------------------------------------------//
 #if defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_COMMON_TYPE_ARITY)
 #define BOOST_COMMON_TYPE_ARITY 3
 #endif
 
 //----------------------------------------------------------------------------//
-#if defined(BOOST_NO_CXX11_DECLTYPE) && !defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
-#include <boost/typeof/typeof.hpp>   // boost wonders never cease!
-#endif
-
-//----------------------------------------------------------------------------//
-#ifndef BOOST_NO_CXX11_STATIC_ASSERT
-#define BOOST_COMMON_TYPE_STATIC_ASSERT(CND, MSG, TYPES) static_assert(CND,MSG)
-#elif defined(BOOST_COMMON_TYPE_USES_MPL_ASSERT)
-#include <boost/mpl/assert.hpp>
-#include <boost/mpl/bool.hpp>
-#define BOOST_COMMON_TYPE_STATIC_ASSERT(CND, MSG, TYPES)                                 \
-    BOOST_MPL_ASSERT_MSG(boost::mpl::bool_< (CND) >::type::value, MSG, TYPES)
-#else
-#include <boost/static_assert.hpp>
-#define BOOST_COMMON_TYPE_STATIC_ASSERT(CND, MSG, TYPES) BOOST_STATIC_ASSERT(CND)
-#endif
-
-#if !defined(BOOST_NO_CXX11_STATIC_ASSERT) || !defined(BOOST_COMMON_TYPE_USES_MPL_ASSERT)
-#define BOOST_COMMON_TYPE_MUST_BE_A_COMPLE_TYPE "must be complete type"
-#endif
-
-#if defined(BOOST_NO_CXX11_DECLTYPE) && defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
-#include <boost/type_traits/detail/common_type_imp.hpp>
-#include <boost/type_traits/remove_cv.hpp>
-#endif
-#include <boost/mpl/if.hpp>
+#if !defined(BOOST_NO_CXX11_DECLTYPE)
 #include <boost/utility/declval.hpp>
+#elif defined(BOOST_COMMON_TYPE_USE_TYPEOF)
 #include <boost/type_traits/add_rvalue_reference.hpp>
+#elif defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
+#include <boost/type_traits/remove_cv.hpp>
+#else
+#include <boost/typeof/typeof.hpp>   // boost wonders never cease!
+#include <boost/type_traits/detail/common_type_imp.hpp>
+#include <boost/type_traits/add_rvalue_reference.hpp>
+#endif
+
+#include <boost/type_traits/remove_cv.hpp>
+#include <boost/type_traits/decay.hpp>
 
 //----------------------------------------------------------------------------//
 //                                                                            //
@@ -63,6 +55,14 @@
 //----------------------------------------------------------------------------//
 
 namespace boost {
+
+    namespace type_traits_detail {
+
+        template <class T>
+        struct std_decay: boost::remove_cv<
+            typename boost::decay<T>::type> {};
+
+    }
 
 // prototype
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
@@ -87,9 +87,9 @@ namespace boost {
 
 #endif
     {
-        BOOST_COMMON_TYPE_STATIC_ASSERT(sizeof(T) > 0, BOOST_COMMON_TYPE_MUST_BE_A_COMPLE_TYPE, (T));
+        BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0, "The template arguments to common_type must be complete types");
     public:
-        typedef T type;
+        typedef typename type_traits_detail::std_decay<T>::type type;
     };
 
 // 2 args
@@ -99,16 +99,18 @@ namespace type_traits_detail {
     struct common_type_2
     {
     private:
-        BOOST_COMMON_TYPE_STATIC_ASSERT(sizeof(T) > 0, BOOST_COMMON_TYPE_MUST_BE_A_COMPLE_TYPE, (T));
-        BOOST_COMMON_TYPE_STATIC_ASSERT(sizeof(U) > 0, BOOST_COMMON_TYPE_MUST_BE_A_COMPLE_TYPE, (U));
-        static bool declval_bool();  // workaround gcc bug; not required by std
-        static typename add_rvalue_reference<T>::type declval_T();  // workaround gcc bug; not required by std
-        static typename add_rvalue_reference<U>::type declval_U();  // workaround gcc bug; not required by std
-        static typename add_rvalue_reference<bool>::type declval_b();  
+        BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0, "The template arguments to common_type must be complete types");
+        BOOST_STATIC_ASSERT_MSG(sizeof(U) > 0, "The template arguments to common_type must be complete types");
 
 #if !defined(BOOST_NO_CXX11_DECLTYPE)
     public:
-        typedef decltype(declval<bool>() ? declval<T>() : declval<U>()) type;
+        typedef typename std_decay<decltype(declval<bool>() ? declval<T>() : declval<U>())>::type type;
+#elif defined(BOOST_COMMON_TYPE_USE_TYPEOF)
+        static typename add_rvalue_reference<T>::type declval_T();  // workaround gcc bug; not required by std
+        static typename add_rvalue_reference<U>::type declval_U();  // workaround gcc bug; not required by std
+        static typename add_rvalue_reference<bool>::type declval_b();  
+    public:
+        typedef typename std_decay<__typeof__(declval_b() ? declval_T() : declval_U())>::type type;
 #elif defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
     public:
     typedef typename detail_type_traits_common_type::common_type_impl<
@@ -116,8 +118,11 @@ namespace type_traits_detail {
           typename remove_cv<U>::type
       >::type type;
 #else
+        static typename add_rvalue_reference<T>::type declval_T();  // workaround gcc bug; not required by std
+        static typename add_rvalue_reference<U>::type declval_U();  // workaround gcc bug; not required by std
+        static typename add_rvalue_reference<bool>::type declval_b();
     public:
-        typedef BOOST_TYPEOF_TPL(declval_b() ? declval_T() : declval_U()) type;
+        typedef typename std_decay<BOOST_TYPEOF_TPL(declval_b() ? declval_T() : declval_U())>::type type;
 #endif
 
 #if defined(__GNUC__) && __GNUC__ == 3 && __GNUC_MINOR__ == 3
@@ -129,7 +134,7 @@ namespace type_traits_detail {
     template <class T>
     struct common_type_2<T, T>
     {
-        typedef T type;
+        typedef typename type_traits_detail::std_decay<T>::type type;
     };
     }
 

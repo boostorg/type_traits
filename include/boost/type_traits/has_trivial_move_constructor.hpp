@@ -11,47 +11,38 @@
 #ifndef BOOST_TT_HAS_TRIVIAL_MOVE_CONSTRUCTOR_HPP_INCLUDED
 #define BOOST_TT_HAS_TRIVIAL_MOVE_CONSTRUCTOR_HPP_INCLUDED
 
-#include <boost/type_traits/config.hpp>
 #include <boost/type_traits/intrinsics.hpp>
+#include <boost/type_traits/integral_constant.hpp>
+
+#ifdef BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR
+
+#if defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_volatile.hpp>
-#include <boost/type_traits/detail/ice_and.hpp>
-#include <boost/type_traits/detail/ice_not.hpp>
-
-// should be the last #include
-#include <boost/type_traits/detail/bool_trait_def.hpp>
+#endif
 
 namespace boost {
 
-namespace detail {
+template <typename T> struct has_trivial_move_constructor : public integral_constant<bool, BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T)>{};
 
-template <typename T>
-struct has_trivial_move_ctor_impl
-{
-#ifdef BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR
-   BOOST_STATIC_CONSTANT(bool, value = (BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T)));
 #else
-   BOOST_STATIC_CONSTANT(bool, value =
-           (::boost::type_traits::ice_and<
-              ::boost::is_pod<T>::value,
-              ::boost::type_traits::ice_not< ::boost::is_volatile<T>::value >::value
-           >::value));
+
+#include <boost/type_traits/is_pod.hpp>
+#include <boost/type_traits/is_volatile.hpp>
+
+namespace boost {
+
+template <typename T> struct has_trivial_move_constructor 
+   : public integral_constant<bool, ::boost::is_pod<T>::value && !::boost::is_volatile<T>::value>{};
 #endif
-};
 
-} // namespace detail
-
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(has_trivial_move_constructor,T,::boost::detail::has_trivial_move_ctor_impl<T>::value)
-
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(has_trivial_move_constructor,void,false)
+template <> struct has_trivial_move_constructor<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(has_trivial_move_constructor,void const,false)
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(has_trivial_move_constructor,void const volatile,false)
-BOOST_TT_AUX_BOOL_TRAIT_SPEC1(has_trivial_move_constructor,void volatile,false)
+template <> struct has_trivial_move_constructor<void const> : public false_type{};
+template <> struct has_trivial_move_constructor<void volatile> : public false_type{};
+template <> struct has_trivial_move_constructor<void const volatile> : public false_type{};
 #endif
 
 } // namespace boost
-
-#include <boost/type_traits/detail/bool_trait_undef.hpp>
 
 #endif // BOOST_TT_HAS_TRIVIAL_MOVE_CONSTRUCTOR_HPP_INCLUDED

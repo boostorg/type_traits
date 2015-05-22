@@ -9,43 +9,31 @@
 #ifndef BOOST_TT_HAS_TRIVIAL_CONSTRUCTOR_HPP_INCLUDED
 #define BOOST_TT_HAS_TRIVIAL_CONSTRUCTOR_HPP_INCLUDED
 
-#include <boost/type_traits/config.hpp>
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/is_pod.hpp>
-#include <boost/type_traits/detail/ice_or.hpp>
 
-// should be the last #include
-#include <boost/type_traits/detail/bool_trait_def.hpp>
+#ifdef BOOST_HAS_TRIVIAL_CONSTRUCTOR
+#ifdef BOOST_HAS_SGI_TYPE_TRAITS
+#include <boost/type_traits/is_same.hpp>
+#elif defined(__GNUC__)
+#include <boost/type_traits/is_volatile.hpp>
+#ifdef BOOST_INTEL
+#include <boost/type_traits/is_pod.hpp>
+#endif
+#endif
+#endif
 
 namespace boost {
 
-namespace detail {
-
-template <typename T>
-struct has_trivial_ctor_impl
-{
+template <typename T> struct has_trivial_constructor
 #ifdef BOOST_HAS_TRIVIAL_CONSTRUCTOR
-   BOOST_STATIC_CONSTANT(bool, value =
-      (::boost::type_traits::ice_or<
-         ::boost::is_pod<T>::value,
-         BOOST_HAS_TRIVIAL_CONSTRUCTOR(T)
-      >::value));
+   : public integral_constant <bool, (::boost::is_pod<T>::value || BOOST_HAS_TRIVIAL_CONSTRUCTOR(T))>{};
 #else
-   BOOST_STATIC_CONSTANT(bool, value =
-      (::boost::type_traits::ice_or<
-         ::boost::is_pod<T>::value,
-         false
-      >::value));
+   : public integral_constant <bool, ::boost::is_pod<T>::value>{};
 #endif
-};
 
-} // namespace detail
-
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(has_trivial_constructor,T,::boost::detail::has_trivial_ctor_impl<T>::value)
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(has_trivial_default_constructor,T,::boost::detail::has_trivial_ctor_impl<T>::value)
+template <class T> struct has_trivial_default_constructor : public has_trivial_constructor<T> {};
 
 } // namespace boost
-
-#include <boost/type_traits/detail/bool_trait_undef.hpp>
 
 #endif // BOOST_TT_HAS_TRIVIAL_CONSTRUCTOR_HPP_INCLUDED

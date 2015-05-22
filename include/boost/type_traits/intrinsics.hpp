@@ -8,8 +8,10 @@
 #ifndef BOOST_TT_INTRINSICS_HPP_INCLUDED
 #define BOOST_TT_INTRINSICS_HPP_INCLUDED
 
+#ifndef BOOST_TT_DISABLE_INTRINSICS
+
 #ifndef BOOST_TT_CONFIG_HPP_INCLUDED
-#include <boost/type_traits/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 #endif
 
 //
@@ -44,6 +46,9 @@
 // BOOST_IS_ENUM(T) true is T is an enum
 // BOOST_IS_POLYMORPHIC(T) true if T is a polymorphic type
 // BOOST_ALIGNMENT_OF(T) should evaluate to the alignment requirements of type T.
+//
+// define BOOST_TT_DISABLE_INTRINSICS to prevent any intrinsics being used (mostly used when testing)
+//
 
 #ifdef BOOST_HAS_SGI_TYPE_TRAITS
     // Hook into SGI's __type_traits class, this will pick up user supplied
@@ -85,9 +90,11 @@
 
 #if (defined(BOOST_MSVC) && defined(BOOST_MSVC_FULL_VER) && (BOOST_MSVC_FULL_VER >=140050215))\
          || (defined(BOOST_INTEL) && defined(_MSC_VER) && (_MSC_VER >= 1500))
-#   include <boost/type_traits/is_same.hpp>
-#   include <boost/type_traits/is_function.hpp>
-
+//
+// Note that even though these intrinsics rely on other type traits classes
+// we do not #include those here as it produces cyclic dependencies and
+// can cause the intrinsics to not even be used at all!
+//
 #   define BOOST_IS_UNION(T) __is_union(T)
 #   define BOOST_IS_POD(T) (__is_pod(T) && __has_trivial_constructor(T))
 #   define BOOST_IS_EMPTY(T) __is_empty(T)
@@ -111,8 +118,8 @@
 //  #   define BOOST_ALIGNMENT_OF(T) __alignof(T)
 
 #   if defined(_MSC_VER) && (_MSC_VER >= 1700)
-#       define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) ((__has_trivial_move_constructor(T) || __is_pod(T)) && !::boost::is_volatile<T>::value && !::boost::is_reference<T>::value)
-#       define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) ((__has_trivial_move_assign(T) || __is_pod(T)) && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value && !::boost::is_reference<T>::value)
+#       define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) ((__has_trivial_move_constructor(T) || boost::is_pod<T>::value) && ! ::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
+#       define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) ((__has_trivial_move_assign(T) || boost::is_pod<T>::value) && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
 #   endif
 #if _MSC_FULL_VER >= 180020827
 #   define BOOST_IS_NOTHROW_MOVE_ASSIGN(T) (__is_nothrow_assignable(T&, T&&))
@@ -144,10 +151,12 @@
 // This is a rubbish fix as it basically stops type traits from working correctly, 
 // but maybe the best we can do for now.  See https://svn.boost.org/trac/boost/ticket/10694
 //
+//
+// Note that even though these intrinsics rely on other type traits classes
+// we do not #include those here as it produces cyclic dependencies and
+// can cause the intrinsics to not even be used at all!
+//
 #   include <cstddef>
-#   include <boost/type_traits/is_same.hpp>
-#   include <boost/type_traits/is_reference.hpp>
-#   include <boost/type_traits/is_volatile.hpp>
 
 #   if __has_feature(is_union)
 #     define BOOST_IS_UNION(T) __is_union(T)
@@ -215,9 +224,11 @@
 #endif
 
 #if defined(__GNUC__) && ((__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3) && !defined(__GCCXML__))) && !defined(BOOST_CLANG)
-#   include <boost/type_traits/is_same.hpp>
-#   include <boost/type_traits/is_reference.hpp>
-#   include <boost/type_traits/is_volatile.hpp>
+//
+// Note that even though these intrinsics rely on other type traits classes
+// we do not #include those here as it produces cyclic dependencies and
+// can cause the intrinsics to not even be used at all!
+//
 
 #ifdef BOOST_INTEL
 #  define BOOST_INTEL_TT_OPTS || is_pod<T>::value
@@ -338,11 +349,7 @@
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
 #endif
 
+#endif // BOOST_TT_DISABLE_INTRINSICS
+
 #endif // BOOST_TT_INTRINSICS_HPP_INCLUDED
-
-
-
-
-
-
 
