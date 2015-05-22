@@ -3,37 +3,37 @@
 ANY
 ~~~
 
-Missing mpl/if.hpp https://github.com/boostorg/any/pull/4
+Missing mpl/if.hpp https://github.com/boostorg/any/pull/4  DM
 
 DETAIL
 ------
 
-Remove unnecessary include for deprecated ice_xxx.hpp header: https://github.com/boostorg/detail/pull/6
-Remove dependency on deprecated type_trait headers: https://github.com/boostorg/detail/pull/8
+Remove unnecessary include for deprecated ice_xxx.hpp header: https://github.com/boostorg/detail/pull/6  D
+Remove dependency on deprecated type_trait headers: https://github.com/boostorg/detail/pull/8   D
 
 FOREACH
 ~~~~~~~
 
 Relies on conversion from integral_constant* to mpl::bool_*
-https://github.com/boostorg/foreach/pull/3
+https://github.com/boostorg/foreach/pull/3   D
 
 FUNCTION
 --------
 
-Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/function/pull/5
+Removed dependencies on ice_xxx.hpp headers: https://github.com/boostorg/function/pull/5   D
 Use ! operator directly rather than boost::mpl::not with Boost supported compilers:
-https://github.com/boostorg/function/pull/8
+https://github.com/boostorg/function/pull/8  D
 
 FUSION
 ------
 
-Deprecated header usage: https://github.com/boostorg/fusion/pull/77
+Deprecated header usage: https://github.com/boostorg/fusion/pull/77  D
 
 FUNCTION_TYPES
 --------------
 
-Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boostorg/function_types/pull/2
-Remove use of deprecated header: https://github.com/boostorg/function_types/pull/4
+Removed dependency on deprecated template_arity_spec.hpp: https://github.com/boostorg/function_types/pull/2   D
+Remove use of deprecated header: https://github.com/boostorg/function_types/pull/4   D
 
 GRAPH
 ~~~~~
@@ -44,25 +44,24 @@ ITERATOR
 ~~~~~~~~
 
 * is_lvalue_iterator.hpp needs to include mpl/bool.hpp
-https://github.com/boostorg/iterator/pull/11
-* Removed reliance on deprecated type traits headers: https://github.com/boostorg/iterator/pull/13
+https://github.com/boostorg/iterator/pull/11   D
+* Removed reliance on deprecated type traits headers: https://github.com/boostorg/iterator/pull/14  D
 
 LAMBDA
 ~~~~~~
 
 Missing includes:
-ice.hpp see https://github.com/boostorg/lambda/pull/3
-Lots of headers: https://github.com/boostorg/lambda/pull/4
-Use mpl instead of ice_ functionality: https://github.com/boostorg/lambda/pull/8
-Changes for type_traits Version2: https://github.com/boostorg/lambda/pull/9
+ice.hpp see https://github.com/boostorg/lambda/pull/3  D
+Lots of headers: https://github.com/boostorg/lambda/pull/4  D
+Changes for type_traits Version2: https://github.com/boostorg/lambda/pull/9  D
 
 LEXICAL_CAST
 ~~~~~~~~~~~
-missing is_float.hpp in converter_numeric.hpp https://github.com/boostorg/lexical_cast/pull/8
-Use mpl instead of ice_ functionality: https://github.com/boostorg/lexical_cast/pull/11
+missing is_float.hpp in converter_numeric.hpp https://github.com/boostorg/lexical_cast/pull/8   D
+Use mpl instead of ice_ functionality: https://github.com/boostorg/lexical_cast/pull/11  D
 Change to use operators rather than mpl equivalents for constant boolean values, in the replacements
 eliminating dependency on deprecated type_traits headers:
-https://github.com/boostorg/lexical_cast/pull/15
+https://github.com/boostorg/lexical_cast/pull/15   D
 
 
 PYTHON
@@ -73,26 +72,26 @@ deprecated header usage: https://github.com/boostorg/python/pull/23
 RANDOM
 ~~~~~~
 
-Missing #includes: https://github.com/boostorg/random/pull/13
+Missing #includes: https://github.com/boostorg/random/pull/13   DM
 
 RANGE
 -----
 
 Remove dependency on type traits ice_xxx.hpp headers, which are deprecated:
-https://github.com/boostorg/range/pull/27
+https://github.com/boostorg/range/pull/27   D
 Use operator || rather than boost::mpl::or_ for constant boolean expression:
-https://github.com/boostorg/range/pull/31
+https://github.com/boostorg/range/pull/31  D
 
 TEST
 ----
 
 Add needed MPL header file:
-https://github.com/boostorg/test/pull/58
+https://github.com/boostorg/test/pull/58  D
 
 VARIANT
 -------
 
-Removed reliance on deprecated type_traits header: https://github.com/boostorg/variant/pull/12
+Removed reliance on deprecated type_traits header: https://github.com/boostorg/variant/pull/12   D
 
 Unexplained new failures
 ~~~~~~~~~~~~~~~~~~~~~~~~
