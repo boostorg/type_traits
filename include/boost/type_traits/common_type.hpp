@@ -24,10 +24,6 @@
 #define BOOST_COMMON_TYPE_USE_TYPEOF
 #endif
 
-#if defined(__SUNPRO_CC) && (__SUNPRO_CC >= 0x5130) && defined(BOOST_NO_CXX11_DECLTYPE)
-#define BOOST_COMMON_TYPE_USE_TYPEOF
-#endif
-
 //----------------------------------------------------------------------------//
 #if defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_COMMON_TYPE_ARITY)
 #define BOOST_COMMON_TYPE_ARITY 3
