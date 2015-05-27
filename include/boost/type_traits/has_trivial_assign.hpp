@@ -13,7 +13,7 @@
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
-#if !defined(BOOST_HAS_TRIVIAL_ASSIGN) || defined(BOOST_MSVC) || defined(__GNUC__) || defined(BOOST_INTEL)
+#if !defined(BOOST_HAS_TRIVIAL_ASSIGN) || defined(BOOST_MSVC) || defined(__GNUC__) || defined(BOOST_INTEL) || defined(__SUNPRO_CC)
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
