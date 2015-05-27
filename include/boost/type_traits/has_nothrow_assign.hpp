@@ -15,7 +15,7 @@
 #if !defined(BOOST_HAS_NOTHROW_ASSIGN) || defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_assign.hpp>
 #endif
-#if defined(__GNUC__)
+#if defined(__GNUC__) || defined(__SUNPRO_CC)
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
 #ifdef BOOST_INTEL
