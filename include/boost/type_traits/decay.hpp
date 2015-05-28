@@ -14,6 +14,7 @@
 #include <boost/type_traits/remove_bounds.hpp>
 #include <boost/type_traits/add_pointer.hpp>
 #include <boost/type_traits/remove_reference.hpp>
+#include <boost/type_traits/remove_cv.hpp>
 
 namespace boost 
 {
@@ -21,7 +22,7 @@ namespace boost
    namespace detail
    {
 
-      template <class T, bool Array, bool Function> struct decay_imp { typedef T type; };
+      template <class T, bool Array, bool Function> struct decay_imp { typedef typename remove_cv<T>::type type; };
       template <class T> struct decay_imp<T, true, false> { typedef typename remove_bounds<T>::type* type; };
       template <class T> struct decay_imp<T, false, true> { typedef T* type; };
 

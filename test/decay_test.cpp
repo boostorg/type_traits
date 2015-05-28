@@ -5,6 +5,7 @@
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include "test.hpp"
+#include "check_type.hpp"
 #include "check_integral_constant.hpp"
 #ifdef TEST_STD
 #  include <type_traits>
@@ -61,7 +62,38 @@ namespace boost
     */
 }
 
-TT_TEST_BEGIN(is_class)
+BOOST_DECL_TRANSFORM_TEST3(decay_test_1, ::tt::decay, const)
+BOOST_DECL_TRANSFORM_TEST3(decay_test_2, ::tt::decay, volatile)
+BOOST_DECL_TRANSFORM_TEST3(decay_test_3, ::tt::decay, const volatile)
+BOOST_DECL_TRANSFORM_TEST3(decay_test_4, ::tt::decay, const&)
+BOOST_DECL_TRANSFORM_TEST3(decay_test_5, ::tt::decay, volatile&)
+BOOST_DECL_TRANSFORM_TEST3(decay_test_6, ::tt::decay, const volatile&)
+BOOST_DECL_TRANSFORM_TEST(decay_test_7, ::tt::decay, const*, const*)
+BOOST_DECL_TRANSFORM_TEST(decay_test_8, ::tt::decay, [], *)
+BOOST_DECL_TRANSFORM_TEST(decay_test_9, ::tt::decay, [2], *)
+BOOST_DECL_TRANSFORM_TEST(decay_test_10, ::tt::decay, [2][3], (*)[3])
+BOOST_DECL_TRANSFORM_TEST(decay_test_11, ::tt::decay, const[], const*)
+BOOST_DECL_TRANSFORM_TEST(decay_test_12, ::tt::decay, const[2], const*)
+BOOST_DECL_TRANSFORM_TEST(decay_test_13, ::tt::decay, const[2][3], const(*)[3])
+BOOST_DECL_TRANSFORM_TEST(decay_test_14, ::tt::decay, (int), (*)(int))
+
+
+TT_TEST_BEGIN(decay)
+
+   decay_test_1();
+decay_test_2();
+decay_test_3();
+decay_test_4();
+decay_test_5();
+decay_test_6();
+decay_test_7();
+decay_test_8();
+decay_test_9();
+decay_test_10();
+decay_test_11();
+decay_test_12();
+decay_test_13();
+decay_test_14();
 
    BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_same< 
           ::tt::decay<int>::type,int>::value),
