@@ -81,19 +81,19 @@ BOOST_DECL_TRANSFORM_TEST(decay_test_14, ::tt::decay, (int), (*)(int))
 TT_TEST_BEGIN(decay)
 
    decay_test_1();
-decay_test_2();
-decay_test_3();
-decay_test_4();
-decay_test_5();
-decay_test_6();
-decay_test_7();
-decay_test_8();
-decay_test_9();
-decay_test_10();
-decay_test_11();
-decay_test_12();
-decay_test_13();
-decay_test_14();
+   decay_test_2();
+   decay_test_3();
+   decay_test_4();
+   decay_test_5();
+   decay_test_6();
+   decay_test_7();
+   decay_test_8();
+   decay_test_9();
+   decay_test_10();
+   decay_test_11();
+   decay_test_12();
+   decay_test_13();
+   decay_test_14();
 
    BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_same< 
           ::tt::decay<int>::type,int>::value),
