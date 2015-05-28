@@ -36,6 +36,7 @@
 #include <boost/type_traits/add_rvalue_reference.hpp>
 #elif defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
 #include <boost/type_traits/remove_cv.hpp>
+#include <boost/type_traits/detail/common_type_imp.hpp>
 #else
 #include <boost/typeof/typeof.hpp>   // boost wonders never cease!
 #include <boost/type_traits/detail/common_type_imp.hpp>
