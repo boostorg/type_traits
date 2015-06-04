@@ -14,8 +14,6 @@
 
 namespace boost {
 
-BOOST_TT_INLINE_NS
-
 // * convert a type T to const type - add_const<T>
 // this is not required since the result is always
 // the same as "T const", but it does suppress warnings
@@ -43,7 +41,6 @@ BOOST_TT_INLINE_NS
       typedef T& type;
    };
 
-BOOST_TT_INLINE_NS_END
 } // namespace boost
 
 #endif // BOOST_TT_ADD_CONST_HPP_INCLUDED
