@@ -17,10 +17,27 @@
 #if defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_constructor.hpp>
 #endif
+#if defined(__GNUC__ ) || defined(__SUNPRO_CC)
+#include <boost/type_traits/is_default_constructible.hpp>
+#endif
 
 namespace boost {
 
 template <class T> struct has_nothrow_constructor : public integral_constant<bool, BOOST_HAS_NOTHROW_CONSTRUCTOR(T)>{};
+
+#elif !defined(BOOST_NO_CXX11_NOEXCEPT)
+
+#include <boost/type_traits/is_default_constructible.hpp>
+#include <boost/type_traits/remove_all_extents.hpp>
+
+namespace boost { namespace detail{
+
+   template <class T, bool b> struct has_nothrow_constructor_imp : public boost::integral_constant<bool, false>{};
+   template <class T> struct has_nothrow_constructor_imp<T, true> : public boost::integral_constant<bool, noexcept(typename remove_all_extents<T>::type())>{};
+
+}
+
+template <class T> struct has_nothrow_constructor : public detail::has_nothrow_constructor_imp<T, is_default_constructible<T>::value>{};
 
 #else
 
