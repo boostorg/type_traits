@@ -133,6 +133,7 @@
 [def __is_complex [link boost_typetraits.reference.is_complex is_complex]]
 
 [def __copy_cv [link boost_typetraits.reference.copy_cv copy_cv]]
+[def __type_identity [link boost_typetraits.reference.type_identity type_identity]]
 
 A printer-friendly [@http://sourceforge.net/projects/boost/files/boost-docs/ 
  PDF version of this manual is also available].
@@ -309,6 +310,7 @@ See __has_trivial_constructor.
 [include remove_pointer.qbk]
 [include remove_reference.qbk]
 [include remove_volatile.qbk]
+[include type_identity.qbk]
 [include type_with_alignment.qbk]
 
 [endsect]
