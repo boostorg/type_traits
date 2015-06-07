@@ -1,5 +1,5 @@
-#ifndef BOOST_TYPE_TRAITS_DETAIL_COMMON_TYPE_HPP_INCLUDED
-#define BOOST_TYPE_TRAITS_DETAIL_COMMON_TYPE_HPP_INCLUDED
+#ifndef BOOST_TYPE_TRAITS_DETAIL_COMMON_TYPE_IMPL_HPP_INCLUDED
+#define BOOST_TYPE_TRAITS_DETAIL_COMMON_TYPE_IMPL_HPP_INCLUDED
 
 //
 //  Copyright 2015 Peter Dimov
@@ -13,17 +13,12 @@
 #include <boost/type_traits/detail/composite_pointer_type.hpp>
 #include <boost/type_traits/detail/composite_member_pointer_type.hpp>
 #include <boost/type_traits/type_identity.hpp>
-#include <boost/type_traits/is_lvalue_reference.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_union.hpp>
-#include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_convertible.hpp>
-#include <boost/type_traits/is_arithmetic.hpp>
-#include <boost/type_traits/is_enum.hpp>
 #include <boost/type_traits/is_pointer.hpp>
 #include <boost/type_traits/is_member_pointer.hpp>
 #include <boost/type_traits/conditional.hpp>
-#include <boost/type_traits/decay.hpp>
 
 namespace boost
 {
@@ -109,4 +104,4 @@ template<class T, class U> struct common_type_impl5: public common_arithmetic_ty
 
 } // namespace boost
 
-#endif // #ifndef BOOST_TYPE_TRAITS_DETAIL_COMMON_TYPE_HPP_INCLUDED
+#endif // #ifndef BOOST_TYPE_TRAITS_DETAIL_COMMON_TYPE_IMPL_HPP_INCLUDED
