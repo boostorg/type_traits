@@ -80,6 +80,9 @@ result of applying the transformation to the template argument `T`.
    template <class T>
    struct __remove_volatile;
 
+   template <class T, class U>
+   struct __copy_cv;
+
 [h4 Broken Compiler Workarounds:]
 
 For all of these templates support for partial specialization of class templates is 

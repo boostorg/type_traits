@@ -132,6 +132,8 @@
 [def __decay [link boost_typetraits.reference.decay decay]]
 [def __is_complex [link boost_typetraits.reference.is_complex is_complex]]
 
+[def __copy_cv [link boost_typetraits.reference.copy_cv copy_cv]]
+
 A printer-friendly [@http://sourceforge.net/projects/boost/files/boost-docs/ 
  PDF version of this manual is also available].
 
@@ -183,6 +185,7 @@ that is the result of the transformation.
 [include alignment_of.qbk]
 [include conditional.qbk]
 [include common_type.qbk]
+[include copy_cv.qbk]
 [include decay.qbk]
 [include extent.qbk]
 [include floating_point_promotion.qbk]
