@@ -10,7 +10,6 @@
 //
 
 #include <boost/type_traits/copy_cv.hpp>
-#include <boost/type_traits/tp_identity.hpp>
 #include <boost/type_traits/remove_cv.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_void.hpp>

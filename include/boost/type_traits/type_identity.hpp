@@ -1,5 +1,5 @@
-#ifndef BOOST_TYPE_TRAITS_TP_IDENTITY_HPP_INCLUDED
-#define BOOST_TYPE_TRAITS_TP_IDENTITY_HPP_INCLUDED
+#ifndef BOOST_TYPE_TRAITS_TYPE_IDENTITY_HPP_INCLUDED
+#define BOOST_TYPE_TRAITS_TYPE_IDENTITY_HPP_INCLUDED
 
 //
 //  Copyright 2015 Peter Dimov
@@ -12,11 +12,11 @@
 namespace boost
 {
 
-template<class T> struct tp_identity
+template<class T> struct type_identity
 {
     typedef T type;
 };
 
 } // namespace boost
 
-#endif // #ifndef BOOST_TYPE_TRAITS_TP_IDENTITY_HPP_INCLUDED
+#endif // #ifndef BOOST_TYPE_TRAITS_TYPE_IDENTITY_HPP_INCLUDED

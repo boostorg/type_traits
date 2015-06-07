@@ -12,7 +12,7 @@
 #include <boost/type_traits/detail/common_arithmetic_type.hpp>
 #include <boost/type_traits/detail/composite_pointer_type.hpp>
 #include <boost/type_traits/detail/composite_member_pointer_type.hpp>
-#include <boost/type_traits/tp_identity.hpp>
+#include <boost/type_traits/type_identity.hpp>
 #include <boost/type_traits/is_lvalue_reference.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_union.hpp>
@@ -57,12 +57,12 @@ template<class T, class U> struct common_type_impl3;
 template<class T, class U> struct common_type_class: public boost::conditional<
 
     boost::is_convertible<T, U>::value && !boost::is_convertible<U, T>::value,
-    boost::tp_identity<U>,
+    boost::type_identity<U>,
 
     typename boost::conditional<
 
         boost::is_convertible<U, T>::value && !boost::is_convertible<T, U>::value,
-        boost::tp_identity<T>,
+        boost::type_identity<T>,
 
         common_type_impl3<T, U>
     >::type
