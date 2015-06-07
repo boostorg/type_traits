@@ -11,7 +11,7 @@
 
 #include <boost/config.hpp>
 #include <boost/type_traits/decay.hpp>
-#include <boost/utility/declval.hpp>
+#include <boost/type_traits/declval.hpp>
 
 #if defined(BOOST_NO_CXX11_DECLTYPE)
 #include <boost/type_traits/detail/common_type_impl.hpp>

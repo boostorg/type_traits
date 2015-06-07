@@ -17,7 +17,7 @@
 #include <boost/type_traits/is_array.hpp>
 #include <boost/type_traits/is_reference.hpp>
 #include <boost/utility/enable_if.hpp>
-#include <boost/utility/declval.hpp>
+#include <boost/type_traits/declval.hpp>
 
 namespace boost {
 

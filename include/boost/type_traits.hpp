@@ -23,6 +23,7 @@
 #include "boost/type_traits/conditional.hpp"
 #include "boost/type_traits/copy_cv.hpp"
 #include "boost/type_traits/decay.hpp"
+#include "boost/type_traits/declval.hpp"
 #include "boost/type_traits/extent.hpp"
 #include "boost/type_traits/floating_point_promotion.hpp"
 #include "boost/type_traits/function_traits.hpp"
