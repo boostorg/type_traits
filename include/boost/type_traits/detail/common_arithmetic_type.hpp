@@ -42,7 +42,7 @@ template<> struct arithmetic_type<3>
 };
 
 // There are five standard signed integer types:
-// “signed char”, “short int”, “int”, “long int”, and “long long int”.
+// â€œsigned charâ€, â€œshort intâ€, â€œintâ€, â€œlong intâ€, and â€œlong long intâ€.
 
 template<> struct arithmetic_type<4>
 {
@@ -75,8 +75,8 @@ template<> struct arithmetic_type<8>
 };
 
 // For each of the standard signed integer types, there exists a corresponding
-// (but different) standard unsigned integer type: “unsigned char”, “unsigned short int”,
-// “unsigned int”, “unsigned long int”, and “unsigned long long int”
+// (but different) standard unsigned integer type: â€œunsigned charâ€, â€œunsigned short intâ€,
+// â€œunsigned intâ€, â€œunsigned long intâ€, and â€œunsigned long long intâ€
 
 template<> struct arithmetic_type<9>
 {
@@ -152,13 +152,13 @@ template<> struct arithmetic_type<18>
 
 template<> struct arithmetic_type<19>
 {
-    typedef __int128 type;
+    typedef boost::int128_type type;
     typedef char (&result_type) [19];
 };
 
 template<> struct arithmetic_type<20>
 {
-    typedef unsigned __int128 type;
+    typedef boost::uint128_type type;
     typedef char (&result_type) [20];
 };
 
