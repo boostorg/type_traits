@@ -41,6 +41,9 @@ result of applying the transformation to the template argument `T`.
    template <class... T>
    struct __common_type;
 
+   template <class T, class U>
+   struct __copy_cv;
+
    template <class T>
    struct __decay;
 
@@ -79,6 +82,9 @@ result of applying the transformation to the template argument `T`.
 
    template <class T>
    struct __remove_volatile;
+
+   template <class T>
+   struct __type_identity;
 
 [h4 Broken Compiler Workarounds:]
 

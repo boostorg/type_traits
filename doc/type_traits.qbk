@@ -132,6 +132,10 @@
 [def __decay [link boost_typetraits.reference.decay decay]]
 [def __is_complex [link boost_typetraits.reference.is_complex is_complex]]
 
+[def __copy_cv [link boost_typetraits.reference.copy_cv copy_cv]]
+[def __type_identity [link boost_typetraits.reference.type_identity type_identity]]
+[def __declval [link boost_typetraits.reference.declval declval]]
+
 A printer-friendly [@http://sourceforge.net/projects/boost/files/boost-docs/ 
  PDF version of this manual is also available].
 
@@ -183,7 +187,9 @@ that is the result of the transformation.
 [include alignment_of.qbk]
 [include conditional.qbk]
 [include common_type.qbk]
+[include copy_cv.qbk]
 [include decay.qbk]
+[include declval.qbk]
 [include extent.qbk]
 [include floating_point_promotion.qbk]
 [include function_traits.qbk]
@@ -306,6 +312,7 @@ See __has_trivial_constructor.
 [include remove_pointer.qbk]
 [include remove_reference.qbk]
 [include remove_volatile.qbk]
+[include type_identity.qbk]
 [include type_with_alignment.qbk]
 
 [endsect]
