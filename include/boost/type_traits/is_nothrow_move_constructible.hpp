@@ -31,7 +31,7 @@ template <class T> struct is_nothrow_move_constructible<T&&> : public ::boost::f
 
 #elif !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR)
 
-#include <boost/utility/declval.hpp>
+#include <boost/type_traits/declval.hpp>
 #include <boost/utility/enable_if.hpp>
 
 namespace boost{ namespace detail{

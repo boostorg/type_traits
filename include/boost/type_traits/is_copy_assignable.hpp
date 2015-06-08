@@ -18,7 +18,7 @@
    && !defined(BOOST_INTEL_CXX_VERSION) && \
       !(defined(BOOST_MSVC) && _MSC_VER == 1800)
 #define BOOST_TT_CXX11_IS_COPY_ASSIGNABLE
-#include <boost/utility/declval.hpp>
+#include <boost/type_traits/declval.hpp>
 #else
    //For compilers without decltype
    #include <boost/type_traits/is_const.hpp>

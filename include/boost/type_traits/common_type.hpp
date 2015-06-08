@@ -1,163 +1,88 @@
-//  common_type.hpp  ---------------------------------------------------------//
+#ifndef BOOST_TYPE_TRAITS_COMMON_TYPE_HPP_INCLUDED
+#define BOOST_TYPE_TRAITS_COMMON_TYPE_HPP_INCLUDED
 
-//  Copyright 2008 Howard Hinnant
-//  Copyright 2008 Beman Dawes
-
+//
+//  Copyright 2015 Peter Dimov
+//
 //  Distributed under the Boost Software License, Version 1.0.
-//  See http://www.boost.org/LICENSE_1_0.txt
-
-#ifndef BOOST_TYPE_TRAITS_COMMON_TYPE_HPP
-#define BOOST_TYPE_TRAITS_COMMON_TYPE_HPP
+//  See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt
+//
 
 #include <boost/config.hpp>
-#include <boost/static_assert.hpp>
-
-#if defined(__SUNPRO_CC) && !defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
-#  define BOOST_COMMON_TYPE_DONT_USE_TYPEOF
-#endif
-#if defined(__IBMCPP__) && !defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
-#  define BOOST_COMMON_TYPE_DONT_USE_TYPEOF
-#endif
-
-#if defined(__GNUC__) && !defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
-// All supported GCC versions (and emulations thereof) support __typeof__
-#define BOOST_COMMON_TYPE_USE_TYPEOF
-#endif
-
-//----------------------------------------------------------------------------//
-#if defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_COMMON_TYPE_ARITY)
-#define BOOST_COMMON_TYPE_ARITY 3
-#endif
-
-//----------------------------------------------------------------------------//
-#if !defined(BOOST_NO_CXX11_DECLTYPE)
-#include <boost/utility/declval.hpp>
-#elif defined(BOOST_COMMON_TYPE_USE_TYPEOF)
-#include <boost/type_traits/add_rvalue_reference.hpp>
-#elif defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
-#include <boost/type_traits/remove_cv.hpp>
-#include <boost/type_traits/detail/common_type_imp.hpp>
-#else
-#include <boost/typeof/typeof.hpp>   // boost wonders never cease!
-#include <boost/type_traits/detail/common_type_imp.hpp>
-#include <boost/type_traits/add_rvalue_reference.hpp>
-#endif
-
-#include <boost/type_traits/remove_cv.hpp>
 #include <boost/type_traits/decay.hpp>
+#include <boost/type_traits/declval.hpp>
 
-//----------------------------------------------------------------------------//
-//                                                                            //
-//                           C++03 implementation of                          //
-//             20.9.7.6 Other transformations [meta.trans.other]              //
-//                          Written by Howard Hinnant                         //
-//      Adapted for Boost by Beman Dawes, Vicente Botet and  Jeffrey Hellrung //
-//                                                                            //
-//----------------------------------------------------------------------------//
-
-namespace boost {
-
-    namespace type_traits_detail {
-
-        template <class T>
-        struct std_decay: boost::remove_cv<
-            typename boost::decay<T>::type> {};
-
-    }
-
-// prototype
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
-    template<typename... T>
-    struct common_type;
-#else // or no specialization
-    template <class T, class U = void, class V = void>
-    struct common_type
-    {
-    public:
-        typedef typename common_type<typename common_type<T, U>::type, V>::type type;
-    };
+#if defined(BOOST_NO_CXX11_DECLTYPE)
+#include <boost/type_traits/detail/common_type_impl.hpp>
 #endif
 
+namespace boost
+{
 
-// 1 arg
-    template<typename T>
+// variadic common_type
+
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
-    struct common_type<T>
+
+template<class... T> struct common_type
+{
+};
+
+template<class T1, class T2, class... T>
+struct common_type<T1, T2, T...>: common_type<typename common_type<T1, T2>::type, T...>
+{
+};
+
 #else
-    struct common_type<T, void, void>
 
-#endif
-    {
-        BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0, "The template arguments to common_type must be complete types");
-    public:
-        typedef typename type_traits_detail::std_decay<T>::type type;
-    };
+template<
+    class T1 = void, class T2 = void, class T3 = void,
+    class T4 = void, class T5 = void, class T6 = void,
+    class T7 = void, class T8 = void, class T9 = void
+>
+struct common_type: common_type<typename common_type<T1, T2>::type, T3, T4, T5, T6, T7, T8, T9>
+{
+};
 
-// 2 args
-namespace type_traits_detail {
+#endif // !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
-    template <class T, class U>
-    struct common_type_2
-    {
-    private:
-        BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0, "The template arguments to common_type must be complete types");
-        BOOST_STATIC_ASSERT_MSG(sizeof(U) > 0, "The template arguments to common_type must be complete types");
+// one argument
+
+template<class T> struct common_type<T>: boost::decay<T>
+{
+};
+
+// two arguments
+
+namespace type_traits_detail
+{
+
+// binary common_type
 
 #if !defined(BOOST_NO_CXX11_DECLTYPE)
-    public:
-        typedef typename std_decay<decltype(declval<bool>() ? declval<T>() : declval<U>())>::type type;
-#elif defined(BOOST_COMMON_TYPE_USE_TYPEOF)
-        static typename add_rvalue_reference<T>::type declval_T();  // workaround gcc bug; not required by std
-        static typename add_rvalue_reference<U>::type declval_U();  // workaround gcc bug; not required by std
-        static typename add_rvalue_reference<bool>::type declval_b();  
-    public:
-        typedef typename std_decay<__typeof__(declval_b() ? declval_T() : declval_U())>::type type;
-#elif defined(BOOST_COMMON_TYPE_DONT_USE_TYPEOF)
-    public:
-    typedef typename detail_type_traits_common_type::common_type_impl<
-          typename remove_cv<T>::type,
-          typename remove_cv<U>::type
-      >::type type;
-#else
-        static typename add_rvalue_reference<T>::type declval_T();  // workaround gcc bug; not required by std
-        static typename add_rvalue_reference<U>::type declval_U();  // workaround gcc bug; not required by std
-        static typename add_rvalue_reference<bool>::type declval_b();
-    public:
-        typedef typename std_decay<BOOST_TYPEOF_TPL(declval_b() ? declval_T() : declval_U())>::type type;
-#endif
 
-#if defined(__GNUC__) && __GNUC__ == 3 && __GNUC_MINOR__ == 3
-    public:
-        void public_dummy_function_just_to_silence_warning();
-#endif
-    };
+template<class T1, class T2> struct common_type_impl: boost::decay<decltype( boost::declval<bool>()? boost::declval<T1>(): boost::declval<T2>() )>
+{
+};
 
-    template <class T>
-    struct common_type_2<T, T>
-    {
-        typedef typename type_traits_detail::std_decay<T>::type type;
-    };
-    }
+#endif // #if !defined(BOOST_NO_CXX11_DECLTYPE)
 
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
-    template <class T, class U>
-    struct common_type<T, U>
-#else
-    template <class T, class U>
-    struct common_type<T, U, void>
-#endif
-    : public type_traits_detail::common_type_2<T,U>
-    { };
+// decay helper
 
+template<class T1, class T2, class T1d = typename boost::decay<T1>::type, class T2d = typename boost::decay<T2>::type> struct common_type_decay_helper: boost::common_type<T1d, T2d>
+{
+};
 
-// 3 or more args
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
-    template<typename T, typename U, typename... V>
-    struct common_type<T, U, V...> {
-    public:
-        typedef typename common_type<typename common_type<T, U>::type, V...>::type type;
-    };
-#endif
-}  // namespace boost
+template<class T1, class T2> struct common_type_decay_helper<T1, T2, T1, T2>: common_type_impl<T1, T2>
+{
+};
 
-#endif  // BOOST_TYPE_TRAITS_COMMON_TYPE_HPP
+} // type_traits_detail
+
+template<class T1, class T2> struct common_type<T1, T2>: type_traits_detail::common_type_decay_helper<T1, T2>
+{
+};
+
+} // namespace boost
+
+#endif // #ifndef BOOST_TYPE_TRAITS_COMMON_TYPE_HPP_INCLUDED
