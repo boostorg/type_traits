@@ -132,6 +132,11 @@
 [def __decay [link boost_typetraits.reference.decay decay]]
 [def __is_complex [link boost_typetraits.reference.is_complex is_complex]]
 
+[def __compat [*Compiler Compatibility:]]
+[template all_compilers[] __compat All current compilers are supported by this trait.]
+[template has_binary_operator_compat[] __compat Requires working SFINAE (i.e. BOOST_NO_SFINAE is not set).  Only a minority of rather old compilers do not support this.]
+
+
 A printer-friendly [@http://sourceforge.net/projects/boost/files/boost-docs/ 
  PDF version of this manual is also available].
 

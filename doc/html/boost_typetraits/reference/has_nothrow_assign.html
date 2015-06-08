@@ -37,16 +37,9 @@
         type.
       </p>
 <p>
-        <span class="bold"><strong>Compiler Compatibility:</strong></span> If the compiler
-        does not support partial-specialization of class templates, then this template
-        can not be used with function types.
-      </p>
-<p>
-        Without some (as yet unspecified) help from the compiler, <code class="computeroutput"><span class="identifier">has_nothrow_assign</span></code>
-        will never report that a class or struct has a non-throwing assignment-operator;
-        this is always safe, if possibly sub-optimal. Currently (May 2005) only Visual
-        C++ 8 has the necessary compiler support to ensure that this trait "just
-        works".
+        <span class="bold"><strong>Compiler Compatibility:</strong></span> Either a compiler
+        intrinsic (for example this is provided by Visual C++ 8 or later, plus all
+        GCC versions in C++11 mode), alternatively support for the C++11 <code class="computeroutput"><span class="keyword">noexcept</span></code> feature.
       </p>
 <p>
         <span class="bold"><strong>Header:</strong></span> <code class="computeroutput"> <span class="preprocessor">#include</span>
