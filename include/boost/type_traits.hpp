@@ -21,7 +21,9 @@
 #include "boost/type_traits/alignment_of.hpp"
 #include "boost/type_traits/common_type.hpp"
 #include "boost/type_traits/conditional.hpp"
+#include "boost/type_traits/copy_cv.hpp"
 #include "boost/type_traits/decay.hpp"
+#include "boost/type_traits/declval.hpp"
 #include "boost/type_traits/extent.hpp"
 #include "boost/type_traits/floating_point_promotion.hpp"
 #include "boost/type_traits/function_traits.hpp"
@@ -93,6 +95,7 @@
 #include "boost/type_traits/remove_pointer.hpp"
 #include "boost/type_traits/remove_reference.hpp"
 #include "boost/type_traits/remove_volatile.hpp"
+#include "boost/type_traits/type_identity.hpp"
 #include "boost/type_traits/type_with_alignment.hpp"
 #if !(defined(__sgi) && defined(__EDG_VERSION__) && (__EDG_VERSION__ == 238))
 #include "boost/type_traits/integral_promotion.hpp"

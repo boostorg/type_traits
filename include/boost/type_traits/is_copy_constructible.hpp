@@ -13,7 +13,7 @@
 #include <boost/type_traits/is_base_and_derived.hpp>
 #include <boost/type_traits/add_reference.hpp>
 #include <boost/type_traits/is_rvalue_reference.hpp>
-#include <boost/utility/declval.hpp>
+#include <boost/type_traits/declval.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace boost {
