@@ -17,6 +17,10 @@
 #include <boost/type_traits/detail/common_type_impl.hpp>
 #endif
 
+#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
+#include <boost/type_traits/detail/mp_defer.hpp>
+#endif
+
 namespace boost
 {
 
@@ -28,10 +32,30 @@ template<class... T> struct common_type
 {
 };
 
+#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
+
+template<class... T> using common_type_t = typename common_type<T...>::type;
+
+namespace type_traits_detail
+{
+
+template<class T1, class T2, class... T> using common_type_fold = common_type_t<common_type_t<T1, T2>, T...>;
+
+} // namespace type_traits_detail
+
+template<class T1, class T2, class... T>
+struct common_type<T1, T2, T...>: type_traits_detail::mp_defer<type_traits_detail::common_type_fold, T1, T2, T...>
+{
+};
+
+#else
+
 template<class T1, class T2, class... T>
 struct common_type<T1, T2, T...>: common_type<typename common_type<T1, T2>::type, T...>
 {
 };
+
+#endif // !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
 #else
 
@@ -61,9 +85,41 @@ namespace type_traits_detail
 
 #if !defined(BOOST_NO_CXX11_DECLTYPE)
 
+#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
+    
+#if !defined(BOOST_MSVC) || BOOST_MSVC > 1800
+
+// internal compiler error on msvc-12.0
+
+template<class T1, class T2> using builtin_common_type = typename boost::decay<decltype( boost::declval<bool>()? boost::declval<T1>(): boost::declval<T2>() )>::type;
+
+template<class T1, class T2> struct common_type_impl: mp_defer<builtin_common_type, T1, T2>
+{
+};
+
+#else
+
+template<class T1, class T2> using builtin_common_type = decltype( boost::declval<bool>()? boost::declval<T1>(): boost::declval<T2>() );
+
+template<class T1, class T2> struct common_type_impl_2: mp_defer<builtin_common_type, T1, T2>
+{
+};
+
+template<class T1, class T2> using decay_common_type = typename boost::decay<typename common_type_impl_2<T1, T2>::type>::type;
+
+template<class T1, class T2> struct common_type_impl: mp_defer<decay_common_type, T1, T2>
+{
+};
+
+#endif // !defined(BOOST_MSVC) || BOOST_MSVC > 1800
+
+#else
+
 template<class T1, class T2> struct common_type_impl: boost::decay<decltype( boost::declval<bool>()? boost::declval<T1>(): boost::declval<T2>() )>
 {
 };
+
+#endif // #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
 #endif // #if !defined(BOOST_NO_CXX11_DECLTYPE)
 
