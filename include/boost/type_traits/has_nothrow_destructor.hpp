@@ -11,10 +11,36 @@
 
 #include <boost/type_traits/has_trivial_destructor.hpp>
 
+#if !defined(BOOST_NO_CXX11_NOEXCEPT)
+
+#include <boost/type_traits/detail/decl.hpp>
+#include <boost/type_traits/is_destructible.hpp>
+
+namespace boost{
+
+   namespace detail{
+
+      template <class T, bool b>
+      struct has_nothrow_destructor_imp : public boost::integral_constant<bool, false>{};
+      template <class T>
+      struct has_nothrow_destructor_imp<T, true> : public boost::integral_constant<bool, noexcept(tt_declval<T*&>()->~T())>{};
+
+   }
+
+   template <class T> struct has_nothrow_destructor : public detail::has_nothrow_destructor_imp<T, boost::is_destructible<T>::value>{};
+   template <class T, std::size_t N> struct has_nothrow_destructor<T[N]> : public has_nothrow_destructor<T>{};
+   template <class T> struct has_nothrow_destructor<T&> : public integral_constant<bool, false>{};
+   template <class T> struct has_nothrow_destructor<T&&> : public integral_constant<bool, false>{};
+
+}
+#else
+
 namespace boost {
 
 template <class T> struct has_nothrow_destructor : public ::boost::has_trivial_destructor<T> {};
 
 } // namespace boost
+
+#endif
 
 #endif // BOOST_TT_HAS_NOTHROW_DESTRUCTOR_HPP_INCLUDED
