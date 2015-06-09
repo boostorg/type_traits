@@ -180,13 +180,13 @@
 #     define BOOST_HAS_TRIVIAL_DESTRUCTOR(T) __has_trivial_destructor(T)
 #   endif
 #   if __has_feature(has_nothrow_constructor)
-#     define BOOST_HAS_NOTHROW_CONSTRUCTOR(T) __has_nothrow_constructor(T)
+#     define BOOST_HAS_NOTHROW_CONSTRUCTOR(T) (__has_nothrow_constructor(T) && is_default_constructible<T>::value)
 #   endif
 #   if __has_feature(has_nothrow_copy)
 #     define BOOST_HAS_NOTHROW_COPY(T) (__has_nothrow_copy(T) && !is_volatile<T>::value && !is_reference<T>::value && is_constructible<T, const T&>::value)
 #   endif
 #   if __has_feature(has_nothrow_assign)
-#     define BOOST_HAS_NOTHROW_ASSIGN(T) (__has_nothrow_assign(T) && !is_volatile<T>::value)
+#     define BOOST_HAS_NOTHROW_ASSIGN(T) (__has_nothrow_assign(T) && !is_volatile<T>::value && is_assignable<T&, const T&>::value)
 #   endif
 #   if __has_feature(has_virtual_destructor)
 #     define BOOST_HAS_VIRTUAL_DESTRUCTOR(T) __has_virtual_destructor(T)
