@@ -10,35 +10,25 @@
 #define BOOST_TT_HAS_TRIVIAL_COPY_HPP_INCLUDED
 
 #include <boost/type_traits/intrinsics.hpp>
-#include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_reference.hpp>
-
-#ifdef __clang__
 #include <boost/type_traits/is_copy_constructible.hpp>
-#endif
 
 namespace boost {
 
 template <typename T> struct has_trivial_copy 
 : public integral_constant<bool, 
 #ifdef BOOST_HAS_TRIVIAL_COPY
-#  ifdef __clang__
    BOOST_HAS_TRIVIAL_COPY(T) && boost::is_copy_constructible<T>::value
-#  else
-   BOOST_HAS_TRIVIAL_COPY(T)
-#  endif
 #else
-   ::boost::is_pod<T>::value && ! ::boost::is_volatile<T>::value
+   ::boost::is_pod<T>::value
 #endif
 >{};
-
-#ifdef __clang__
-
-template <typename T, std::size_t N>
-struct has_trivial_copy<T[N]> : public has_trivial_copy<T>{};
-
-#endif
+// Arrays are not explicitly copyable:
+template <typename T, std::size_t N> struct has_trivial_copy<T[N]> : public false_type{};
+template <typename T> struct has_trivial_copy<T[]> : public false_type{};
+// Are volatile types ever trivial?  We don't really know, so assume not:
+template <typename T> struct has_trivial_copy<T volatile> : public false_type{};
 
 template <> struct has_trivial_copy<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS

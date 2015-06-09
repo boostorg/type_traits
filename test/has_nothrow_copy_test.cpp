@@ -212,9 +212,10 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int&>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int&&>::value, false);
 #endif
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<const int&>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int[2]>::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int[3][2]>::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int[2][4][5][6][3]>::value, true);
+// These used to be true, but are now false to match std conforming behavior:
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int[2]>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int[3][2]>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<int[2][4][5][6][3]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<void>::value, false);
 // cases we would like to succeed but can't implement in the language:
@@ -236,8 +237,10 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<delete_copy>::value, false)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<noexcept_copy>::value, true);
 #endif
 
+#if !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<non_copy>::value, false);
-   
+#endif
+
 TT_TEST_END
 
 

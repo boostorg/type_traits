@@ -16,17 +16,40 @@
 
 #if defined(BOOST_CLANG) || defined(__GNUC__) || defined(__ghs__) || defined(__CODEGEARC__)
 #include <boost/type_traits/is_volatile.hpp>
+#include <boost/type_traits/is_constructible.hpp>
 #include <boost/type_traits/is_reference.hpp>
 #ifdef BOOST_INTEL
 #include <boost/type_traits/is_pod.hpp>
 #endif
 #elif defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_copy.hpp>
+#include <boost/type_traits/is_array.hpp>
 #endif
 
 namespace boost {
 
 template <class T> struct has_nothrow_copy_constructor : public integral_constant<bool, BOOST_HAS_NOTHROW_COPY(T)>{};
+
+#elif !defined(BOOST_NO_CXX11_NOEXCEPT)
+
+#include <boost/type_traits/detail/decl.hpp>
+#include <boost/type_traits/is_constructible.hpp>
+
+namespace boost{
+
+namespace detail{
+
+template <class T, bool b>
+struct has_nothrow_copy_constructor_imp : public boost::integral_constant<bool, false>{};
+template <class T>
+struct has_nothrow_copy_constructor_imp<T, true> : public boost::integral_constant<bool, noexcept(T(tt_declval<const T&>()))>{};
+
+}
+
+template <class T> struct has_nothrow_copy_constructor : public detail::has_nothrow_copy_constructor_imp<T, boost::is_constructible<T, T const&>::value>{};
+template <class T> struct has_nothrow_copy_constructor<T&> : public integral_constant<bool, false>{};
+template <class T> struct has_nothrow_copy_constructor<T&&> : public integral_constant<bool, false>{};
+template <class T> struct has_nothrow_copy_constructor<T volatile> : public integral_constant<bool, false>{};
 
 #else
 
