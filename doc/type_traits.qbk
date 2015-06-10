@@ -92,6 +92,7 @@
 [def __has_nothrow_copy [link boost_typetraits.reference.has_nothrow_copy has_nothrow_copy]]
 [def __has_nothrow_default_constructor [link boost_typetraits.reference.has_nothrow_constructor has_nothrow_default_constructor]]
 [def __has_nothrow_copy_constructor [link boost_typetraits.reference.has_nothrow_copy has_nothrow_copy_constructor]]
+[def __has_nothrow_destructor [link boost_typetraits.reference.has_nothrow_destruct has_nothrow_destructor]]
 [def __is_nothrow_move_constructible [link boost_typetraits.reference.is_nothrow_move_constructible is_nothrow_move_constructible]]
 [def __has_nothrow_assign [link boost_typetraits.reference.has_nothrow_assign has_nothrow_assign]]
 [def __is_nothrow_move_assignable [link boost_typetraits.reference.is_nothrow_move_assignable is_nothrow_move_assignable]]
@@ -231,6 +232,7 @@ that is the result of the transformation.
 [include has_nothrow_assign.qbk]
 [include has_nothrow_constructor.qbk]
 [include has_nothrow_copy.qbk]
+[include has_nothrow_destruct.qbk]
 [section:has_nothrow_cp_cons has_nothrow_copy_constructor]
 See __has_nothrow_copy.
 [endsect]

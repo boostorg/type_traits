@@ -127,6 +127,9 @@ The following templates describe the general properties of a type.
    struct __has_nothrow_copy_constructor;
 
    template <class T>
+   struct __has_nothrow_destructor;
+
+   template <class T>
    struct __has_trivial_assign;
 
    template <class T>
