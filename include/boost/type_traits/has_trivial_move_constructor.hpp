@@ -21,6 +21,11 @@
 #include <boost/type_traits/is_volatile.hpp>
 #endif
 
+#if defined(__GNUC__) || defined(__clang)
+#include <boost/type_traits/is_constructible.hpp>
+#endif
+
+
 namespace boost {
 
 template <typename T> struct has_trivial_move_constructor : public integral_constant<bool, BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T)>{};
