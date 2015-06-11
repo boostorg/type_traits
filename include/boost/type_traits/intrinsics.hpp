@@ -210,10 +210,10 @@
 #     define BOOST_IS_POLYMORPHIC(T) __is_polymorphic(T)
 #   endif
 #   if __has_feature(has_trivial_move_constructor)
-#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__has_trivial_move_constructor(T)  && is_constructible<T, T&&>::value)
+#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__has_trivial_move_constructor(T)  && is_constructible<T, T&&>::value && !::boost::is_volatile<T>::value)
 #   endif
 #   if __has_feature(has_trivial_move_assign)
-#     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__has_trivial_move_assign(T) && is_assignable<T&, T&&>::value)
+#     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__has_trivial_move_assign(T) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
 #   endif
 #   define BOOST_ALIGNMENT_OF(T) __alignof(T)
 #   if __has_feature(is_final)
@@ -264,8 +264,8 @@
 #   endif
 
 #   if __GNUC__ >= 5
-#     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__is_trivially_assignable(T&, T&&) && is_assignable<T&, T&&>::value)
-#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__is_trivially_constructible(T, T&&) && is_constructible<T, T&&>::value)
+#     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__is_trivially_assignable(T&, T&&) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
+#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__is_trivially_constructible(T, T&&) && is_constructible<T, T&&>::value && !::boost::is_volatile<T>::values)
 #   endif
 
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
