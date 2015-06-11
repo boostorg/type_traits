@@ -265,7 +265,7 @@
 
 #   if __GNUC__ >= 5
 #     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__is_trivially_assignable(T&, T&&) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
-#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__is_trivially_constructible(T, T&&) && is_constructible<T, T&&>::value && !::boost::is_volatile<T>::values)
+#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__is_trivially_constructible(T, T&&) && is_constructible<T, T&&>::value && !::boost::is_volatile<T>::value)
 #   endif
 
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
