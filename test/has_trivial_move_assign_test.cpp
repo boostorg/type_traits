@@ -213,9 +213,10 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int&>::value, false)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int&&>::value, false);
 #endif
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<const int&>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int[2]>::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int[3][2]>::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int[2][4][5][6][3]>::value, true);
+// array types are not assignable:
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int[2]>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int[3][2]>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<int[2][4][5][6][3]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<empty_UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_assign<void>::value, false);
