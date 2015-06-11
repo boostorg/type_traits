@@ -52,6 +52,7 @@
 #include <boost/type_traits/is_complex.hpp>
 #include "boost/type_traits/is_compound.hpp"
 #include "boost/type_traits/is_const.hpp"
+#include "boost/type_traits/is_constructible.hpp"
 #include "boost/type_traits/is_convertible.hpp"
 #include "boost/type_traits/is_copy_constructible.hpp"
 #include "boost/type_traits/is_copy_assignable.hpp"
