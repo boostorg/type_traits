@@ -23,6 +23,7 @@
 
 #if defined(__GNUC__) || defined(__clang)
 #include <boost/type_traits/is_constructible.hpp>
+#include <boost/type_traits/is_volatile.hpp>
 #endif
 
 
