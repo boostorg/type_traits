@@ -32,6 +32,8 @@ namespace boost{
    }
 
    template <class T> struct is_destructible : public integral_constant<bool, sizeof(detail::is_destructible_imp::test<T>(0)) == sizeof(boost::type_traits::yes_type)>{};
+   template <class T, std::size_t N> struct is_destructible<T[N]> : public is_destructible<T>{};
+   template <class T> struct is_destructible<T[]> : public is_destructible<T>{};
 
 #else
 
@@ -43,6 +45,11 @@ namespace boost{
    // We don't know how to implement this:
    template <class T> struct is_destructible : public integral_constant<bool, is_pod<T>::value || is_class<T>::value>{};
 #endif
+
+   template <> struct is_destructible<void> : public false_type{};
+   template <> struct is_destructible<void const> : public false_type{};
+   template <> struct is_destructible<void volatile> : public false_type{};
+   template <> struct is_destructible<void const volatile> : public false_type{};
 
 } // namespace boost
 
