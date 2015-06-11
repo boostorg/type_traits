@@ -24,10 +24,6 @@ struct is_nothrow_move_constructible : public integral_constant<bool, BOOST_IS_N
 
 template <class T> struct is_nothrow_move_constructible<volatile T> : public ::boost::false_type {};
 template <class T> struct is_nothrow_move_constructible<const volatile T> : public ::boost::false_type{};
-template <class T> struct is_nothrow_move_constructible<T&> : public ::boost::false_type{};
-#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-template <class T> struct is_nothrow_move_constructible<T&&> : public ::boost::false_type{};
-#endif
 
 #elif !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR)
 
@@ -53,10 +49,6 @@ template <class T> struct is_nothrow_move_constructible
 
 template <class T> struct is_nothrow_move_constructible<volatile T> : public ::boost::false_type {};
 template <class T> struct is_nothrow_move_constructible<const volatile T> : public ::boost::false_type{};
-template <class T> struct is_nothrow_move_constructible<T&> : public ::boost::false_type{};
-#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-template <class T> struct is_nothrow_move_constructible<T&&> : public ::boost::false_type{};
-#endif
 
 #else
 
@@ -79,6 +71,11 @@ template <> struct is_nothrow_move_constructible<void> : false_type{};
 template <> struct is_nothrow_move_constructible<void const> : false_type{};
 template <> struct is_nothrow_move_constructible<void volatile> : false_type{};
 template <> struct is_nothrow_move_constructible<void const volatile> : false_type{};
+#endif
+// References are always trivially constructible, even if the thing they reference is not:
+template <class T> struct is_nothrow_move_constructible<T&> : public ::boost::true_type{};
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
+template <class T> struct is_nothrow_move_constructible<T&&> : public ::boost::true_type{};
 #endif
 
 } // namespace boost

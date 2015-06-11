@@ -48,6 +48,14 @@ template <> struct has_trivial_move_constructor<void const> : public false_type{
 template <> struct has_trivial_move_constructor<void volatile> : public false_type{};
 template <> struct has_trivial_move_constructor<void const volatile> : public false_type{};
 #endif
+// What should we do with reference types??? The standard seems to suggest these are trivial, even if the thing they reference is not:
+template <class T> struct has_trivial_move_constructor<T&> : public true_type{};
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
+template <class T> struct has_trivial_move_constructor<T&&> : public true_type{};
+#endif
+// Arrays can not be explicitly copied:
+template <class T, std::size_t N> struct has_trivial_move_constructor<T[N]> : public false_type{};
+template <class T> struct has_trivial_move_constructor<T[]> : public false_type{};
 
 } // namespace boost
 

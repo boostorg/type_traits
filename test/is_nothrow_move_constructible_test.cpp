@@ -182,11 +182,11 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<mp>::value, tr
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<cmf>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<enum_UDT>::value, true);
 
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<int&>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<int&>::value, true);
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<int&&>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<int&&>::value, true);
 #endif
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<const int&>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<const int&>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<int[2]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<int[3][2]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<int[2][4][5][6][3]>::value, false);

@@ -210,14 +210,14 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<mp>::value, tru
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<cmf>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<enum_UDT>::value, true);
 
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int&>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int&>::value, true);
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int&&>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int&&>::value, true);
 #endif
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<const int&>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int[2]>::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int[3][2]>::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int[2][4][5][6][3]>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<const int&>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int[2]>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int[3][2]>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<int[2][4][5][6][3]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<void>::value, false);
 // cases we would like to succeed but can't implement in the language:
