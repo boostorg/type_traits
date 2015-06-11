@@ -11,6 +11,7 @@
 
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/is_pod.hpp>
+#include <boost/type_traits/is_default_constructible.hpp>
 
 #ifdef BOOST_HAS_TRIVIAL_CONSTRUCTOR
 #ifdef BOOST_HAS_SGI_TYPE_TRAITS
@@ -27,7 +28,7 @@ namespace boost {
 
 template <typename T> struct has_trivial_constructor
 #ifdef BOOST_HAS_TRIVIAL_CONSTRUCTOR
-   : public integral_constant <bool, (::boost::is_pod<T>::value || BOOST_HAS_TRIVIAL_CONSTRUCTOR(T))>{};
+   : public integral_constant <bool, ((::boost::is_pod<T>::value || BOOST_HAS_TRIVIAL_CONSTRUCTOR(T)) && is_default_constructible<T>::value)>{};
 #else
    : public integral_constant <bool, ::boost::is_pod<T>::value>{};
 #endif

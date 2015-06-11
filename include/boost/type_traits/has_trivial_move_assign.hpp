@@ -23,6 +23,10 @@
 #endif
 #endif
 
+#if defined(__GNUC__) || defined(__clang)
+#include <boost/type_traits/is_assignable.hpp>
+#endif
+
 namespace boost {
 
 template <typename T>

@@ -25,6 +25,13 @@ public:
 
 #endif
 
+struct private_copy
+{
+   private_copy();
+private:
+   private_copy(const private_copy&);
+};
+
 TT_TEST_BEGIN(has_trivial_copy)
 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_copy<bool>::value, true);
@@ -220,6 +227,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_copy<test_abc1>::value, false);
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_copy<bug_10389>::value, false);
 #endif
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_copy<private_copy>::value, false);
 
 TT_TEST_END
 
