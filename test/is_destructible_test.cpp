@@ -151,6 +151,19 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<mf3>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<mp>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<cmf>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT&>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT const>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT const volatile>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT volatile>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT const&>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT const volatile&>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT volatile&>::value, true);
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT&&>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT const&&>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT const volatile&&>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<enum_UDT volatile&&>::value, true);
+#endif
 
 //
 // These are commented out for now because it's not clear what the semantics should be:
