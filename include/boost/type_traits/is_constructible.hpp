@@ -15,6 +15,7 @@
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
 
 #include <boost/type_traits/is_destructible.hpp>
+#include <boost/type_traits/is_default_constructible.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/detail/decl.hpp>
 
@@ -47,6 +48,13 @@ namespace boost{
    template <class Ref, class Arg> struct is_constructible<Ref&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&>(detail::tt_declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
    template <class Ref, class Arg> struct is_constructible<Ref&&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&&>(detail::tt_declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
 
+   template <> struct is_constructible<void> : public false_type{};
+   template <> struct is_constructible<void const> : public false_type{};
+   template <> struct is_constructible<void const volatile> : public false_type{};
+   template <> struct is_constructible<void volatile> : public false_type{};
+
+   template <class T> struct is_constructible<T> : public is_default_constructible<T>{};
+
 #else
 
 #include <boost/type_traits/is_convertible.hpp>
@@ -57,6 +65,14 @@ namespace boost{
    // We don't know how to implement this:
    template <class T, class U = void> struct is_constructible : public is_convertible<U, T>{};
    template <class T> struct is_constructible<T, void> : public is_default_constructible<T>{};
+   template <> struct is_constructible<void, void> : public false_type{};
+   template <> struct is_constructible<void const, void> : public false_type{};
+   template <> struct is_constructible<void const volatile, void> : public false_type{};
+   template <> struct is_constructible<void volatile, void> : public false_type{};
+   template <class Ref> struct is_constructible<Ref&, void> : public false_type{};
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
+   template <class Ref> struct is_constructible<Ref&&, void> : public false_type{};
+#endif
 #endif
 
 } // namespace boost
