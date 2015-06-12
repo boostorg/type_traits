@@ -263,7 +263,7 @@
 #     define BOOST_IS_FINAL(T) __is_final(T)
 #   endif
 
-#   if __GNUC__ >= 5
+#   if (__GNUC__ >= 5) && (__cplusplus >= 201103)
 #     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__is_trivially_assignable(T&, T&&) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
 #     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__is_trivially_constructible(T, T&&) && is_constructible<T, T&&>::value && !::boost::is_volatile<T>::value)
 #   endif
