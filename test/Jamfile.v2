@@ -29,7 +29,7 @@ rule all-tests {
      {
          result += [ run $(source) ] ;
      }
-     for local source in has_nothrow_assign_test has_nothrow_constr_test has_nothrow_copy_test
+     for local source in has_nothrow_assign_test has_nothrow_constr_test has_nothrow_copy_test is_nothrow_move_assignable_test is_nothrow_move_constructible_test
      {
          result += [ run $(source).cpp : : : <define>BOOST_TT_DISABLE_INTRINSICS : $(source)_no_intrinsics ] ;
      }

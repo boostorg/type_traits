@@ -34,7 +34,7 @@ struct delete_copy
 struct noexcept_copy
 {
    noexcept_copy();
-   noexcept_copy& operator=(const non_copy&)noexcept;
+   noexcept_copy& operator=(const noexcept_copy&)noexcept;
 };
 
 #endif
