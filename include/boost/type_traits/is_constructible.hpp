@@ -17,7 +17,7 @@
 #include <boost/type_traits/is_destructible.hpp>
 #include <boost/type_traits/is_default_constructible.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
-#include <boost/type_traits/detail/decl.hpp>
+#include <boost/type_traits/declval.hpp>
 
 namespace boost{
 
@@ -25,12 +25,12 @@ namespace boost{
 
       struct is_constructible_imp
       {
-         template<typename T, typename ...TheArgs, typename = decltype(T(tt_declval<TheArgs>()...))>
+         template<typename T, typename ...TheArgs, typename = decltype(T(boost::declval<TheArgs>()...))>
          static boost::type_traits::yes_type test(int);
          template<typename, typename...>
          static boost::type_traits::no_type test(...);
 
-         template<typename T, typename Arg, typename = decltype(::new T(tt_declval<Arg>()))>
+         template<typename T, typename Arg, typename = decltype(::new T(boost::declval<Arg>()))>
          static boost::type_traits::yes_type test1(int);
          template<typename, typename>
          static boost::type_traits::no_type test1(...);
@@ -45,8 +45,8 @@ namespace boost{
 
    template <class T, class ...Args> struct is_constructible : public integral_constant<bool, sizeof(detail::is_constructible_imp::test<T, Args...>(0)) == sizeof(boost::type_traits::yes_type)>{};
    template <class T, class Arg> struct is_constructible<T, Arg> : public integral_constant<bool, is_destructible<T>::value && sizeof(detail::is_constructible_imp::test1<T, Arg>(0)) == sizeof(boost::type_traits::yes_type)>{};
-   template <class Ref, class Arg> struct is_constructible<Ref&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&>(detail::tt_declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
-   template <class Ref, class Arg> struct is_constructible<Ref&&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&&>(detail::tt_declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
+   template <class Ref, class Arg> struct is_constructible<Ref&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&>(boost::declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
+   template <class Ref, class Arg> struct is_constructible<Ref&&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&&>(boost::declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
 
    template <> struct is_constructible<void> : public false_type{};
    template <> struct is_constructible<void const> : public false_type{};

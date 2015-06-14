@@ -69,7 +69,7 @@ namespace boost {
 #include <boost/type_traits/is_rvalue_reference.hpp>
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_array.hpp>
-#include <boost/type_traits/detail/decl.hpp>
+#include <boost/type_traits/declval.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace boost {
@@ -137,7 +137,7 @@ namespace boost {
          //      };
          BOOST_STATIC_CONSTANT(bool, value = (
             sizeof(test(
-            tt_declval</*BOOST_DEDUCED_TYPENAME boost::add_reference<T const>::type*/ const T&>()
+            boost::declval</*BOOST_DEDUCED_TYPENAME boost::add_reference<T const>::type*/ const T&>()
             )) == sizeof(boost::type_traits::yes_type)
             &&
             !boost::is_rvalue_reference<T>::value

@@ -13,7 +13,7 @@
 
 #if !defined(BOOST_NO_CXX11_NOEXCEPT)
 
-#include <boost/type_traits/detail/decl.hpp>
+#include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_destructible.hpp>
 
 namespace boost{
@@ -23,7 +23,7 @@ namespace boost{
       template <class T, bool b>
       struct has_nothrow_destructor_imp : public boost::integral_constant<bool, false>{};
       template <class T>
-      struct has_nothrow_destructor_imp<T, true> : public boost::integral_constant<bool, noexcept(tt_declval<T*&>()->~T())>{};
+      struct has_nothrow_destructor_imp<T, true> : public boost::integral_constant<bool, noexcept(boost::declval<T*&>()->~T())>{};
 
    }
 
