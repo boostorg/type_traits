@@ -120,20 +120,24 @@ TT_TEST_BEGIN(decay)
    typedef int f1_type(void);
    typedef int f2_type(int);
 
-   BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_same< 
+   BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_same<
           ::tt::decay<f1_type>::type,int (*)(void)>::value),
                                   true );
    BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_same< 
           ::tt::decay<f2_type>::type,int (*)(int)>::value),
                                   true );
 
+#ifndef BOOST_NO_TEMPLATED_ITERATOR_CONSTRUCTORS
+   //
+   // Don't test this if the std lib has no templated constructors (Oracle+STLPort):
+   //
    std::pair<std::string,std::string> p  = boost::make_pair( "foo", "bar" );
    std::pair<std::string, int>        p2 = boost::make_pair( "foo", 1 );
 #ifndef BOOST_NO_STD_WSTRING
    std::pair<std::wstring,std::string> p3  = boost::make_pair( L"foo", "bar" );
    std::pair<std::wstring, int>        p4  = boost::make_pair( L"foo", 1 );
 #endif
-
+#endif
    //
    // Todo: make these work sometime. The test id not directly
    //       related to decay<T>::type and can be avoided for now.
