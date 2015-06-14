@@ -272,10 +272,6 @@
 #endif
 
 #if defined(__SUNPRO_CC) && (__SUNPRO_CC >= 0x5130)
-#   include <boost/type_traits/is_same.hpp>
-#   include <boost/type_traits/is_reference.hpp>
-#   include <boost/type_traits/is_volatile.hpp>
-
 #   define BOOST_IS_UNION(T) __oracle_is_union(T)
 #   define BOOST_IS_POD(T) (__oracle_is_pod(T) && !is_function<T>::value)
 #   define BOOST_IS_EMPTY(T) __oracle_is_empty(T)
