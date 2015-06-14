@@ -16,7 +16,7 @@
 #ifdef BOOST_HAS_TRIVIAL_CONSTRUCTOR
 #ifdef BOOST_HAS_SGI_TYPE_TRAITS
 #include <boost/type_traits/is_same.hpp>
-#elif defined(__GNUC__)
+#elif defined(__GNUC__) || defined(__SUNPRO_CC)
 #include <boost/type_traits/is_volatile.hpp>
 #ifdef BOOST_INTEL
 #include <boost/type_traits/is_pod.hpp>
