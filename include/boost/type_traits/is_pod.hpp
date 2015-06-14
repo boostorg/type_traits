@@ -14,6 +14,10 @@
 #include <boost/type_traits/is_scalar.hpp>
 #include <boost/type_traits/intrinsics.hpp>
 
+#ifdef __SUNPRO_CC
+#include <boost/type_traits/is_function.hpp>
+#endif
+
 #include <cstddef>
 
 #ifndef BOOST_IS_POD

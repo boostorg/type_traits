@@ -277,7 +277,7 @@
 #   include <boost/type_traits/is_volatile.hpp>
 
 #   define BOOST_IS_UNION(T) __oracle_is_union(T)
-#   define BOOST_IS_POD(T) __oracle_is_pod(T)
+#   define BOOST_IS_POD(T) (__oracle_is_pod(T) && !is_function<T>::value)
 #   define BOOST_IS_EMPTY(T) __oracle_is_empty(T)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) (__oracle_has_trivial_constructor(T) && ! ::boost::is_volatile<T>::value)
 #   define BOOST_HAS_TRIVIAL_COPY(T) (__oracle_has_trivial_copy(T) && !is_reference<T>::value)
