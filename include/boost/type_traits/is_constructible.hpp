@@ -77,4 +77,4 @@ namespace boost{
 
 } // namespace boost
 
-#endif // BOOST_TT_IS_ASSIGNABLE_HPP_INCLUDED
+#endif // BOOST_TT_IS_CONSTRUCTIBLE_HPP_INCLUDED
