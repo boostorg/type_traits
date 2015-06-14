@@ -33,13 +33,25 @@ template <typename T> struct has_trivial_move_constructor : public integral_cons
 
 #else
 
+#ifdef __SUNPRO_CC
+#include <boost/type_traits/is_assignable.hpp>
+#include <boost/type_traits/remove_const.hpp>
+#if __cplusplus >= 201103
+#define SOLARIS_EXTRA_CHECK && is_assignable<typename remove_const<T>::type&, typename remove_const<T>::type&&>::value
+#endif
+#endif
+
+#ifndef SOLARIS_EXTRA_CHECK
+#define SOLARIS_EXTRA_CHECK
+#endif
+
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_volatile.hpp>
 
 namespace boost {
 
 template <typename T> struct has_trivial_move_constructor 
-   : public integral_constant<bool, ::boost::is_pod<T>::value && !::boost::is_volatile<T>::value>{};
+   : public integral_constant<bool, ::boost::is_pod<T>::value && !::boost::is_volatile<T>::value SOLARIS_EXTRA_CHECK>{};
 #endif
 
 template <> struct has_trivial_move_constructor<void> : public false_type{};
