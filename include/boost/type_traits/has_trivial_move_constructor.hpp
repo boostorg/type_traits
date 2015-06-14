@@ -34,10 +34,10 @@ template <typename T> struct has_trivial_move_constructor : public integral_cons
 #else
 
 #ifdef __SUNPRO_CC
-#include <boost/type_traits/is_assignable.hpp>
+#include <boost/type_traits/is_constructible.hpp>
 #include <boost/type_traits/remove_const.hpp>
 #if __cplusplus >= 201103
-#define SOLARIS_EXTRA_CHECK && is_assignable<typename remove_const<T>::type&, typename remove_const<T>::type&&>::value
+#define SOLARIS_EXTRA_CHECK && is_constructible<typename remove_const<T>::type, typename remove_const<T>::type&&>::value
 #endif
 #endif
 
