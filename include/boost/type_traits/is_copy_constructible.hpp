@@ -137,7 +137,7 @@ namespace boost {
          //      };
          BOOST_STATIC_CONSTANT(bool, value = (
             sizeof(test(
-            boost::declval</*BOOST_DEDUCED_TYPENAME boost::add_reference<T const>::type*/ const T&>()
+            boost::declval<BOOST_DEDUCED_TYPENAME boost::add_reference<T const>::type>()
             )) == sizeof(boost::type_traits::yes_type)
             &&
             !boost::is_rvalue_reference<T>::value
