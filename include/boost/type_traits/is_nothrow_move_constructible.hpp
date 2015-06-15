@@ -49,6 +49,8 @@ template <class T> struct is_nothrow_move_constructible
 
 template <class T> struct is_nothrow_move_constructible<volatile T> : public ::boost::false_type {};
 template <class T> struct is_nothrow_move_constructible<const volatile T> : public ::boost::false_type{};
+template <class T, std::size_t N> struct is_nothrow_move_constructible<T[N]> : public ::boost::false_type{};
+template <class T> struct is_nothrow_move_constructible<T[]> : public ::boost::false_type{};
 
 #else
 
