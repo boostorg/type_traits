@@ -14,7 +14,7 @@
 #include <boost/type_traits/is_reference.hpp>
 
 #if (defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 409)) || defined(BOOST_CLANG)
-#include <boost/type_traits/is_default_constructible.hpp>
+#include <boost/type_traits/is_copy_constructible.hpp>
 #define BOOST_TT_TRIVIAL_CONSTRUCT_FIX && is_copy_constructible<T>::value
 #else
 #define BOOST_TT_TRIVIAL_CONSTRUCT_FIX
