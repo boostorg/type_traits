@@ -27,13 +27,6 @@ public:
    explicit bug11324_derived(char arg) : data(arg) {}
 };
 
-struct private_construct
-{
-   private_construct(int);
-private:
-   private_construct();
-};
-
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 
 struct deleted_construct
@@ -204,7 +197,6 @@ BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<wrap<trivial_ex
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<test_abc1>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<bug11324_derived>::value, false);
 
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<private_construct>::value, false);
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<deleted_construct>::value, false);
 #endif

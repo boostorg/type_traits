@@ -14,13 +14,6 @@
 #  include <boost/type_traits/is_nothrow_move_constructible.hpp>
 #endif
 
-struct non_copy
-{
-   non_copy();
-private:
-   non_copy(const non_copy&);
-};
-
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 
 struct delete_copy
@@ -244,8 +237,6 @@ BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<nothrow_c
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<nothrow_assign_UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<nothrow_construct_UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<test_abc1>::value, false);
-
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<non_copy>::value, false);
 
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<delete_copy>::value, false);
