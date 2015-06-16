@@ -12,14 +12,20 @@
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_reference.hpp>
-#include <boost/type_traits/is_copy_constructible.hpp>
+
+#if (defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 409)) || defined(BOOST_CLANG)
+#include <boost/type_traits/is_default_constructible.hpp>
+#define BOOST_TT_TRIVIAL_CONSTRUCT_FIX && is_copy_constructible<T>::value
+#else
+#define BOOST_TT_TRIVIAL_CONSTRUCT_FIX
+#endif
 
 namespace boost {
 
 template <typename T> struct has_trivial_copy 
 : public integral_constant<bool, 
 #ifdef BOOST_HAS_TRIVIAL_COPY
-   BOOST_HAS_TRIVIAL_COPY(T) && boost::is_copy_constructible<T>::value
+   BOOST_HAS_TRIVIAL_COPY(T) BOOST_TT_TRIVIAL_CONSTRUCT_FIX
 #else
    ::boost::is_pod<T>::value
 #endif
@@ -38,6 +44,8 @@ template <> struct has_trivial_copy<void const volatile> : public false_type{};
 #endif
 
 template <class T> struct has_trivial_copy_constructor : public has_trivial_copy<T>{};
+
+#undef BOOST_TT_TRIVIAL_CONSTRUCT_FIX
 
 } // namespace boost
 

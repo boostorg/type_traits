@@ -28,6 +28,7 @@
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/is_assignable.hpp>
+#include <boost/type_traits/is_array.hpp>
 #ifdef BOOST_INTEL
 #include <boost/type_traits/is_pod.hpp>
 #endif

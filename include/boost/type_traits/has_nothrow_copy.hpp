@@ -18,6 +18,7 @@
 #include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/is_copy_constructible.hpp>
 #include <boost/type_traits/is_reference.hpp>
+#include <boost/type_traits/is_array.hpp>
 #ifdef BOOST_INTEL
 #include <boost/type_traits/is_pod.hpp>
 #endif
