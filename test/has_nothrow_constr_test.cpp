@@ -37,6 +37,15 @@ struct deleted_default_construct
 
 #endif
 
+struct private_default_construct
+{
+private:
+   private_default_construct();
+public:
+   private_default_construct(char val) : member(val) {}
+   char member;
+};
+
 #ifndef BOOST_NO_CXX11_NOEXCEPT
 struct noexcept_default_construct
 {
@@ -201,6 +210,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<bug11324_derived>::v
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<deleted_default_construct>::value, false);
 #endif
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<private_default_construct>::value, false);
 #ifndef BOOST_NO_CXX11_NOEXCEPT
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<noexcept_default_construct>::value, true);
 #endif

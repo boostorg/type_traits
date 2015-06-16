@@ -22,6 +22,13 @@ struct deleted_destruct
 
 #endif
 
+struct private_destruct
+{
+   private_destruct();
+private:
+   ~private_destruct();
+};
+
 TT_TEST_BEGIN(has_trivial_destructor)
 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_destructor<bool>::value, true);
@@ -180,6 +187,7 @@ BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_trivial_destructor<wrap<trivial_exc
 BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_trivial_destructor<wrap<trivial_except_construct> >::value, true, false);
 BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_trivial_destructor<wrap<trivial_except_assign> >::value, true, false);
 
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_destructor<private_destruct>::value, false);
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_destructor<deleted_destruct>::value, false);
 #endif

@@ -12,6 +12,13 @@
 #  include <boost/type_traits/has_nothrow_copy.hpp>
 #endif
 
+struct non_copy
+{
+   non_copy();
+private:
+   non_copy(const non_copy&);
+};
+
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 
 struct delete_copy
@@ -228,6 +235,10 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<delete_copy>::value, false)
 
 #ifndef BOOST_NO_CXX11_NOEXCEPT
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<noexcept_copy>::value, true);
+#endif
+
+#if !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<non_copy>::value, false);
 #endif
 
 TT_TEST_END

@@ -12,6 +12,13 @@
 #  include <boost/type_traits/has_trivial_assign.hpp>
 #endif
 
+struct non_assignable
+{
+   non_assignable();
+private:
+   non_assignable& operator=(const non_assignable&);
+};
+
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 
 struct non_assignable2
@@ -217,6 +224,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_assign<test_abc1>::value, false)
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_assign<non_assignable2>::value, false);
 #endif
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_assign<non_assignable>::value, false);
 
 TT_TEST_END
 

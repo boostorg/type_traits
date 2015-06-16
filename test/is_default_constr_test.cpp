@@ -37,6 +37,15 @@ struct deleted_default_construct
 
 #endif
 
+struct private_default_construct
+{
+private:
+   private_default_construct();
+public:
+   private_default_construct(char val) : member(val) {}
+   char member;
+};
+
 TT_TEST_BEGIN(is_default_constructible)
 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_default_constructible<bool>::value, true);
@@ -189,6 +198,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_default_constructible<bug11324_derived>::
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_default_constructible<deleted_default_construct>::value, false);
 #endif
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_default_constructible<private_default_construct>::value, false);
 
 TT_TEST_END
 
