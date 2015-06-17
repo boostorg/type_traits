@@ -54,7 +54,7 @@ namespace boost {
 
 namespace detail {
 
-#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) && !(defined(BOOST_GCC) && (BOOST_GCC < 40700))
 
    // This is a C++11 conforming version, place this first and use it wherever possible:
 
