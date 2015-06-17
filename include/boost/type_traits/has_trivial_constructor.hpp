@@ -25,7 +25,7 @@
 #endif
 
 
-#if (defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 409)) || defined(BOOST_CLANG)
+#if (defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 409)) || defined(BOOST_CLANG) || (defined(__SUNPRO_CC) && defined(BOOST_HAS_TRIVIAL_CONSTRUCTOR))
 #include <boost/type_traits/is_default_constructible.hpp>
 #define BOOST_TT_TRIVIAL_CONSTRUCT_FIX && is_default_constructible<T>::value
 #else
