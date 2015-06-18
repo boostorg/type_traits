@@ -43,12 +43,13 @@ namespace boost{
 
 #else
 
-#include <boost/type_traits/has_trivial_constructor.hpp>
+#include <boost/type_traits/is_pod.hpp>
 
 namespace boost{
 
-   // We don't know how to implement this:
-   template <class T> struct is_default_constructible : public has_trivial_constructor<T>{};
+   // We don't know how to implement this, note we can not use has_trivial_constructor here
+   // because the correct implementation of that trait requires this one:
+   template <class T> struct is_default_constructible : public is_pod<T>{};
    template <> struct is_default_constructible<void> : public integral_constant<bool, false>{};
    template <> struct is_default_constructible<void const> : public integral_constant<bool, false>{};
    template <> struct is_default_constructible<void volatile> : public integral_constant<bool, false>{};

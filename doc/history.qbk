@@ -11,6 +11,8 @@
 
 * Refactored traits to depend only on Boost.Config.  Greatly simplified code to improve readability and remove workarounds for old compilers no longer supported.
 * Fix __decay to follow C++11 semantics, see [@https://svn.boost.org/trac/boost/ticket/7760 #7760].
+* Added a number of new traits __is_assignable, __is_default_constructible, __is_constructible and __is_destructible required to fix bugs in a number of other traits,
+see for example [@https://svn.boost.org/trac/boost/ticket/7760 #11324].
 
 [h4 Boost 1.58.0]
 

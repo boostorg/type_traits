@@ -15,18 +15,20 @@
 #if !defined(BOOST_HAS_NOTHROW_ASSIGN) || defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_assign.hpp>
 #if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
-#include <boost/type_traits/detail/decl.hpp>
+#include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/is_reference.hpp>
 #include <boost/type_traits/is_assignable.hpp>
 #include <boost/type_traits/add_reference.hpp>
+#include <boost/type_traits/remove_reference.hpp>
 #endif
 #endif
 #if defined(__GNUC__) || defined(__SUNPRO_CC)
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/is_assignable.hpp>
+#include <boost/type_traits/is_array.hpp>
 #ifdef BOOST_INTEL
 #include <boost/type_traits/is_pod.hpp>
 #endif
@@ -39,7 +41,7 @@ namespace boost {
    namespace detail
    {
       template <class T, bool b1, bool b2> struct has_nothrow_assign_imp{ static const bool value = false; };
-      template <class T>          struct has_nothrow_assign_imp<T, false, true>{ static const bool value = noexcept(detail::tt_decl_ref<T>() = detail::tt_decl_const_ref<T>()); };
+      template <class T>          struct has_nothrow_assign_imp<T, false, true>{ static const bool value = noexcept(boost::declval<typename add_reference<T>::type>() = boost::declval<typename add_reference<T const>::type>()); };
       template <class T, std::size_t N> struct has_nothrow_assign_imp<T[N], false, true>{ static const bool value = has_nothrow_assign_imp<T, false, true>::value; };
       template <class T>          struct has_nothrow_assign_imp<T[], false, true>{ static const bool value = has_nothrow_assign_imp<T, false, true>::value; };
    }

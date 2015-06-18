@@ -21,6 +21,10 @@
 #include <boost/type_traits/is_same.hpp>
 #endif
 
+#if defined(__GNUC__) || defined(__clang) || defined(__SUNPRO_CC)
+#include <boost/type_traits/is_destructible.hpp>
+#endif
+
 namespace boost {
 
 template <typename T> struct has_trivial_destructor : public integral_constant<bool, BOOST_HAS_TRIVIAL_DESTRUCTOR(T)>{};

@@ -29,7 +29,10 @@ rule all-tests {
      {
          result += [ run $(source) ] ;
      }
-     for local source in has_nothrow_assign_test has_nothrow_constr_test
+     #
+     # These traits have both intrinsic support, and a std conforming version, test a version with intrinsics disabled for better code coverage:
+     #
+     for local source in has_nothrow_assign_test has_nothrow_constr_test has_nothrow_copy_test is_nothrow_move_assignable_test is_nothrow_move_constructible_test
      {
          result += [ run $(source).cpp : : : <define>BOOST_TT_DISABLE_INTRINSICS : $(source)_no_intrinsics ] ;
      }

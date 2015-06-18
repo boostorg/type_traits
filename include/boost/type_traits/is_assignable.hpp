@@ -21,7 +21,7 @@ namespace boost{
 #if !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
 
 #include <boost/type_traits/detail/yes_no_type.hpp>
-#include <boost/type_traits/detail/decl.hpp>
+#include <boost/type_traits/declval.hpp>
 
 namespace boost{
 
@@ -29,7 +29,7 @@ namespace boost{
 
       struct is_assignable_imp
       {
-         template<typename T, typename U, typename = decltype(tt_declval<T>() = tt_declval<U>())>
+         template<typename T, typename U, typename = decltype(boost::declval<T>() = boost::declval<U>())>
          static boost::type_traits::yes_type test(int);
 
          template<typename, typename>

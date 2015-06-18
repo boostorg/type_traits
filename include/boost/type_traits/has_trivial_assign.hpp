@@ -13,29 +13,33 @@
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
-#if !defined(BOOST_HAS_TRIVIAL_ASSIGN) || defined(BOOST_MSVC) || defined(__GNUC__) || defined(BOOST_INTEL) || defined(__SUNPRO_CC)
+#if !defined(BOOST_HAS_TRIVIAL_ASSIGN) || defined(BOOST_MSVC) || defined(__GNUC__) || defined(BOOST_INTEL) || defined(__SUNPRO_CC) || defined(__clang)
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
+#include <boost/type_traits/is_assignable.hpp>
 #endif
 
 namespace boost {
 
-template <typename T>
-struct has_trivial_assign : public integral_constant<bool,
+   template <typename T>
+   struct has_trivial_assign : public integral_constant < bool,
 #ifdef BOOST_HAS_TRIVIAL_ASSIGN
-   BOOST_HAS_TRIVIAL_ASSIGN(T)
+      BOOST_HAS_TRIVIAL_ASSIGN(T)
 #else
-   ::boost::is_pod<T>::value && !::boost::is_const<T>::value && !::boost::is_volatile<T>::value
+      ::boost::is_pod<T>::value && !::boost::is_const<T>::value && !::boost::is_volatile<T>::value
 #endif
    > {};
 
-template<> struct has_trivial_assign<void> : public false_type{};
+   template<> struct has_trivial_assign<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-template<> struct has_trivial_assign<void const> : public false_type{};
-template<> struct has_trivial_assign<void const volatile> : public false_type{};
-template<> struct has_trivial_assign<void volatile> : public false_type{};
+   template<> struct has_trivial_assign<void const> : public false_type{};
+   template<> struct has_trivial_assign<void const volatile> : public false_type{};
+   template<> struct has_trivial_assign<void volatile> : public false_type{};
 #endif
+   // Arrays are not explictly assignable:
+   template <typename T, std::size_t N> struct has_trivial_assign<T[N]> : public false_type{};
+   template <typename T> struct has_trivial_assign<T[]> : public false_type{};
 
 } // namespace boost
 
