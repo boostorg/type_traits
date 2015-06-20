@@ -11,7 +11,7 @@
 
 #include <boost/type_traits/has_trivial_destructor.hpp>
 
-#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(__SUNPRO_CC)
+#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(__SUNPRO_CC) && !defined(BOOST_MSVC)
 
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_destructible.hpp>
