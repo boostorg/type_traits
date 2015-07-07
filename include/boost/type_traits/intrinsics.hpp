@@ -112,8 +112,6 @@
 #   define BOOST_IS_CLASS(T) __is_class(T)
 #   define BOOST_IS_CONVERTIBLE(T,U) ((__is_convertible_to(T,U) || (is_same<T,U>::value && !is_function<U>::value)) && !__is_abstract(U))
 #   define BOOST_IS_ENUM(T) __is_enum(T)
-//  This one doesn't quite always do the right thing:
-//  #   define BOOST_IS_POLYMORPHIC(T) __is_polymorphic(T)
 //  This one fails if the default alignment has been changed with /Zp:
 //  #   define BOOST_ALIGNMENT_OF(T) __alignof(T)
 
@@ -121,6 +119,11 @@
 #       define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) ((__has_trivial_move_constructor(T) || boost::is_pod<T>::value) && ! ::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
 #       define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) ((__has_trivial_move_assign(T) || boost::is_pod<T>::value) && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
 #   endif
+#ifndef BOOST_NO_CXX11_FINAL
+//  This one doesn't quite always do the right thing on older VC++ versions
+//  we really need it when the final keyword is supporyted though:
+#   define BOOST_IS_POLYMORPHIC(T) __is_polymorphic(T)
+#endif
 #if _MSC_FULL_VER >= 180020827
 #   define BOOST_IS_NOTHROW_MOVE_ASSIGN(T) (__is_nothrow_assignable(T&, T&&))
 #   define BOOST_IS_NOTHROW_MOVE_CONSTRUCT(T) (__is_nothrow_constructible(T, T&&))
