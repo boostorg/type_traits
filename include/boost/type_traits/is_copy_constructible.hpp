@@ -72,6 +72,11 @@ namespace boost {
 #include <boost/type_traits/declval.hpp>
 #include <boost/noncopyable.hpp>
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable:4181)
+#endif
+
 namespace boost {
 
    namespace detail{
@@ -172,6 +177,10 @@ namespace boost {
 #endif
 
 } // namespace boost
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #endif
 
