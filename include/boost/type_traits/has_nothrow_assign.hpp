@@ -67,6 +67,11 @@ namespace boost {
 
 template <class T, std::size_t N> struct has_nothrow_assign <T[N]> : public has_nothrow_assign<T> {};
 template <> struct has_nothrow_assign<void> : public false_type{};
+template <class T> struct has_nothrow_assign<T volatile> : public false_type{};
+template <class T> struct has_nothrow_assign<T&> : public false_type{};
+#if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+template <class T> struct has_nothrow_assign<T&&> : public false_type{};
+#endif
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
 template <> struct has_nothrow_assign<void const> : public false_type{};
 template <> struct has_nothrow_assign<void const volatile> : public false_type{};

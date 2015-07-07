@@ -37,6 +37,11 @@ namespace boost {
    template<> struct has_trivial_assign<void const volatile> : public false_type{};
    template<> struct has_trivial_assign<void volatile> : public false_type{};
 #endif
+   template <class T> struct has_trivial_assign<T volatile> : public false_type{};
+   template <class T> struct has_trivial_assign<T&> : public false_type{};
+#if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+   template <class T> struct has_trivial_assign<T&&> : public false_type{};
+#endif
    // Arrays are not explictly assignable:
    template <typename T, std::size_t N> struct has_trivial_assign<T[N]> : public false_type{};
    template <typename T> struct has_trivial_assign<T[]> : public false_type{};

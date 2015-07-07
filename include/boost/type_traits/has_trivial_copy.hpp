@@ -43,6 +43,9 @@ template <> struct has_trivial_copy<void volatile> : public false_type{};
 template <> struct has_trivial_copy<void const volatile> : public false_type{};
 #endif
 
+template <class T> struct has_trivial_copy<T&> : public false_type{};
+template <class T> struct has_trivial_copy<T&&> : public false_type{};
+
 template <class T> struct has_trivial_copy_constructor : public has_trivial_copy<T>{};
 
 #undef BOOST_TT_TRIVIAL_CONSTRUCT_FIX

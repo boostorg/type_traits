@@ -30,6 +30,11 @@ template <class T> struct has_nothrow_constructor : public integral_constant<boo
 #include <boost/type_traits/is_default_constructible.hpp>
 #include <boost/type_traits/remove_all_extents.hpp>
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable:4197) // top-level volatile in cast is ignored
+#endif
+
 namespace boost { namespace detail{
 
    template <class T, bool b> struct has_nothrow_constructor_imp : public boost::integral_constant<bool, false>{};
@@ -38,6 +43,10 @@ namespace boost { namespace detail{
 }
 
 template <class T> struct has_nothrow_constructor : public detail::has_nothrow_constructor_imp<T, is_default_constructible<T>::value>{};
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #else
 
