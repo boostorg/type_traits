@@ -22,7 +22,7 @@ struct non_copyable_movable
    non_copyable_movable(const non_copyable_movable&) = delete;
    non_copyable_movable& operator=(const non_copyable_movable&) = delete;
    //non_copyable_movable(non_copyable_movable&&) = default;
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1800)
+#if BOOST_WORKAROUND(BOOST_MSVC, <= 1800) || BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40500)
    non_copyable_movable& operator=(non_copyable_movable&& o) 
    {
       val = std::move(o.val);

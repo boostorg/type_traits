@@ -12,7 +12,7 @@
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/detail/workaround.hpp>
 
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
+#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40500)
 
 #include <boost/type_traits/is_destructible.hpp>
 #include <boost/type_traits/is_default_constructible.hpp>
