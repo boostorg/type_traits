@@ -44,7 +44,9 @@ template <> struct has_trivial_copy<void const volatile> : public false_type{};
 #endif
 
 template <class T> struct has_trivial_copy<T&> : public false_type{};
+#if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) 
 template <class T> struct has_trivial_copy<T&&> : public false_type{};
+#endif
 
 template <class T> struct has_trivial_copy_constructor : public has_trivial_copy<T>{};
 

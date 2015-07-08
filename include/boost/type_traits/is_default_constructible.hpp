@@ -35,7 +35,9 @@ namespace boost{
    template <class T, std::size_t N> struct is_default_constructible<T[N]> : public is_default_constructible<T>{};
    template <class T> struct is_default_constructible<T[]> : public is_default_constructible<T>{};
    template <class T> struct is_default_constructible<T&> : public integral_constant<bool, false>{};
+#if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) 
    template <class T> struct is_default_constructible<T&&> : public integral_constant<bool, false>{};
+#endif
    template <> struct is_default_constructible<void> : public integral_constant<bool, false>{};
    template <> struct is_default_constructible<void const> : public integral_constant<bool, false>{};
    template <> struct is_default_constructible<void volatile> : public integral_constant<bool, false>{};
