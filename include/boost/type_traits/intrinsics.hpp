@@ -218,7 +218,12 @@
 #   if __has_feature(has_trivial_move_assign)
 #     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__has_trivial_move_assign(T) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
 #   endif
-#   define BOOST_ALIGNMENT_OF(T) __alignof(T)
+#   if (!defined(unix) && !defined(__unix__)) || defined(__LP64__) || !defined(__GNUC__)
+// GCC sometimes lies about alignment requirements
+// of type double on 32-bit unix platforms, use the
+// old implementation instead in that case:
+#     define BOOST_ALIGNMENT_OF(T) __alignof(T)
+#   endif
 #   if __has_feature(is_final)
 #     define BOOST_IS_FINAL(T) __is_final(T)
 #   endif
