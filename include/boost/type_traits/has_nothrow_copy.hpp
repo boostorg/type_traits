@@ -48,11 +48,6 @@ struct has_nothrow_copy_constructor_imp<T, true> : public boost::integral_consta
 }
 
 template <class T> struct has_nothrow_copy_constructor : public detail::has_nothrow_copy_constructor_imp<T, boost::is_copy_constructible<T>::value>{};
-template <class T> struct has_nothrow_copy_constructor<T&> : public integral_constant<bool, false>{};
-#if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
-template <class T> struct has_nothrow_copy_constructor<T&&> : public integral_constant<bool, false>{};
-#endif
-template <class T> struct has_nothrow_copy_constructor<T volatile> : public integral_constant<bool, false>{};
 
 #else
 
