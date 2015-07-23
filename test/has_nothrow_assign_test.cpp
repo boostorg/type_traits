@@ -27,7 +27,7 @@ struct non_assignable
 struct noexcept_assignable
 {
    noexcept_assignable();
-   noexcept_assignable& operator=(const non_assignable&)noexcept;
+   noexcept_assignable& operator=(const noexcept_assignable&)noexcept;
 };
 
 #endif
