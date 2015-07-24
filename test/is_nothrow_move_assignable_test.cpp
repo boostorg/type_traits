@@ -244,7 +244,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<test_abc1>::value
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<non_assignable>::value, false);
 #endif
-#ifndef BOOST_NO_CXX11_NOEXCEPT
+#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<noexcept_assignable>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<noexcept_move_assignable>::value, true);
 #endif

@@ -251,7 +251,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<non_copy>::val
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<delete_copy>::value, false);
 #endif
 
-#ifndef BOOST_NO_CXX11_NOEXCEPT
+#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<noexcept_copy>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<noexcept_move>::value, true);
 #endif
