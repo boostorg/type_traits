@@ -14,7 +14,7 @@
 
 #if !defined(BOOST_HAS_NOTHROW_ASSIGN) || defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_assign.hpp>
-#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
@@ -36,7 +36,7 @@
 
 namespace boost {
 
-#if !defined(BOOST_HAS_NOTHROW_ASSIGN) && !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+#if !defined(BOOST_HAS_NOTHROW_ASSIGN) && !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 
    namespace detail
    {
@@ -51,7 +51,7 @@ namespace boost {
    template <class T>
    struct has_nothrow_assign : public integral_constant < bool,
 #ifndef BOOST_HAS_NOTHROW_ASSIGN
-#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
+#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
       // Portable C++11 version:
       detail::has_nothrow_assign_imp<T, 
       (is_const<typename remove_reference<T>::type>::value || is_volatile<typename remove_reference<T>::type>::value || is_reference<T>::value), 

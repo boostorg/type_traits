@@ -38,8 +38,8 @@ template <class T> struct has_nothrow_constructor : public integral_constant<boo
 namespace boost { namespace detail{
 
    template <class T, bool b> struct has_nothrow_constructor_imp : public boost::integral_constant<bool, false>{};
-   template <class T> struct has_nothrow_constructor_imp<T, true> : public boost::integral_constant<bool, noexcept(typename remove_all_extents<T>::type())>{};
-
+   template <class T> struct has_nothrow_constructor_imp<T, true> : public boost::integral_constant<bool, noexcept(T())>{};
+   template <class T, std::size_t N> struct has_nothrow_constructor_imp<T[N], true> : public has_nothrow_constructor_imp<T, true> {};
 }
 
 template <class T> struct has_nothrow_constructor : public detail::has_nothrow_constructor_imp<T, is_default_constructible<T>::value>{};
