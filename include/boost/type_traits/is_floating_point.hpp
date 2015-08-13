@@ -21,9 +21,9 @@ namespace boost {
    template<> struct is_floating_point<double> : public true_type{};
    template<> struct is_floating_point<long double> : public true_type{};
    
- #if defined(_GLIBCXX_USE_FLOAT128) && defined(BOOST_GCC) && !defined(__STRICT_ANSI__)
+#if defined(BOOST_HAS_FLOAT128)
    template<> struct is_floating_point<__float128> : public true_type{};
- #endif
+#endif
 
 } // namespace boost
 
