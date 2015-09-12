@@ -59,7 +59,7 @@ void do_check(const T&)
 
 #ifndef TEST_STD
    // Non-Tr1 behaviour:
-   typedef typename tt::aligned_storage<T::value,-1L>::type t3;
+   typedef typename tt::aligned_storage<T::value,(std::size_t)(-1L)>::type t3;
    t3 as3 = { 0, };
    must_be_pod<t3> pod3;
    no_unused_warning(as3);

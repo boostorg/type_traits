@@ -27,6 +27,22 @@ public:
    explicit bug11324_derived(char arg) : data(arg) {}
 };
 
+struct private_construct
+{
+   private_construct(int);
+private:
+   private_construct();
+};
+
+#ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
+
+struct deleted_construct
+{
+   deleted_construct(int);
+   deleted_construct() = delete;
+};
+
+#endif
 
 TT_TEST_BEGIN(has_trivial_constructor)
 
@@ -167,7 +183,8 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<int[3][2]>::value, t
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<int[2][4][5][6][3]>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<empty_UDT>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<void>::value, true);
+// Can't construct type void:
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<void>::value, false);
 // cases we would like to succeed but can't implement in the language:
 BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<empty_POD_UDT>::value, true, false);
 BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<POD_UDT>::value, true, false);
@@ -186,6 +203,11 @@ BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<wrap<trivial_ex
 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<test_abc1>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<bug11324_derived>::value, false);
+
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<private_construct>::value, false);
+#ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<deleted_construct>::value, false);
+#endif
 
 TT_TEST_END
 
