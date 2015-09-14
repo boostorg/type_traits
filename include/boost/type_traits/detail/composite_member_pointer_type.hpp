@@ -84,6 +84,14 @@ template<class C1, class C2> struct common_member_class
     >::type type;
 };
 
+//This indirection avoids compilation errors on some older 
+//compilers like MSVC 7.1
+template<class CT, class CB>
+struct common_member_class_pointer_to_member
+{
+    typedef CT CB::* type;
+};
+
 template<class C1, class T1, class C2, class T2> struct composite_member_pointer_type<T1 C1::*, T2 C2::*>
 {
 private:
@@ -95,7 +103,7 @@ private:
 
 public:
 
-    typedef CT CB::* type;
+    typedef typename common_member_class_pointer_to_member<CT, CB>::type type;
 };
 
 } // namespace type_traits_detail
