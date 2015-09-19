@@ -128,13 +128,15 @@ public:
 
 template<class T, class U> struct composite_pointer_type<T*, U*>
 {
+    //Done in two steps to avoid compilation errors
+    //in old compilers like MSVC 7.1
     typedef typename boost::conditional<
 
         detail::has_common_pointee<T, U>::value,
         detail::common_pointee<T, U>,
         detail::composite_pointer_impl<T, U>
-
-    >::type::type * type;
+    >::type first_type;
+    typename first_type::type * type;
 };
 
 } // namespace type_traits_detail
