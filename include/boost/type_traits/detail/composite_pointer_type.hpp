@@ -124,19 +124,26 @@ public:
     typedef typename boost::copy_cv<typename boost::copy_cv<typename composite_pointer_type<T2, U2>::type const, T>::type, U>::type type;
 };
 
+//Old compilers like MSVC-7.1 have problems using boost::conditional in
+//composite_pointer_type. Partially specializing on has_common_pointee<T, U>::value
+//seems to make their life easier
+template<class T, class U, bool = has_common_pointee<T, U>::value >
+struct composite_pointer_type_dispatch
+   : common_pointee<T, U>
+{};
+
+template<class T, class U>
+struct composite_pointer_type_dispatch<T, U, false>
+   : composite_pointer_impl<T, U>
+{};
+
+
 } // detail
+
 
 template<class T, class U> struct composite_pointer_type<T*, U*>
 {
-    //Done in two steps to avoid compilation errors
-    //in old compilers like MSVC 7.1
-    typedef typename boost::conditional<
-
-        detail::has_common_pointee<T, U>::value,
-        detail::common_pointee<T, U>,
-        detail::composite_pointer_impl<T, U>
-    >::type first_type;
-    typename first_type::type * type;
+    typedef typename detail::composite_pointer_type_dispatch<T, U>::type* type;
 };
 
 } // namespace type_traits_detail
