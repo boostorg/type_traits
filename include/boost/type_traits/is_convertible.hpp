@@ -300,13 +300,26 @@ struct is_convertible_basic_impl:
 // This version seems to work pretty well for a wide spectrum of compilers,
 // however it does rely on undefined behaviour by passing UDT's through (...).
 //
+
+//Workaround for old compilers like MSVC 7.1 to avoid
+//forming a reference to an array of unknown bound
+template <typename From>
+struct is_convertible_basic_impl_add_lvalue_reference
+   : add_lvalue_reference<From>
+{};
+
+template <typename From>
+struct is_convertible_basic_impl_add_lvalue_reference<From[]>
+{
+    typedef From type [];
+};
+
 template <typename From, typename To>
 struct is_convertible_basic_impl
 {
     static ::boost::type_traits::no_type BOOST_TT_DECL _m_check(...);
     static ::boost::type_traits::yes_type BOOST_TT_DECL _m_check(To);
-    typedef typename add_lvalue_reference<From>::type lvalue_type;
-    typedef typename add_rvalue_reference<From>::type rvalue_type; 
+    typedef typename is_convertible_basic_impl_add_lvalue_reference<From>::type lvalue_type;
     static lvalue_type _m_from;
 #ifdef BOOST_MSVC
 #pragma warning(push)
@@ -316,6 +329,7 @@ struct is_convertible_basic_impl
 #endif
 #endif
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
+    typedef typename add_rvalue_reference<From>::type rvalue_type; 
     BOOST_STATIC_CONSTANT(bool, value =
         sizeof( _m_check(static_cast<rvalue_type>(_m_from)) ) == sizeof(::boost::type_traits::yes_type)
         );

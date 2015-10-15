@@ -19,7 +19,9 @@ namespace boost {
 
 #if !defined( __CODEGEARC__ )
 
-#if !(defined(__EDG_VERSION__) && __EDG_VERSION__ <= 238) && !defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION)
+#if !(defined(BOOST_MSVC) && BOOST_MSVC <= 1310) && \
+    !(defined(__EDG_VERSION__) && __EDG_VERSION__ <= 238) &&\
+    !defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION)
 
 namespace detail{
 
