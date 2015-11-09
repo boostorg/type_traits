@@ -25,6 +25,10 @@
 #elif defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_copy.hpp>
 #include <boost/type_traits/is_array.hpp>
+#ifdef BOOST_INTEL
+#include <boost/type_traits/add_lvalue_reference.hpp>
+#include <boost/type_traits/add_const.hpp>
+#endif
 #endif
 
 namespace boost {
