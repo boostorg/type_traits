@@ -107,7 +107,7 @@
 #if !defined(BOOST_INTEL)
 #   define BOOST_HAS_NOTHROW_COPY(T) ((__has_nothrow_copy(T) || ::boost::has_trivial_copy<T>::value) && !is_array<T>::value)
 #   define BOOST_HAS_TRIVIAL_COPY(T) (__has_trivial_copy(T) || ::boost::is_pod<T>::value)
-#else if (_MSC_VER >= 1900)
+#elif (_MSC_VER >= 1900)
 #   define BOOST_HAS_NOTHROW_COPY(T) ((__is_nothrow_constructible(T, typename add_lvalue_reference<typename add_const<T>::type>::type)) && !is_array<T>::value)
 #   define BOOST_HAS_TRIVIAL_COPY(T) (__is_trivially_constructible(T, typename add_lvalue_reference<typename add_const<T>::type>::type))
 #endif
