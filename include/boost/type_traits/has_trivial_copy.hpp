@@ -20,6 +20,11 @@
 #define BOOST_TT_TRIVIAL_CONSTRUCT_FIX
 #endif
 
+#ifdef BOOST_INTEL
+#include <boost/type_traits/add_const.hpp>
+#include <boost/type_traits/add_lvalue_reference.hpp>
+#endif
+
 namespace boost {
 
 template <typename T> struct has_trivial_copy 

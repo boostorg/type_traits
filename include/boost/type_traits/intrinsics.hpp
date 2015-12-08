@@ -10,6 +10,8 @@
 
 #ifndef BOOST_TT_DISABLE_INTRINSICS
 
+#include <boost/config.hpp>
+
 #ifndef BOOST_TT_CONFIG_HPP_INCLUDED
 #include <boost/type_traits/detail/config.hpp>
 #endif
@@ -99,11 +101,16 @@
 #   define BOOST_IS_POD(T) (__is_pod(T) && __has_trivial_constructor(T))
 #   define BOOST_IS_EMPTY(T) __is_empty(T)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) __has_trivial_constructor(T)
-#   define BOOST_HAS_TRIVIAL_COPY(T) (__has_trivial_copy(T) || ::boost::is_pod<T>::value)
 #   define BOOST_HAS_TRIVIAL_ASSIGN(T) (__has_trivial_assign(T) || ( ::boost::is_pod<T>::value && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value))
 #   define BOOST_HAS_TRIVIAL_DESTRUCTOR(T) (__has_trivial_destructor(T) || ::boost::is_pod<T>::value)
 #   define BOOST_HAS_NOTHROW_CONSTRUCTOR(T) (__has_nothrow_constructor(T) || ::boost::has_trivial_constructor<T>::value)
+#if !defined(BOOST_INTEL)
 #   define BOOST_HAS_NOTHROW_COPY(T) ((__has_nothrow_copy(T) || ::boost::has_trivial_copy<T>::value) && !is_array<T>::value)
+#   define BOOST_HAS_TRIVIAL_COPY(T) (__has_trivial_copy(T) || ::boost::is_pod<T>::value)
+#elif (_MSC_VER >= 1900)
+#   define BOOST_HAS_NOTHROW_COPY(T) ((__is_nothrow_constructible(T, typename add_lvalue_reference<typename add_const<T>::type>::type)) && !is_array<T>::value)
+#   define BOOST_HAS_TRIVIAL_COPY(T) (__is_trivially_constructible(T, typename add_lvalue_reference<typename add_const<T>::type>::type))
+#endif
 #   define BOOST_HAS_NOTHROW_ASSIGN(T) (__has_nothrow_assign(T) || ::boost::has_trivial_assign<T>::value)
 #   define BOOST_HAS_VIRTUAL_DESTRUCTOR(T) __has_virtual_destructor(T)
 
