@@ -14,6 +14,7 @@
 #include <boost/config.hpp>
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
+#include <boost/detail/workaround.hpp>
 
 #ifdef BOOST_IS_NOTHROW_MOVE_CONSTRUCT
 
