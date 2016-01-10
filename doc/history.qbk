@@ -7,7 +7,13 @@
 
 [section:history History]
 
-[h4 Boost 1.60.0 ???]
+[h4 Boost 1.61.0]
+
+* Fixed wchar_t usage bug for older msvc compilers, see [@https://svn.boost.org/trac/boost/ticket/11870 #11870].
+* Fixed use of name "check" which is a macro on Apple, see [@https://github.com/boostorg/type_traits/pull/23 PR#23].
+* Fix `add_reference<const void>::type` to respect cv-qualifiers, see [@https://svn.boost.org/trac/boost/ticket/11900 #11900].
+
+[h4 Boost 1.60.0]
 
 * Refactored traits to depend only on Boost.Config.  Greatly simplified code to improve readability and remove workarounds for old compilers no longer supported.
 * Fix __decay to follow C++11 semantics, see [@https://svn.boost.org/trac/boost/ticket/7760 #7760].

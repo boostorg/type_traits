@@ -12,12 +12,13 @@
 #include <boost/config.hpp>
 #include <boost/type_traits/decay.hpp>
 #include <boost/type_traits/declval.hpp>
+#include <boost/detail/workaround.hpp>
 
 #if defined(BOOST_NO_CXX11_DECLTYPE)
 #include <boost/type_traits/detail/common_type_impl.hpp>
 #endif
 
-#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
+#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !BOOST_WORKAROUND(__CUDACC_VER__,  < 70500)
 #include <boost/type_traits/detail/mp_defer.hpp>
 #endif
 
@@ -26,7 +27,7 @@ namespace boost
 
 // variadic common_type
 
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
+#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !BOOST_WORKAROUND(__CUDACC_VER__,  < 70500)
 
 template<class... T> struct common_type
 {
