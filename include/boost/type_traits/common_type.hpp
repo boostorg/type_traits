@@ -18,7 +18,7 @@
 #include <boost/type_traits/detail/common_type_impl.hpp>
 #endif
 
-#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !BOOST_WORKAROUND(__CUDACC_VER__,  < 70500)
+#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 #include <boost/type_traits/detail/mp_defer.hpp>
 #endif
 
@@ -27,7 +27,7 @@ namespace boost
 
 // variadic common_type
 
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !BOOST_WORKAROUND(__CUDACC_VER__,  < 70500)
+#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
 template<class... T> struct common_type
 {
