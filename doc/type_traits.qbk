@@ -134,6 +134,7 @@
 
 [def __make_signed [link boost_typetraits.reference.make_signed make_signed]]
 [def __make_unsigned [link boost_typetraits.reference.make_unsigned make_unsigned]]
+[def __make_void [link boost_typetraits.reference.make_void make_void]]
 [def __decay [link boost_typetraits.reference.decay decay]]
 [def __is_complex [link boost_typetraits.reference.is_complex is_complex]]
 
@@ -316,6 +317,7 @@ See __has_trivial_constructor.
 
 [include make_signed.qbk]
 [include make_unsigned.qbk]
+[include make_void.qbk]
 
 [include promote.qbk]
 [include rank.qbk]
