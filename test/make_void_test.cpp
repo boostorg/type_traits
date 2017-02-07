@@ -26,9 +26,20 @@ BOOST_CHECK_TYPE(::tt::make_void<int(*)(int)>::type, void);
 BOOST_CHECK_TYPE(::tt::make_void<int[]>::type, void);
 BOOST_CHECK_TYPE(::tt::make_void<int[1]>::type, void);
 
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 BOOST_CHECK_TYPE(::tt::make_void<>::type, void);
 BOOST_CHECK_TYPE3(::tt::make_void<int, int>::type, void);
+
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+BOOST_CHECK_TYPE(::tt::void_t<int>, void);
+BOOST_CHECK_TYPE(::tt::void_t<const volatile int>, void);
+BOOST_CHECK_TYPE(::tt::void_t<int&>, void);
+BOOST_CHECK_TYPE(::tt::void_t<void>, void);
+BOOST_CHECK_TYPE(::tt::void_t<int(*)(int)>, void);
+BOOST_CHECK_TYPE(::tt::void_t<int[]>, void);
+BOOST_CHECK_TYPE(::tt::void_t<int[1]>, void);
+
+BOOST_CHECK_TYPE(::tt::void_t<>, void);
+BOOST_CHECK_TYPE3(::tt::void_t<int, int>, void);
 #endif
 
 TT_TEST_END

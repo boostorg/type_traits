@@ -42,6 +42,7 @@ __header ` #include <boost/type_traits/make_void.hpp>` or ` #include <boost/type
 
 ]
 
-[all_compilers]
+[all_compilers]  However, the type alias `void_t` is only available if the compiler supports template aliases.
+Further, in the absence of variadic-template support, `make_void` only supports up to 5 parameters.
 
 [endsect]

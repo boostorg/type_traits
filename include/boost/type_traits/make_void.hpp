@@ -24,8 +24,10 @@ struct make_void {
 template<class... Ts>
 using void_t = typename make_void<Ts...>::type;
 #endif
-#else
-template<class>
+
+#else // BOOST_NO_CXX11_VARIADIC_TEMPLATES
+
+template<class T = void, class U = void, class V = void, class X = void, class Y = void>
 struct make_void {
     typedef void type;
 };
@@ -34,6 +36,7 @@ struct make_void {
 template<class T>
 using void_t = typename make_void<T>::type;
 #endif
+
 #endif
 
 } /* boost */
