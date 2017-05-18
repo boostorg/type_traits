@@ -31,6 +31,8 @@
 <span class="special">{</span>
    <span class="keyword">typedef</span> <em class="replaceable"><code>see-below</code></em> <span class="identifier">type</span><span class="special">;</span>
 <span class="special">};</span>
+
+<span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">U</span><span class="special">&gt;</span> <span class="keyword">using</span> <span class="identifier">copy_cv_t</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">copy_cv</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">U</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span> <span class="comment">// C++11 and above</span>
 </pre>
 <p>
         <span class="bold"><strong>type:</strong></span> <code class="literal">T <span class="emphasis"><em>cv</em></span></code>,
