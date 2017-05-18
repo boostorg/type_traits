@@ -96,8 +96,34 @@ int error_count = 0;
    int main(){
 #define TT_TEST_END return error_count; }
 
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+
+#define TRANSFORM_CHECK_ALIASES(name, from_suffix, to_suffix)\
+   BOOST_CHECK_TYPE(bool to_suffix, name##_t<bool from_suffix>);\
+   BOOST_CHECK_TYPE(char to_suffix, name##_t<char from_suffix>);\
+   BOOST_CHECK_TYPE(wchar_t to_suffix, name##_t<wchar_t from_suffix>);\
+   BOOST_CHECK_TYPE(signed char to_suffix, name##_t<signed char from_suffix>);\
+   BOOST_CHECK_TYPE(unsigned char to_suffix, name##_t<unsigned char from_suffix>);\
+   BOOST_CHECK_TYPE(short to_suffix, name##_t<short from_suffix>);\
+   BOOST_CHECK_TYPE(unsigned short to_suffix, name##_t<unsigned short from_suffix>);\
+   BOOST_CHECK_TYPE(int to_suffix, name##_t<int from_suffix>);\
+   BOOST_CHECK_TYPE(unsigned int to_suffix, name##_t<unsigned int from_suffix>);\
+   BOOST_CHECK_TYPE(long to_suffix, name##_t<long from_suffix>);\
+   BOOST_CHECK_TYPE(unsigned long to_suffix, name##_t<unsigned long from_suffix>);\
+   BOOST_CHECK_TYPE(float to_suffix, name##_t<float from_suffix>);\
+   BOOST_CHECK_TYPE(long double to_suffix, name##_t<long double from_suffix>);\
+   BOOST_CHECK_TYPE(double to_suffix, name##_t<double from_suffix>);\
+   BOOST_CHECK_TYPE(UDT to_suffix, name##_t<UDT from_suffix>);\
+   BOOST_CHECK_TYPE(enum1 to_suffix, name##_t<enum1 from_suffix>);
+
+#else
+
+#define TRANSFORM_CHECK_ALIASES(name, from_suffix, to_suffix) /**/
+
+#endif
 
 #define TRANSFORM_CHECK(name, from_suffix, to_suffix)\
+   TRANSFORM_CHECK_ALIASES(name, from_suffix, to_suffix)\
    BOOST_CHECK_TYPE(bool to_suffix, name<bool from_suffix>::type);\
    BOOST_CHECK_TYPE(char to_suffix, name<char from_suffix>::type);\
    BOOST_CHECK_TYPE(wchar_t to_suffix, name<wchar_t from_suffix>::type);\
