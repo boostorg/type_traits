@@ -8,6 +8,7 @@
 #define TT_TEST_HPP
 
 #include <boost/config.hpp>
+#include <boost/detail/workaround.hpp>
 
 #if defined(_WIN32_WCE) && defined(BOOST_MSVC)
 #pragma warning(disable:4201)
@@ -96,7 +97,7 @@ int error_count = 0;
    int main(){
 #define TT_TEST_END return error_count; }
 
-#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !BOOST_WORKAROUND(BOOST_GCC, < 40704)
 
 #define TRANSFORM_CHECK_ALIASES(name, from_suffix, to_suffix)\
    BOOST_CHECK_TYPE(bool to_suffix, name##_t<bool from_suffix>);\
