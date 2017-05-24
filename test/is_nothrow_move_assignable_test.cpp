@@ -5,8 +5,12 @@
 //  Boost Software License, Version 1.0. (See accompanying file 
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#include <boost/config.hpp>
 #include "test.hpp"
 #include "check_integral_constant.hpp"
+
+#if !(defined(BOOST_MSVC) && defined(BOOST_TT_DISABLE_INTRINSICS) && defined(CI_SUPPRESS_KNOWN_ISSUES))
+
 #ifdef TEST_STD
 #  include <type_traits>
 #else
@@ -216,9 +220,11 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<int&>::value, fal
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<int&&>::value, false);
 #endif
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<const int&>::value, false);
+#if !(defined(BOOST_MSVC) && defined(CI_SUPPRESS_KNOWN_ISSUES) && (BOOST_MSVC < 1910))
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<int[2]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<int[3][2]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<int[2][4][5][6][3]>::value, false);
+#endif
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<empty_UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<void>::value, false);
@@ -251,5 +257,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<noexcept_move_ass
 
 TT_TEST_END
 
+#else
 
+int main() { return 0; }
+
+#endif
 

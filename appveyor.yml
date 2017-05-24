@@ -1,0 +1,45 @@
+# Copyright 2016 Peter Dimov
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at http://boost.org/LICENSE_1_0.txt)
+
+version: 1.0.{build}-{branch}
+
+shallow_clone: true
+
+branches:
+  only:
+    - master
+    - develop
+
+platform:
+  - x86
+  - x64
+
+environment:
+  matrix:
+    - TOOLSET: msvc-9.0
+    - TOOLSET: msvc-10.0
+    - TOOLSET: msvc-11.0
+    - TOOLSET: msvc-12.0
+    - TOOLSET: msvc-14.0
+
+install:
+  - cd ..
+  - git clone -b %APPVEYOR_REPO_BRANCH% --depth 1 https://github.com/boostorg/boost.git boost-root
+  - cd boost-root
+  - git submodule update --init tools/build
+  - git submodule update --init libs/config
+  - git submodule update --init libs/type_traits
+  - git submodule update --init tools/boostdep
+  - python tools/boostdep/depinst/depinst.py type_traits
+  - bootstrap
+  - b2 headers
+
+build: off
+
+test_script:
+  - cd libs\config\test
+  - ..\..\..\b2 config_info_travis_install toolset=%TOOLSET%
+  - config_info_travis
+  - cd ..\..\type_traits\test
+  - ..\..\..\b2 -j3 toolset=%TOOLSET% define=CI_SUPPRESS_KNOWN_ISSUES

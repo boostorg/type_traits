@@ -7,6 +7,9 @@
 
 #include "test.hpp"
 #include <boost/config.hpp>
+
+#if !(defined(BOOST_MSVC) && defined(BOOST_TT_DISABLE_INTRINSICS) && defined(CI_SUPPRESS_KNOWN_ISSUES))
+
 #include "check_integral_constant.hpp"
 #ifdef TEST_STD
 #  include <type_traits>
@@ -265,5 +268,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<noexcept_move>
 
 TT_TEST_END
 
+#else
 
+int main() { return 0; }
+
+#endif
 
