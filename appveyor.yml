@@ -58,6 +58,7 @@ install:
   - git submodule update --init libs/preprocessor
   - git submodule update --init libs/static_assert
   - git submodule update --init libs/throw_exception
+  - git submodule update --init libs/type_index
   - git submodule update --init libs/utility
   - xcopy /s /e /q %APPVEYOR_BUILD_FOLDER% libs\type_traits
   - bootstrap
