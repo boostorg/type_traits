@@ -210,7 +210,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<bug11324_derived>::v
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<deleted_default_construct>::value, false);
 #endif
+#if !defined(BOOST_GCC) || (BOOST_GCC >= 40800)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<private_default_construct>::value, false);
+#endif
 #ifndef BOOST_NO_CXX11_NOEXCEPT
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_constructor<noexcept_default_construct>::value, true);
 #endif

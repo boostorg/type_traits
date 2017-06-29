@@ -180,8 +180,10 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<UDT>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<empty_UDT>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<void>::value, false);
 
+#if !(defined(BOOST_MSVC) && defined(CI_SUPPRESS_KNOWN_ISSUES) && (BOOST_MSVC < 1900))
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_destructible<deleted_destruct>::value, false);
+#endif
 #endif
 
 TT_TEST_END

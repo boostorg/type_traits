@@ -238,7 +238,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<noexcept_copy>::value, true
 #endif
 
 #if !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
+#if !defined(BOOST_GCC) || (BOOST_GCC >= 40800)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<non_copy>::value, false);
+#endif
 #endif
 
 TT_TEST_END
