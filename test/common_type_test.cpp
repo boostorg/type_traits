@@ -5,13 +5,13 @@
 //  Distributed under the Boost Software License, Version 1.0.
 //  See http://www.boost.org/LICENSE_1_0.txt
 
-#include "test.hpp"
-#include "check_type.hpp"
 #ifdef TEST_STD
 #  include <type_traits>
 #else
 #  include <boost/type_traits/common_type.hpp>
 #endif
+#include "test.hpp"
+#include "check_type.hpp"
 #include <iostream>
 
 #ifdef BOOST_INTEL

@@ -5,9 +5,9 @@
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "test.hpp"
 #include "check_integral_constant.hpp"
-#include <boost/type_traits/is_virtual_base_of.hpp>
 
 // for bug report 3317: https://svn.boost.org/trac/boost/ticket/3317
 class B
