@@ -7,13 +7,13 @@
 
 #define BOOST_COMMON_TYPE_DONT_USE_TYPEOF 1
 
-#include "test.hpp"
-#include "check_type.hpp"
 #ifdef TEST_STD
 #  include <type_traits>
 #else
 #  include <boost/type_traits/common_type.hpp>
 #endif
+#include "test.hpp"
+#include "check_type.hpp"
 #include <iostream>
 
 #ifdef BOOST_INTEL
