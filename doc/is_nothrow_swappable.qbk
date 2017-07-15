@@ -1,0 +1,23 @@
+[/ 
+  Copyright 2017 Peter Dimov
+
+  Distributed under the Boost Software License, Version 1.0.
+
+  (See accompanying file LICENSE_1_0.txt or copy at
+  http://www.boost.org/LICENSE_1_0.txt).
+]
+
+[section:is_nothrow_swappable is_nothrow_swappable]
+
+   template <class T>
+   struct is_nothrow_swappable : public __tof {};
+
+__inherit If the expression `swap(declval<T&>(), declval<T&>())` (in a context
+where `std::swap` is visible) is valid and non-throwing, inherits from
+__true_type, otherwise from __false_type.
+
+__compat This trait requires C++11.
+
+__header ` #include <boost/type_traits/is_nothrow_swappable.hpp>` or ` #include <boost/type_traits.hpp>`
+
+[endsect]
