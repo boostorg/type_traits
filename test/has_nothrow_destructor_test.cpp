@@ -30,12 +30,19 @@ struct noexcept_destruct
    ~noexcept_destruct()noexcept;
 };
 
-#endif
+struct throwing_base
+{
+   ~throwing_base() noexcept(false);
+};
+
+#else
 
 struct throwing_base
 {
    ~throwing_base() throw(int);
 };
+
+#endif
 
 struct throwing_derived : public throwing_base {};
 
