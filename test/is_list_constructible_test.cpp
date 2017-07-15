@@ -5,8 +5,9 @@
 //  See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt
 
-#if defined( __GNUC__ ) && (__GNUC__ >= 7)
+#if defined( __GNUC__ ) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 407)
 #pragma GCC diagnostic ignored "-Wnarrowing"
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
 #ifdef TEST_STD
