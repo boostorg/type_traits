@@ -72,8 +72,13 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, int const>::value)
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, int, int>::value), true);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, int const, int const>::value), true);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, int, int, int>::value), false);
+
+#if defined(CI_SUPPRESS_KNOWN_ISSUES) && defined(__GNUC__) && (__GNUC__ == 7) && (__cplusplus >= 201500)
+// g++ 7.1 in -std=c++1z, c++17 has a bug
+#else
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, float>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, int, float>::value), false);
+#endif
 
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z>::value), true);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int>::value), true);
@@ -81,8 +86,13 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int const>::value)
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int, int>::value), true);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int const, int const>::value), true);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int, int, int>::value), false);
+
+#if defined(CI_SUPPRESS_KNOWN_ISSUES) && defined(__GNUC__) && (__GNUC__ == 7) && (__cplusplus >= 201500)
+// -"-
+#else
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, float>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int, float>::value), false);
+#endif
 
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<V>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<V, int>::value), false);
