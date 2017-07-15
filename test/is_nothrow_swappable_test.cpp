@@ -23,7 +23,6 @@ int main()
 
 #include "test.hpp"
 #include "check_integral_constant.hpp"
-#include <vector>
 #include <utility>
 
 struct X
@@ -104,16 +103,6 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<V[2]>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<V const[2]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<V volatile[2]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<V const volatile[2]>::value, false);
-
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<int> >::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<int> const>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<int> volatile>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<int> const volatile>::value, false);
-
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<Y> >::value, true);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<Y> const>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<Y> volatile>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<std::vector<Y> const volatile>::value, false);
 
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_nothrow_swappable<std::pair<X, int> >::value), true);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_nothrow_swappable<std::pair<X, int> const>::value), false);
