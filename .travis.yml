@@ -491,7 +491,7 @@ matrix:
 
     - os: osx
       env: TOOLSET=clang COMPILER=clang++ CXXSTD=c++1z
-      osx_image: xcode8.1
+      osx_image: xcode8.2
 
     - os: osx
       env: TOOLSET=clang COMPILER=clang++ CXXSTD=c++03
@@ -584,7 +584,7 @@ script:
   - |-
     echo "using $TOOLSET : : $COMPILER : <cxxflags>-std=$CXXSTD ;" > ~/user-config.jam
   - (cd libs/config/test && ../../../b2 config_info_travis_install toolset=$TOOLSET && ./config_info_travis)
-  - ./b2 -j3 libs/type_traits/test toolset=$TOOLSET
+  - ./b2 -j3 libs/type_traits/test toolset=$TOOLSET define=CI_SUPPRESS_KNOWN_ISSUES
 
 notifications:
   email:
