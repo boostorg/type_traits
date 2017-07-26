@@ -21,7 +21,8 @@ namespace boost {
    template<> struct is_floating_point<double> : public true_type{};
    template<> struct is_floating_point<long double> : public true_type{};
    
-#if defined(BOOST_HAS_FLOAT128)
+// In PGI x86 compiler, __float128 is a typedef, not its own type.
+#if defined(BOOST_HAS_FLOAT128) && !defined(__PGI)
    template<> struct is_floating_point<__float128> : public true_type{};
 #endif
 
