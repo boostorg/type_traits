@@ -76,7 +76,7 @@ template <std::size_t Target> struct short_alignment<Target, false>{ typedef typ
 template <std::size_t Target, bool check> struct char_alignment{ typedef char type; };
 template <std::size_t Target> struct char_alignment<Target, false>{ typedef typename short_alignment<Target, boost::alignment_of<short>::value >= Target>::type type; };
 
-}
+} // namespace detail
 
 template <std::size_t Align>
 struct type_with_alignment 
@@ -213,6 +213,8 @@ template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
 // 1) The version above doesn't always compile (with the new test cases for example)
 // 2) Because of Borlands #pragma option we can create types with alignments that are
 //    greater that the largest aligned builtin type.
+
+} // namespace detail
 
 namespace tt_align_ns{
 #pragma option push -a16
