@@ -25,9 +25,8 @@
 #endif
 
 namespace boost {
-   namespace detail{
-
 #ifndef __BORLANDC__
+   namespace detail{
 
       union max_align
       {
@@ -213,8 +212,6 @@ template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
 // 1) The version above doesn't always compile (with the new test cases for example)
 // 2) Because of Borlands #pragma option we can create types with alignments that are
 //    greater that the largest aligned builtin type.
-
-} // namespace detail
 
 namespace tt_align_ns{
 #pragma option push -a16
