@@ -5,6 +5,13 @@
 
 # bring in the rules for testing
 import testing ;
+import os ;
+
+if [ os.environ CI ] 
+{
+CI_DEFINES = <define>CI_SUPPRESS_KNOWN_ISSUES=1 ;
+}
+
 
 # type_traits in V1 seem to have two modes: standalone, triggered
 # by a command line option, and a regular. For now, just imitate
@@ -23,6 +30,7 @@ project : requirements
    <toolset>sun:<warnings-as-errors>on
    <toolset>msvc:<warnings-as-errors>on
    <include>libs/tt2/light/include
+   $(CI_DEFINES)
 ;             
 
 rule all-tests {
