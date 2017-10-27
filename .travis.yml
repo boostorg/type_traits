@@ -222,9 +222,7 @@ script:
   - |-
     echo "using $TOOLSET : : $COMPILER ;" > ~/user-config.jam
   - IFS=','
-  - for CXXLOCAL in $CXXSTD; do
-  -    (cd libs/config/test && ../../../b2 config_info_travis_install toolset=$TOOLSET cxxstd=$CXXLOCAL $CXXSTD_DIALECT && echo With Standard Version: $CXXLOCAL && ./config_info_travis && rm ./config_info_travis)
-  - done
+  - for CXXLOCAL in $CXXSTD; do  (cd libs/config/test && ../../../b2 config_info_travis_install toolset=$TOOLSET cxxstd=$CXXLOCAL $CXXSTD_DIALECT && echo With Standard Version: $CXXLOCAL && ./config_info_travis && rm ./config_info_travis)  done
   - ./b2 -j3 libs/type_traits/test toolset=$TOOLSET cxxstd=$CXXSTD $CXXSTD_DIALECT
 
 notifications:
