@@ -76,7 +76,7 @@ matrix:
             - ubuntu-toolchain-r-test
 
     - os: linux
-      env: TOOLSET=gcc COMPILER=g++-6 CXXSTD=03,11,14,1z CXXSTD_DIALECT=cxxstd.dialect=gnu
+      env: TOOLSET=gcc COMPILER=g++-6 CXXSTD=03,11,14,1z CXXSTD_DIALECT=cxxstd-dialect=gnu
       addons:
         apt:
           packages:
@@ -98,7 +98,7 @@ matrix:
     - os: linux
       dist: trusty
       compiler: g++-7
-      env: TOOLSET=gcc COMPILER=g++-7 CXXSTD=03,11,14,17 CXXSTD_DIALECT=cxxstd.dialect=gnu
+      env: TOOLSET=gcc COMPILER=g++-7 CXXSTD=03,11,14,17 CXXSTD_DIALECT=cxxstd-dialect=gnu
       addons:
         apt:
           packages:
