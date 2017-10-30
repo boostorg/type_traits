@@ -12,6 +12,7 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
+#include <utility>
 
 class bug11324_base
 {
@@ -43,6 +44,18 @@ struct deleted_construct
 };
 
 #endif
+
+template<class T> class holder
+{
+private:
+
+    T t_;
+
+public:
+
+    holder(): t_() {}
+    explicit holder( T const& t ): t_( t ) {}
+};
 
 TT_TEST_BEGIN(has_trivial_constructor)
 
@@ -207,6 +220,8 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<bug11324_derived>::v
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<private_construct>::value, false);
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor<deleted_construct>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_constructor< holder<deleted_construct> >::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT((::tt::has_trivial_constructor< std::pair<deleted_construct, int> >::value), false);
 #endif
 
 TT_TEST_END
