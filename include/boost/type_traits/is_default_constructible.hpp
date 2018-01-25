@@ -16,6 +16,9 @@
 #if BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40700)
 #include <boost/type_traits/is_abstract.hpp>
 #endif
+#ifdef  __clang__
+#include <utility> // std::pair
+#endif
 
 #if !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40500)
 
@@ -55,6 +58,9 @@ namespace boost{
    template <class T, std::size_t N> struct is_default_constructible<T[N]> : public is_default_constructible<T>{};
    template <class T> struct is_default_constructible<T[]> : public is_default_constructible<T>{};
    template <class T> struct is_default_constructible<T&> : public integral_constant<bool, false>{};
+#ifdef  __clang__
+   template <class T, class U> struct is_default_constructible<std::pair<T,U> > : public integral_constant<bool, is_default_constructible<T>::value && is_default_constructible<U>::value>{};
+#endif
 #if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) 
    template <class T> struct is_default_constructible<T&&> : public integral_constant<bool, false>{};
 #endif
