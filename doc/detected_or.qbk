@@ -29,10 +29,17 @@ __header `#include <boost/type_traits/detected_or.hpp>`
 
 __examples
 
+Suppose we wish to declare a type that represents the difference between two values of type T, it should be
+T::difference_type if such a type exists, or std::ptrdiff_t otherwise:
+
     template<class T>
     using difference_t = typename T::difference_type;
 
     template<class T>
     using difference_type = boost::detected_or_t<std::ptrdiff_t, difference_t, T>;
+
+Now the type `difference_type<T>` gives us what we need.
+
+See also: __is_detected, __is_detected_convertible, __is_detected_exact.
 
 [endsect]

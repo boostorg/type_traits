@@ -21,11 +21,17 @@ __compat Requires C++11 variadic templates and C++11 template aliases.
 
 __header `#include <boost/type_traits/is_detected_exact.hpp>`
 
+The type `is_detected_exact<To, Op, Args>` is an alias for __true_type if the result of 
+`Op<Args>` is type `To`.  Otherwise it's the type __false_type;
+
+
 __examples
 
     template<class T>
     using difference_t = typename T::difference_type;
 
     static_assert(boost::is_detected_exact_v<std::ptrdiff_t, difference_t, T>);
+
+See also: __is_detected, __is_detected_convertible.
 
 [endsect]

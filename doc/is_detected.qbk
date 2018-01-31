@@ -26,6 +26,9 @@ __header `#include <boost/type_traits/is_detected.hpp>`
 
 __examples
 
+Suppose we wish to "reset" a value of type T, if the type has a `clear()` member function then we should call
+it, otherwise we should assign a default constructed value:
+
     template<class T>
     using clear_t = decltype(boost::declval<T&>().clear());
 
@@ -38,5 +41,7 @@ __examples
             value = T();
         }
     }
+
+See also:  __is_detected_convertible, __is_detected_exact.
 
 [endsect]

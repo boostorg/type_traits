@@ -21,11 +21,17 @@ __compat Requires C++11 variadic templates and C++11 template aliases.
 
 __header `#include <boost/type_traits/is_detected_convertible.hpp>`
 
+The type `is_detected_convertible<To, Op, Args>` is an alias for __true_type if the result of 
+`Op<Args>` is convertible to type `To`.  Otherwise it's the type __false_type;
+
 __examples
 
     template<class T>
     using size_type_t = typename T::size_type;
 
     static_assert(boost::is_detected_convertible_v<std::size_t, size_type_t, T>);
+
+See also: __is_detected, __is_detected_exact.
+
 
 [endsect]

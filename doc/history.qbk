@@ -7,6 +7,10 @@
 
 [section:history History]
 
+[h4 Boost 1.67.0]
+
+* Added new traits __detected, __detected_or, __is_detected, __is_detected_convertible, and __is_detected_exact.
+
 [h4 Boost 1.64.0]
 
 * Added new trait __make_void.
