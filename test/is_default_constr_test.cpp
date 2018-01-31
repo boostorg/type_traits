@@ -12,6 +12,8 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
+#include <utility>
+
 class bug11324_base
 {
 public:
