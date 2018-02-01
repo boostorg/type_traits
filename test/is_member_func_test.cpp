@@ -30,6 +30,13 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<foo0_t>::value, f
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<int&>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int&>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int[2] >::value, false);
+
+#if __cpp_noexcept_function_type
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf5>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf6>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf7>::value, true);
+#endif
+
 #ifndef __IBMCPP__
 // this test may not be strictly legal:
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int[] >::value, false);

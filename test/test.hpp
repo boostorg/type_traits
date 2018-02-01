@@ -177,6 +177,11 @@ struct UDT
    int f2();
    int f3(int);
    int f4(int, float);
+#if __cpp_noexcept_function_type
+   void f5()noexcept;
+   int f6(int)noexcept(true);
+   double f7()noexcept(false);
+#endif
 };
 
 typedef void(*f1)();
@@ -188,6 +193,11 @@ typedef int (UDT::*mf3)(int);
 typedef int (UDT::*mf4)(int, float);
 typedef int (UDT::*mp);
 typedef int (UDT::*cmf)(int) const;
+#if __cpp_noexcept_function_type
+typedef void (UDT::*mf5)()noexcept;
+typedef int (UDT::*mf6)(int)noexcept;
+typedef double (UDT::*mf7)()noexcept;
+#endif
 
 // cv-qualifiers applied to reference types should have no effect
 // declare these here for later use with is_reference and remove_reference:
