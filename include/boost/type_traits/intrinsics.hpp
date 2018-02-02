@@ -135,6 +135,9 @@
 #   define BOOST_IS_NOTHROW_MOVE_ASSIGN(T) (__is_nothrow_assignable(T&, T&&))
 #   define BOOST_IS_NOTHROW_MOVE_CONSTRUCT(T) (__is_nothrow_constructible(T, T&&))
 #endif
+#if _MSC_VER >= 1800
+#   define BOOST_IS_FINAL(T) __is_final(T)
+#endif
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
 #endif
 
