@@ -70,7 +70,9 @@
         the C++11 features <code class="computeroutput"><span class="keyword">decltype</span></code>
         variadic templates and SFINAE-expression support for full support. While
         there is some fallback code for cases where this is not the case, the trait
-        should really be considered broken in that case.
+        should really be considered broken in that case. The header will define the
+        macro <code class="computeroutput"><span class="identifier">BOOST_TT_IS_CONSTRUCTIBLE_CONFORMING</span></code>
+        when the full implementation is available.
       </p>
 <p>
         <span class="bold"><strong>Header:</strong></span> <code class="computeroutput"> <span class="preprocessor">#include</span>

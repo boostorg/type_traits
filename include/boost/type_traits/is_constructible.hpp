@@ -19,6 +19,8 @@
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/declval.hpp>
 
+#define BOOST_TT_IS_CONSTRUCTIBLE_CONFORMING 1
+
 namespace boost{
 
    namespace detail{
