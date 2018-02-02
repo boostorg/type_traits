@@ -36,6 +36,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf5>::value, true
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf6>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf7>::value, true);
 #endif
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf8>::value, true);
 
 #ifndef __IBMCPP__
 // this test may not be strictly legal:

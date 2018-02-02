@@ -198,6 +198,7 @@ typedef void (UDT::*mf5)()noexcept;
 typedef int (UDT::*mf6)(int)noexcept;
 typedef double (UDT::*mf7)()noexcept;
 #endif
+typedef int (UDT::*mf8)(...);
 
 // cv-qualifiers applied to reference types should have no effect
 // declare these here for later use with is_reference and remove_reference:
