@@ -12,6 +12,8 @@
 #include <cstddef> // size_t
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/detail/workaround.hpp>
+#include <boost/type_traits/is_complete.hpp>
+#include <boost/static_assert.hpp>
 
 #if BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40700)
 #include <boost/type_traits/is_abstract.hpp>
@@ -51,9 +53,15 @@ namespace boost{
    }
 
 #if BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40700)
-   template <class T> struct is_default_constructible : public integral_constant<bool, detail::is_default_constructible_abstract_filter<T, boost::is_abstract<T>::value>::value>{};
+   template <class T> struct is_default_constructible : public integral_constant<bool, detail::is_default_constructible_abstract_filter<T, boost::is_abstract<T>::value>::value>
+   {
+      BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_default_constructible must be complete types");
+   };
 #else
-   template <class T> struct is_default_constructible : public integral_constant<bool, sizeof(detail::is_default_constructible_imp::test<T>(0)) == sizeof(boost::type_traits::yes_type)>{};
+   template <class T> struct is_default_constructible : public integral_constant<bool, sizeof(detail::is_default_constructible_imp::test<T>(0)) == sizeof(boost::type_traits::yes_type)>
+   {
+      BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_default_constructible must be complete types");
+   };
 #endif
    template <class T, std::size_t N> struct is_default_constructible<T[N]> : public is_default_constructible<T>{};
    template <class T> struct is_default_constructible<T[]> : public is_default_constructible<T>{};

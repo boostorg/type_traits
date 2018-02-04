@@ -39,6 +39,10 @@ rule all-tests {
      {
          result += [ run $(source) ] ;
      }
+     for local source in [ glob compile_fail/*.cpp ]
+     {
+         result += [ compile-fail $(source) ] ;
+     }
      #
      # These traits have both intrinsic support, and a std conforming version, test a version with intrinsics disabled for better code coverage:
      #
