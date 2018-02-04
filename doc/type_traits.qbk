@@ -291,6 +291,7 @@ See __has_trivial_constructor.
 [include is_assignable.qbk]
 [include is_base_of.qbk]
 [include is_class.qbk]
+[include is_complete.qbk]
 [include is_complex.qbk]
 [include is_compound.qbk]
 [include is_const.qbk]
