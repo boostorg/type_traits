@@ -27,7 +27,7 @@
 
 namespace boost {
 
-#ifndef BOOST_NO_SFINAE_EXPR
+#if !defined(BOOST_NO_SFINAE_EXPR) && !BOOST_WORKAROUND(BOOST_MSVC, <= 1900)
 
    namespace detail{
 
@@ -43,7 +43,7 @@ namespace boost {
    template <class T> struct is_complete
       : public integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || (sizeof(detail::check_is_complete<T>(0)) != sizeof(char))> {};
 
-#elif !defined(BOOST_NO_SFINAE)
+#elif !defined(BOOST_NO_SFINAE) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS)
 
    namespace detail
    {

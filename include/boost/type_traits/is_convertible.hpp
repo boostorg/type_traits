@@ -14,11 +14,11 @@
 
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
-#ifndef BOOST_IS_CONVERTIBLE
 #include <boost/type_traits/is_complete.hpp>
 #include <boost/type_traits/is_void.hpp>
 #include <boost/type_traits/is_array.hpp>
 #include <boost/static_assert.hpp>
+#ifndef BOOST_IS_CONVERTIBLE
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/is_array.hpp>
@@ -487,7 +487,14 @@ struct is_convertible : public integral_constant<bool, ::boost::detail::is_conve
 #else
 
 template <class From, class To>
-struct is_convertible : public integral_constant<bool, BOOST_IS_CONVERTIBLE(From, To)> {};
+struct is_convertible : public integral_constant<bool, BOOST_IS_CONVERTIBLE(From, To)> 
+{
+#ifdef __clang__
+   // clang's intrinsic doesn't assert on incomplete types:
+   BOOST_STATIC_ASSERT_MSG(boost::is_complete<To>::value || boost::is_void<To>::value || boost::is_array<To>::value, "Destination argument type to is_convertible must be a complete type");
+   BOOST_STATIC_ASSERT_MSG(boost::is_complete<From>::value || boost::is_void<From>::value || boost::is_array<From>::value, "From argument type to is_convertible must be a complete type");
+#endif
+};
 
 #endif
 
