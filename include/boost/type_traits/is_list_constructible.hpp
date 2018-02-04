@@ -10,6 +10,8 @@
 #include <boost/config.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/declval.hpp>
+#include <boost/type_traits/is_complete.hpp>
+#include <boost/static_assert.hpp>
 
 namespace boost
 {
@@ -18,6 +20,7 @@ namespace boost
 
 template<class T, class = void, class = void, class = void, class = void, class = void, class = void> struct is_list_constructible: false_type
 {
+   BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_list_constructible must be complete types");
 };
 
 #else
@@ -32,6 +35,7 @@ template<class T, class... A> false_type is_list_constructible_impl( ... );
 
 template<class T, class... A> struct is_list_constructible: decltype( type_traits_detail::is_list_constructible_impl<T, A...>(0) )
 {
+   BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_list_constructible must be complete types");
 };
 
 #endif

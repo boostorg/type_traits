@@ -15,6 +15,10 @@
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 #ifndef BOOST_IS_CONVERTIBLE
+#include <boost/type_traits/is_complete.hpp>
+#include <boost/type_traits/is_void.hpp>
+#include <boost/type_traits/is_array.hpp>
+#include <boost/static_assert.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/is_array.hpp>
@@ -474,7 +478,11 @@ template <class From> struct is_convertible_impl_dispatch<From, void volatile> :
 } // namespace detail
 
 template <class From, class To> 
-struct is_convertible : public integral_constant<bool, ::boost::detail::is_convertible_impl_dispatch<From, To>::value> {};
+struct is_convertible : public integral_constant<bool, ::boost::detail::is_convertible_impl_dispatch<From, To>::value> 
+{
+   BOOST_STATIC_ASSERT_MSG(boost::is_complete<To>::value || boost::is_void<To>::value || boost::is_array<To>::value, "Destination argument type to is_convertible must be a complete type");
+   BOOST_STATIC_ASSERT_MSG(boost::is_complete<From>::value || boost::is_void<From>::value || boost::is_array<From>::value, "From argument type to is_convertible must be a complete type");
+};
 
 #else
 

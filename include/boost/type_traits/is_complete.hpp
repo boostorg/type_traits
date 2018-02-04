@@ -1,0 +1,81 @@
+
+//  (C) Copyright John Maddock 2017.
+//  Use, modification and distribution are subject to the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt).
+//
+//  See http://www.boost.org/libs/type_traits for most recent version including documentation.
+ 
+#ifndef BOOST_TT_IS_COMPLETE_HPP_INCLUDED
+#define BOOST_TT_IS_COMPLETE_HPP_INCLUDED
+
+#include <boost/type_traits/integral_constant.hpp>
+#include <boost/type_traits/remove_reference.hpp>
+#include <boost/type_traits/is_function.hpp>
+
+/*
+ * CAUTION:
+ * ~~~~~~~~
+ *
+ * THIS TRAIT EXISTS SOLELY TO GENERATE HARD ERRORS WHEN A ANOTHER TRAIT
+ * WHICH REQUIRES COMPLETE TYPES AS ARGUMENTS IS PASSED AN INCOMPLETE TYPE
+ *
+ * DO NOT MAKE GENERAL USE OF THIS TRAIT, AS THE COMPLETENESS OF A TYPE
+ * VARIES ACROSS TRANSLATION UNITS AS WELL AS WITHIN A SINGLE UNIT.
+ *
+*/
+
+namespace boost {
+
+#ifndef BOOST_NO_SFINAE_EXPR
+
+   namespace detail{
+
+      template <unsigned N>
+      struct ok_tag { double d; char c[N]; };
+
+      template <class T>
+      ok_tag<sizeof(T)> check_is_complete(int);
+      template <class T>
+      char check_is_complete(...);
+   }
+
+   template <class T> struct is_complete
+      : public integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || (sizeof(detail::check_is_complete<T>(0)) != sizeof(char))> {};
+
+#elif !defined(BOOST_NO_SFINAE)
+
+   namespace detail
+   {
+
+      template <class T>
+      struct is_complete_imp
+      {
+         template <class U, class = decltype(sizeof(std::declval< U >())) >
+         static type_traits::yes_type check(U*);
+
+         template <class U>
+         static type_traits::no_type check(...);
+
+         static const bool value = sizeof(check<T>(0)) == sizeof(type_traits::yes_type);
+      };
+
+} // namespace detail
+
+
+   template <class T>
+   struct is_complete : std::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || detail::is_complete_imp<T>::value>
+   {};
+   template <class T>
+   struct is_complete<T&> : is_complete<T> {};
+   
+#else
+
+      template <class T> struct is_complete
+         : public integral_constant<bool, true> {};
+
+#endif
+
+} // namespace boost
+
+#endif // BOOST_TT_IS_COMPLETE_HPP_INCLUDED
