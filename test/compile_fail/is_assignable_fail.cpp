@@ -7,6 +7,10 @@
 #  include <boost/type_traits/is_assignable.hpp>
 #include "../test.hpp"
 
+#ifndef BOOST_TT_HAS_WORKING_IS_COMPLETE
+#error "Sorry can't test this."
+#endif
+
 int main()
 {
    return boost::is_assignable<incomplete_type>::value;

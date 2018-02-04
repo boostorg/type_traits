@@ -31,7 +31,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<int[2]>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<int const[3]>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<int volatile[2][3]>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<int const volatile[4][5][6]>::value, true);
-#ifndef BOOST_NO_SFINAE
+#ifdef BOOST_TT_HAS_WORKING_IS_COMPLETE
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<int[]>::value, false);
 #endif
 
@@ -43,7 +43,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<cmf>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<mf8>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<union_UDT>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<test_abc1>::value, true);
-#ifndef BOOST_NO_SFINAE
+#ifdef BOOST_TT_HAS_WORKING_IS_COMPLETE
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<incomplete_type>::value, false);
 #endif
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_complete<polymorphic_base>::value, true);

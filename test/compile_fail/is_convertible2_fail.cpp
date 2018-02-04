@@ -7,8 +7,8 @@
 #  include <boost/type_traits/is_convertible.hpp>
 #include "../test.hpp"
 
-#if defined(CI_SUPPRESS_KNOWN_ISSUES) && defined(BOOST_MSVC) && (BOOST_MSVC <= 1800)
-#error "Sorry check doesn't work"
+#ifndef BOOST_TT_HAS_WORKING_IS_COMPLETE
+#error "Sorry can't test this."
 #endif
 
 int main()

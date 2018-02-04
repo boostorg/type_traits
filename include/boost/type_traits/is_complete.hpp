@@ -27,6 +27,12 @@
 
 namespace boost {
 
+
+//
+// We will undef this if the trait isn't fully functional:
+//
+#define BOOST_TT_HAS_WORKING_IS_COMPLETE
+
 #if !defined(BOOST_NO_SFINAE_EXPR) && !BOOST_WORKAROUND(BOOST_MSVC, <= 1900)
 
    namespace detail{
@@ -73,6 +79,8 @@ namespace boost {
 
       template <class T> struct is_complete
          : public integral_constant<bool, true> {};
+
+#undef BOOST_TT_HAS_WORKING_IS_COMPLETE
 
 #endif
 
