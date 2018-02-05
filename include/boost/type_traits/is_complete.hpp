@@ -70,7 +70,7 @@ namespace boost {
 
 
    template <class T>
-   struct is_complete : std::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || detail::is_complete_imp<T>::value>
+   struct is_complete : std::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || ::boost::detail::is_complete_imp<T>::value>
    {};
    template <class T>
    struct is_complete<T&> : is_complete<T> {};
