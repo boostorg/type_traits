@@ -71,15 +71,15 @@ namespace boost {
 
 
    template <class T>
-   struct is_complete : std::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || ::boost::detail::is_complete_imp<T>::value>
+   struct is_complete : boost::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || ::boost::detail::is_complete_imp<T>::value>
    {};
    template <class T>
-   struct is_complete<T&> : is_complete<T> {};
+   struct is_complete<T&> : boost::is_complete<T> {};
    
 #else
 
       template <class T> struct is_complete
-         : public integral_constant<bool, true> {};
+         : public boost::integral_constant<bool, true> {};
 
 #undef BOOST_TT_HAS_WORKING_IS_COMPLETE
 
