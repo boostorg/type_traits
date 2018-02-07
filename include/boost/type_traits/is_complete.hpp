@@ -12,6 +12,7 @@
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/remove_reference.hpp>
 #include <boost/type_traits/is_function.hpp>
+#include <boost/config/workaround.hpp>
 
 /*
  * CAUTION:
@@ -49,7 +50,7 @@ namespace boost {
    template <class T> struct is_complete
       : public integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || (sizeof(detail::check_is_complete<T>(0)) != sizeof(char))> {};
 
-#elif !defined(BOOST_NO_SFINAE) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS)
+#elif !defined(BOOST_NO_SFINAE) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40500)
 
    namespace detail
    {
