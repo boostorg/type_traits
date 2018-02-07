@@ -13,6 +13,14 @@
 #include <boost/type_traits/remove_reference.hpp>
 #include <boost/type_traits/is_function.hpp>
 
+#if !defined(BOOST_NO_SFINAE_EXPR) && !BOOST_WORKAROUND(BOOST_MSVC, <= 1900)
+#elif !defined(BOOST_NO_SFINAE) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS)
+
+#include <boost/type_traits/declval.hpp>
+#include <boost/type_traits/detail/yes_no_type.hpp>
+
+#endif
+
 /*
  * CAUTION:
  * ~~~~~~~~
@@ -57,7 +65,7 @@ namespace boost {
       template <class T>
       struct is_complete_imp
       {
-         template <class U, class = decltype(sizeof(std::declval< U >())) >
+         template <class U, class = decltype(sizeof(::boost::declval< U >())) >
          static type_traits::yes_type check(U*);
 
          template <class U>
@@ -70,7 +78,7 @@ namespace boost {
 
 
    template <class T>
-   struct is_complete : std::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || ::boost::detail::is_complete_imp<T>::value>
+   struct is_complete : ::boost::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || ::boost::detail::is_complete_imp<T>::value>
    {};
    template <class T>
    struct is_complete<T&> : is_complete<T> {};
