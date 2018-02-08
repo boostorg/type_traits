@@ -86,13 +86,13 @@ inline bool operator BOOST_TT_TRAIT_OP (const C&, void*) { return true; }
 inline bool operator BOOST_TT_TRAIT_OP (void*, const D&) { return true; }
 inline bool operator BOOST_TT_TRAIT_OP (const C&, const D&) { return true; }
 
-struct private_op { private: void operator BOOST_TT_TRAIT_OP (const private_op&); };
+struct private_op { private: void operator BOOST_TT_TRAIT_OP (const private_op&) {} };
 
 struct ambiguous_A 
 { 
 };
-bool operator BOOST_TT_TRAIT_OP (const ambiguous_A&, const ambiguous_A&);
-struct ambiguous_B { operator ambiguous_A()const; };
+inline bool operator BOOST_TT_TRAIT_OP (const ambiguous_A&, const ambiguous_A&) { return true; }
+struct ambiguous_B { operator ambiguous_A()const { return ambiguous_A(); } };
 
 //class internal_private { ret operator BOOST_TT_TRAIT_OP (const internal_private&) const; };
 
