@@ -40,6 +40,7 @@
 #include <boost/type_traits/make_void.hpp>
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/type_traits/is_void.hpp>
+#include <boost/type_traits/is_pointer.hpp>
 #include <boost/type_traits/add_reference.hpp>
 #include <boost/type_traits/remove_pointer.hpp>
 #include <boost/type_traits/remove_reference.hpp>
@@ -92,7 +93,8 @@ namespace boost
       public boost::binary_op_detail::has_minus_assign_void_ptr_filter<
       T, U, Ret,
       boost::is_void<typename remove_pointer<typename remove_reference<T>::type>::type>::value
-      || boost::is_void<typename remove_pointer<typename remove_reference<U>::type>::type>::value> {};
+      || boost::is_void<typename remove_pointer<typename remove_reference<U>::type>::type>::value
+      || (boost::is_pointer<typename remove_reference<T>::type>::value && boost::is_pointer<typename remove_reference<U>::type>::value)> {};
 
 
 }
