@@ -16,6 +16,9 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 namespace boost {
 namespace detail {
 
+template<class T>
+using detector_t = typename boost::make_void<T>::type;
+
 template<class Default, class, template<class...> class, class...>
 struct detector {
     using value_t = boost::false_type;
@@ -23,8 +26,7 @@ struct detector {
 };
 
 template<class Default, template<class...> class Op, class... Args>
-struct detector<Default, typename boost::make_void<Op<Args...> >::type, Op,
-    Args...> {
+struct detector<Default, detector_t<Op<Args...> >, Op, Args...> {
     using value_t = boost::true_type;
     using type = Op<Args...>;
 };
