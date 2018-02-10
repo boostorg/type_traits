@@ -152,7 +152,7 @@ void common() {
    TEST_TR(Derived2, bool, true);
 // compile time error
 // TEST_T(internal_private, false);
-#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1900) && !BOOST_WORKAROUND(BOOST_GCC, < 40900)
+#if defined(BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION)
 // There are some things that pass that wouldn't otherwise do so:
 #if !BOOST_WORKAROUND(BOOST_MSVC, < 1910)
    TEST_TR(private_op, bool, false);

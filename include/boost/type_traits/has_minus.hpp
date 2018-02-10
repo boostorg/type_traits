@@ -10,7 +10,7 @@
 #define BOOST_TT_HAS_MINUS_HPP_INCLUDED
 
 #include <boost/config.hpp>
-#include <boost/config/workaround.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 // cannot include this header without getting warnings of the kind:
 // gcc:
@@ -34,7 +34,7 @@
 #   endif
 #endif
 
-#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1900) && !BOOST_WORKAROUND(BOOST_GCC, < 40900)
+#if defined(BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION)
 
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/make_void.hpp>
