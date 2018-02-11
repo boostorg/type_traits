@@ -158,6 +158,74 @@
 [template all_compilers[] __compat All current compilers are supported by this trait.]
 [template has_binary_operator_compat[] __compat Requires working SFINAE (i.e. BOOST_NO_SFINAE is not set).  Only a minority of rather old compilers do not support this.]
 
+[template binary_operator_known_issues[Name Op Ret1 Ret2 Const]
+[*Known issues:]
+
+For modern compilers (those that support arbitrary SFINAE-expressions and decltype/declval) this trait offers near perfect detection.
+In this situation the macro `BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION` will be defined after including
+[^<boost/type_traits/[Name].hpp>].  Please note however, that detection is based on function signature only, 
+in the case that the operator is a function template then [Name] cannot perform
+introspection of the template function body to ensure that the type meets all of the conceptual requirements of the actual code.
+
+Example:
+
+
+   #include <boost/type_traits/``[Name]``.hpp>
+   #include <iostream>
+   
+   template <class T>
+   struct contains 
+   { 
+      T data; 
+      contains(const T& d) : data(d) {}   
+   };
+
+   template <class T>
+   ``[Ret2]`` operator ``[Op]`` (``[Const]``contains<T> &lhs, const contains<T> &rhs) {
+	   return f(lhs.data, rhs.data);
+   }
+
+   class bad { };
+   class good { };
+   good f(const good&, const good&) { return /*something*/; }
+
+   int main() {
+	   std::cout<<std::boolalpha;
+	   // works fine for contains<good>
+	   std::cout<<boost::``[Name]``< contains< good > >::value<<'\n'; // true
+	   contains<good> g;
+	   g&g; // ok
+	   // does not work for contains<bad>
+	   std::cout<<boost::``[Name]``< contains< bad > >::value<<'\n'; // true, should be false
+	   contains<bad> b;
+	   b&b; // compile time error
+	   return 0;
+   }
+
+For older compilers (`BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION` not defined) then there are  a number of issues:
+
+* This trait cannot detect whether binary `operator`[Op] is public or not:
+if `operator`[Op] is defined as a private member of `Lhs` then
+instantiating [^[Name]<Lhs>] will produce a compiler error.
+For this reason [^[Name]] cannot be used to determine whether a type has a public `operator`[Op] or not.
+
+   struct A { private: ``[Ret1]`` operator ``[Op]`` (const A&); };
+   boost::``[Name]``<A>::value; // error: A::operator ``[Op]`` (const A&) is private
+
+
+* There is an issue if the operator exists only for type `A` and `B` is
+convertible to `A`. In this case, the compiler will report an ambiguous overload.
+
+   struct A { };
+   ``[Ret1]`` operator ``[Op]`` (``[Const]``A&, const A&);
+   struct B { operator A(); };
+   boost::``[Name]``<A>::value; // this is fine
+   boost::``[Name]``<B>::value; // error: ambiguous overload
+
+
+* `volatile` qualifier is not properly handled and would lead to undefined behavior
+]
+
 
 A printer-friendly [@http://sourceforge.net/projects/boost/files/boost-docs/ 
  PDF version of this manual is also available].
