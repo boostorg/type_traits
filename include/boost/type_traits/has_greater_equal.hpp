@@ -36,6 +36,9 @@
                ::boost::is_void< Rhs_noptr >::value\
             )\
          )\
+      ) || \
+      (\
+         ::boost::is_class<Lhs_noref>::value && ::boost::is_convertible<Lhs_noref, void(*)()>::value\
       )\
    )
 

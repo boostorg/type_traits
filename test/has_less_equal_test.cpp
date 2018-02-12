@@ -219,6 +219,19 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int* const &, int* &, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int* const &, int* const &, int const & >::value), 1);
 
+#if defined(BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION)
+   // There are some things that pass that wouldn't otherwise do so:
+   auto f = []() {};
+#ifndef BOOST_MSVC
+   TEST_TR(decltype(f), bool, true);
+#else
+   TEST_TR(decltype(f), bool, false);
+#endif
+
+#elif !defined(BOOST_NO_CXX11_LAMBDAS)
+   auto f = []() {};
+   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< decltype(f)>::value), 0);
+#endif
 }
 
 TT_TEST_BEGIN(BOOST_TT_TRAIT_NAME)
