@@ -233,7 +233,7 @@ void specific() {
    (void)f;
    (void)f2;
 
-#elif !defined(BOOST_NO_CXX11_LAMBDAS)
+#elif !defined(BOOST_NO_CXX11_LAMBDAS) && !defined(BOOST_MSVC)
    auto f = []() {};
    auto f2 = [](double)->int { return 2; };
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< decltype(f)>::value), 0);

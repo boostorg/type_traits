@@ -27,7 +27,7 @@ struct is_likely_stateless_lambda : public false_type {};
 
 }}
 
-#elif !defined(BOOST_NO_CXX11_LAMBDAS) && !defined(BOOST_NO_CXX11_DECLTYPE) && !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
+#elif !defined(BOOST_NO_CXX11_LAMBDAS) && !defined(BOOST_NO_CXX11_DECLTYPE) && !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES) && !defined(BOOST_MSVC)
 
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/core/enable_if.hpp>
@@ -79,14 +79,16 @@ struct is_likely_stateless_lambda<
 } /* namespace boost */
 
 #else
-//
-// Can't implement this:
-//
-namespace boost{ namespace type_traits_detail{
 
-template<typename T>
-struct is_likely_stateless_lambda : public false_type {};
+#include <boost/type_traits/is_complete.hpp>
+ //
+ // Can't implement this, but for some reason msvc detects lambda types as incomplete and we can use that here as a poor man's proxy:
+ //
+namespace boost {
+   namespace type_traits_detail {
 
+      template<typename T>
+      struct is_likely_stateless_lambda : public boost::integral_constant<bool, !boost::is_complete<T>::value> {};
 }}
 
 #endif
