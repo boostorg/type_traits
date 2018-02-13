@@ -38,7 +38,7 @@
          )\
       ) || \
       (\
-         ::boost::is_class<Lhs_noref>::value && ::boost::is_convertible<Lhs_noref, void(*)()>::value\
+         ::boost::type_traits_detail::is_likely_stateless_lambda<Lhs_noref>::value\
       )\
       )
 
