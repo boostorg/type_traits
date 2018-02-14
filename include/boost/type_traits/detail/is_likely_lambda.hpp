@@ -79,16 +79,14 @@ struct is_likely_stateless_lambda<
 } /* namespace boost */
 
 #else
-
-#include <boost/type_traits/is_complete.hpp>
  //
- // Can't implement this, but for some reason msvc detects lambda types as incomplete and we can use that here as a poor man's proxy:
+ // Can't implement this:
  //
 namespace boost {
    namespace type_traits_detail {
 
       template<typename T>
-      struct is_likely_stateless_lambda : public boost::integral_constant<bool, !boost::is_complete<T>::value> {};
+      struct is_likely_stateless_lambda : public boost::integral_constant<bool, false> {};
 }}
 
 #endif
