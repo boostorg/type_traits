@@ -74,6 +74,10 @@
 #  define BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
 #endif
 
+#if defined(__clang__) && (__clang_major__ == 3) && (__clang_minor__ < 2) && defined(BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION)
+#undef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
+#endif
+
 #endif // BOOST_TT_CONFIG_HPP_INCLUDED
 
 
