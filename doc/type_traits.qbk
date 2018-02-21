@@ -154,6 +154,8 @@
 [def __is_detected_exact [link boost_typetraits.reference.is_detected_exact is_detected_exact]]
 [def __nonesuch [link boost_typetraits.reference.nonesuch nonesuch]]
 
+[def __is_complete [link boost_typetraits.reference.is_complete is_complete]]
+
 [def __compat [*Compiler Compatibility:]]
 [template all_compilers[] __compat All current compilers are supported by this trait.]
 [template has_binary_operator_compat[] __compat Requires working SFINAE (i.e. BOOST_NO_SFINAE is not set).  Only a minority of rather old compilers do not support this.]
