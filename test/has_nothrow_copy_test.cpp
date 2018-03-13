@@ -227,7 +227,9 @@ BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<nothrow_copy_UDT>::val
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<nothrow_assign_UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<nothrow_construct_UDT>::value, false);
 
+#if !(defined(CI_SUPPRESS_KNOWN_ISSUES) && BOOST_WORKAROUND(BOOST_GCC, < 40700))
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<test_abc1>::value, false);
+#endif
 
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<delete_copy>::value, false);

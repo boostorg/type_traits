@@ -71,7 +71,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_constructible<int*, int[]>::value), true
 
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_constructible<int(*)(int), int&>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_constructible<int(*)(int), int(*)(int)>::value), true);
+#if !(defined(CI_SUPPRESS_KNOWN_ISSUES) && BOOST_WORKAROUND(BOOST_GCC, < 40700))
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_constructible<int(&)(int), int(int)>::value), true);
+#endif
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_constructible<int(int), int(int)>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_constructible<int(int), int(&)(int)>::value), false);
 

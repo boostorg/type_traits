@@ -248,7 +248,9 @@ BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<nothrow_c
 #endif
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<nothrow_assign_UDT>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<nothrow_construct_UDT>::value, false);
+#if !defined(BOOST_GCC) || (BOOST_GCC >= 40700)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<test_abc1>::value, false);
+#endif
 
 #if !defined(BOOST_GCC) || (BOOST_GCC >= 40800)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_constructible<non_copy>::value, false);

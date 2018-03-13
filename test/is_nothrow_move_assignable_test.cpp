@@ -9,7 +9,7 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
-#if !(defined(BOOST_MSVC) && defined(BOOST_TT_DISABLE_INTRINSICS) && defined(CI_SUPPRESS_KNOWN_ISSUES))
+#if !((defined(BOOST_MSVC) || BOOST_WORKAROUND(BOOST_GCC, < 40700)) && defined(BOOST_TT_DISABLE_INTRINSICS) && defined(CI_SUPPRESS_KNOWN_ISSUES))
 
 #ifdef TEST_STD
 #  include <type_traits>
@@ -250,7 +250,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<test_abc1>::value
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<non_assignable>::value, false);
 #endif
-#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR)
+#if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_SFINAE_EXPR) && !BOOST_WORKAROUND(BOOST_GCC, < 40700)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<noexcept_assignable>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_move_assignable<noexcept_move_assignable>::value, true);
 #endif

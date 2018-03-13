@@ -8,8 +8,10 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 
 #include <boost/config.hpp>
+#include <boost/config/workaround.hpp>
 
-#if defined(BOOST_NO_SFINAE_EXPR) || defined(BOOST_NO_CXX11_NOEXCEPT) || defined(BOOST_NO_CXX11_DECLTYPE) || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS)
+#if defined(BOOST_NO_SFINAE_EXPR) || defined(BOOST_NO_CXX11_NOEXCEPT) || defined(BOOST_NO_CXX11_DECLTYPE) \
+   || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) || BOOST_WORKAROUND(BOOST_GCC, < 40700)
 
 #include <boost/type_traits/is_scalar.hpp>
 #include <boost/type_traits/is_const.hpp>

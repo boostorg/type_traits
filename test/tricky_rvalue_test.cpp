@@ -25,8 +25,10 @@ TT_TEST_BEGIN(rvalue_reference_test)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_reference<int (&&)(int)>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_rvalue_reference<int (&)(int)>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_rvalue_reference<int (&&)(int)>::value, true);
+#if !(defined(CI_SUPPRESS_KNOWN_ISSUES) && BOOST_WORKAROUND(BOOST_GCC, < 40700))
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<int&&, int&>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_convertible<int(), int(&&)()>::value), true);
+#endif
 #endif
 
 #endif

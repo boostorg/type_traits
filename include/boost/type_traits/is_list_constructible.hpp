@@ -8,6 +8,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 
 #include <boost/config.hpp>
+#include <boost/config/workaround.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_complete.hpp>
@@ -16,7 +17,9 @@
 namespace boost
 {
 
-#if defined(BOOST_NO_SFINAE_EXPR) || defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) || defined(BOOST_NO_CXX11_DECLTYPE) || defined(BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX) || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS)
+#if defined(BOOST_NO_SFINAE_EXPR) || defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) || defined(BOOST_NO_CXX11_DECLTYPE) \
+   || defined(BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX) || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS)\
+   || BOOST_WORKAROUND(BOOST_GCC, < 40700)
 
 template<class T, class = void, class = void, class = void, class = void, class = void, class = void> struct is_list_constructible: false_type
 {

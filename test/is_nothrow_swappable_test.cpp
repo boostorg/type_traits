@@ -53,6 +53,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<int volatile>::value, t
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<int const volatile>::value, false);
 
 #if defined(BOOST_NO_SFINAE_EXPR) || defined(BOOST_NO_CXX11_NOEXCEPT) || defined(BOOST_NO_CXX11_DECLTYPE) || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) \
+    || BOOST_WORKAROUND(BOOST_GCC, < 40700)\
     || (defined(__GLIBCXX__) && __GLIBCXX__ <= 20120301) // built-in clang++ -std=c++11 on Travis, w/ libstdc++ 4.6
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<int[2]>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<int const[2]>::value, false);
@@ -71,6 +72,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<void volatile>::value, 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<void const volatile>::value, false);
 
 #if defined(BOOST_NO_SFINAE_EXPR) || defined(BOOST_NO_CXX11_NOEXCEPT) || defined(BOOST_NO_CXX11_DECLTYPE) || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) \
+     || BOOST_WORKAROUND(BOOST_GCC, < 40700)\
     || (defined(__GLIBCXX__) && __GLIBCXX__ <= 20120301) // built-in clang++ -std=c++11 on Travis, w/ libstdc++ 4.6
 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_nothrow_swappable<X>::value, false);

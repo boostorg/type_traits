@@ -35,6 +35,9 @@
 #   if BOOST_WORKAROUND(BOOST_MSVC_FULL_VER, >= 140050000)
 #       pragma warning ( disable : 6334)
 #   endif
+#   if BOOST_WORKAROUND(_MSC_VER, >= 1913)
+#       pragma warning ( disable : 4834)
+#   endif
 #endif
 
 
