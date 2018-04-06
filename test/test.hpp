@@ -408,6 +408,9 @@ struct final_UDT final
 {};
 struct polymorphic_derived_final final : public polymorphic_derived2
 {};
+template< typename T >
+struct final_UDT_template final
+{};
 #endif
 
 
