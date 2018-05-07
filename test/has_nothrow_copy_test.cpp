@@ -21,6 +21,12 @@ private:
 
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 
+struct delete_move
+{
+   delete_move();
+   delete_move(const delete_move&&) = delete;
+};
+
 struct delete_copy
 {
    delete_copy();
@@ -233,6 +239,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<test_abc1>::value, false);
 
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<delete_copy>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<delete_move>::value, false);
 #endif
 
 #ifndef BOOST_NO_CXX11_NOEXCEPT
