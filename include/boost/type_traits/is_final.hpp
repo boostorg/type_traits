@@ -13,14 +13,15 @@
 
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
-#ifdef BOOST_IS_FINAL
-#include <boost/type_traits/remove_cv.hpp>
-#endif
 
 namespace boost {
 
 #ifdef BOOST_IS_FINAL
-template <class T> struct is_final : public integral_constant<bool, BOOST_IS_FINAL(typename remove_cv<T>::type)> {};
+// Note: gcc 6.4 and 7.2 break for some template types if we use remove_cv here
+template <class T> struct is_final : public integral_constant<bool, BOOST_IS_FINAL(T)> {};
+template <class T> struct is_final< const T > : public integral_constant<bool, BOOST_IS_FINAL(T)> {};
+template <class T> struct is_final< volatile T > : public integral_constant<bool, BOOST_IS_FINAL(T)> {};
+template <class T> struct is_final< const volatile T > : public integral_constant<bool, BOOST_IS_FINAL(T)> {};
 #else
 template <class T> struct is_final : public integral_constant<bool, false> {};
 #endif
