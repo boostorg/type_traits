@@ -239,7 +239,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<test_abc1>::value, false);
 
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<delete_copy>::value, false);
+#if !(defined(CI_SUPPRESS_KNOWN_ISSUES) && BOOST_WORKAROUND(BOOST_GCC, < 40600))
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_nothrow_copy<delete_move>::value, false);
+#endif
 #endif
 
 #ifndef BOOST_NO_CXX11_NOEXCEPT
