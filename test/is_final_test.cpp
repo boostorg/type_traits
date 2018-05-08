@@ -48,10 +48,12 @@ TT_TEST_BEGIN(is_final)
    BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_final<final_UDT>::value, true, false);
    BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_final<final_UDT const>::value, true, false);
    BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_final<final_template<int> >::value, true, false);
+   BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_final<final_template<int> const>::value, true, false);
 #  else
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<final_UDT>::value, true);
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<final_UDT const>::value, true);
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<final_template<int> >::value, true);
+   BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_final<final_template<int> const>::value, true);
 #  endif
 #else
    std::cout <<
