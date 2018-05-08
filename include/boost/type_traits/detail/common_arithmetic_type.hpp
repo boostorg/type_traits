@@ -206,7 +206,7 @@ private:
 
     static bool cond();
 
-    BOOST_STATIC_CONSTANT(const int, selector = sizeof(select(cond() ? T() : U())));
+    BOOST_STATIC_CONSTANT(int, selector = sizeof(select(cond() ? T() : U())));
 
 public:
 
