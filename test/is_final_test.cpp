@@ -14,9 +14,11 @@
 #include "check_integral_constant.hpp"
 #include <iostream>
 
+#if !defined(BOOST_NO_CXX11_FINAL)
 template <class T>
 struct final_template final
 {};
+#endif
 template <class T>
 struct non_final_template
 {};
