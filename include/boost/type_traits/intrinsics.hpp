@@ -128,7 +128,7 @@
 #   endif
 #ifndef BOOST_NO_CXX11_FINAL
 //  This one doesn't quite always do the right thing on older VC++ versions
-//  we really need it when the final keyword is supporyted though:
+//  we really need it when the final keyword is supported though:
 #   define BOOST_IS_POLYMORPHIC(T) __is_polymorphic(T)
 #endif
 #if _MSC_FULL_VER >= 180020827
