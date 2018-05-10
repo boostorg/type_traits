@@ -132,7 +132,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_virtual_base_of<non_virtual_base,non_vir
 //
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_virtual_base_of<bug11309_A, bug11309_C>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_virtual_base_of<bug11309_A, bug11309_B>::value), true);
-#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !defined(BOOST_NO_CXX11_NULLPTR)
+#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !defined(BOOST_NO_CXX11_NULLPTR) && !BOOST_WORKAROUND(BOOST_GCC, < 40800)
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_virtual_base_of<bug11323_B, bug11323_C>::value), false);
 #ifndef BOOST_NO_CXX11_FINAL
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_virtual_base_of<bug11323_2B, bug11323_2C>::value), false);

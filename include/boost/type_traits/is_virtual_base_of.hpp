@@ -12,6 +12,7 @@
 #include <boost/type_traits/is_base_of.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/make_void.hpp>
+#include <utility>
 
 namespace boost {
    namespace detail {
@@ -24,7 +25,7 @@ namespace boost {
 #pragma GCC system_header
 #endif
 
-#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !defined(BOOST_NO_CXX11_NULLPTR) && !BOOST_WORKAROUND(BOOST_GCC, <= 40800)
+#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !defined(BOOST_NO_CXX11_NULLPTR) && !BOOST_WORKAROUND(BOOST_GCC, < 40800)
 
 #ifdef __clang__
 
@@ -32,7 +33,7 @@ namespace boost {
       constexpr bool is_virtual_base_impl(...) { return true; }
 
       template<class T, class U,
-         boost::void_t<decltype(static_cast<U*>(std::declval<T*>()))>* =
+         boost::void_t<decltype((U*)(std::declval<T*>()))>* =
          nullptr>
          constexpr bool is_virtual_base_impl(int) { return false; }
 
