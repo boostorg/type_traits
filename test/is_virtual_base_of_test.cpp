@@ -145,11 +145,3 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_virtual_base_of<non_virtual_base, privat
 
 TT_TEST_END
 
-
-
-
-
-
-
-
-

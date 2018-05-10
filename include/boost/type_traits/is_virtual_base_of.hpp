@@ -11,9 +11,10 @@
 
 #include <boost/type_traits/is_base_of.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include <boost/type_traits/make_void.hpp>
 
 namespace boost {
-namespace detail {
+   namespace detail {
 
 
 #ifdef BOOST_MSVC
@@ -23,7 +24,31 @@ namespace detail {
 #pragma GCC system_header
 #endif
 
-#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !defined(BOOST_NO_CXX11_NULLPTR)
+#if !defined(BOOST_NO_SFINAE_EXPR) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !defined(BOOST_NO_CXX11_NULLPTR) && !BOOST_WORKAROUND(BOOST_GCC, <= 40800)
+
+#ifdef __clang__
+
+      template<class T, class U>
+      constexpr bool is_virtual_base_impl(...) { return true; }
+
+      template<class T, class U,
+         boost::void_t<decltype(static_cast<U*>(std::declval<T*>()))>* =
+         nullptr>
+         constexpr bool is_virtual_base_impl(int) { return false; }
+
+   } // namespace detail
+
+   template<class T, class U>
+   struct is_virtual_base_of : public
+      boost::integral_constant<
+      bool,
+      boost::is_base_of<T, U>::value &&
+      detail::is_virtual_base_impl<T, U>(0) &&
+      !detail::is_virtual_base_impl<U, T>(0)
+      > {};
+
+
+#else
 
 template<class Base, class Derived>
 struct is_virtual_base_of_impl
@@ -62,6 +87,8 @@ struct is_virtual_base_of_impl
 } // namespace detail
 
 template <class Base, class Derived> struct is_virtual_base_of : public integral_constant<bool, (::boost::detail::is_virtual_base_of_impl<Base, Derived>::value)>{};
+
+#endif // __clang__
 
 #else
 
