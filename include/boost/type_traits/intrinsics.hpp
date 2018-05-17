@@ -222,11 +222,11 @@
 #   if __has_feature(is_polymorphic)
 #     define BOOST_IS_POLYMORPHIC(T) __is_polymorphic(T)
 #   endif
-#   if __has_feature(has_trivial_move_constructor)
-#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__has_trivial_move_constructor(T)  && is_constructible<T, T&&>::value && !::boost::is_volatile<T>::value)
+#   if __has_extension(is_trivially_constructible)
+#     define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) (__is_trivially_constructible(T, T&&) && is_constructible<T, T&&>::value && !::boost::is_volatile<T>::value)
 #   endif
-#   if __has_feature(has_trivial_move_assign)
-#     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__has_trivial_move_assign(T) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
+#   if __has_extension(is_trivially_assignable)
+#     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__is_trivially_assignable(T&, T&&) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
 #   endif
 #   if (!defined(unix) && !defined(__unix__)) || defined(__LP64__) || !defined(__GNUC__)
 // GCC sometimes lies about alignment requirements
