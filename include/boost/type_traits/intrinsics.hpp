@@ -122,7 +122,10 @@
 //  This one fails if the default alignment has been changed with /Zp:
 //  #   define BOOST_ALIGNMENT_OF(T) __alignof(T)
 
-#   if defined(_MSC_VER) && (_MSC_VER >= 1700)
+#   if defined(_MSC_VER) && (_MSC_VER >= 1800)
+#       define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) ((__is_trivially_constructible(T, T&&) || boost::is_pod<T>::value) && ! ::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
+#       define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) ((__is_trivially_assignable(T, T&&) || boost::is_pod<T>::value) && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
+#   elif defined(_MSC_VER) && (_MSC_VER >= 1700)
 #       define BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) ((__has_trivial_move_constructor(T) || boost::is_pod<T>::value) && ! ::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
 #       define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) ((__has_trivial_move_assign(T) || boost::is_pod<T>::value) && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value && ! ::boost::is_reference<T>::value)
 #   endif
