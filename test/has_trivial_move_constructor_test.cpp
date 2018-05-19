@@ -232,8 +232,10 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<empty_POD_union
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<trivial_except_copy>::value, false);
 // Why does this fail on multiple compilers??
 //BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<trivial_except_destroy>::value, true);
+#if !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<trivial_except_construct>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<trivial_except_assign>::value, true);
+#endif
 /*
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<wrap<trivial_except_copy> >::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_move_constructor<wrap<trivial_except_destroy> >::value, true);
