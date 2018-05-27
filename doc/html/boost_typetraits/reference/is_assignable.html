@@ -33,8 +33,9 @@
         <span class="bold"><strong>Inherits:</strong></span> If <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">declval</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span>
         <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">declval</span><span class="special">&lt;</span><span class="identifier">U</span><span class="special">&gt;()</span></code>
         then inherits from <a class="link" href="integral_constant.html" title="integral_constant">true_type</a>,
-        otherwise from __flase_type. Type <code class="computeroutput"><span class="identifier">T</span></code>
-        must be a complete type.
+        otherwise from <a class="link" href="integral_constant.html" title="integral_constant">false_type</a>.
+        Type <code class="computeroutput"><span class="identifier">T</span></code> must be a complete
+        type.
       </p>
 <p>
         Note that this trait is somewhat tricky to use correctly: for example:
