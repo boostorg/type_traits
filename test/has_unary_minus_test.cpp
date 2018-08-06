@@ -219,6 +219,9 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int* const &, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int* const &, int const & >::value), 0);
 
+#ifndef BOOST_NO_CXX11_SCOPED_ENUMS
+   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< scoped_enum >::value), 0);
+#endif
 }
 
 TT_TEST_BEGIN(BOOST_TT_TRAIT_NAME)

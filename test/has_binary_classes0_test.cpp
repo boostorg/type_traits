@@ -259,4 +259,9 @@ TT_TEST_BEGIN(BOOST_TT_TRAIT_NAME)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::has_plus< C014, C014 &, ret const & >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::has_plus< C014, C014 const &, ret const & >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::has_plus< C014 const, C014, ret const >::value), 1);
+
+#ifndef BOOST_NO_CXX11_SCOPED_ENUMS
+   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::has_plus< scoped_enum, scoped_enum >::value), 0);
+#endif
+   
 TT_TEST_END
