@@ -99,4 +99,8 @@ template <class T> struct is_function<T&&> : public false_type {};
 #endif
 } // namespace boost
 
+#if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) && defined(BOOST_MSVC) && BOOST_WORKAROUND(BOOST_MSVC, <= 1700)
+#include <boost/type_traits/detail/is_function_msvc10_fix.hpp>
+#endif
+
 #endif // BOOST_TT_IS_FUNCTION_HPP_INCLUDED
