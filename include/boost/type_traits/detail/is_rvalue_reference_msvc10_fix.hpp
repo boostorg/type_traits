@@ -24,6 +24,19 @@ template <class R, class Arg1, class Arg2, class Arg3, class Arg4> struct is_rva
 template <class R, class Arg1, class Arg2, class Arg3, class Arg4, class Arg5> struct is_rvalue_reference<R(&&)(Arg1, Arg2, Arg3, Arg4, Arg5)> : public true_type {};
 template <class R, class Arg1, class Arg2, class Arg3, class Arg4, class Arg5> struct is_rvalue_reference<R(&&)(Arg1, Arg2, Arg3, Arg4, Arg5, ...)> : public true_type {};
 
+template <class R> struct is_rvalue_reference<R(&)()> : public false_type {};
+template <class R> struct is_rvalue_reference<R(&)(...)> : public false_type {};
+template <class R, class Arg1> struct is_rvalue_reference<R(&)(Arg1)> : public false_type {};
+template <class R, class Arg1> struct is_rvalue_reference<R(&)(Arg1, ...)> : public false_type {};
+template <class R, class Arg1, class Arg2> struct is_rvalue_reference<R(&)(Arg1, Arg2)> : public false_type {};
+template <class R, class Arg1, class Arg2> struct is_rvalue_reference<R(&)(Arg1, Arg2, ...)> : public false_type {};
+template <class R, class Arg1, class Arg2, class Arg3> struct is_rvalue_reference<R(&)(Arg1, Arg2, Arg3)> : public false_type {};
+template <class R, class Arg1, class Arg2, class Arg3> struct is_rvalue_reference<R(&)(Arg1, Arg2, Arg3, ...)> : public false_type {};
+template <class R, class Arg1, class Arg2, class Arg3, class Arg4> struct is_rvalue_reference<R(&)(Arg1, Arg2, Arg3, Arg4)> : public false_type {};
+template <class R, class Arg1, class Arg2, class Arg3, class Arg4> struct is_rvalue_reference<R(&)(Arg1, Arg2, Arg3, Arg4, ...)> : public false_type {};
+template <class R, class Arg1, class Arg2, class Arg3, class Arg4, class Arg5> struct is_rvalue_reference<R(&)(Arg1, Arg2, Arg3, Arg4, Arg5)> : public false_type {};
+template <class R, class Arg1, class Arg2, class Arg3, class Arg4, class Arg5> struct is_rvalue_reference<R(&)(Arg1, Arg2, Arg3, Arg4, Arg5, ...)> : public false_type {};
+
 } // namespace boost
 
 #endif // BOOST_TT_IS_REFERENCE_HPP_INCLUDED
