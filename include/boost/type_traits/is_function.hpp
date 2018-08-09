@@ -96,6 +96,7 @@ template <class T> struct is_function : integral_constant<bool, ::boost::detail:
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
 template <class T> struct is_function<T&&> : public false_type {};
 #endif
+template <class T> struct is_function<T&> : public false_type {};
 #endif
 } // namespace boost
 
