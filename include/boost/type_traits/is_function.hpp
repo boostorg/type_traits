@@ -13,6 +13,7 @@
 
 #include <boost/type_traits/is_reference.hpp>
 #include <boost/type_traits/detail/config.hpp>
+#include <boost/config/workaround.hpp>
 
 #if !defined(BOOST_TT_TEST_MS_FUNC_SIGS)
 #   include <boost/type_traits/detail/is_function_ptr_helper.hpp>
@@ -96,7 +97,9 @@ template <class T> struct is_function : integral_constant<bool, ::boost::detail:
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
 template <class T> struct is_function<T&&> : public false_type {};
 #endif
+#if !BOOST_WORKAROUND(BOOST_MSVC, <= 1600)
 template <class T> struct is_function<T&> : public false_type {};
+#endif
 #endif
 } // namespace boost
 

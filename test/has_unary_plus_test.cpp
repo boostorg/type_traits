@@ -223,10 +223,15 @@ void specific() {
    // There are some things that pass that wouldn't otherwise do so:
    auto f = []() {};
    auto f2 = [](double)->int { return 2; };
-   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f)>::value), 1);
-   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f2)>::value), 1);
-   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f), bool>::value), 1);
-   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f2), bool>::value), 1);
+#if BOOST_WORKAROUND(BOOST_MSVC, <= 1900)
+   bool result = false;
+#else
+   bool result = true;
+#endif
+   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f)>::value), result);
+   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f2)>::value), result);
+   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f), bool>::value), result);
+   BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f2), bool>::value), result);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f), void>::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f2), void>::value), 0);
 
