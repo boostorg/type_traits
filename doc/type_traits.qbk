@@ -227,6 +227,30 @@ convertible to `A`. In this case, the compiler will report an ambiguous overload
 
 * `volatile` qualifier is not properly handled and would lead to undefined behavior
 ]
+[template prefix_operator_known_issues[Name Op]
+[*Known issues:]
+
+For modern compilers (those that support arbitrary SFINAE-expressions and decltype/declval) this trait offers near perfect detection.
+In this situation the macro `BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION` will be defined after including
+[^<boost/type_traits/[Name].hpp>].  Please note however, that detection is based on function signature only, 
+in the case that the operator is a function template then [Name] cannot perform
+introspection of the template function body to ensure that the type meets all of the conceptual requirements of the actual code.
+
+For older compilers (`BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION` not defined) then there are  a number of issues:
+
+* This trait cannot detect whether unary `operator`[Op] is public or not:
+if `operator`[Op] is defined as a private class member of type T then
+instantiating [^[Name]<T>] will produce a compiler error.
+For this reason [^[Name]] cannot be used to determine whether a type has a public `operator`[Op] or not.
+
+* `volatile` qualifier is not properly handled and would lead to undefined behavior
+
+* Capturless lambdas are not supported and will lead to a compiler error if [Name] is instantiated
+on the lambda type.
+
+* Scoped enum types are not supported and will lead to a compiler error if [Name] is instantiated on such a type.
+
+]
 
 
 A printer-friendly [@http://sourceforge.net/projects/boost/files/boost-docs/ 
