@@ -322,6 +322,12 @@ enum enum2
    three_,four_
 };
 
+#ifndef BOOST_NO_CXX11_SCOPED_ENUMS
+
+enum class scoped_enum { one, two, three };
+
+#endif
+
 struct VB
 {
    virtual ~VB(){};
