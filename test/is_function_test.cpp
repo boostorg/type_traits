@@ -12,6 +12,10 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
+#ifdef BOOST_GCC
+#pragma GCC diagnostic ignored "-Wnoexcept-type"
+#endif
+
 #ifdef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
 
 struct X
