@@ -12,18 +12,25 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
+#ifdef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
+
 struct X
 {
    void f() {}
    void fc() const {}
    void fv() volatile {}
    void fcv() const volatile {}
+   void noexcept_f()noexcept {}
+   void ref_f()const& {}
+   void rvalue_f() && {}
 };
 
 template< class C, class F > void test_cv_qual(F C::*)
 {
    BOOST_CHECK_INTEGRAL_CONSTANT(boost::is_function< F >::value, true);
 }
+
+#endif
 
 TT_TEST_BEGIN(is_function)
 
@@ -85,12 +92,15 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo4_t>::value, true);
 
 #endif
 
-#ifndef BOOST_NO_CXX11_VARIADIC_TEMPLATES
+#ifdef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
 
 test_cv_qual(&X::f);
 test_cv_qual(&X::fc);
 test_cv_qual(&X::fv);
 test_cv_qual(&X::fcv);
+test_cv_qual(&X::noexcept_f);
+test_cv_qual(&X::ref_f);
+test_cv_qual(&X::rvalue_f);
 
 #endif
 
