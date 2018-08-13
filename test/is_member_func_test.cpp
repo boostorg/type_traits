@@ -12,7 +12,7 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
-#ifdef BOOST_GCC
+#if defined(BOOST_GCC) && (BOOST_GCC >= 70000)
 #pragma GCC diagnostic ignored "-Wnoexcept-type"
 #endif
 
