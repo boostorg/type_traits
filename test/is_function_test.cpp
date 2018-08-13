@@ -12,6 +12,30 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
+#if defined(BOOST_GCC) && (BOOST_GCC >= 70000)
+#pragma GCC diagnostic ignored "-Wnoexcept-type"
+#endif
+
+#ifdef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
+
+struct X
+{
+   void f() {}
+   void fc() const {}
+   void fv() volatile {}
+   void fcv() const volatile {}
+   void noexcept_f()noexcept {}
+   void ref_f()const& {}
+   void rvalue_f() && {}
+};
+
+template< class C, class F > void test_cv_qual(F C::*)
+{
+   BOOST_CHECK_INTEGRAL_CONSTANT(boost::is_function< F >::value, true);
+}
+
+#endif
+
 TT_TEST_BEGIN(is_function)
 
 typedef void foo0_t();
@@ -69,6 +93,18 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo1_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo2_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo3_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo4_t>::value, true);
+
+#endif
+
+#ifdef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
+
+test_cv_qual(&X::f);
+test_cv_qual(&X::fc);
+test_cv_qual(&X::fv);
+test_cv_qual(&X::fcv);
+test_cv_qual(&X::noexcept_f);
+test_cv_qual(&X::ref_f);
+test_cv_qual(&X::rvalue_f);
 
 #endif
 

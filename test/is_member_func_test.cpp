@@ -12,6 +12,28 @@
 #include "test.hpp"
 #include "check_integral_constant.hpp"
 
+#if defined(BOOST_GCC) && (BOOST_GCC >= 70000)
+#pragma GCC diagnostic ignored "-Wnoexcept-type"
+#endif
+
+#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
+struct tricky_members
+{
+   void noexcept_proc()noexcept
+   {}
+   void const_ref_proc()const &
+   {}
+   void rvalue_proc()&&
+   {}
+};
+
+template <class T>
+void test_tricky(T)
+{
+   BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<T>::value, true);
+}
+#endif
+
 TT_TEST_BEGIN(is_member_function_pointer)
 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<f1>::value, false);
@@ -53,12 +75,12 @@ typedef void (__cdecl test_abc1::*ccall_proc)(int, long, double);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<ccall_proc>::value, true);
 #endif
 
+#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
+test_tricky(&tricky_members::const_ref_proc);
+test_tricky(&tricky_members::noexcept_proc);
+test_tricky(&tricky_members::rvalue_proc);
+#endif
+
 TT_TEST_END
-
-
-
-
-
-
 
 
