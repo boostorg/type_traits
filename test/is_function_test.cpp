@@ -16,7 +16,7 @@
 #pragma GCC diagnostic ignored "-Wnoexcept-type"
 #endif
 
-#ifdef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
+#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
 
 struct X
 {
