@@ -96,7 +96,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo4_t>::value, true);
 
 #endif
 
-#ifdef BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION
+#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
 
 test_cv_qual(&X::f);
 test_cv_qual(&X::fc);
