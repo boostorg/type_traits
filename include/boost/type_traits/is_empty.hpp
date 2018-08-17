@@ -11,8 +11,6 @@
 
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/type_traits/detail/config.hpp>
-#include <boost/type_traits/intrinsics.hpp>
-
 #include <boost/type_traits/remove_cv.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/add_reference.hpp>
