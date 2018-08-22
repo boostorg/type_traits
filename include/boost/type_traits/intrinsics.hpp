@@ -25,7 +25,6 @@
 // (these should largely ignore cv-qualifiers)
 // BOOST_IS_UNION(T) should evaluate to true if T is a union type
 // BOOST_IS_POD(T) should evaluate to true if T is a POD type
-// BOOST_IS_EMPTY(T) should evaluate to true if T is an empty class type (and not a union)
 // BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) should evaluate to true if "T x;" has no effect
 // BOOST_HAS_TRIVIAL_COPY(T) should evaluate to true if T(t) <==> memcpy
 // BOOST_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) should evaluate to true if T(boost::move(t)) <==> memcpy
@@ -99,7 +98,6 @@
 //
 #   define BOOST_IS_UNION(T) __is_union(T)
 #   define BOOST_IS_POD(T) (__is_pod(T) && __has_trivial_constructor(T))
-#   define BOOST_IS_EMPTY(T) __is_empty(T)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) __has_trivial_constructor(T)
 #   define BOOST_HAS_TRIVIAL_ASSIGN(T) (__has_trivial_assign(T) || ( ::boost::is_pod<T>::value && ! ::boost::is_const<T>::value && !::boost::is_volatile<T>::value))
 #   define BOOST_HAS_TRIVIAL_DESTRUCTOR(T) (__has_trivial_destructor(T) || ::boost::is_pod<T>::value)
@@ -138,9 +136,6 @@
 #   define BOOST_IS_NOTHROW_MOVE_ASSIGN(T) (__is_nothrow_assignable(T&, T&&))
 #   define BOOST_IS_NOTHROW_MOVE_CONSTRUCT(T) (__is_nothrow_constructible(T, T&&))
 #endif
-#if _MSC_VER >= 1800
-#   define BOOST_IS_FINAL(T) __is_final(T)
-#endif
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
 #endif
 
@@ -148,7 +143,6 @@
 // For Digital Mars C++, www.digitalmars.com
 #   define BOOST_IS_UNION(T) (__typeinfo(T) & 0x400)
 #   define BOOST_IS_POD(T) (__typeinfo(T) & 0x800)
-#   define BOOST_IS_EMPTY(T) (__typeinfo(T) & 0x1000)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) (__typeinfo(T) & 0x10)
 #   define BOOST_HAS_TRIVIAL_COPY(T) (__typeinfo(T) & 0x20)
 #   define BOOST_HAS_TRIVIAL_ASSIGN(T) (__typeinfo(T) & 0x40)
@@ -179,9 +173,6 @@
 #   endif
 #   if (!defined(__GLIBCXX__) || (__GLIBCXX__ >= 20080306 && __GLIBCXX__ != 20080519)) && __has_feature(is_pod)
 #     define BOOST_IS_POD(T) __is_pod(T)
-#   endif
-#   if (!defined(__GLIBCXX__) || (__GLIBCXX__ >= 20080306 && __GLIBCXX__ != 20080519)) && __has_feature(is_empty)
-#     define BOOST_IS_EMPTY(T) __is_empty(T)
 #   endif
 #   if __has_feature(has_trivial_constructor)
 #     define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) __has_trivial_constructor(T)
@@ -239,9 +230,6 @@
 // old implementation instead in that case:
 #     define BOOST_ALIGNMENT_OF(T) __alignof(T)
 #   endif
-#   if __has_feature(is_final)
-#     define BOOST_IS_FINAL(T) __is_final(T)
-#   endif
 
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
 #endif
@@ -261,7 +249,6 @@
 
 #   define BOOST_IS_UNION(T) __is_union(T)
 #   define BOOST_IS_POD(T) __is_pod(T)
-#   define BOOST_IS_EMPTY(T) __is_empty(T)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) ((__has_trivial_constructor(T) BOOST_INTEL_TT_OPTS) && ! ::boost::is_volatile<T>::value)
 #   define BOOST_HAS_TRIVIAL_COPY(T) ((__has_trivial_copy(T) BOOST_INTEL_TT_OPTS) && !is_reference<T>::value)
 #if (__GNUC__ * 100 + __GNUC_MINOR__) >= 409
@@ -293,9 +280,6 @@
       // old implementation instead in that case:
 #     define BOOST_ALIGNMENT_OF(T) __alignof__(T)
 #   endif
-#   if (__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 7))
-#     define BOOST_IS_FINAL(T) __is_final(T)
-#   endif
 
 #   if (__GNUC__ >= 5) && (__cplusplus >= 201103)
 #     define BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T) (__is_trivially_assignable(T&, T&&) && is_assignable<T&, T&&>::value && !::boost::is_volatile<T>::value)
@@ -308,7 +292,6 @@
 #if defined(__SUNPRO_CC) && (__SUNPRO_CC >= 0x5130)
 #   define BOOST_IS_UNION(T) __oracle_is_union(T)
 #   define BOOST_IS_POD(T) (__oracle_is_pod(T) && !is_function<T>::value)
-#   define BOOST_IS_EMPTY(T) __oracle_is_empty(T)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) (__oracle_has_trivial_constructor(T) && ! ::boost::is_volatile<T>::value)
 #   define BOOST_HAS_TRIVIAL_COPY(T) (__oracle_has_trivial_copy(T) && !is_reference<T>::value)
 #   define BOOST_HAS_TRIVIAL_ASSIGN(T) ((__oracle_has_trivial_assign(T) || __oracle_is_trivial(T)) && ! ::boost::is_volatile<T>::value && ! ::boost::is_const<T>::value && is_assignable<T&, const T&>::value)
@@ -325,7 +308,6 @@
 #   define BOOST_IS_ENUM(T) __oracle_is_enum(T)
 #   define BOOST_IS_POLYMORPHIC(T) __oracle_is_polymorphic(T)
 #   define BOOST_ALIGNMENT_OF(T) __alignof__(T)
-#   define BOOST_IS_FINAL(T) __oracle_is_final(T)
 
 #   define BOOST_HAS_TYPE_TRAITS_INTRINSICS
 #endif
@@ -337,7 +319,6 @@
 
 #   define BOOST_IS_UNION(T) __is_union(T)
 #   define BOOST_IS_POD(T) __is_pod(T)
-#   define BOOST_IS_EMPTY(T) __is_empty(T)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) __has_trivial_constructor(T)
 #   define BOOST_HAS_TRIVIAL_COPY(T) (__has_trivial_copy(T) && !is_reference<T>::value)
 #   define BOOST_HAS_TRIVIAL_ASSIGN(T) (__has_trivial_assign(T) && !is_volatile<T>::value)
@@ -364,7 +345,6 @@
 
 #   define BOOST_IS_UNION(T) __is_union(T)
 #   define BOOST_IS_POD(T) __is_pod(T)
-#   define BOOST_IS_EMPTY(T) __is_empty(T)
 #   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) (__has_trivial_default_constructor(T))
 #   define BOOST_HAS_TRIVIAL_COPY(T) (__has_trivial_copy_constructor(T) && !is_reference<T>::value)
 #   define BOOST_HAS_TRIVIAL_ASSIGN(T) (__has_trivial_assign(T) && !is_volatile<T>::value)
