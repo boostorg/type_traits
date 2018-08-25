@@ -19,6 +19,10 @@ namespace boost
 #ifndef BOOST_NONCOPYABLE_BASE_TOKEN_DEFINED
 #define BOOST_NONCOPYABLE_BASE_TOKEN_DEFINED
 
+// boost::noncopyable derives from noncopyable_::base_token to enable us
+// to recognize it. The definition is macro-guarded so that we can replicate
+// it here without including boost/core/noncopyable.hpp, which is in Core.
+
 namespace noncopyable_
 {
     struct base_token {};
