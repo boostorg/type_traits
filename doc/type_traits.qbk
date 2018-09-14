@@ -309,6 +309,7 @@ that is the result of the transformation.
 [include declval.qbk]
 [include detected.qbk]
 [include detected_or.qbk]
+[include enable_if.qbk]
 [include extent.qbk]
 [include floating_point_promotion.qbk]
 [include function_traits.qbk]

@@ -11,7 +11,7 @@
 #endif
 #include "test.hpp"
 #include "check_integral_constant.hpp"
-#include <boost/utility/enable_if.hpp>
+#include <boost/type_traits/enable_if.hpp>
 
 
 template <class T>
@@ -30,7 +30,7 @@ template<typename T>
 struct test_bug_4530
 {
     template<typename A>
-    test_bug_4530(A&&, typename boost::enable_if< ::tt::is_convertible<A&&, T> >::type* =0);
+    test_bug_4530(A&&, typename boost::enable_if_< ::tt::is_convertible<A&&, T>::value >::type* =0);
 };
 
 struct A4530
