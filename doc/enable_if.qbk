@@ -20,10 +20,14 @@ there is no member `type`.
 
 __header `#include <boost/type_traits/enable_if.hpp>`
 
+[note The trait has the name `enable_if_` (with a trailing underscore) but
+behaves like `std::enable_if` or `boost::enable_if_c`. The existing trait
+with the name `boost::enable_if` has a different interface.]
+
 __examples
 
 The following function can be used to destroy each element of an array and
-specially handle arrays of trivially destrucibtle types.
+specially handle arrays of trivially destructible types.
 
     template<class T>
     typename boost::enable_if_<!boost::has_trivial_destructor<T>::value>::type
