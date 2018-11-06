@@ -11,6 +11,12 @@ volatile qualifier from a type. Each class that performs a transformation define
 
 The full documentation is available on [boost.org](http://www.boost.org/doc/libs/release/libs/type_traits/index.html).
 
+|                  |  Master  |   Develop   |
+|------------------|----------|-------------|
+| Travis           | [![Build Status](https://travis-ci.org/boostorg/type_traits.svg?branch=master)](https://travis-ci.org/boostorg/type_traits)  |  [![Build Status](https://travis-ci.org/boostorg/type_traits.svg)](https://travis-ci.org/boostorg/type_traits) |
+| Appveyor         | [![Build status](https://ci.appveyor.com/api/projects/status/lwjqu4087qiolje8/branch/master?svg=true)](https://ci.appveyor.com/project/jzmaddock/type-traits/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/lwjqu4087qiolje8/branch/develop?svg=true)](https://ci.appveyor.com/project/jzmaddock/type-traits/branch/develop)  |
+
+
 ## Support, bugs and feature requests ##
 
 Bugs and feature requests can be reported through the [Gitub issue tracker](https://github.com/boostorg/type_traits/issues)
