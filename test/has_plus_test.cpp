@@ -33,7 +33,9 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool, bool &, void >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool, int, int const & >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool, double &, bool & >::value), 0);
+#if !BOOST_WORKAROUND(__ICC, < 1700) || !defined(CI_SUPPRESS_KNOWN_ISSUES)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool, void* &, bool const >::value), 0);
+#endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool, int*, void >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool, int*, bool const & >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const, int & >::value), 1);
@@ -50,7 +52,9 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, int &, int const & >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, double const, bool >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, double const &, int const & >::value), 1);
+#if !BOOST_WORKAROUND(__ICC, < 1700) || !defined(CI_SUPPRESS_KNOWN_ISSUES)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, void*, bool const & >::value), 0);
+#endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, void* const, void >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, void* const, int const >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, void* const &, bool & >::value), 0);
@@ -62,7 +66,9 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const &, double const, bool & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const &, double &, bool & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const &, double const &, bool >::value), 1);
+#if !BOOST_WORKAROUND(__ICC, < 1700) || !defined(CI_SUPPRESS_KNOWN_ISSUES)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const &, void* &, bool const & >::value), 0);
+#endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const &, int*, bool const & >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const &, int* const &, int const >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int, bool, int const >::value), 1);
@@ -88,9 +94,11 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const, int const &, void >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const, int const &, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const, double & >::value), 1);
+#if !BOOST_WORKAROUND(__ICC, < 1700) || !defined(CI_SUPPRESS_KNOWN_ISSUES)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const, void*, bool >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const, void*, int >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const, void* &, bool const & >::value), 0);
+#endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int &, bool, bool >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int &, bool const >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int &, bool &, bool >::value), 1);
@@ -107,7 +115,9 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const &, double, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const &, double &, bool >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const &, double const &, bool & >::value), 0);
+#if !BOOST_WORKAROUND(__ICC, < 1700) || !defined(CI_SUPPRESS_KNOWN_ISSUES)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< int const &, void* const, bool const >::value), 0);
+#endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< double, bool >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< double, bool const, bool const >::value), 1);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< double, bool &, void >::value), 0);
@@ -147,9 +157,11 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< double const &, int* & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< double const &, int* &, bool & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< double const &, int* &, bool const & >::value), 0);
+#if !BOOST_WORKAROUND(__ICC, < 1700) || !defined(CI_SUPPRESS_KNOWN_ISSUES)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void*, bool const, bool const >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void*, bool const, int const & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void*, bool &, bool >::value), 0);
+#endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void*, bool const &, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void*, int const, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void*, int &, int >::value), 0);
@@ -162,9 +174,11 @@ void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* const, void* &, bool >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* const, int*, int const >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* &, bool, bool & >::value), 0);
+#if !BOOST_WORKAROUND(__ICC, < 1700) || !defined(CI_SUPPRESS_KNOWN_ISSUES)
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* &, bool const &, int const >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* &, bool const &, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* &, int, bool >::value), 0);
+#endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* &, void* const &, int & >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* &, int*, void >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< void* &, int* &, int const & >::value), 0);
