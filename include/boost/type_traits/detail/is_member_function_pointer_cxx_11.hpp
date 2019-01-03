@@ -121,8 +121,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -136,8 +138,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)const BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -151,8 +155,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -166,8 +172,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)const volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
 
    // reference qualified:
 #ifdef __CLR_VER
@@ -182,8 +190,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -197,8 +207,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)const &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -212,8 +224,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -227,8 +241,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)const volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
 
    // rvalue reference qualified:
 #ifdef __CLR_VER
@@ -243,8 +259,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...) && BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...) && BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -258,8 +276,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)const &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -273,8 +293,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -288,8 +310,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret (__vectorcall C::*)(Args...)const volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
 #endif
 
 
@@ -375,8 +399,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -390,8 +416,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)const BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -405,8 +433,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -420,8 +450,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)const volatile BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
 
    // reference qualified:
 #ifdef __CLR_VER
@@ -436,8 +468,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -451,8 +485,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)const &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -466,8 +502,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -481,8 +519,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)const volatile &BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
 
    // rvalue reference qualified:
 #ifdef __CLR_VER
@@ -497,8 +537,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...) && BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...) && BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -512,8 +554,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)const &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -527,8 +571,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
    // const volatile:
 #ifdef __CLR_VER
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
@@ -542,8 +588,10 @@ namespace boost {
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__cdecl C::*)(Args...)const volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
 #endif
+#if defined(_M_IX86_FP) && (_M_IX86_FP >= 2)
    template <class Ret, class C, class...Args BOOST_TT_NOEXCEPT_PARAM>
    struct is_member_function_pointer<Ret(__vectorcall C::*)(Args...)const volatile &&BOOST_TT_NOEXCEPT_DECL> : public true_type {};
+#endif
 #endif
 
 
