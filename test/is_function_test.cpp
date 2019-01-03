@@ -88,11 +88,47 @@ typedef void __stdcall sfoo2_t(int&, double);
 typedef void __stdcall sfoo3_t(int&, bool, int, int);
 typedef void __stdcall sfoo4_t(int, bool, int*, int[], int, int, int, int, int);
 
+typedef void __cdecl cfoo0_t();
+typedef void __cdecl cfoo1_t(int);
+typedef void __cdecl cfoo2_t(int&, double);
+typedef void __cdecl cfoo3_t(int&, bool, int, int);
+typedef void __cdecl cfoo4_t(int, bool, int*, int[], int, int, int, int, int);
+
+typedef void __fastcall ffoo0_t();
+typedef void __fastcall ffoo1_t(int);
+typedef void __fastcall ffoo2_t(int&, double);
+typedef void __fastcall ffoo3_t(int&, bool, int, int);
+typedef void __fastcall ffoo4_t(int, bool, int*, int[], int, int, int, int, int);
+
+typedef void __vectorcall vfoo0_t();
+typedef void __vectorcall vfoo1_t(int);
+typedef void __vectorcall vfoo2_t(int&, double);
+typedef void __vectorcall vfoo3_t(int&, bool, int, int);
+typedef void __vectorcall vfoo4_t(int, bool, int*, int[], int, int, int, int, int);
+
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo0_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo1_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo2_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo3_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<sfoo4_t>::value, true);
+
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<cfoo0_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<cfoo1_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<cfoo2_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<cfoo3_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<cfoo4_t>::value, true);
+
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo0_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo1_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo2_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo3_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo4_t>::value, true);
+
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo0_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo1_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo2_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo3_t>::value, true);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo4_t>::value, true);
 
 #endif
 
