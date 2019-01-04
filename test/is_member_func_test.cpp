@@ -74,7 +74,7 @@ typedef void (__fastcall test_abc1::*fcall_proc)(int);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<fcall_proc>::value, true);
 typedef void (__cdecl test_abc1::*ccall_proc)(int, long, double);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<ccall_proc>::value, true);
-#if _MSC_VER >= 1800
+#if (_MSC_VER >= 1800) && !defined(__CLR_VER)
 typedef void(__vectorcall test_abc1::*vcall_proc)(int, long, double, double, double, double);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<vcall_proc>::value, true);
 #endif

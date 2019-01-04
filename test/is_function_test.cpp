@@ -99,7 +99,7 @@ typedef void __fastcall ffoo1_t(int);
 typedef void __fastcall ffoo2_t(int&, double);
 typedef void __fastcall ffoo3_t(int&, bool, int, int);
 typedef void __fastcall ffoo4_t(int, bool, int*, int[], int, int, int, int, int);
-#if _MSC_VER >= 1800
+#if (_MSC_VER >= 1800) && !defined(__CLR_VER)
 typedef void __vectorcall vfoo0_t();
 typedef void __vectorcall vfoo1_t(int);
 typedef void __vectorcall vfoo2_t(int&, double);
@@ -124,7 +124,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo2_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo3_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<ffoo4_t>::value, true);
 
-#if _MSC_VER >= 1800
+#if (_MSC_VER >= 1800) && !defined(__CLR_VER)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo0_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo1_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo2_t>::value, true);
