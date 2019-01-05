@@ -22,6 +22,7 @@ environment:
     - ARGS: --toolset=msvc-12.0 address-model=32
     - ARGS: --toolset=msvc-14.0 address-model=32
     - ARGS: --toolset=msvc-12.0 address-model=32 cxxflags=-clr asynch-exceptions=on
+    - ARGS: --toolset=msvc-12.0 address-model=32 cxxflags=-arch:IA32
     - ARGS: --toolset=msvc-14.0 address-model=32 cxxflags=-clr asynch-exceptions=on
     - ARGS: --toolset=msvc-12.0 address-model=64
     - ARGS: --toolset=msvc-14.0 address-model=64
@@ -32,6 +33,8 @@ environment:
       ARGS: --toolset=msvc-14.1 address-model=64
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARGS: --toolset=msvc-14.1 address-model=32
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      ARGS: --toolset=msvc-14.1 address-model=32  cxxflags=-arch:IA32
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARGS: --toolset=msvc-14.1 address-model=64 cxxflags=-std:c++latest
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
