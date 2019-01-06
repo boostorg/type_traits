@@ -223,6 +223,17 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-5.0
 
+    - os: linux
+      compiler: clang++-6.0
+      env: TOOLSET=clang COMPILER=clang++-6.0 CXXSTD=03,11,14,1z
+      addons:
+        apt:
+          packages:
+            - clang-6.0
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+
     - os: osx
       env: TOOLSET=clang COMPILER=clang++ CXXSTD=03,11,14,1z
       osx_image: xcode10.1
@@ -231,6 +242,12 @@ matrix:
       env: TOOLSET=clang COMPILER=clang++ CXXSTD=03,11,14,1z
       osx_image: xcode9.4
       # 9.1 fails some tests that pass on 9.4:
+    - os: osx
+      env: TOOLSET=clang COMPILER=clang++ CXXSTD=03,11,14,1z
+      osx_image: xcode9.3
+    - os: osx
+      env: TOOLSET=clang COMPILER=clang++ CXXSTD=03,11,14,1z
+      osx_image: xcode9.2
     - os: osx
       env: TOOLSET=clang COMPILER=clang++ CXXSTD=03,11,14,1z
       osx_image: xcode9.1
