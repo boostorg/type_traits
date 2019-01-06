@@ -67,6 +67,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int[] >::va
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<void>::value, false);
 
 #ifdef BOOST_TT_TEST_MS_FUNC_SIGS
+
 typedef void (__stdcall test_abc1::*scall_proc)();
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<scall_proc>::value, true);
 #ifndef __CLR_VER
@@ -75,6 +76,13 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<fcall_proc>::valu
 #endif
 typedef void (__cdecl test_abc1::*ccall_proc)(int, long, double);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<ccall_proc>::value, true);
+#if (_MSC_VER >= 1800) && !defined(__CLR_VER) && (defined(_M_IX86_FP) && (_M_IX86_FP >= 2) || defined(_M_X64))
+typedef void(__vectorcall test_abc1::*vcall_proc)(int, long, double, double, double, double);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<vcall_proc>::value, true);
+#endif
+typedef void(__thiscall test_abc1::*tcall_proc)(int, long, double, double, double, double);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<tcall_proc>::value, true);
+
 #endif
 
 #ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
