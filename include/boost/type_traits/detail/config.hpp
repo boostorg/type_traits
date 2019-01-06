@@ -91,6 +91,7 @@
 #endif
 #if defined(__APPLE_CC__) && defined(__clang_major__) && (__clang_major__ == 9) && (__clang_minor__ == 0)
 #  define BOOST_TT_NO_DEDUCED_NOEXCEPT_PARAM
+#  define BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE
 #endif
 
 #endif // BOOST_TT_CONFIG_HPP_INCLUDED

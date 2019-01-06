@@ -316,7 +316,7 @@ namespace boost {
 
    // All over again for msvc with noexcept:
 
-#if defined(BOOST_TT_NO_DEDUCED_NOEXCEPT_PARAM) 
+#if defined(BOOST_TT_NO_DEDUCED_NOEXCEPT_PARAM) && !defined(BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE)
 
 #undef BOOST_TT_NOEXCEPT_DECL
 #define BOOST_TT_NOEXCEPT_DECL noexcept
