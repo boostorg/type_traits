@@ -18,7 +18,7 @@ namespace boost {
    template <class T>
    struct is_function : public false_type {};
 
-#if defined(__cpp_noexcept_function_type) && !defined(_MSC_VER)
+#if defined(__cpp_noexcept_function_type) && !defined(BOOST_TT_NO_DEDUCED_NOEXCEPT_PARAM)
 #define BOOST_TT_NOEXCEPT_PARAM , bool NE
 #define BOOST_TT_NOEXCEPT_DECL noexcept(NE)
 #else
@@ -307,7 +307,7 @@ namespace boost {
 
    // All over again for msvc with noexcept:
 
-#if defined(_MSVC_LANG) && (_MSVC_LANG >= 201703) 
+#if defined(BOOST_TT_NO_DEDUCED_NOEXCEPT_PARAM) && !defined(BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE)
 
 #undef BOOST_TT_NOEXCEPT_DECL
 #define BOOST_TT_NOEXCEPT_DECL noexcept

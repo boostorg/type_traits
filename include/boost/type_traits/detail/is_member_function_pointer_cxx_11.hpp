@@ -31,7 +31,7 @@ namespace boost {
    template <class T>
    struct is_member_function_pointer<T const volatile> : public is_member_function_pointer<T> {};
 
-#if defined(_MSVC_LANG) && (_MSVC_LANG >= 201703) 
+#if defined(BOOST_TT_NO_DEDUCED_NOEXCEPT_PARAM)
    // MSVC can't handle noexcept(b) as a deduced template parameter 
    // so we will have to write everything out :(
 #define BOOST_TT_NOEXCEPT_PARAM
@@ -350,7 +350,7 @@ namespace boost {
 #endif
 
 
-#if defined(_MSVC_LANG) && (_MSVC_LANG >= 201703) 
+#if defined(BOOST_TT_NO_DEDUCED_NOEXCEPT_PARAM)  && !defined(BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE)
 
 #undef BOOST_TT_NOEXCEPT_DECL
 #define BOOST_TT_NOEXCEPT_DECL noexcept
