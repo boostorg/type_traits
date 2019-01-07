@@ -53,7 +53,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<int&>::value, fal
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int&>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int[2] >::value, false);
 
-#if __cpp_noexcept_function_type
+#if defined(__cpp_noexcept_function_type) && !defined(BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf5>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf6>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf7>::value, true);
@@ -79,7 +79,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<ccall_proc>::valu
 
 #ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
 test_tricky(&tricky_members::const_ref_proc);
+#ifndef BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE
 test_tricky(&tricky_members::noexcept_proc);
+#endif
 test_tricky(&tricky_members::rvalue_proc);
 #endif
 
