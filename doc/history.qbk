@@ -7,6 +7,10 @@
 
 [section:history History]
 
+[h4 Boost-1.70.0]
+
+* Added new traits __is_bounded_array, __is_unbounded_array.
+
 [h4 Boost-1.68.0]
 
 * Added support for detecting trivial moves on clang.
