@@ -42,7 +42,7 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARGS: --toolset=msvc-14.1 address-model=32 cxxflags=-clr asynch-exceptions=on
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      ARGS: --toolset=msvc-14.1 architecture=arm is_member_func_test testing.launcher=null_runner
+      ARGS: --toolset=msvc-14.1 architecture=arm testing.launcher=../../type_traits/test/null_runner.bat
     - ARGS: --toolset=gcc address-model=64
       PATH: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64\bin;%PATH%
     - ARGS: --toolset=gcc address-model=64 cxxflags=-std=gnu++1z
