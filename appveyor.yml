@@ -42,7 +42,8 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARGS: --toolset=msvc-14.1 address-model=32 cxxflags=-clr asynch-exceptions=on
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      ARGS: --toolset=msvc-14.1 architecture=arm testing.launcher=../../type_traits/test/null_runner.bat
+      ARGS: --toolset=msvc-14.1 architecture=arm testing.execute=off
+      DISABLE_CONFIG_INFO: "YES"
     - ARGS: --toolset=gcc address-model=64
       PATH: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64\bin;%PATH%
     - ARGS: --toolset=gcc address-model=64 cxxflags=-std=gnu++1z
@@ -83,7 +84,7 @@ build: off
 
 test_script:
   - cd libs\config\test
-  - ..\..\..\b2 config_info_travis_install %ARGS%
-  - config_info_travis
+  - IF DEFINED DISABLE_CONFIG_INFO (echo skipping config_info build) ELSE (..\..\..\b2 config_info_travis_install %ARGS%)
+  - IF DEFINED DISABLE_CONFIG_INFO (echo skipping config_info printout) ELSE (config_info_travis)
   - cd ..\..\type_traits\test
   - ..\..\..\b2 -j3 --hash %ARGS%
