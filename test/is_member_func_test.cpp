@@ -53,7 +53,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<int&>::value, fal
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int&>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int[2] >::value, false);
 
-#if __cpp_noexcept_function_type
+#if defined(__cpp_noexcept_function_type) && !defined(BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf5>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf6>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<mf7>::value, true);
@@ -67,17 +67,29 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<const int[] >::va
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<void>::value, false);
 
 #ifdef BOOST_TT_TEST_MS_FUNC_SIGS
+
 typedef void (__stdcall test_abc1::*scall_proc)();
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<scall_proc>::value, true);
+#ifndef __CLR_VER
 typedef void (__fastcall test_abc1::*fcall_proc)(int);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<fcall_proc>::value, true);
+#endif
 typedef void (__cdecl test_abc1::*ccall_proc)(int, long, double);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<ccall_proc>::value, true);
+#if (_MSC_VER >= 1800) && !defined(__CLR_VER) && (defined(_M_IX86_FP) && (_M_IX86_FP >= 2) || defined(_M_X64))
+typedef void(__vectorcall test_abc1::*vcall_proc)(int, long, double, double, double, double);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<vcall_proc>::value, true);
+#endif
+typedef void(__thiscall test_abc1::*tcall_proc)(int, long, double, double, double, double);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<tcall_proc>::value, true);
+
 #endif
 
 #ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
 test_tricky(&tricky_members::const_ref_proc);
+#ifndef BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE
 test_tricky(&tricky_members::noexcept_proc);
+#endif
 test_tricky(&tricky_members::rvalue_proc);
 #endif
 
