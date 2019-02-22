@@ -146,6 +146,8 @@
 [def __is_complex [link boost_typetraits.reference.is_complex is_complex]]
 
 [def __copy_cv [link boost_typetraits.reference.copy_cv copy_cv]]
+[def __copy_cv_ref [link boost_typetraits.reference.copy_cv_ref copy_cv_ref]]
+[def __copy_reference [link boost_typetraits.reference.copy_reference copy_reference]]
 [def __type_identity [link boost_typetraits.reference.type_identity type_identity]]
 [def __declval [link boost_typetraits.reference.declval declval]]
 
@@ -307,6 +309,8 @@ that is the result of the transformation.
 [include conditional.qbk]
 [include common_type.qbk]
 [include copy_cv.qbk]
+[include copy_cv_ref.qbk]
+[include copy_reference.qbk]
 [include decay.qbk]
 [include declval.qbk]
 [include detected.qbk]
