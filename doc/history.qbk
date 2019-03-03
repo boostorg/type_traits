@@ -9,7 +9,7 @@
 
 [h4 Boost-1.70.0]
 
-* Added new traits __is_bounded_array, __is_unbounded_array.
+* Added new traits __is_bounded_array, __is_unbounded_array, __copy_reference, __copy_cv_ref.
 
 [h4 Boost-1.68.0]
 
