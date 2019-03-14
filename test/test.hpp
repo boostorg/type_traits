@@ -208,6 +208,9 @@ typedef int (UDT::*mf8)(...);
 # elif defined(BOOST_INTEL)
 #  pragma warning(push)
 #  pragma warning(disable: 21)
+# elif defined(BOOST_CLANG)
+#  pragma clang diagnostic push
+#  pragma clang diagnostic ignored "-Wignored-qualifiers"
 # endif
 //
 // This is intentional:
@@ -228,6 +231,8 @@ typedef r_type cr_type;
 # elif defined(BOOST_INTEL)
 #  pragma warning(pop)
 #  pragma warning(disable: 985) // identifier truncated in debug information
+# elif defined(BOOST_CLANG)
+#  pragma clang diagnostic pop
 # endif
 
 struct POD_UDT { int x; };
