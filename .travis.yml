@@ -180,15 +180,15 @@ matrix:
             - llvm-toolchain-trusty-3.6
 
     - os: linux
-      env: TOOLSET=clang COMPILER=clang++-3.7 CXXSTD=03,11
-      dist: trusty
+      dist: precise
+      env: TOOLSET=clang COMPILER=clang++-3.7 CXXSTD=03,11,14,1z
       addons:
         apt:
           packages:
             - clang-3.7
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-3.7
+            - llvm-toolchain-precise-3.7
 
     - os: linux
       env: TOOLSET=clang COMPILER=clang++-3.8 CXXSTD=03,11,14,1z
