@@ -38,9 +38,9 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARGS: --toolset=msvc-14.1 address-model=64 cxxflags=-std:c++latest
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      ARGS: --toolset=msvc-14.1 address-model=64 cxxflags=-clr asynch-exceptions=on
+      ARGS: --toolset=msvc-14.1 cxxstd=17 address-model=64 cxxflags=-clr asynch-exceptions=on
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      ARGS: --toolset=msvc-14.1 address-model=32 cxxflags=-clr asynch-exceptions=on
+      ARGS: --toolset=msvc-14.1 cxxstd=17 address-model=32 cxxflags=-clr asynch-exceptions=on
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARGS: --toolset=msvc-14.1 architecture=arm testing.execute=off
       DISABLE_CONFIG_INFO: "YES"
