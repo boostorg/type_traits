@@ -3,6 +3,10 @@
 //  Boost Software License, Version 1.0. (See accompanying file
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+// It would be nice to get rid of the unnamed namespace here,
+// but for now we just turn off inspection reporting :(
+// boostinspect:nounnamed
+
 #ifndef TT_HAS_BINARY_OPERATORS_HPP
 #define TT_HAS_BINARY_OPERATORS_HPP
 
