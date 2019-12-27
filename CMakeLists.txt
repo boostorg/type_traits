@@ -28,3 +28,11 @@ if(BOOST_SUPERPROJECT_VERSION)
   boost_install(TARGETS boost_type_traits HEADER_DIRECTORY include/)
 
 endif()
+
+# BUILD_TESTING is the standard CTest variable that enables testing
+
+if(BUILD_TESTING)
+
+  add_subdirectory(test)
+
+endif()

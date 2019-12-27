@@ -18,6 +18,7 @@ branches:
   only:
     - master
     - develop
+    - /feature\/.*/
 
 env:
   matrix:
@@ -311,10 +312,18 @@ matrix:
       env: TOOLSET=clang COMPILER=clang++ CXXSTD=03,11,14,1z
       osx_image: xcode7.3
 
+    - os: linux
+      env: CMAKE=1
+      script:
+        - mkdir __build__ && cd __build__
+        - cmake -DBOOST_ENABLE_CMAKE=1 -DBoost_DEBUG=1 ..
+        - ctest --output-on-failure -R boost_type_traits
+
 
 install:
+  - BOOST_BRANCH=develop && [ "$TRAVIS_BRANCH" == "master" ] && BOOST_BRANCH=master || true
   - cd ..
-  - git clone -b $TRAVIS_BRANCH --depth 1 https://github.com/boostorg/boost.git boost-root
+  - git clone -b $BOOST_BRANCH --depth 1 https://github.com/boostorg/boost.git boost-root
   - cd boost-root
   - git submodule update --init tools/build
   - git submodule update --init tools/boost_install
