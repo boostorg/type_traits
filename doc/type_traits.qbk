@@ -129,6 +129,9 @@
 [def __add_cv [link boost_typetraits.reference.add_cv add_cv]]
 [def __common_type [link boost_typetraits.reference.common_type common_type]]
 [def __conditional [link boost_typetraits.reference.conditional conditional]]
+[def __conjunction [link boost_typetraits.reference.conjunction conjunction]]
+[def __disjunction [link boost_typetraits.reference.disjunction disjunction]]
+[def __negation [link boost_typetraits.reference.negation negation]]
 
 [def __type_with_alignment [link boost_typetraits.reference.type_with_alignment type_with_alignment]]
 [def __aligned_storage [link boost_typetraits.reference.aligned_storage aligned_storage]]
@@ -307,6 +310,7 @@ that is the result of the transformation.
 [include aligned_storage.qbk]
 [include alignment_of.qbk]
 [include conditional.qbk]
+[include conjunction.qbk]
 [include common_type.qbk]
 [include copy_cv.qbk]
 [include copy_cv_ref.qbk]
@@ -315,6 +319,7 @@ that is the result of the transformation.
 [include declval.qbk]
 [include detected.qbk]
 [include detected_or.qbk]
+[include disjunction.qbk]
 [include enable_if.qbk]
 [include extent.qbk]
 [include floating_point_promotion.qbk]
@@ -441,6 +446,7 @@ See __has_trivial_constructor.
 [include make_signed.qbk]
 [include make_unsigned.qbk]
 [include make_void.qbk]
+[include negation.qbk]
 [include nonesuch.qbk]
 
 [include promote.qbk]
