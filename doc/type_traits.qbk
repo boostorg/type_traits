@@ -8,7 +8,7 @@
 [library Boost.TypeTraits
     [quickbook 1.5]
     [copyright 2000 2011 Adobe Systems Inc, David Abrahams, Frederic Bron,
-    Steve Cleary, Beman Dawes, Aleksey Gurtovoy, Howard Hinnant, Jesse Jones,
+    Steve Cleary, Beman Dawes, Glen Fernandes, Aleksey Gurtovoy, Howard Hinnant, Jesse Jones,
     Mat Marcus, Itay Maman, John Maddock, Alexander Nasonov, Thorsten Ottosen,
     Roman Perepelitsa, Robert Ramey, Jeremy Siek, Robert Stewart and Steven Watanabe]
     [purpose Meta-programming support library]
@@ -87,6 +87,7 @@
 [def __is_signed [link boost_typetraits.reference.is_signed is_signed]]
 [def __is_unsigned [link boost_typetraits.reference.is_unsigned is_unsigned]]
 [def __has_virtual_destructor [link boost_typetraits.reference.has_virtual_destructor has_virtual_destructor]]
+[def __is_trivially_copyable [link boost_typetraits.reference.is_trivially_copyable is_trivially_copyable]]
 [def __is_pod [link boost_typetraits.reference.is_pod is_pod]]
 [def __is_final [link boost_typetraits.reference.is_final is_final]]
 [def __has_trivial_constructor [link boost_typetraits.reference.has_trivial_constructor has_trivial_constructor]]
@@ -439,6 +440,7 @@ See __has_trivial_constructor.
 [include is_scoped_enum.qbk]
 [include is_signed.qbk]
 [include is_stateless.qbk]
+[include is_trivially_copyable.qbk]
 [include is_unbounded_array.qbk]
 [include is_union.qbk]
 [include is_unscoped_enum.qbk]
