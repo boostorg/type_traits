@@ -128,9 +128,11 @@
 #include <boost/type_traits/is_rvalue_reference.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_scalar.hpp>
+#include <boost/type_traits/is_scoped_enum.hpp>
 #include <boost/type_traits/is_signed.hpp>
 #include <boost/type_traits/is_stateless.hpp>
 #include <boost/type_traits/is_union.hpp>
+#include <boost/type_traits/is_unscoped_enum.hpp>
 #include <boost/type_traits/is_unsigned.hpp>
 #include <boost/type_traits/is_virtual_base_of.hpp>
 #include <boost/type_traits/is_void.hpp>
