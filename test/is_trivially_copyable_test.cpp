@@ -53,6 +53,17 @@ struct deleted_destruct {
 };
 #endif
 
+#ifndef BOOST_NO_CXX11_DEFAULTED_FUNCTIONS
+struct default_copy {
+    default_copy(const default_copy&) = default;
+    default_copy(default_copy&&) { }
+    default_copy& operator=(const default_copy&) = default;
+    default_copy& operator=(default_copy&&) {
+        return *this;
+    }
+};
+#endif
+
 TT_TEST_BEGIN(is_trivially_copyable)
 
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<bool>::value, true);
@@ -215,10 +226,13 @@ BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<wrap<trivial_exce
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<wrap<trivial_except_assign> >::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<test_abc1>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<private_copy>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_assign<private_assign>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<private_assign>::value, false);
 #ifndef BOOST_NO_CXX11_DELETED_FUNCTIONS
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<deleted_copy>::value, false);
-BOOST_CHECK_INTEGRAL_CONSTANT(::tt::has_trivial_assign<deleted_assign>::value, false);
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<deleted_assign>::value, false);
+#endif
+#ifndef BOOST_NO_CXX11_DEFAULTED_FUNCTIONS
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_trivially_copyable<default_copy>::value, false);
 #endif
 
 TT_TEST_END
