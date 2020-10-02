@@ -36,7 +36,7 @@ namespace boost {
 //
 #define BOOST_TT_HAS_WORKING_IS_COMPLETE
 
-#if !defined(BOOST_NO_SFINAE_EXPR) && !BOOST_WORKAROUND(BOOST_MSVC, <= 1900) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40600)
+#if !defined(BOOST_NO_SFINAE_EXPR) && !BOOST_WORKAROUND(BOOST_MSVC, <= 1900) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40600) && !BOOST_WORKAROUND(__ICC, < 1700)
 
    namespace detail{
 
@@ -77,6 +77,15 @@ namespace boost {
    {};
    template <class T>
    struct is_complete<T&> : boost::is_complete<T> {};
+   
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
+   template <class T>
+   struct is_complete<T&&> : boost::is_complete<T> {};
+#endif
+#ifdef __ICC
+   template <class T>
+   struct is_complete<T[]> : boost::integral_constant<bool, false> {};
+#endif
    
 #else
 
