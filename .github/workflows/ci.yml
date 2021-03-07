@@ -209,7 +209,7 @@ jobs:
       fail-fast: false
       matrix:
         toolset: [ clang ]
-        standard: [ 03, 11, 14, 17, 2a ]
+        standard: [ "03", 11, 14, 17, 2a ]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -333,7 +333,7 @@ jobs:
         run: config_info_travis
         working-directory: ../boost-root/libs/config/test
       - name: Test
-        run: ..\..\..\b2 --hash cxxstd=${{ matrix.standard }} toolset=msvc-14.0
+        run: ..\..\..\b2 --hash cxxstd=${{ matrix.standard }} toolset=msvc-14.0 define=CI_SUPPRESS_KNOWN_ISSUES
         working-directory: ../boost-root/libs/type_traits/test
   windows_msvc_14_2:
     runs-on: windows-latest
@@ -377,5 +377,5 @@ jobs:
         run: config_info_travis
         working-directory: ../boost-root/libs/config/test
       - name: Test
-        run: ..\..\..\b2 --hash cxxstd=${{ matrix.standard }} toolset=msvc-14.2
+        run: ..\..\..\b2 --hash cxxstd=${{ matrix.standard }} toolset=msvc-14.2 define=CI_SUPPRESS_KNOWN_ISSUES
         working-directory: ../boost-root/libs/type_traits/test
