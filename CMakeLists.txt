@@ -18,13 +18,3 @@ target_link_libraries(boost_type_traits
     Boost::config
     Boost::static_assert
 )
-
-# boost_install requires PROJECT_VERSION
-# Without the superproject, we don't have any, so skip installation
-
-if(BOOST_SUPERPROJECT_VERSION)
-
-  include(BoostInstall)
-  boost_install(TARGETS boost_type_traits HEADER_DIRECTORY include/)
-
-endif()
