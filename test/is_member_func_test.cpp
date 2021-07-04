@@ -16,7 +16,7 @@
 #pragma GCC diagnostic ignored "-Wnoexcept-type"
 #endif
 
-#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
+#ifdef BOOST_TT_HAS_ACCURATE_IS_FUNCTION
 struct tricky_members
 {
    void noexcept_proc()noexcept
@@ -85,7 +85,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<tcall_proc>::valu
 
 #endif
 
-#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
+#ifdef BOOST_TT_HAS_ACCURATE_IS_FUNCTION
 test_tricky(&tricky_members::const_ref_proc);
 #ifndef BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE
 test_tricky(&tricky_members::noexcept_proc);
