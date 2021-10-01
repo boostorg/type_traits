@@ -224,9 +224,9 @@ void specific() {
    auto f = []() {};
    auto f2 = [](double)->int { return 2; };
 #if BOOST_WORKAROUND(BOOST_MSVC, <= 1900)
-   bool result = false;
+   BOOST_CONSTEXPR bool result = false;
 #else
-   bool result = true;
+   BOOST_CONSTEXPR bool result = true;
 #endif
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f)>::value), result);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME<decltype(f2)>::value), result);

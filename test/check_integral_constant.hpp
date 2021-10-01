@@ -9,6 +9,13 @@
 
 #include "test.hpp"
 
+#ifdef TEST_VIA_STATIC_ASSERT
+
+#define BOOST_CHECK_INTEGRAL_CONSTANT(expression, expected_value) static_assert(expression == expected_value, BOOST_STRINGIZE(expression) " == " BOOST_STRINGIZE(expected_value))
+#define BOOST_CHECK_SOFT_INTEGRAL_CONSTANT(expression, expected_value, other_value)
+
+#else
+
 namespace boost{
    namespace detail{
 
@@ -70,6 +77,7 @@ namespace boost{
    }//detail
 }//boost
 
+#endif
 
 #endif
 

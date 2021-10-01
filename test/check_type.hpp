@@ -22,6 +22,15 @@ expected_value:   the type we expect to find.
 #pragma option -w-8008 -w-8066 -w-8019
 #endif
 
+#ifdef TEST_VIA_STATIC_ASSERT
+
+#define BOOST_CHECK_TYPE(type_expression, expected_type) static_assert(::boost::is_same< type_expression, expected_type >::value, BOOST_STRINGIZE(type_expression) " == " BOOST_STRINGIZE(expected_type))
+
+#define BOOST_CHECK_TYPE3(type_expression, type_expression_suffix, expected_type) static_assert(::boost::is_same< type_expression, type_expression_suffix, expected_type >::value, BOOST_STRINGIZE(type_expression) "," BOOST_STRINGIZE(type_expression_suffix) " == " BOOST_STRINGIZE(expected_type))
+
+#define BOOST_CHECK_TYPE4(type_expression, suffix1, suffix2, expected_type) static_assert(::boost::is_same< type_expression, suffix1, suffix2, expected_type >::value, BOOST_STRINGIZE(type_expression) "," BOOST_STRINGIZE(suffix1) "," BOOST_STRINGIZE(suffix2) " == " BOOST_STRINGIZE(expected_type))
+
+#else
 
 #define BOOST_CHECK_TYPE(type_expression, expected_type)\
 do{\
@@ -64,4 +73,4 @@ do{\
 
 #endif
 
-
+#endif

@@ -423,3 +423,73 @@ jobs:
       - name: Test
         run: ..\..\..\b2 --hash cxxstd=${{ matrix.standard }} toolset=msvc-14.2 define=CI_SUPPRESS_KNOWN_ISSUES cxxflags=-clr asynch-exceptions=on
         working-directory: ../boost-root/libs/type_traits/test
+  ubuntu-cuda:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        standard: [ 11, 14, 17 ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - uses: Jimver/cuda-toolkit@v0.2.4
+      - uses: mstachniuk/ci-skip@v1
+        with:
+          commit-filter: '[skip ci];[ci skip];[CI SKIP];[SKIP CI];***CI SKIP***;***SKIP CI***;[windows];[Windows];[WINDOWS];[apple];[Apple];[APPLE]'
+          commit-filter-separator: ';'
+          fail-fast: true
+      - name: Add repository
+        continue-on-error: true
+        id: addrepo
+        run: sudo apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
+      - name: Retry Add Repo
+        continue-on-error: true
+        id: retry1
+        if: steps.addrepo.outcome=='failure'
+        run: sudo apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
+      - name: Retry Add Repo 2
+        continue-on-error: true
+        id: retry2
+        if: steps.retry1.outcome=='failure'
+        run: sudo apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
+      - name: Install packages
+        run: sudo apt install clang-10
+      - name: Checkout main boost
+        run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
+      - name: Update tools/boostdep
+        run: git submodule update --init tools/boostdep
+        working-directory: ../boost-root
+      - name: Copy files
+        run: cp -r $GITHUB_WORKSPACE/* libs/type_traits
+        working-directory: ../boost-root
+      - name: Install deps
+        run: python tools/boostdep/depinst/depinst.py type_traits
+        working-directory: ../boost-root
+      - name: Bootstrap
+        run: ./bootstrap.sh
+        working-directory: ../boost-root
+      - name: Generate headers
+        run: ./b2 headers
+        working-directory: ../boost-root
+      - name: nvcc version
+        run: nvcc --version
+        working-directory: ../boost-root/libs/config/test
+      - name: Testing nvcc
+        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cpp" && nvcc -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cpp || break -1; done
+        working-directory: ../boost-root/libs/type_traits/test
+      - name: Testing nvcc+clang
+        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cpp" && nvcc --compiler-bindir=clang++ -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cpp || break -1; done
+        working-directory: ../boost-root/libs/type_traits/test
+      - name: Create .cu files
+        run: for file in $(cat cuda_tests.txt); do cp $file.cpp $file.cu; done
+        working-directory: ../boost-root/libs/type_traits/test
+      - name: Testing nvcc on .cu files
+        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cu" && nvcc -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
+        working-directory: ../boost-root/libs/type_traits/test
+      - name: Testing nvcc+clang on .cu files
+        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cu" && nvcc --compiler-bindir=clang++ -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
+        working-directory: ../boost-root/libs/type_traits/test
+      - name: Testing clang on .cu files
+        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cu" && clang++ -nocudalib --no-cuda-version-check --cuda-gpu-arch=sm_75 -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
+        working-directory: ../boost-root/libs/type_traits/test
