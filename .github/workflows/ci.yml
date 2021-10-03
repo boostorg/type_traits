@@ -476,20 +476,26 @@ jobs:
         run: nvcc --version
         working-directory: ../boost-root/libs/config/test
       - name: Testing nvcc
-        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cpp" && nvcc -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cpp || break -1; done
+        run: for file in $(cat cuda/cuda_tests.txt); do echo "testing $file.cpp" && nvcc -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cpp || break -1; done
         working-directory: ../boost-root/libs/type_traits/test
       - name: Testing nvcc+clang
-        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cpp" && nvcc --compiler-bindir=clang++ -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cpp || break -1; done
+        run: for file in $(cat cuda/cuda_tests.txt); do echo "testing $file.cpp" && nvcc --compiler-bindir=clang++ -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cpp || break -1; done
         working-directory: ../boost-root/libs/type_traits/test
       - name: Create .cu files
-        run: for file in $(cat cuda_tests.txt); do cp $file.cpp $file.cu; done
+        run: for file in $(cat cuda/cuda_tests.txt); do cp $file.cpp $file.cu; done
         working-directory: ../boost-root/libs/type_traits/test
       - name: Testing nvcc on .cu files
-        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cu" && nvcc -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
+        run: for file in $(cat cuda/cuda_tests.txt); do echo "testing $file.cu" && nvcc -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
         working-directory: ../boost-root/libs/type_traits/test
       - name: Testing nvcc+clang on .cu files
-        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cu" && nvcc --compiler-bindir=clang++ -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
+        run: for file in $(cat cuda/cuda_tests.txt); do echo "testing $file.cu" && nvcc --compiler-bindir=clang++ -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
         working-directory: ../boost-root/libs/type_traits/test
       - name: Testing clang on .cu files
-        run: for file in $(cat cuda_tests.txt); do echo "testing $file.cu" && clang++ -nocudalib --no-cuda-version-check --cuda-gpu-arch=sm_75 -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
+        run: for file in $(cat cuda/cuda_tests.txt); do echo "testing $file.cu" && clang++ -nocudalib --no-cuda-version-check --cuda-gpu-arch=sm_75 -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_VIA_STATIC_ASSERT $file.cu || break -1; done
+        working-directory: ../boost-root/libs/type_traits/test
+      - name: Testing nvcc on .cu files
+        run: for file in $(cat cuda/cuda_tests.txt); do echo "testing $file.cu" && nvcc -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_CUDA_DEVICE $file.cu || break -1; done
+        working-directory: ../boost-root/libs/type_traits/test
+      - name: Testing clang on .cu files
+        run: for file in $(cat cuda/cuda_tests.txt); do echo "testing $file.cu" && clang++ -nocudalib --no-cuda-version-check --cuda-gpu-arch=sm_75 -std=c++${{ matrix.standard }} -I../../.. -c -DTEST_CUDA_DEVICE $file.cu || break -1; done
         working-directory: ../boost-root/libs/type_traits/test
