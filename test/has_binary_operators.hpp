@@ -31,53 +31,53 @@ struct without { };
 
 struct ret { };
 
-struct internal { ret operator BOOST_TT_TRAIT_OP (const internal&) const; };
+struct internal { BOOST_TT_PROC ret operator BOOST_TT_TRAIT_OP (const internal&) const; };
 
 struct external { };
-inline ret operator BOOST_TT_TRAIT_OP (const external&, const external&) {  return ret();  }
+inline BOOST_TT_PROC ret operator BOOST_TT_TRAIT_OP (const external&, const external&) {  return ret();  }
 
 struct comma1_ret { };
-struct ret_with_comma1 { comma1_ret operator,(int); };
+struct ret_with_comma1 { BOOST_TT_PROC comma1_ret operator,(int); };
 
-struct internal_comma1 { ret_with_comma1 operator BOOST_TT_TRAIT_OP (const internal_comma1&) const; };
+struct internal_comma1 { BOOST_TT_PROC ret_with_comma1 operator BOOST_TT_TRAIT_OP (const internal_comma1&) const; };
 
 struct external_comma1 { };
-ret_with_comma1 operator BOOST_TT_TRAIT_OP (const external_comma1&, const external_comma1&) { return ret_with_comma1(); }
+BOOST_TT_PROC ret_with_comma1 operator BOOST_TT_TRAIT_OP (const external_comma1&, const external_comma1&) { return ret_with_comma1(); }
 
-struct ret_with_comma2 { void operator,(int); };
+struct ret_with_comma2 { BOOST_TT_PROC void operator,(int); };
 
-struct internal_comma2 { ret_with_comma2 operator BOOST_TT_TRAIT_OP (const internal_comma2&) const; };
+struct internal_comma2 { BOOST_TT_PROC ret_with_comma2 operator BOOST_TT_TRAIT_OP (const internal_comma2&) const; };
 
 struct external_comma2 { };
-ret_with_comma2 operator BOOST_TT_TRAIT_OP (const external_comma2&, const external_comma2&){ return ret_with_comma2(); }
+BOOST_TT_PROC ret_with_comma2 operator BOOST_TT_TRAIT_OP (const external_comma2&, const external_comma2&){ return ret_with_comma2(); }
 
-struct returns_int { int operator BOOST_TT_TRAIT_OP (const returns_int&)const; };
+struct returns_int { BOOST_TT_PROC int operator BOOST_TT_TRAIT_OP (const returns_int&)const; };
 
-struct returns_void { void operator BOOST_TT_TRAIT_OP (const returns_void&)const; };
+struct returns_void { BOOST_TT_PROC void operator BOOST_TT_TRAIT_OP (const returns_void&)const; };
 
-struct returns_void_star { void *operator BOOST_TT_TRAIT_OP (const returns_void_star&)const; };
+struct returns_void_star { BOOST_TT_PROC void *operator BOOST_TT_TRAIT_OP (const returns_void_star&)const; };
 
-struct returns_double { double operator BOOST_TT_TRAIT_OP (const returns_double&)const; };
+struct returns_double { BOOST_TT_PROC double operator BOOST_TT_TRAIT_OP (const returns_double&)const; };
 
 struct ret1 { };
-struct convertible_to_ret1 { operator ret1 () const; };
-struct returns_convertible_to_ret1 { convertible_to_ret1 operator BOOST_TT_TRAIT_OP (const returns_convertible_to_ret1&)const; };
+struct convertible_to_ret1 { BOOST_TT_PROC operator ret1 () const; };
+struct returns_convertible_to_ret1 { BOOST_TT_PROC convertible_to_ret1 operator BOOST_TT_TRAIT_OP (const returns_convertible_to_ret1&)const; };
 
 struct convertible_to_ret2 { };
-struct ret2 { ret2(const convertible_to_ret2); };
-struct returns_convertible_to_ret2 { convertible_to_ret2 operator BOOST_TT_TRAIT_OP (const returns_convertible_to_ret2&)const; };
+struct ret2 { BOOST_TT_PROC ret2(const convertible_to_ret2); };
+struct returns_convertible_to_ret2 { BOOST_TT_PROC convertible_to_ret2 operator BOOST_TT_TRAIT_OP (const returns_convertible_to_ret2&)const; };
 
 class Base1 { };
 class Derived1 : public Base1 { };
 
-bool operator BOOST_TT_TRAIT_OP (const Base1&, const Base1&) { return true; }
+BOOST_TT_PROC bool operator BOOST_TT_TRAIT_OP (const Base1&, const Base1&) { return true; }
 
 class Base2 { };
 struct Derived2 : public Base2 {
-   Derived2(int); // to check if it works with a class that is not default constructible
+   BOOST_TT_PROC Derived2(int); // to check if it works with a class that is not default constructible
 };
 
-bool operator BOOST_TT_TRAIT_OP (const Derived2&, const Derived2&) { return true; }
+BOOST_TT_PROC bool operator BOOST_TT_TRAIT_OP (const Derived2&, const Derived2&) { return true; }
 
 struct tag { };
 
@@ -86,21 +86,21 @@ struct B : public A { };
 
 struct C { };
 struct D { };
-inline bool operator BOOST_TT_TRAIT_OP (const C&, void*) { return true; }
-inline bool operator BOOST_TT_TRAIT_OP (void*, const D&) { return true; }
-inline bool operator BOOST_TT_TRAIT_OP (const C&, const D&) { return true; }
+BOOST_TT_PROC inline bool operator BOOST_TT_TRAIT_OP (const C&, void*) { return true; }
+BOOST_TT_PROC inline bool operator BOOST_TT_TRAIT_OP (void*, const D&) { return true; }
+BOOST_TT_PROC inline bool operator BOOST_TT_TRAIT_OP (const C&, const D&) { return true; }
 
-struct private_op { private: void operator BOOST_TT_TRAIT_OP (const private_op&) {} };
+struct private_op { private: BOOST_TT_PROC void operator BOOST_TT_TRAIT_OP (const private_op&) {} };
 
 struct ambiguous_A 
 { 
 };
-inline bool operator BOOST_TT_TRAIT_OP (const ambiguous_A&, const ambiguous_A&) { return true; }
-struct ambiguous_B { operator ambiguous_A()const { return ambiguous_A(); } };
+inline BOOST_TT_PROC bool operator BOOST_TT_TRAIT_OP (const ambiguous_A&, const ambiguous_A&) { return true; }
+struct ambiguous_B { BOOST_TT_PROC operator ambiguous_A()const { return ambiguous_A(); } };
 
 //class internal_private { ret operator BOOST_TT_TRAIT_OP (const internal_private&) const; };
 
-void common() {
+BOOST_TT_PROC void common() {
    TEST_T(void, false);
    TEST_TT(void, void, false);
    TEST_TTR(void, void, void, false);

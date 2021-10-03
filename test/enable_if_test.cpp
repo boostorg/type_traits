@@ -27,12 +27,12 @@ struct Check<long>
 class Construct {
 public:
     template<class T>
-    Construct(T, typename boost::enable_if_<Check<T>::value>::type* = 0)
+    BOOST_TT_PROC Construct(T, typename boost::enable_if_<Check<T>::value>::type* = 0)
         : value_(true) { }
     template<class T>
-    Construct(T, typename boost::enable_if_<!Check<T>::value>::type* = 0)
+    BOOST_TT_PROC Construct(T, typename boost::enable_if_<!Check<T>::value>::type* = 0)
         : value_(false) { }
-    bool value() const {
+    BOOST_TT_PROC bool value() const {
         return value_;
     }
 private:
@@ -51,26 +51,26 @@ struct Specialize<T, typename boost::enable_if_<!Check<T>::value>::type>
     : Constant<false> { };
 
 template<class T>
-typename boost::enable_if_<Check<T>::value, bool>::type Returns(T)
+BOOST_TT_PROC typename boost::enable_if_<Check<T>::value, bool>::type Returns(T)
 {
     return true;
 }
 
 template<class T>
-typename boost::enable_if_<!Check<T>::value, bool>::type Returns(T)
+BOOST_TT_PROC typename boost::enable_if_<!Check<T>::value, bool>::type Returns(T)
 {
     return false;
 }
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 template<class T>
-boost::enable_if_t<Check<T>::value, bool> Alias(T)
+BOOST_TT_PROC boost::enable_if_t<Check<T>::value, bool> Alias(T)
 {
     return true;
 }
 
 template<class T>
-boost::enable_if_t<!Check<T>::value, bool> Alias(T)
+BOOST_TT_PROC boost::enable_if_t<!Check<T>::value, bool> Alias(T)
 {
     return false;
 }

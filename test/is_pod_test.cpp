@@ -177,7 +177,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_pod<char16_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_pod<char32_t>::value, true);
 #endif
 
-#ifdef BOOST_HAS_INT128
+#if defined(BOOST_HAS_INT128) && !defined(TEST_CUDA_DEVICE)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_pod<boost::int128_type>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_pod<boost::uint128_type>::value, true);
 #endif

@@ -17,8 +17,8 @@ template<class T> struct X
 {
     T t_;
 
-    X(): t_() {}
-    template<class U> X( X<U> const & x ): t_( x.t_ ) {}
+    BOOST_TT_PROC X(): t_() {}
+    template<class U> BOOST_TT_PROC X( X<U> const & x ): t_( x.t_ ) {}
 };
 
 namespace boost
