@@ -33,7 +33,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_unsigned<unsigned&&>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_unsigned<unsigned*>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_unsigned<unsigned[2]>::value, false);
 
-#ifdef BOOST_HAS_INT128
+#if defined(BOOST_HAS_INT128) && !defined(TEST_CUDA_DEVICE)
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_unsigned<boost::int128_type>::value, false);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_unsigned<boost::uint128_type>::value, true);
 #endif

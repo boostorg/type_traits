@@ -69,6 +69,9 @@ BOOST_CHECK(::tt::is_pod<\
 
 TT_TEST_BEGIN(type_with_alignment)
 
+// Nothing we can really test on the CUDA device:
+#ifndef TEST_CUDA_DEVICE
+
 TYPE_WITH_ALIGNMENT_TEST_EX(char)
 TYPE_WITH_ALIGNMENT_TEST_EX(short)
 TYPE_WITH_ALIGNMENT_TEST_EX(int)
@@ -102,6 +105,8 @@ TYPE_WITH_ALIGNMENT_TEST(__m64)
 TYPE_WITH_ALIGNMENT_TEST(a8)
 TYPE_WITH_ALIGNMENT_TEST(a16)
 TYPE_WITH_ALIGNMENT_TEST(a32)
+#endif
+
 #endif
 
 TT_TEST_END

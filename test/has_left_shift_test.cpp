@@ -23,7 +23,7 @@
 
 #include "has_binary_operators.hpp"
 
-void specific() {
+BOOST_TT_PROC void specific() {
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const, void, void >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool &, void >::value), 0);
    BOOST_CHECK_INTEGRAL_CONSTANT((::boost::BOOST_TT_TRAIT_NAME< bool const &, void, void >::value), 0);

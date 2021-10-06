@@ -27,12 +27,12 @@ union must_be_pod
 };
 
 template <class T>
-inline void no_unused_warning(const volatile T&)
+inline BOOST_TT_PROC void no_unused_warning(const volatile T&)
 {
 }
 
 template <class T>
-void do_check(const T&)
+BOOST_TT_PROC void do_check(const T&)
 {
    typedef typename tt::aligned_storage<T::value,T::value>::type t1;
 #if defined(BOOST_GCC) && (BOOST_GCC < 40800)
@@ -46,6 +46,7 @@ void do_check(const T&)
    must_be_pod<t1> pod1;
    no_unused_warning(as1);
    no_unused_warning(pod1);
+#ifndef TEST_CUDA_DEVICE
    BOOST_TEST_MESSAGE(typeid(t1).name());
    BOOST_CHECK(::tt::alignment_of<t1>::value == T::value);
    BOOST_CHECK(sizeof(t1) == T::value);
@@ -84,6 +85,7 @@ void do_check(const T&)
    BOOST_CHECK((sizeof(t3) % T::value) == 0);
 #ifndef BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
    BOOST_CHECK(::tt::is_pod<t3>::value == true);
+#endif
 #endif
 #endif
 }

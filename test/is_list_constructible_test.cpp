@@ -88,6 +88,8 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, int, int, int>::va
 // g++ 4.x doesn't seem to disallow narrowing
 #elif defined(CI_SUPPRESS_KNOWN_ISSUES) && defined(__GNUC__) && (__GNUC__ == 7) && (__cplusplus >= 201500)
 // g++ 7.1 in -std=c++1z, c++17 has a bug
+#elif defined(__NVCC__)
+// nvcc in -std=c++17 mode has this issue.
 #else
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, float>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Y, int, float>::value), false);
@@ -104,6 +106,8 @@ BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int, int, int>::va
 // g++ 4.x doesn't seem to disallow narrowing
 #elif defined(CI_SUPPRESS_KNOWN_ISSUES) && defined(__GNUC__) && (__GNUC__ == 7) && (__cplusplus >= 201500)
 // g++ 7.1 in -std=c++1z, c++17 has a bug
+#elif defined(__NVCC__)
+// nvcc in -std=c++17 mode has this issue.
 #else
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, float>::value), false);
 BOOST_CHECK_INTEGRAL_CONSTANT((::tt::is_list_constructible<Z, int, float>::value), false);

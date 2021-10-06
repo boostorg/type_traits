@@ -107,6 +107,9 @@
 #if defined(BOOST_MSVC) && !defined(__cpp_rvalue_references) && !defined(BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE) && !defined(_NOEXCEPT_TYPES_SUPPORTED)
 #  define BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE
 #endif
+#if defined(__cpp_rvalue_references) && defined(__NVCC__) && defined(__CUDACC__) && !defined(BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE)
+#  define BOOST_TT_NO_NOEXCEPT_SEPARATE_TYPE
+#endif
 
 #endif // BOOST_TT_CONFIG_HPP_INCLUDED
 
