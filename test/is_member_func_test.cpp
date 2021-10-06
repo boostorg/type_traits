@@ -19,16 +19,16 @@
 #ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
 struct tricky_members
 {
-   void noexcept_proc()noexcept
+   BOOST_TT_PROC void noexcept_proc()noexcept
    {}
-   void const_ref_proc()const &
+   BOOST_TT_PROC void const_ref_proc()const &
    {}
-   void rvalue_proc()&&
+   BOOST_TT_PROC void rvalue_proc()&&
    {}
 };
 
 template <class T>
-void test_tricky(T)
+BOOST_TT_PROC void test_tricky(T)
 {
    BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_member_function_pointer<T>::value, true);
 }

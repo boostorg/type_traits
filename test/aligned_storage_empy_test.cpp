@@ -90,6 +90,8 @@ namespace
 
 TT_TEST_BEGIN(type_with_empty_alignment_buffer)
 
+#ifndef TEST_CUDA_DEVICE
+
 do_check<char>();
 do_check<short>();
 do_check<int>();
@@ -115,6 +117,8 @@ do_check<POD_UDT>();
 do_check<empty_UDT>();
 do_check<union_UDT>();
 do_check<boost::detail::max_align>();
+
+#endif
 
 TT_TEST_END
 
