@@ -16,7 +16,7 @@
 #pragma GCC diagnostic ignored "-Wnoexcept-type"
 #endif
 
-#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
+#ifdef BOOST_TT_HAS_ACCURATE_IS_FUNCTION
 
 struct X
 {
@@ -138,7 +138,7 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_function<vfoo4_t>::value, true);
 
 #endif
 
-#ifdef BOOST_TT_HAS_ASCCURATE_IS_FUNCTION
+#ifdef BOOST_TT_HAS_ACCURATE_IS_FUNCTION
 
 test_cv_qual(&X::f);
 test_cv_qual(&X::fc);
