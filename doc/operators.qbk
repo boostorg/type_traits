@@ -474,7 +474,7 @@ bool operator==(const contains<T> &lhs, const contains<T> &rhs) {
 
 class bad { };
 class good { };
-bool f(const good&, const good&) { }
+bool f(const good&, const good&) { return true; }
 
 int main() {
 	std::cout<<std::boolalpha;
