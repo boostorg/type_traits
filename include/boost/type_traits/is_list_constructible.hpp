@@ -7,12 +7,13 @@
 //  See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt
 
-#include <boost/config.hpp>
-#include <boost/config/workaround.hpp>
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_complete.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/static_assert.hpp>
+#endif
 
 namespace boost
 {
@@ -21,7 +22,7 @@ namespace boost
    || defined(BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX) || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS)\
    || BOOST_WORKAROUND(BOOST_GCC, < 40700)
 
-template<class T, class = void, class = void, class = void, class = void, class = void, class = void> struct is_list_constructible: false_type
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class = void, class = void, class = void, class = void, class = void, class = void> struct is_list_constructible: false_type
 {
    BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_list_constructible must be complete types");
 };
@@ -36,7 +37,7 @@ template<class T, class... A> false_type is_list_constructible_impl( ... );
 
 } // namespace type_traits_detail
 
-template<class T, class... A> struct is_list_constructible: decltype( type_traits_detail::is_list_constructible_impl<T, A...>(0) )
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class... A> struct is_list_constructible: decltype( type_traits_detail::is_list_constructible_impl<T, A...>(0) )
 {
    BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_list_constructible must be complete types");
 };

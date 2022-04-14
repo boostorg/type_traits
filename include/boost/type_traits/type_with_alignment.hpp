@@ -8,12 +8,15 @@
 #ifndef BOOST_TT_TYPE_WITH_ALIGNMENT_INCLUDED
 #define BOOST_TT_TYPE_WITH_ALIGNMENT_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
+#include <boost/static_assert.hpp>
+#include <cstddef> // size_t
+#endif
+
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/alignment_of.hpp>
 #include <boost/type_traits/is_pod.hpp>
-#include <boost/static_assert.hpp>
-#include <boost/config.hpp>
-#include <cstddef> // size_t
-#include <boost/detail/workaround.hpp>
+
 
 #ifdef BOOST_MSVC
 #   pragma warning(push)
@@ -77,7 +80,7 @@ template <std::size_t Target> struct char_alignment<Target, false>{ typedef type
 
 } // namespace detail
 
-template <std::size_t Align>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <std::size_t Align>
 struct type_with_alignment 
 {
    typedef typename boost::detail::char_alignment<Align, boost::alignment_of<char>::value >= Align>::type type;
@@ -85,31 +88,31 @@ struct type_with_alignment
 
 #if (defined(__GNUC__) || (defined (__SUNPRO_CC) &&  (__SUNPRO_CC >= 0x5130)) || defined(__clang__)) && !defined(BOOST_TT_DISABLE_INTRINSICS)
 namespace tt_align_ns {
-struct __attribute__((__aligned__(2))) a2 {};
-struct __attribute__((__aligned__(4))) a4 {};
-struct __attribute__((__aligned__(8))) a8 {};
-struct __attribute__((__aligned__(16))) a16 {};
-struct __attribute__((__aligned__(32))) a32 {};
-struct __attribute__((__aligned__(64))) a64 {};
-struct __attribute__((__aligned__(128))) a128 {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __attribute__((__aligned__(2))) a2 {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __attribute__((__aligned__(4))) a4 {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __attribute__((__aligned__(8))) a8 {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __attribute__((__aligned__(16))) a16 {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __attribute__((__aligned__(32))) a32 {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __attribute__((__aligned__(64))) a64 {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __attribute__((__aligned__(128))) a128 {};
 }
 
-template<> struct type_with_alignment<1>  { public: typedef char type; };
-template<> struct type_with_alignment<2>  { public: typedef tt_align_ns::a2 type; };
-template<> struct type_with_alignment<4>  { public: typedef tt_align_ns::a4 type; };
-template<> struct type_with_alignment<8>  { public: typedef tt_align_ns::a8 type; };
-template<> struct type_with_alignment<16> { public: typedef tt_align_ns::a16 type; };
-template<> struct type_with_alignment<32> { public: typedef tt_align_ns::a32 type; };
-template<> struct type_with_alignment<64> { public: typedef tt_align_ns::a64 type; };
-template<> struct type_with_alignment<128> { public: typedef tt_align_ns::a128 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<1>  { public: typedef char type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<2>  { public: typedef tt_align_ns::a2 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<4>  { public: typedef tt_align_ns::a4 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<8>  { public: typedef tt_align_ns::a8 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<16> { public: typedef tt_align_ns::a16 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<32> { public: typedef tt_align_ns::a32 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<64> { public: typedef tt_align_ns::a64 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<128> { public: typedef tt_align_ns::a128 type; };
 
-template<> struct is_pod< ::boost::tt_align_ns::a2> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a4> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a8> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a16> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a32> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a64> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a2> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a4> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a8> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a16> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a32> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a64> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
 
 #endif
 #if (defined(BOOST_MSVC) || (defined(BOOST_INTEL) && defined(_MSC_VER))) && !defined(BOOST_TT_DISABLE_INTRINSICS)
@@ -130,30 +133,30 @@ template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
 // in the matter because no other "ordinary" type is available.
 //
 namespace tt_align_ns {
-struct __declspec(align(8)) a8 { 
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __declspec(align(8)) a8 { 
    char m[8]; 
    typedef a8 type;
 };
-struct __declspec(align(16)) a16 { 
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __declspec(align(16)) a16 {
    char m[16]; 
    typedef a16 type;
 };
-struct __declspec(align(32)) a32 { 
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __declspec(align(32)) a32 {
    char m[32]; 
    typedef a32 type;
 };
-struct __declspec(align(64)) a64 
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __declspec(align(64)) a64
 { 
    char m[64]; 
    typedef a64 type;
 };
-struct __declspec(align(128)) a128 { 
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct __declspec(align(128)) a128 {
    char m[128]; 
    typedef a128 type;
 };
 }
 
-template<> struct type_with_alignment<8>  
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<8>
 { 
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 8,
@@ -162,7 +165,7 @@ template<> struct type_with_alignment<8>
 public: 
    typedef t1::type type;
 };
-template<> struct type_with_alignment<16> 
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<16>
 { 
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 16,
@@ -171,7 +174,7 @@ template<> struct type_with_alignment<16>
 public: 
    typedef t1::type type;
 };
-template<> struct type_with_alignment<32> 
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<32>
 { 
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 32,
@@ -180,7 +183,7 @@ template<> struct type_with_alignment<32>
 public: 
    typedef t1::type type;
 };
-template<> struct type_with_alignment<64> {
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<64> {
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 64,
       tt_align_ns::a64,
@@ -188,7 +191,7 @@ template<> struct type_with_alignment<64> {
 public: 
    typedef t1::type type;
 };
-template<> struct type_with_alignment<128> {
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct type_with_alignment<128> {
    typedef boost::conditional<
       ::boost::alignment_of<boost::detail::max_align>::value < 128,
       tt_align_ns::a128,
@@ -197,11 +200,11 @@ public:
    typedef t1::type type;
 };
 
-template<> struct is_pod< ::boost::tt_align_ns::a8> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a16> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a32> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a64> : public true_type{};
-template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a8> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a16> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a32> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a64> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
 
 #endif
 
@@ -234,18 +237,18 @@ template <> struct is_pod< ::boost::tt_align_ns::a8> : public true_type{};
 template <> struct is_pod< ::boost::tt_align_ns::a16> : public true_type{};
 //#endif
 
-template <std::size_t N> struct type_with_alignment
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <std::size_t N> struct type_with_alignment
 {
    // We should never get to here, but if we do use the maximally
    // aligned type:
    // BOOST_STATIC_ASSERT(0);
    typedef tt_align_ns::a16 type;
 };
-template <> struct type_with_alignment<1>{ typedef char type; };
-template <> struct type_with_alignment<2>{ typedef tt_align_ns::a2 type; };
-template <> struct type_with_alignment<4>{ typedef tt_align_ns::a4 type; };
-template <> struct type_with_alignment<8>{ typedef tt_align_ns::a8 type; };
-template <> struct type_with_alignment<16>{ typedef tt_align_ns::a16 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct type_with_alignment<1>{ typedef char type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct type_with_alignment<2>{ typedef tt_align_ns::a2 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct type_with_alignment<4>{ typedef tt_align_ns::a4 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct type_with_alignment<8>{ typedef tt_align_ns::a8 type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct type_with_alignment<16>{ typedef tt_align_ns::a16 type; };
 
 #endif
 

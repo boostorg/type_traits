@@ -9,13 +9,18 @@
 #ifndef BOOST_TT_CONFIG_HPP_INCLUDED
 #define BOOST_TT_CONFIG_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #ifndef BOOST_CONFIG_HPP
 #include <boost/config.hpp>
 #endif
 #include <boost/version.hpp>
 #include <boost/config/workaround.hpp>
+#define BOOST_TYPE_TRAITS_MODULE_EXPORT
+#else
+#define BOOST_STATIC_ASSERT(x) static_assert(x)
+#define BOOST_STATIC_ASSERT_MSG(x, msg) static_assert(x, msg)
+#endif
 
-//
 // whenever we have a conversion function with ellipses
 // it needs to be declared __cdecl to suppress compiler
 // warnings from MS and Borland compilers (this *must*
@@ -112,5 +117,3 @@
 #endif
 
 #endif // BOOST_TT_CONFIG_HPP_INCLUDED
-
-

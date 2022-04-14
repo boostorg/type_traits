@@ -28,7 +28,7 @@ namespace boost
 
    }
 
-    template< class T >
+    BOOST_TYPE_TRAITS_MODULE_EXPORT template< class T >
     struct decay
     {
     private:
@@ -39,7 +39,7 @@ namespace boost
     
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using decay_t = typename decay<T>::type;
+    BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using decay_t = typename decay<T>::type;
 
 #endif
 

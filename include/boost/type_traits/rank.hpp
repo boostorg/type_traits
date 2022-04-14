@@ -10,7 +10,9 @@
 #ifndef BOOST_TT_RANK_HPP_INCLUDED
 #define BOOST_TT_RANK_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
+#endif
 #include <boost/type_traits/integral_constant.hpp>
 
 namespace boost {
@@ -77,9 +79,9 @@ struct rank_imp<T const volatile[], N>
 #endif // !defined( BOOST_CODEGEARC )
 
 #if defined( BOOST_CODEGEARC )
-template <class T> struct rank : public integral_constant<std::size_t, __array_rank(T)>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct rank : public integral_constant<std::size_t, __array_rank(T)>{};
 #else
-template <class T> struct rank : public integral_constant<std::size_t, (::boost::detail::rank_imp<T, 0>::value)>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct rank : public integral_constant<std::size_t, (::boost::detail::rank_imp<T, 0>::value)>{};
 #endif
 
 } // namespace boost

@@ -9,9 +9,11 @@
 #ifndef BOOST_TT_ALIGNMENT_OF_HPP_INCLUDED
 #define BOOST_TT_ALIGNMENT_OF_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef>
+#endif
 
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
@@ -25,7 +27,7 @@
 
 namespace boost {
 
-template <typename T> struct alignment_of;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct alignment_of;
 
 // get the alignment of some arbitrary type:
 namespace detail {
@@ -85,25 +87,25 @@ struct alignment_of_impl
 
 } // namespace detail
 
-template <class T> struct alignment_of : public integral_constant<std::size_t, ::boost::detail::alignment_of_impl<T>::value>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct alignment_of : public integral_constant<std::size_t, ::boost::detail::alignment_of_impl<T>::value>{};
 
 // references have to be treated specially, assume
 // that a reference is just a special pointer:
-template <typename T> struct alignment_of<T&> : public alignment_of<T*>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct alignment_of<T&> : public alignment_of<T*>{};
 
 #ifdef BOOST_BORLANDC
 // long double gives an incorrect value of 10 (!)
 // unless we do this...
 struct long_double_wrapper{ long double ld; };
-template<> struct alignment_of<long double> : public alignment_of<long_double_wrapper>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct alignment_of<long double> : public alignment_of<long_double_wrapper>{};
 #endif
 
 // void has to be treated specially:
-template<> struct alignment_of<void> : integral_constant<std::size_t, 0>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct alignment_of<void> : integral_constant<std::size_t, 0>{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-template<> struct alignment_of<void const> : integral_constant<std::size_t, 0>{};
-template<> struct alignment_of<void const volatile> : integral_constant<std::size_t, 0>{};
-template<> struct alignment_of<void volatile> : integral_constant<std::size_t, 0>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct alignment_of<void const> : integral_constant<std::size_t, 0>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct alignment_of<void const volatile> : integral_constant<std::size_t, 0>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct alignment_of<void volatile> : integral_constant<std::size_t, 0>{};
 #endif
 
 } // namespace boost

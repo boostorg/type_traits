@@ -9,14 +9,16 @@
 #ifndef BOOST_TT_HAS_NOTHROW_DESTRUCTOR_HPP_INCLUDED
 #define BOOST_TT_HAS_NOTHROW_DESTRUCTOR_HPP_INCLUDED
 
-#include <boost/type_traits/has_trivial_destructor.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 #if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(__SUNPRO_CC) && !(defined(BOOST_MSVC) && (_MSC_FULL_VER < 190023506))
 
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_destructible.hpp>
 #include <boost/type_traits/is_complete.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/static_assert.hpp>
+#endif
 
 namespace boost{
 
@@ -29,21 +31,23 @@ namespace boost{
 
    }
 
-   template <class T> struct has_nothrow_destructor : public detail::has_nothrow_destructor_imp<T, boost::is_destructible<T>::value>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_destructor : public detail::has_nothrow_destructor_imp<T, boost::is_destructible<T>::value>
    {
       BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to has_nothrow_destructor must be complete types");
    };
-   template <class T, std::size_t N> struct has_nothrow_destructor<T[N]> : public has_nothrow_destructor<T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N> struct has_nothrow_destructor<T[N]> : public has_nothrow_destructor<T>
    {
       BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to has_nothrow_destructor must be complete types");
    };
-   template <class T> struct has_nothrow_destructor<T&> : public integral_constant<bool, false>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_destructor<T&> : public integral_constant<bool, false>{};
 #if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) 
-   template <class T> struct has_nothrow_destructor<T&&> : public integral_constant<bool, false>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_destructor<T&&> : public integral_constant<bool, false>{};
 #endif
-   template <> struct has_nothrow_destructor<void> : public false_type {};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_nothrow_destructor<void> : public false_type {};
 }
 #else
+
+#include <boost/type_traits/has_trivial_destructor.hpp>
 
 namespace boost {
 

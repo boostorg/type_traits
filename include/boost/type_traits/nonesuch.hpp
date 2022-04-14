@@ -10,19 +10,19 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 #ifndef BOOST_TT_NONESUCH_HPP_INCLUDED
 #define BOOST_TT_NONESUCH_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
 #if !defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
-struct nonesuch {
+BOOST_TYPE_TRAITS_MODULE_EXPORT struct nonesuch {
     nonesuch() = delete;
     ~nonesuch() = delete;
     nonesuch(const nonesuch&) = delete;
     void operator=(const nonesuch&) = delete;
 };
 #else
-class nonesuch {
+BOOST_TYPE_TRAITS_MODULE_EXPORT class nonesuch {
     nonesuch();
     ~nonesuch();
     nonesuch(const nonesuch&);

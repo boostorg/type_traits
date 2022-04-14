@@ -11,28 +11,30 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 #define BOOST_TT_IS_BOUNDED_ARRAY_HPP_INCLUDED
 
 #include <boost/type_traits/integral_constant.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef>
+#endif
 
 namespace boost {
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct is_bounded_array
     : false_type { };
 
 #if !defined(BOOST_NO_ARRAY_TYPE_SPECIALIZATIONS)
-template<class T, std::size_t N>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, std::size_t N>
 struct is_bounded_array<T[N]>
     : true_type { };
 
-template<class T, std::size_t N>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, std::size_t N>
 struct is_bounded_array<const T[N]>
     : true_type { };
 
-template<class T, std::size_t N>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, std::size_t N>
 struct is_bounded_array<volatile T[N]>
     : true_type { };
 
-template<class T, std::size_t N>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, std::size_t N>
 struct is_bounded_array<const volatile T[N]>
     : true_type { };
 #endif

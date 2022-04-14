@@ -47,7 +47,7 @@ struct add_pointer<T&const volatile>
 
 #else
 
-template <typename T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T>
 struct add_pointer
 {
     typedef typename remove_reference<T>::type no_ref_type;
@@ -58,7 +58,7 @@ struct add_pointer
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using add_pointer_t = typename add_pointer<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using add_pointer_t = typename add_pointer<T>::type;
 
 #endif
 

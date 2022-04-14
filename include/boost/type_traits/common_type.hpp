@@ -9,14 +9,15 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 //
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/decay.hpp>
 #include <boost/type_traits/declval.hpp>
-#include <boost/detail/workaround.hpp>
 #include <boost/type_traits/is_complete.hpp>
 #include <boost/type_traits/is_void.hpp>
 #include <boost/type_traits/is_array.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/static_assert.hpp>
+#endif
 
 #if defined(BOOST_NO_CXX11_DECLTYPE)
 #include <boost/type_traits/detail/common_type_impl.hpp>
@@ -33,13 +34,13 @@ namespace boost
 
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
-template<class... T> struct common_type
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class... T> struct common_type
 {
 };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-template<class... T> using common_type_t = typename common_type<T...>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class... T> using common_type_t = typename common_type<T...>::type;
 
 namespace type_traits_detail
 {
@@ -48,14 +49,14 @@ template<class T1, class T2, class... T> using common_type_fold = common_type_t<
 
 } // namespace type_traits_detail
 
-template<class T1, class T2, class... T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T1, class T2, class... T>
 struct common_type<T1, T2, T...>: type_traits_detail::mp_defer<type_traits_detail::common_type_fold, T1, T2, T...>
 {
 };
 
 #else
 
-template<class T1, class T2, class... T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T1, class T2, class... T>
 struct common_type<T1, T2, T...>: common_type<typename common_type<T1, T2>::type, T...>
 {
 };
@@ -64,7 +65,7 @@ struct common_type<T1, T2, T...>: common_type<typename common_type<T1, T2>::type
 
 #else
 
-template<
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<
     class T1 = void, class T2 = void, class T3 = void,
     class T4 = void, class T5 = void, class T6 = void,
     class T7 = void, class T8 = void, class T9 = void
@@ -77,7 +78,7 @@ struct common_type: common_type<typename common_type<T1, T2>::type, T3, T4, T5, 
 
 // one argument
 
-template<class T> struct common_type<T>: boost::decay<T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T> struct common_type<T>: boost::decay<T>
 {
    BOOST_STATIC_ASSERT_MSG(::boost::is_complete<T>::value || ::boost::is_void<T>::value || ::boost::is_array<T>::value, "Arguments to common_type must both be complete types");
 };
@@ -141,7 +142,7 @@ template<class T1, class T2> struct common_type_decay_helper<T1, T2, T1, T2>: co
 
 } // type_traits_detail
 
-template<class T1, class T2> struct common_type<T1, T2>: type_traits_detail::common_type_decay_helper<T1, T2>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T1, class T2> struct common_type<T1, T2>: type_traits_detail::common_type_decay_helper<T1, T2>
 {
    BOOST_STATIC_ASSERT_MSG(::boost::is_complete<T1>::value || ::boost::is_void<T1>::value || ::boost::is_array<T1>::value, "Arguments to common_type must both be complete types");
    BOOST_STATIC_ASSERT_MSG(::boost::is_complete<T2>::value || ::boost::is_void<T2>::value || ::boost::is_array<T2>::value, "Arguments to common_type must both be complete types");

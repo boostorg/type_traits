@@ -14,24 +14,24 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct is_unbounded_array
     : false_type { };
 
 #if !defined(BOOST_NO_ARRAY_TYPE_SPECIALIZATIONS)
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct is_unbounded_array<T[]>
     : true_type { };
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct is_unbounded_array<const T[]>
     : true_type { };
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct is_unbounded_array<volatile T[]>
     : true_type { };
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct is_unbounded_array<const volatile T[]>
     : true_type { };
 #endif

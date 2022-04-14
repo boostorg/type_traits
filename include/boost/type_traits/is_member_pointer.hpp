@@ -21,21 +21,21 @@
 #ifndef BOOST_TT_IS_MEMBER_POINTER_HPP_INCLUDED
 #define BOOST_TT_IS_MEMBER_POINTER_HPP_INCLUDED
 
-#include <boost/detail/workaround.hpp>
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/is_member_function_pointer.hpp>
 
 namespace boost {
 
 #if defined( BOOST_CODEGEARC )
-template <class T> struct is_member_pointer : public integral_constant<bool, __is_member_pointer(T)>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_member_pointer : public integral_constant<bool, __is_member_pointer(T)>{};
 #else
-template <class T> struct is_member_pointer : public integral_constant<bool, ::boost::is_member_function_pointer<T>::value>{};
-template <class T, class U> struct is_member_pointer<U T::* > : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_member_pointer : public integral_constant<bool, ::boost::is_member_function_pointer<T>::value>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct is_member_pointer<U T::* > : public true_type{};
 
 #if !BOOST_WORKAROUND(__MWERKS__,<=0x3003) && !BOOST_WORKAROUND(__IBMCPP__, <=600)
-template <class T, class U> struct is_member_pointer<U T::*const> : public true_type{};
-template <class T, class U> struct is_member_pointer<U T::*const volatile> : public true_type{};
-template <class T, class U> struct is_member_pointer<U T::*volatile> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct is_member_pointer<U T::*const> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct is_member_pointer<U T::*const volatile> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct is_member_pointer<U T::*volatile> : public true_type{};
 #endif
 
 #endif

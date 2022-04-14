@@ -9,8 +9,7 @@
 #ifndef BOOST_TT_REMOVE_REFERENCE_HPP_INCLUDED
 #define BOOST_TT_REMOVE_REFERENCE_HPP_INCLUDED
 
-#include <boost/config.hpp>
-#include <boost/detail/workaround.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
@@ -35,8 +34,8 @@ struct remove_rvalue_ref<T&&>
 
 } // namespace detail
 
-template <class T> struct remove_reference{ typedef typename boost::detail::remove_rvalue_ref<T>::type type; };
-template <class T> struct remove_reference<T&>{ typedef T type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_reference{ typedef typename boost::detail::remove_rvalue_ref<T>::type type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_reference<T&>{ typedef T type; };
 
 #if defined(BOOST_ILLEGAL_CV_REFERENCES)
 // these are illegal specialisations; cv-qualifies applied to
@@ -50,7 +49,7 @@ template <class T> struct remove_reference<T&const volatile>{ typedef T type; };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using remove_reference_t = typename remove_reference<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using remove_reference_t = typename remove_reference<T>::type;
 
 #endif
 

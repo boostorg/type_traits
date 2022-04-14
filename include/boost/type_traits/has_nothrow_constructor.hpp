@@ -9,11 +9,13 @@
 #ifndef BOOST_TT_HAS_NOTHROW_CONSTRUCTOR_HPP_INCLUDED
 #define BOOST_TT_HAS_NOTHROW_CONSTRUCTOR_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
+#endif
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
-#ifdef BOOST_HAS_NOTHROW_CONSTRUCTOR
+#if defined(BOOST_HAS_NOTHROW_CONSTRUCTOR)
 
 #if defined(BOOST_MSVC) || defined(BOOST_INTEL)
 #include <boost/type_traits/has_trivial_constructor.hpp>
@@ -24,7 +26,7 @@
 
 namespace boost {
 
-template <class T> struct has_nothrow_constructor : public integral_constant<bool, BOOST_HAS_NOTHROW_CONSTRUCTOR(T)>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_constructor : public integral_constant<bool, BOOST_HAS_NOTHROW_CONSTRUCTOR(T)>{};
 
 #elif !defined(BOOST_NO_CXX11_NOEXCEPT)
 
@@ -43,7 +45,7 @@ namespace boost { namespace detail{
    template <class T, std::size_t N> struct has_nothrow_constructor_imp<T[N], true> : public has_nothrow_constructor_imp<T, true> {};
 }
 
-template <class T> struct has_nothrow_constructor : public detail::has_nothrow_constructor_imp<T, is_default_constructible<T>::value>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_constructor : public detail::has_nothrow_constructor_imp<T, is_default_constructible<T>::value>{};
 
 #ifdef BOOST_MSVC
 #pragma warning(pop)
@@ -55,18 +57,18 @@ template <class T> struct has_nothrow_constructor : public detail::has_nothrow_c
 
 namespace boost {
 
-template <class T> struct has_nothrow_constructor : public ::boost::has_trivial_constructor<T> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_constructor : public ::boost::has_trivial_constructor<T> {};
 
 #endif
 
-template<> struct has_nothrow_constructor<void> : public false_type {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_nothrow_constructor<void> : public false_type {};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-template<> struct has_nothrow_constructor<void const> : public false_type{};
-template<> struct has_nothrow_constructor<void const volatile> : public false_type{};
-template<> struct has_nothrow_constructor<void volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_nothrow_constructor<void const> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_nothrow_constructor<void const volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_nothrow_constructor<void volatile> : public false_type{};
 #endif
 
-template <class T> struct has_nothrow_default_constructor : public has_nothrow_constructor<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_default_constructor : public has_nothrow_constructor<T>{};
 
 } // namespace boost
 

@@ -9,7 +9,9 @@
 #ifndef BOOST_TT_IS_COPY_ASSIGNABLE_HPP_INCLUDED
 #define BOOST_TT_IS_COPY_ASSIGNABLE_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/config.hpp>
+#endif
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_noncopyable.hpp>
 
@@ -127,12 +129,12 @@ struct is_copy_assignable_impl {
 
 } // namespace detail
 
-template <class T> struct is_copy_assignable : public integral_constant<bool, ::boost::detail::is_copy_assignable_impl<T>::value>{};
-template <> struct is_copy_assignable<void> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_copy_assignable : public integral_constant<bool, ::boost::detail::is_copy_assignable_impl<T>::value>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_assignable<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-template <> struct is_copy_assignable<void const> : public false_type{};
-template <> struct is_copy_assignable<void const volatile> : public false_type{};
-template <> struct is_copy_assignable<void volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_assignable<void const> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_assignable<void const volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_assignable<void volatile> : public false_type{};
 #endif
 
 } // namespace boost

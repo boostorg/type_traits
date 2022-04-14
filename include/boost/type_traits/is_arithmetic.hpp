@@ -14,7 +14,7 @@
 
 namespace boost {
 
-template <class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
 struct is_arithmetic : public integral_constant<bool, is_integral<T>::value || is_floating_point<T>::value> {};
 
 } // namespace boost

@@ -6,7 +6,7 @@
 #ifndef FILE_boost_type_traits_integral_promotion_hpp_INCLUDED
 #define FILE_boost_type_traits_integral_promotion_hpp_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_enum.hpp>

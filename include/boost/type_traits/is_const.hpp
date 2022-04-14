@@ -21,23 +21,25 @@
 #ifndef BOOST_TT_IS_CONST_HPP_INCLUDED
 #define BOOST_TT_IS_CONST_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
+#endif
 #include <boost/type_traits/integral_constant.hpp>
 
 namespace boost {
 
 #if defined( BOOST_CODEGEARC )
 
-   template <class T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
    struct is_const : public integral_constant<bool, __is_const(T)> {};
 
 #else
 
-   template <class T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
    struct is_const : public false_type {};
-   template <class T> struct is_const<T const> : public true_type{};
-   template <class T, std::size_t N> struct is_const<T const[N]> : public true_type{};
-   template <class T> struct is_const<T const[]> : public true_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_const<T const> : public true_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N> struct is_const<T const[N]> : public true_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_const<T const[]> : public true_type{};
 
 #endif
 

@@ -8,7 +8,7 @@
 #ifndef BOOST_TYPE_TRAITS_DECLVAL_HPP_INCLUDED
 #define BOOST_TYPE_TRAITS_DECLVAL_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 //----------------------------------------------------------------------------//
 
@@ -36,7 +36,7 @@
 
 namespace boost {
 
-    template <typename T>
+    BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T>
     typename add_rvalue_reference<T>::type declval() BOOST_NOEXCEPT; // as unevaluated operand
 
 }  // namespace boost

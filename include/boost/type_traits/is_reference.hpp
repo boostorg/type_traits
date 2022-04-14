@@ -17,7 +17,7 @@
 
 namespace boost {
 
-template <class T> struct is_reference 
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_reference 
    : public 
    integral_constant<
       bool, 

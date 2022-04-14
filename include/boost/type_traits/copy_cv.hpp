@@ -18,7 +18,7 @@
 namespace boost
 {
 
-template<class T, class U> struct copy_cv
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class U> struct copy_cv
 {
 private:
 
@@ -31,7 +31,7 @@ public:
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T, class U> using copy_cv_t = typename copy_cv<T, U>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> using copy_cv_t = typename copy_cv<T, U>::type;
 
 #endif
 

@@ -30,7 +30,7 @@ namespace noncopyable_
 
 #endif // #ifndef BOOST_NONCOPYABLE_BASE_TOKEN_DEFINED
 
-template<class T> struct is_noncopyable: is_base_and_derived<noncopyable_::base_token, T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T> struct is_noncopyable: is_base_and_derived<noncopyable_::base_token, T>
 {
 };
 

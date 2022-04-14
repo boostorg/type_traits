@@ -12,7 +12,6 @@
 #define BOOST_TT_IS_FUNCTION_HPP_INCLUDED
 
 #include <boost/type_traits/detail/config.hpp>
-#include <boost/config/workaround.hpp>
 
 #ifdef BOOST_TT_HAS_ACCURATE_IS_FUNCTION
 

@@ -102,11 +102,11 @@ struct is_class_impl
 
 } // namespace detail
 
-template <class T> struct is_class : public integral_constant<bool, ::boost::detail::is_class_impl<T>::value> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_class : public integral_constant<bool, ::boost::detail::is_class_impl<T>::value> {};
 # ifdef __EDG_VERSION__
-template <class T> struct is_class<const T> : public is_class<T>{};
-template <class T> struct is_class<const volatile T> : public is_class<T>{};
-template <class T> struct is_class<volatile T> : public is_class<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_class<const T> : public is_class<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_class<const volatile T> : public is_class<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_class<volatile T> : public is_class<T>{};
 # endif
     
 } // namespace boost

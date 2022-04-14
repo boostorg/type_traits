@@ -9,15 +9,17 @@
 #ifndef BOOST_TT_IS_ASSIGNABLE_HPP_INCLUDED
 #define BOOST_TT_IS_ASSIGNABLE_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
-#include <boost/type_traits/integral_constant.hpp>
-#include <boost/detail/workaround.hpp>
-#include <boost/type_traits/is_complete.hpp>
 #include <boost/static_assert.hpp>
+#endif
+#include <boost/type_traits/integral_constant.hpp>
+#include <boost/type_traits/detail/config.hpp>
+#include <boost/type_traits/is_complete.hpp>
 
 namespace boost{
 
-   template <class T, class U = T> struct is_assignable;
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U = T> struct is_assignable;
 
 }
 
@@ -41,18 +43,18 @@ namespace boost{
 
    }
 
-   template <class T, class U> struct is_assignable : public integral_constant<bool, sizeof(detail::is_assignable_imp::test<T, U>(0)) == sizeof(boost::type_traits::yes_type)>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct is_assignable : public integral_constant<bool, sizeof(detail::is_assignable_imp::test<T, U>(0)) == sizeof(boost::type_traits::yes_type)>
    {
       BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_assignable must be complete types");
    };
-   template <class T, std::size_t N, class U> struct is_assignable<T[N], U> : public is_assignable<T, U>{};
-   template <class T, std::size_t N, class U> struct is_assignable<T(&)[N], U> : public is_assignable<T&, U>{};
-   template <class T, class U> struct is_assignable<T[], U> : public is_assignable<T, U>{};
-   template <class T, class U> struct is_assignable<T(&)[], U> : public is_assignable<T&, U>{};
-   template <class U> struct is_assignable<void, U> : public integral_constant<bool, false>{};
-   template <class U> struct is_assignable<void const, U> : public integral_constant<bool, false>{};
-   template <class U> struct is_assignable<void volatile, U> : public integral_constant<bool, false>{};
-   template <class U> struct is_assignable<void const volatile, U> : public integral_constant<bool, false>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N, class U> struct is_assignable<T[N], U> : public is_assignable<T, U>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N, class U> struct is_assignable<T(&)[N], U> : public is_assignable<T&, U>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct is_assignable<T[], U> : public is_assignable<T, U>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct is_assignable<T(&)[], U> : public is_assignable<T&, U>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class U> struct is_assignable<void, U> : public integral_constant<bool, false>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class U> struct is_assignable<void const, U> : public integral_constant<bool, false>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class U> struct is_assignable<void volatile, U> : public integral_constant<bool, false>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class U> struct is_assignable<void const volatile, U> : public integral_constant<bool, false>{};
 
 #else
 

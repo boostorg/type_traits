@@ -14,7 +14,9 @@
 #include <boost/type_traits/is_enum.hpp>
 #include <boost/type_traits/remove_cv.hpp>
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <climits>
+#endif
 
 namespace boost {
 
@@ -65,7 +67,7 @@ struct is_unsigned_select_helper<false>
    };
 };
 
-template <class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
 struct is_unsigned
 {
    typedef ::boost::detail::is_unsigned_select_helper< ::boost::is_integral<T>::value || ::boost::is_enum<T>::value > selector;
@@ -76,7 +78,7 @@ struct is_unsigned
 
 } // namespace detail
 
-template <class T> struct is_unsigned : public integral_constant<bool, boost::detail::is_unsigned<T>::value> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_unsigned : public integral_constant<bool, boost::detail::is_unsigned<T>::value> {};
 
 #else
 
@@ -85,77 +87,77 @@ template <class T> struct is_unsigned : public false_type{};
 #endif
 
 #else // defined( BOOST_CODEGEARC )
-template <class T> struct is_unsigned : public integral_constant<bool, __is_unsigned(T)> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_unsigned : public integral_constant<bool, __is_unsigned(T)> {};
 #endif
 
-template <> struct is_unsigned<unsigned char> : public true_type{};
-template <> struct is_unsigned<const unsigned char> : public true_type{};
-template <> struct is_unsigned<volatile unsigned char> : public true_type{};
-template <> struct is_unsigned<const volatile unsigned char> : public true_type{};
-template <> struct is_unsigned<unsigned short> : public true_type{};
-template <> struct is_unsigned<const unsigned short> : public true_type{};
-template <> struct is_unsigned<volatile unsigned short> : public true_type{};
-template <> struct is_unsigned<const volatile unsigned short> : public true_type{};
-template <> struct is_unsigned<unsigned int> : public true_type{};
-template <> struct is_unsigned<const unsigned int> : public true_type{};
-template <> struct is_unsigned<volatile unsigned int> : public true_type{};
-template <> struct is_unsigned<const volatile unsigned int> : public true_type{};
-template <> struct is_unsigned<unsigned long> : public true_type{};
-template <> struct is_unsigned<const unsigned long> : public true_type{};
-template <> struct is_unsigned<volatile unsigned long> : public true_type{};
-template <> struct is_unsigned<const volatile unsigned long> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<unsigned char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const unsigned char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile unsigned char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile unsigned char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<unsigned short> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const unsigned short> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile unsigned short> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile unsigned short> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<unsigned int> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const unsigned int> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile unsigned int> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile unsigned int> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<unsigned long> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const unsigned long> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile unsigned long> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile unsigned long> : public true_type{};
 
-template <> struct is_unsigned<signed char> : public false_type{};
-template <> struct is_unsigned<const signed char> : public false_type{};
-template <> struct is_unsigned<volatile signed char> : public false_type{};
-template <> struct is_unsigned<const volatile signed char> : public false_type{};
-template <> struct is_unsigned< short> : public false_type{};
-template <> struct is_unsigned<const  short> : public false_type{};
-template <> struct is_unsigned<volatile  short> : public false_type{};
-template <> struct is_unsigned<const volatile  short> : public false_type{};
-template <> struct is_unsigned< int> : public false_type{};
-template <> struct is_unsigned<const  int> : public false_type{};
-template <> struct is_unsigned<volatile  int> : public false_type{};
-template <> struct is_unsigned<const volatile  int> : public false_type{};
-template <> struct is_unsigned< long> : public false_type{};
-template <> struct is_unsigned<const  long> : public false_type{};
-template <> struct is_unsigned<volatile  long> : public false_type{};
-template <> struct is_unsigned<const volatile  long> : public false_type{};
-#ifdef BOOST_HAS_LONG_LONG
-template <> struct is_unsigned< ::boost::ulong_long_type> : public true_type{};
-template <> struct is_unsigned<const ::boost::ulong_long_type> : public true_type{};
-template <> struct is_unsigned<volatile ::boost::ulong_long_type> : public true_type{};
-template <> struct is_unsigned<const volatile ::boost::ulong_long_type> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<signed char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const signed char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile signed char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile signed char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned< short> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const  short> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile  short> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile  short> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned< int> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const  int> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile  int> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile  int> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned< long> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const  long> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile  long> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile  long> : public false_type{};
+#ifndef BOOST_NO_LONG_LONG
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned< ::boost::ulong_long_type> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const ::boost::ulong_long_type> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile ::boost::ulong_long_type> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile ::boost::ulong_long_type> : public true_type{};
 
-template <> struct is_unsigned< ::boost::long_long_type> : public false_type{};
-template <> struct is_unsigned<const ::boost::long_long_type> : public false_type{};
-template <> struct is_unsigned<volatile ::boost::long_long_type> : public false_type{};
-template <> struct is_unsigned<const volatile ::boost::long_long_type> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned< ::boost::long_long_type> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const ::boost::long_long_type> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile ::boost::long_long_type> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile ::boost::long_long_type> : public false_type{};
 #endif
 #if defined(CHAR_MIN) 
 #if CHAR_MIN == 0
-template <> struct is_unsigned<char> : public true_type{};
-template <> struct is_unsigned<const char> : public true_type{};
-template <> struct is_unsigned<volatile char> : public true_type{};
-template <> struct is_unsigned<const volatile char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile char> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile char> : public true_type{};
 #else
-template <> struct is_unsigned<char> : public false_type{};
-template <> struct is_unsigned<const char> : public false_type{};
-template <> struct is_unsigned<volatile char> : public false_type{};
-template <> struct is_unsigned<const volatile char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile char> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile char> : public false_type{};
 #endif
 #endif
 #if !defined(BOOST_NO_INTRINSIC_WCHAR_T) && defined(WCHAR_MIN)
 #if WCHAR_MIN == 0
-template <> struct is_unsigned<wchar_t> : public true_type{};
-template <> struct is_unsigned<const wchar_t> : public true_type{};
-template <> struct is_unsigned<volatile wchar_t> : public true_type{};
-template <> struct is_unsigned<const volatile wchar_t> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<wchar_t> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const wchar_t> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile wchar_t> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile wchar_t> : public true_type{};
 #else
-template <> struct is_unsigned<wchar_t> : public false_type{};
-template <> struct is_unsigned<const wchar_t> : public false_type{};
-template <> struct is_unsigned<volatile wchar_t> : public false_type{};
-template <> struct is_unsigned<const volatile wchar_t> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<wchar_t> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const wchar_t> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<volatile wchar_t> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_unsigned<const volatile wchar_t> : public false_type{};
 #endif
 #endif
 } // namespace boost

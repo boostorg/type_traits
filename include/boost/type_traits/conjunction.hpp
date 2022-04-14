@@ -18,19 +18,19 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 namespace boost {
 
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
-template<class...>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class...>
 struct conjunction
     : true_type { };
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct conjunction<T>
     : T { };
 
-template<class T, class... U>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class... U>
 struct conjunction<T, U...>
     : conditional<bool(T::value), conjunction<U...>, T>::type { };
 #else
-template<class T, class U>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class U>
 struct conjunction
     : conditional<bool(T::value), U, T>::type { };
 #endif

@@ -20,7 +20,7 @@
 
 #include <boost/type_traits/detail/template_arity_spec.hpp>
 #include <boost/type_traits/integral_constant.hpp>
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 //
 // Unfortunately some libraries have started using this header without

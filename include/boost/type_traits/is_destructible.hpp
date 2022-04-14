@@ -9,11 +9,16 @@
 #ifndef BOOST_TT_IS_DESTRUCTIBLE_HPP_INCLUDED
 #define BOOST_TT_IS_DESTRUCTIBLE_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
-#include <boost/type_traits/integral_constant.hpp>
 #include <boost/detail/workaround.hpp>
-#include <boost/type_traits/is_complete.hpp>
 #include <boost/static_assert.hpp>
+#else
+#include <boost/type_traits/detail/config.hpp>
+#endif
+
+#include <boost/type_traits/integral_constant.hpp>
+#include <boost/type_traits/is_complete.hpp>
 
 #if !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800)
 
@@ -34,7 +39,7 @@ namespace boost{
 
    }
 
-   template <class T> struct is_destructible : public integral_constant<bool, sizeof(boost::detail::is_destructible_imp::test<T>(0)) == sizeof(boost::type_traits::yes_type)>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_destructible : public integral_constant<bool, sizeof(boost::detail::is_destructible_imp::test<T>(0)) == sizeof(boost::type_traits::yes_type)>
    {
       BOOST_STATIC_ASSERT_MSG(boost::is_complete<T>::value, "Arguments to is_destructible must be complete types");
    };

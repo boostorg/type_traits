@@ -6,7 +6,6 @@
 //
 //  See http://www.boost.org/libs/type_traits for most recent version including documentation.
 
-#include <boost/config.hpp>
 #include <boost/type_traits/detail/config.hpp>
 
 // cannot include this header without getting warnings of the kind:
@@ -38,7 +37,9 @@
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/type_traits/is_void.hpp>
 #include <boost/type_traits/add_reference.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <utility>
+#endif
 
 namespace boost
 {
@@ -70,11 +71,11 @@ namespace boost
 
    }
 
-   template <class T, class U = T, class Ret = boost::binary_op_detail::dont_care>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U = T, class Ret = boost::binary_op_detail::dont_care>
    struct BOOST_TT_TRAIT_NAME : public boost::binary_op_detail:: BOOST_JOIN(BOOST_TT_TRAIT_NAME, _ret_imp) <T, U, Ret> {};
-   template <class T, class U>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U>
    struct BOOST_TT_TRAIT_NAME<T, U, void> : public boost::binary_op_detail:: BOOST_JOIN(BOOST_TT_TRAIT_NAME, _void_imp) <T, U> {};
-   template <class T, class U>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U>
    struct BOOST_TT_TRAIT_NAME<T, U, boost::binary_op_detail::dont_care> : public boost::binary_op_detail:: BOOST_JOIN(BOOST_TT_TRAIT_NAME, _dc_imp) <T, U> {};
 
 

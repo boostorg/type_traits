@@ -14,8 +14,9 @@
 #include <boost/type_traits/remove_reference.hpp>
 #include <boost/type_traits/is_function.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
-#include <boost/config/workaround.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef>
+#endif
 
 /*
  * CAUTION:
@@ -50,7 +51,7 @@ namespace boost {
       char check_is_complete(...);
    }
 
-   template <class T> struct is_complete
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_complete
       : public integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || (sizeof(boost::detail::check_is_complete<T>(0)) != sizeof(char))> {};
 
 #elif !defined(BOOST_NO_SFINAE) && !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40500)
@@ -73,16 +74,16 @@ namespace boost {
 } // namespace detail
 
 
-   template <class T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
    struct is_complete : boost::integral_constant<bool, ::boost::is_function<typename boost::remove_reference<T>::type>::value || ::boost::detail::is_complete_imp<T>::value>
    {};
-   template <class T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
    struct is_complete<T&> : boost::is_complete<T> {};
    
 #else
 
-      template <class T> struct is_complete
-         : public boost::integral_constant<bool, true> {};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_complete
+      : public boost::integral_constant<bool, true> {};
 
 #undef BOOST_TT_HAS_WORKING_IS_COMPLETE
 

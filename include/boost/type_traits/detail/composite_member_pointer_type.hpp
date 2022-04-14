@@ -13,8 +13,10 @@
 #include <boost/type_traits/remove_pointer.hpp>
 #include <boost/type_traits/is_base_of.hpp>
 #include <boost/type_traits/conditional.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/config.hpp>
 #include <cstddef>
+#endif
 
 namespace boost
 {

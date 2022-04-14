@@ -14,11 +14,11 @@
 #include <boost/type_traits/has_trivial_destructor.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_empty.hpp>
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
-template <typename T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T>
 struct is_stateless
  : public integral_constant<bool,  
       (::boost::has_trivial_constructor<T>::value

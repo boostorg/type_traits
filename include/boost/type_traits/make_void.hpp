@@ -10,24 +10,24 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 #ifndef BOOST_TT_MAKE_VOID_HPP_INCLUDED
 #define BOOST_TT_MAKE_VOID_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
-template<class...>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class...>
 struct make_void {
     typedef void type;
 };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
-template<class... Ts>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class... Ts>
 using void_t = typename make_void<Ts...>::type;
 #endif
 
 #else /* BOOST_NO_CXX11_VARIADIC_TEMPLATES */
 
-template<class = void,
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class = void,
          class = void,
          class = void,
          class = void,
@@ -37,7 +37,7 @@ struct make_void {
 };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
-template<class A = void,
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class A = void,
          class B = void,
          class C = void,
          class D = void,

@@ -13,7 +13,9 @@
 #ifndef BOOST_IS_POLYMORPHIC
 #include <boost/type_traits/is_class.hpp>
 #endif
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/detail/workaround.hpp>
+#endif
 
 #if defined(BOOST_MSVC) && (BOOST_MSVC >= 1700)
 #pragma warning(push)
@@ -105,11 +107,11 @@ struct is_polymorphic_imp
 
 } // namespace detail
 
-template <class T> struct is_polymorphic : public integral_constant<bool, ::boost::detail::is_polymorphic_imp<T>::value> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_polymorphic : public integral_constant<bool, ::boost::detail::is_polymorphic_imp<T>::value> {};
 
 #else // BOOST_IS_POLYMORPHIC
 
-template <class T> struct is_polymorphic : public integral_constant<bool, BOOST_IS_POLYMORPHIC(T)> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_polymorphic : public integral_constant<bool, BOOST_IS_POLYMORPHIC(T)> {};
 
 #endif
 

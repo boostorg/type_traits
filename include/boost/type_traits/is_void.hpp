@@ -13,13 +13,13 @@
 
 namespace boost {
 
-template <class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
 struct is_void : public false_type {};
 
-template<> struct is_void<void> : public true_type {};
-template<> struct is_void<const void> : public true_type{};
-template<> struct is_void<const volatile void> : public true_type{};
-template<> struct is_void<volatile void> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_void<void> : public true_type {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_void<const void> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_void<const volatile void> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct is_void<volatile void> : public true_type{};
 
 } // namespace boost
 

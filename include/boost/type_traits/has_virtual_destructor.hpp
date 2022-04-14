@@ -16,9 +16,9 @@
 namespace boost {
 
 #ifdef BOOST_HAS_VIRTUAL_DESTRUCTOR
-   template <class T> struct has_virtual_destructor : public integral_constant<bool, BOOST_HAS_VIRTUAL_DESTRUCTOR(T)>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_virtual_destructor : public integral_constant<bool, BOOST_HAS_VIRTUAL_DESTRUCTOR(T)>{};
 #else
-   template <class T> struct has_virtual_destructor : public integral_constant<bool, false>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_virtual_destructor : public integral_constant<bool, false>{};
 #endif
 
 } // namespace boost

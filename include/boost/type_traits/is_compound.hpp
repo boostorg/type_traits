@@ -14,9 +14,9 @@
 namespace boost {
 
 #if defined( BOOST_CODEGEARC )
-   template <class T> struct is_compound : public integral_constant<bool, __is_compound(T)> {};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_compound : public integral_constant<bool, __is_compound(T)> {};
 #else
-   template <class T> struct is_compound : public integral_constant<bool, ! ::boost::is_fundamental<T>::value> {};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_compound : public integral_constant<bool, ! ::boost::is_fundamental<T>::value> {};
 #endif
 
 } // namespace boost

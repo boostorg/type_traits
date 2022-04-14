@@ -10,7 +10,7 @@
 #ifndef BOOST_TT_ADD_VOLATILE_HPP_INCLUDED
 #define BOOST_TT_ADD_VOLATILE_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
@@ -27,17 +27,17 @@ namespace boost {
 #   pragma warning(disable:4181) // warning C4181: qualifier applied to reference type ignored
 #endif 
 
-template <class T> struct add_volatile{ typedef T volatile type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct add_volatile{ typedef T volatile type; };
 
 #if defined(BOOST_MSVC)
 #   pragma warning(pop)
 #endif 
 
-template <class T> struct add_volatile<T&>{ typedef T& type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct add_volatile<T&>{ typedef T& type; };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using add_volatile_t = typename add_volatile<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using add_volatile_t = typename add_volatile<T>::type;
 
 #endif
 

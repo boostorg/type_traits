@@ -9,7 +9,9 @@
 #ifndef BOOST_TT_HAS_TRIVIAL_ASSIGN_HPP_INCLUDED
 #define BOOST_TT_HAS_TRIVIAL_ASSIGN_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
+#endif
 #include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
@@ -23,7 +25,7 @@
 
 namespace boost {
 
-   template <typename T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T>
    struct has_trivial_assign : public integral_constant < bool,
 #ifdef BOOST_HAS_TRIVIAL_ASSIGN
       BOOST_HAS_TRIVIAL_ASSIGN(T)
@@ -32,20 +34,20 @@ namespace boost {
 #endif
    > {};
 
-   template<> struct has_trivial_assign<void> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_trivial_assign<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-   template<> struct has_trivial_assign<void const> : public false_type{};
-   template<> struct has_trivial_assign<void const volatile> : public false_type{};
-   template<> struct has_trivial_assign<void volatile> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_trivial_assign<void const> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_trivial_assign<void const volatile> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template<> struct has_trivial_assign<void volatile> : public false_type{};
 #endif
-   template <class T> struct has_trivial_assign<T volatile> : public false_type{};
-   template <class T> struct has_trivial_assign<T&> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_trivial_assign<T volatile> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_trivial_assign<T&> : public false_type{};
 #if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
-   template <class T> struct has_trivial_assign<T&&> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_trivial_assign<T&&> : public false_type{};
 #endif
    // Arrays are not explictly assignable:
-   template <typename T, std::size_t N> struct has_trivial_assign<T[N]> : public false_type{};
-   template <typename T> struct has_trivial_assign<T[]> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T, std::size_t N> struct has_trivial_assign<T[N]> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct has_trivial_assign<T[]> : public false_type{};
 
 } // namespace boost
 

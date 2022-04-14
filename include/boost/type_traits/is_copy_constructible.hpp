@@ -9,8 +9,7 @@
 #ifndef BOOST_TT_IS_COPY_CONSTRUCTIBLE_HPP_INCLUDED
 #define BOOST_TT_IS_COPY_CONSTRUCTIBLE_HPP_INCLUDED
 
-#include <boost/config.hpp>
-#include <boost/detail/workaround.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40900)
 
@@ -20,12 +19,12 @@
 
 namespace boost {
 
-template <class T> struct is_copy_constructible : public boost::is_constructible<T, const T&>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_copy_constructible : public boost::is_constructible<T, const T&>{};
 
-template <> struct is_copy_constructible<void> : public false_type{};
-template <> struct is_copy_constructible<void const> : public false_type{};
-template <> struct is_copy_constructible<void const volatile> : public false_type{};
-template <> struct is_copy_constructible<void volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_constructible<void> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_constructible<void const> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_constructible<void const volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_copy_constructible<void volatile> : public false_type{};
 
 } // namespace boost
 

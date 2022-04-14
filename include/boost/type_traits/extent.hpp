@@ -10,9 +10,10 @@
 #ifndef BOOST_TT_EXTENT_HPP_INCLUDED
 #define BOOST_TT_EXTENT_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
+#endif
 #include <boost/type_traits/integral_constant.hpp>
-#include <boost/detail/workaround.hpp>
 
 namespace boost {
 
@@ -128,7 +129,7 @@ struct extent_imp<T const volatile[], 0>
 #endif  // non-CodeGear implementation
 }   // ::boost::detail
 
-template <class T, std::size_t N = 0>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N = 0>
 struct extent
    : public ::boost::integral_constant<std::size_t, ::boost::detail::extent_imp<T,N>::value>
 {

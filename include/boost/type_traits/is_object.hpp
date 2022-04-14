@@ -9,14 +9,14 @@
 #ifndef BOOST_TT_IS_OBJECT_HPP_INCLUDED
 #define BOOST_TT_IS_OBJECT_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/is_reference.hpp>
 #include <boost/type_traits/is_void.hpp>
 #include <boost/type_traits/is_function.hpp>
 
 namespace boost {
 
-template <class T> struct is_object
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_object
    : public 
       integral_constant<
          bool, 
