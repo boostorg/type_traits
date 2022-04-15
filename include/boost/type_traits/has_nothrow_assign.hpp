@@ -15,7 +15,7 @@
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/intrinsics.hpp>
 
-#if (defined(BOOST_MSVC) || defined(BOOST_INTEL))
+#if (defined(BOOST_MSVC) || defined(BOOST_INTEL) || defined(BOOST_NO_CXX11_NOEXCEPT) || defined(BOOST_NO_CXX11_RVALUE_REFERENCES))
 #include <boost/type_traits/has_trivial_assign.hpp>
 #endif
 #if !defined(BOOST_HAS_NOTHROW_ASSIGN)
