@@ -154,5 +154,9 @@ BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_integral<char16_t>::value, true);
 BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_integral<char32_t>::value, true);
 #endif
 
+#if defined(__cpp_char8_t) && __cpp_char8_t >= 201811L
+BOOST_CHECK_INTEGRAL_CONSTANT(::tt::is_integral<char8_t>::value, true);
+#endif
+
 TT_TEST_END
 
