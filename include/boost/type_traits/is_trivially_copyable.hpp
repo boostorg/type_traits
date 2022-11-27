@@ -18,7 +18,7 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct is_trivially_copyable
     : integral_constant<bool, has_trivial_copy<T>::value &&
         has_trivial_assign<T>::value &&

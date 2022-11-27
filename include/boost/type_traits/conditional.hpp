@@ -9,16 +9,16 @@
 #ifndef BOOST_TT_CONDITIONAL_HPP_INCLUDED
 #define BOOST_TT_CONDITIONAL_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
-template <bool b, class T, class U> struct conditional { typedef T type; };
-template <class T, class U> struct conditional<false, T, U> { typedef U type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <bool b, class T, class U> struct conditional { typedef T type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U> struct conditional<false, T, U> { typedef U type; };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <bool b, class T, class U> using conditional_t = typename conditional<b, T, U>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <bool b, class T, class U> using conditional_t = typename conditional<b, T, U>::type;
 
 #endif
 

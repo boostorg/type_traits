@@ -9,30 +9,32 @@
 #ifndef BOOST_TT_REMOVE_ALL_EXTENTS_HPP_INCLUDED
 #define BOOST_TT_REMOVE_ALL_EXTENTS_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
-#include <boost/detail/workaround.hpp>
+#endif
+
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
-template <class T> struct remove_all_extents{ typedef T type; };
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_all_extents{ typedef T type; };
 
 #if !defined(BOOST_NO_ARRAY_TYPE_SPECIALIZATIONS)
-template <class T, std::size_t N> struct remove_all_extents<T[N]> : public remove_all_extents<T>{};
-template <class T, std::size_t N> struct remove_all_extents<T const[N]> : public remove_all_extents<T const>{};
-template <class T, std::size_t N> struct remove_all_extents<T volatile[N]> : public remove_all_extents<T volatile>{};
-template <class T, std::size_t N> struct remove_all_extents<T const volatile[N]> : public remove_all_extents<T const volatile>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N> struct remove_all_extents<T[N]> : public remove_all_extents<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N> struct remove_all_extents<T const[N]> : public remove_all_extents<T const>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N> struct remove_all_extents<T volatile[N]> : public remove_all_extents<T volatile>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N> struct remove_all_extents<T const volatile[N]> : public remove_all_extents<T const volatile>{};
 #if !BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x610)) && !defined(__IBMCPP__) &&  !BOOST_WORKAROUND(__DMC__, BOOST_TESTED_AT(0x840))
-template <class T> struct remove_all_extents<T[]> : public remove_all_extents<T>{};
-template <class T> struct remove_all_extents<T const[]> : public remove_all_extents<T const>{};
-template <class T> struct remove_all_extents<T volatile[]> : public remove_all_extents<T volatile>{};
-template <class T> struct remove_all_extents<T const volatile[]> : public remove_all_extents<T const volatile>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_all_extents<T[]> : public remove_all_extents<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_all_extents<T const[]> : public remove_all_extents<T const>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_all_extents<T volatile[]> : public remove_all_extents<T volatile>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_all_extents<T const volatile[]> : public remove_all_extents<T const volatile>{};
 #endif
 #endif
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using remove_all_extents_t = typename remove_all_extents<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using remove_all_extents_t = typename remove_all_extents<T>::type;
 
 #endif
 

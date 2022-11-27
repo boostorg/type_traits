@@ -6,8 +6,7 @@
 #ifndef BOOST_TYPE_TRAITS_INTEGRAL_CONSTANT_HPP
 #define BOOST_TYPE_TRAITS_INTEGRAL_CONSTANT_HPP
 
-#include <boost/config.hpp>
-#include <boost/detail/workaround.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 #if (BOOST_WORKAROUND(BOOST_MSVC, BOOST_TESTED_AT(1400)) \
    || BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x610)) \
@@ -20,9 +19,9 @@
 namespace boost{
    namespace mpl
    {
-      template <bool B> struct bool_;
-      template <class I, I val> struct integral_c;
-      struct integral_c_tag;
+      BOOST_TYPE_TRAITS_MODULE_EXPORT template <bool B> struct bool_;
+      BOOST_TYPE_TRAITS_MODULE_EXPORT template <class I, I val> struct integral_c;
+      BOOST_TYPE_TRAITS_MODULE_EXPORT struct integral_c_tag;
    }
 }
 
@@ -30,18 +29,18 @@ namespace boost{
 
 namespace mpl_{
 
-   template <bool B> struct bool_;
-   template <class I, I val> struct integral_c;
-   struct integral_c_tag;
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <bool B> struct bool_;
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class I, I val> struct integral_c;
+   BOOST_TYPE_TRAITS_MODULE_EXPORT struct integral_c_tag;
 }
 
 namespace boost
 {
    namespace mpl
    {
-      using ::mpl_::bool_;
-      using ::mpl_::integral_c;
-      using ::mpl_::integral_c_tag;
+      BOOST_TYPE_TRAITS_MODULE_EXPORT using ::mpl_::bool_;
+      BOOST_TYPE_TRAITS_MODULE_EXPORT using ::mpl_::integral_c;
+      BOOST_TYPE_TRAITS_MODULE_EXPORT using ::mpl_::integral_c_tag;
    }
 }
 
@@ -49,7 +48,7 @@ namespace boost
 
 namespace boost{
 
-   template <class T, T val>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, T val>
    struct integral_constant
    {
       typedef mpl::integral_c_tag tag;
@@ -66,10 +65,10 @@ namespace boost{
       BOOST_CONSTEXPR operator T()const { return val; }
    };
 
-   template <class T, T val>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, T val>
    T const integral_constant<T, val>::value;
       
-   template <bool val>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <bool val>
    struct integral_constant<bool, val>
    {
       typedef mpl::integral_c_tag tag;
@@ -86,11 +85,11 @@ namespace boost{
       BOOST_CONSTEXPR operator bool()const { return val; }
    };
 
-   template <bool val>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <bool val>
    bool const integral_constant<bool, val>::value;
 
-   typedef integral_constant<bool, true> true_type;
-   typedef integral_constant<bool, false> false_type;
+   BOOST_TYPE_TRAITS_MODULE_EXPORT typedef integral_constant<bool, true> true_type;
+   BOOST_TYPE_TRAITS_MODULE_EXPORT typedef integral_constant<bool, false> false_type;
 
 }
 

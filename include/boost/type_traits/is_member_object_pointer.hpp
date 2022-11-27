@@ -15,7 +15,7 @@
 
 namespace boost {
 
-template <class T> struct is_member_object_pointer 
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_member_object_pointer 
    : public integral_constant<bool, 
    ::boost::is_member_pointer<T>::value && !::boost::is_member_function_pointer<T>::value>{};
 

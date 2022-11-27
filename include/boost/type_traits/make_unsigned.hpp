@@ -20,11 +20,13 @@
 #include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/add_const.hpp>
 #include <boost/type_traits/add_volatile.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/static_assert.hpp>
+#endif
 
 namespace boost {
 
-template <class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
 struct make_unsigned
 {
 private:
@@ -126,7 +128,7 @@ public:
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using make_unsigned_t = typename make_unsigned<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using make_unsigned_t = typename make_unsigned<T>::type;
 
 #endif
 

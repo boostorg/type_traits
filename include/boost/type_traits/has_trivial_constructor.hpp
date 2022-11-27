@@ -36,19 +36,19 @@
 
 namespace boost {
 
-template <typename T> struct has_trivial_constructor
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct has_trivial_constructor
 #ifdef BOOST_HAS_TRIVIAL_CONSTRUCTOR
    : public integral_constant <bool, ((::boost::is_pod<T>::value || BOOST_HAS_TRIVIAL_CONSTRUCTOR(T)) BOOST_TT_TRIVIAL_CONSTRUCT_FIX)>{};
 #else
    : public integral_constant <bool, ::boost::is_pod<T>::value>{};
 #endif
 
-template <> struct has_trivial_constructor<void> : public boost::false_type{};
-template <> struct has_trivial_constructor<void const> : public boost::false_type{};
-template <> struct has_trivial_constructor<void const volatile> : public boost::false_type{};
-template <> struct has_trivial_constructor<void volatile> : public boost::false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_constructor<void> : public boost::false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_constructor<void const> : public boost::false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_constructor<void const volatile> : public boost::false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_constructor<void volatile> : public boost::false_type{};
 
-template <class T> struct has_trivial_default_constructor : public has_trivial_constructor<T> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_trivial_default_constructor : public has_trivial_constructor<T> {};
 
 #undef BOOST_TT_TRIVIAL_CONSTRUCT_FIX
 

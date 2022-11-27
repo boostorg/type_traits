@@ -15,12 +15,12 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<template<class...> class Op, class... Args>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<template<class...> class Op, class... Args>
 using is_detected = typename
     detail::detector<nonesuch, void, Op, Args...>::value_t;
 
 #if !defined(BOOST_NO_CXX14_VARIABLE_TEMPLATES)
-template<template<class...> class Op, class... Args>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<template<class...> class Op, class... Args>
 constexpr bool is_detected_v = is_detected<Op, Args...>::value;
 #endif
 

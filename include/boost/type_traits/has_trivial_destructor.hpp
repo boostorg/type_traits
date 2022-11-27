@@ -27,20 +27,20 @@
 
 namespace boost {
 
-template <typename T> struct has_trivial_destructor : public integral_constant<bool, BOOST_HAS_TRIVIAL_DESTRUCTOR(T)>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct has_trivial_destructor : public integral_constant<bool, BOOST_HAS_TRIVIAL_DESTRUCTOR(T)>{};
 #else
 #include <boost/type_traits/is_pod.hpp>
 
 namespace boost{
 
-template <typename T> struct has_trivial_destructor : public integral_constant<bool, ::boost::is_pod<T>::value>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct has_trivial_destructor : public integral_constant<bool, ::boost::is_pod<T>::value>{};
 #endif
 
-template <> struct has_trivial_destructor<void> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_destructor<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-template <> struct has_trivial_destructor<void const> : public false_type{};
-template <> struct has_trivial_destructor<void const volatile> : public false_type{};
-template <> struct has_trivial_destructor<void volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_destructor<void const> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_destructor<void const volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_destructor<void volatile> : public false_type{};
 #endif
 
 } // namespace boost

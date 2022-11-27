@@ -17,7 +17,7 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<class T, class U>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class U>
 struct copy_reference {
     typedef typename conditional<is_rvalue_reference<U>::value,
         typename add_rvalue_reference<T>::type,
@@ -26,7 +26,7 @@ struct copy_reference {
 };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
-template<class T, class U>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class U>
 using copy_reference_t = typename copy_reference<T, U>::type;
 #endif
 

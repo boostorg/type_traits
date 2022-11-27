@@ -27,7 +27,7 @@ namespace boost {
 #   pragma warning(disable:4181) // warning C4181: qualifier applied to reference type ignored
 #endif 
 
-   template <class T> struct add_const
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct add_const
    {
       typedef T const type;
    };
@@ -36,14 +36,14 @@ namespace boost {
 #   pragma warning(pop)
 #endif 
 
-   template <class T> struct add_const<T&>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct add_const<T&>
    {
       typedef T& type;
    };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using add_const_t = typename add_const<T>::type;
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using add_const_t = typename add_const<T>::type;
 
 #endif
 

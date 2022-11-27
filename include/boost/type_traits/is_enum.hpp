@@ -145,19 +145,19 @@ template <typename T> struct is_enum_impl
 
 } // namespace detail
 
-template <class T> struct is_enum : public integral_constant<bool, ::boost::detail::is_enum_impl<T>::value> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_enum : public integral_constant<bool, ::boost::detail::is_enum_impl<T>::value> {};
 
 #else // BOOST_BORLANDC
 //
 // buggy is_convertible prevents working
 // implementation of is_enum:
-template <class T> struct is_enum : public integral_constant<bool, false> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_enum : public integral_constant<bool, false> {};
 
 #endif
 
 #else // BOOST_IS_ENUM
 
-template <class T> struct is_enum : public integral_constant<bool, BOOST_IS_ENUM(T)> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_enum : public integral_constant<bool, BOOST_IS_ENUM(T)> {};
 
 #endif
 

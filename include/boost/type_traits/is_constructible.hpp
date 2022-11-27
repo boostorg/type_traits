@@ -10,7 +10,12 @@
 #define BOOST_TT_IS_CONSTRUCTIBLE_HPP_INCLUDED
 
 #include <boost/type_traits/integral_constant.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/detail/workaround.hpp>
+#include <boost/static_assert.hpp>
+#else
+#include <boost/type_traits/detail/config.hpp>
+#endif
 
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_DECLTYPE) && !BOOST_WORKAROUND(BOOST_MSVC, < 1800) && !BOOST_WORKAROUND(BOOST_GCC_VERSION, < 40500)
 
@@ -19,7 +24,6 @@
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_complete.hpp>
-#include <boost/static_assert.hpp>
 
 #define BOOST_TT_IS_CONSTRUCTIBLE_CONFORMING 1
 
@@ -47,23 +51,23 @@ namespace boost{
 
    }
 
-   template <class T, class ...Args> struct is_constructible : public integral_constant<bool, sizeof(detail::is_constructible_imp::test<T, Args...>(0)) == sizeof(boost::type_traits::yes_type)>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class ...Args> struct is_constructible : public integral_constant<bool, sizeof(detail::is_constructible_imp::test<T, Args...>(0)) == sizeof(boost::type_traits::yes_type)>
    {
       BOOST_STATIC_ASSERT_MSG(::boost::is_complete<T>::value, "The target type must be complete in order to test for constructibility");
    };
-   template <class T, class Arg> struct is_constructible<T, Arg> : public integral_constant<bool, is_destructible<T>::value && sizeof(boost::detail::is_constructible_imp::test1<T, Arg>(0)) == sizeof(boost::type_traits::yes_type)>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class Arg> struct is_constructible<T, Arg> : public integral_constant<bool, is_destructible<T>::value && sizeof(boost::detail::is_constructible_imp::test1<T, Arg>(0)) == sizeof(boost::type_traits::yes_type)>
    {
       BOOST_STATIC_ASSERT_MSG(::boost::is_complete<T>::value, "The target type must be complete in order to test for constructibility");
    };
-   template <class Ref, class Arg> struct is_constructible<Ref&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&>(boost::declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
-   template <class Ref, class Arg> struct is_constructible<Ref&&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&&>(boost::declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Ref, class Arg> struct is_constructible<Ref&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&>(boost::declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Ref, class Arg> struct is_constructible<Ref&&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&&>(boost::declval<Arg>())) == sizeof(boost::type_traits::yes_type)>{};
 
-   template <> struct is_constructible<void> : public false_type{};
-   template <> struct is_constructible<void const> : public false_type{};
-   template <> struct is_constructible<void const volatile> : public false_type{};
-   template <> struct is_constructible<void volatile> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_constructible<void> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_constructible<void const> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_constructible<void const volatile> : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct is_constructible<void volatile> : public false_type{};
 
-   template <class T> struct is_constructible<T> : public is_default_constructible<T>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_constructible<T> : public is_default_constructible<T>{};
 
 #else
 

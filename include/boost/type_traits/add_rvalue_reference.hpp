@@ -8,7 +8,7 @@
 #ifndef BOOST_TYPE_TRAITS_EXT_ADD_RVALUE_REFERENCE__HPP
 #define BOOST_TYPE_TRAITS_EXT_ADD_RVALUE_REFERENCE__HPP
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 //----------------------------------------------------------------------------//
 
@@ -53,14 +53,14 @@ namespace type_traits_detail {
 
 }
 
-template <class T> struct add_rvalue_reference
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct add_rvalue_reference
 {
    typedef typename boost::type_traits_detail::add_rvalue_reference_imp<T>::type type;
 };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using add_rvalue_reference_t = typename add_rvalue_reference<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using add_rvalue_reference_t = typename add_rvalue_reference<T>::type;
 
 #endif
 

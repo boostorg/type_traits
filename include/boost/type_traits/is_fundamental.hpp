@@ -16,9 +16,9 @@ namespace boost {
 
 //* is a type T a fundamental type described in the standard (3.9.1)
 #if defined( BOOST_CODEGEARC )
-template <class T> struct is_fundamental : public integral_constant<bool, __is_fundamental(T)> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_fundamental : public integral_constant<bool, __is_fundamental(T)> {};
 #else
-template <class T> struct is_fundamental : public integral_constant<bool, ::boost::is_arithmetic<T>::value || ::boost::is_void<T>::value> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_fundamental : public integral_constant<bool, ::boost::is_arithmetic<T>::value || ::boost::is_void<T>::value> {};
 #endif
 
 } // namespace boost

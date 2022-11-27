@@ -15,20 +15,20 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 #ifndef BOOST_TT_ENABLE_IF_HPP_INCLUDED
 #define BOOST_TT_ENABLE_IF_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost {
 
-template<bool B, class T = void>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<bool B, class T = void>
 struct enable_if_ {
     typedef T type;
 };
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct enable_if_<false, T> { };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
-template<bool B, class T = void>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<bool B, class T = void>
 using enable_if_t = typename enable_if_<B, T>::type;
 #endif
 

@@ -26,11 +26,11 @@
 namespace boost {
 
 #if defined( BOOST_CODEGEARC )
-   template <class T> struct is_lvalue_reference : public integral_constant<bool, __is_reference(T)>{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_lvalue_reference : public integral_constant<bool, __is_reference(T)>{};
 #else
 
-   template <class T> struct is_lvalue_reference : public false_type{};
-   template <class T> struct is_lvalue_reference<T&> : public true_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_lvalue_reference : public false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_lvalue_reference<T&> : public true_type{};
 
 #if  defined(BOOST_ILLEGAL_CV_REFERENCES)
 // these are illegal specialisations; cv-qualifies applied to

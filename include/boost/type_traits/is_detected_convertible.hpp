@@ -15,11 +15,11 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<class To, template<class...> class Op, class... Args>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class To, template<class...> class Op, class... Args>
 using is_detected_convertible = is_convertible<detected_t<Op, Args...>, To>;
 
 #if !defined(BOOST_NO_CXX14_VARIABLE_TEMPLATES)
-template<class To, template<class...> class Op, class... Args>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class To, template<class...> class Op, class... Args>
 constexpr bool is_detected_convertible_v = is_detected_convertible<To, Op,
     Args...>::value;
 #endif

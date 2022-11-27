@@ -110,7 +110,7 @@ struct is_empty_impl
 
 } // namespace detail
 
-template <class T> struct is_empty : integral_constant<bool, ::boost::detail::is_empty_impl<T>::value> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_empty : integral_constant<bool, ::boost::detail::is_empty_impl<T>::value> {};
 
 } // namespace boost
 

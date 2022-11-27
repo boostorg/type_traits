@@ -9,7 +9,9 @@
 #ifndef BOOST_TT_HAS_TRIVIAL_COPY_HPP_INCLUDED
 #define BOOST_TT_HAS_TRIVIAL_COPY_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
+#endif
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_reference.hpp>
@@ -28,7 +30,7 @@
 
 namespace boost {
 
-template <typename T> struct has_trivial_copy 
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct has_trivial_copy 
 : public integral_constant<bool, 
 #ifdef BOOST_HAS_TRIVIAL_COPY
    BOOST_HAS_TRIVIAL_COPY(T) BOOST_TT_TRIVIAL_CONSTRUCT_FIX
@@ -37,24 +39,24 @@ template <typename T> struct has_trivial_copy
 #endif
 >{};
 // Arrays are not explicitly copyable:
-template <typename T, std::size_t N> struct has_trivial_copy<T[N]> : public false_type{};
-template <typename T> struct has_trivial_copy<T[]> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T, std::size_t N> struct has_trivial_copy<T[N]> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct has_trivial_copy<T[]> : public false_type{};
 // Are volatile types ever trivial?  We don't really know, so assume not:
-template <typename T> struct has_trivial_copy<T volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <typename T> struct has_trivial_copy<T volatile> : public false_type{};
 
-template <> struct has_trivial_copy<void> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_copy<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-template <> struct has_trivial_copy<void const> : public false_type{};
-template <> struct has_trivial_copy<void volatile> : public false_type{};
-template <> struct has_trivial_copy<void const volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_copy<void const> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_copy<void volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_trivial_copy<void const volatile> : public false_type{};
 #endif
 
-template <class T> struct has_trivial_copy<T&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_trivial_copy<T&> : public false_type{};
 #if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) 
-template <class T> struct has_trivial_copy<T&&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_trivial_copy<T&&> : public false_type{};
 #endif
 
-template <class T> struct has_trivial_copy_constructor : public has_trivial_copy<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_trivial_copy_constructor : public has_trivial_copy<T>{};
 
 #undef BOOST_TT_TRIVIAL_CONSTRUCT_FIX
 

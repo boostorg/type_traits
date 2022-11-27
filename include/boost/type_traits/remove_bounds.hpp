@@ -14,11 +14,11 @@
 namespace boost 
 {
 
-template <class T> struct remove_bounds : public remove_extent<T> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_bounds : public remove_extent<T> {};
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-template <class T> using remove_bounds_t = typename remove_bounds<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using remove_bounds_t = typename remove_bounds<T>::type;
 
 #endif
 

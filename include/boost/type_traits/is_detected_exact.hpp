@@ -15,11 +15,11 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<class Expected, template<class...> class Op, class... Args>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class Expected, template<class...> class Op, class... Args>
 using is_detected_exact = is_same<Expected, detected_t<Op, Args...> >;
 
 #if !defined(BOOST_NO_CXX14_VARIABLE_TEMPLATES)
-template<class Expected, template<class...> class Op, class... Args>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class Expected, template<class...> class Op, class... Args>
 constexpr bool is_detected_exact_v = is_detected_exact<Expected, Op,
     Args...>::value;
 #endif

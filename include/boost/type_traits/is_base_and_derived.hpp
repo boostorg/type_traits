@@ -15,8 +15,10 @@
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_convertible.hpp>
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <boost/static_assert.hpp>
+#endif
 #endif
 #include <boost/type_traits/remove_cv.hpp>
 #include <boost/type_traits/is_same.hpp>
@@ -228,15 +230,15 @@ struct is_base_and_derived_impl
 #endif
 } // namespace detail
 
-template <class Base, class Derived> struct is_base_and_derived
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_and_derived
    : public integral_constant<bool, (::boost::detail::is_base_and_derived_impl<Base, Derived>::value)> {};
 
-template <class Base, class Derived> struct is_base_and_derived<Base&, Derived> : public false_type{};
-template <class Base, class Derived> struct is_base_and_derived<Base, Derived&> : public false_type{};
-template <class Base, class Derived> struct is_base_and_derived<Base&, Derived&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_and_derived<Base&, Derived> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_and_derived<Base, Derived&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_and_derived<Base&, Derived&> : public false_type{};
 
 #if BOOST_WORKAROUND(BOOST_CODEGEARC, BOOST_TESTED_AT(0x610))
-template <class Base> struct is_base_and_derived<Base, Base> : public true_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base> struct is_base_and_derived<Base, Base> : public true_type{};
 #endif
 
 } // namespace boost

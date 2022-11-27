@@ -9,14 +9,13 @@
 #ifndef BOOST_TT_IS_RVALUE_REFERENCE_HPP_INCLUDED
 #define BOOST_TT_IS_RVALUE_REFERENCE_HPP_INCLUDED
 
-#include <boost/config.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
 namespace boost {
 
-template <class T> struct is_rvalue_reference : public false_type {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_rvalue_reference : public false_type {};
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-template <class T> struct is_rvalue_reference<T&&> : public true_type {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_rvalue_reference<T&&> : public true_type {};
 #endif
 
 } // namespace boost

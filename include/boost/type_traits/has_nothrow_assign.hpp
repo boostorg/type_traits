@@ -9,12 +9,16 @@
 #ifndef BOOST_TT_HAS_NOTHROW_ASSIGN_HPP_INCLUDED
 #define BOOST_TT_HAS_NOTHROW_ASSIGN_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <cstddef> // size_t
+#endif
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/intrinsics.hpp>
 
-#if !defined(BOOST_HAS_NOTHROW_ASSIGN) || defined(BOOST_MSVC) || defined(BOOST_INTEL)
+#if (defined(BOOST_MSVC) || defined(BOOST_INTEL) || defined(BOOST_NO_CXX11_NOEXCEPT) || defined(BOOST_NO_CXX11_RVALUE_REFERENCES))
 #include <boost/type_traits/has_trivial_assign.hpp>
+#endif
+#if !defined(BOOST_HAS_NOTHROW_ASSIGN)
 #if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_const.hpp>
@@ -49,9 +53,9 @@ namespace boost {
 
 #endif
 
-   template <class T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
    struct has_nothrow_assign : public integral_constant < bool,
-#ifndef BOOST_HAS_NOTHROW_ASSIGN
+#if !defined(BOOST_HAS_NOTHROW_ASSIGN)
 #if !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
       // Portable C++11 version:
       detail::has_nothrow_assign_imp<T, 
@@ -66,17 +70,17 @@ namespace boost {
 #endif
    > {};
 
-template <class T, std::size_t N> struct has_nothrow_assign <T[N]> : public has_nothrow_assign<T> {};
-template <> struct has_nothrow_assign<void> : public false_type{};
-template <class T> struct has_nothrow_assign<T volatile> : public false_type{};
-template <class T> struct has_nothrow_assign<T&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, std::size_t N> struct has_nothrow_assign <T[N]> : public has_nothrow_assign<T> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_nothrow_assign<void> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_assign<T volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_assign<T&> : public false_type{};
 #if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
-template <class T> struct has_nothrow_assign<T&&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_nothrow_assign<T&&> : public false_type{};
 #endif
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
-template <> struct has_nothrow_assign<void const> : public false_type{};
-template <> struct has_nothrow_assign<void const volatile> : public false_type{};
-template <> struct has_nothrow_assign<void volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_nothrow_assign<void const> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_nothrow_assign<void const volatile> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <> struct has_nothrow_assign<void volatile> : public false_type{};
 #endif
 
 } // namespace boost

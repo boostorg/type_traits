@@ -17,11 +17,9 @@
 #include <boost/type_traits/is_complete.hpp>
 #include <boost/type_traits/is_void.hpp>
 #include <boost/type_traits/is_array.hpp>
-#include <boost/static_assert.hpp>
 #ifndef BOOST_IS_CONVERTIBLE
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/detail/config.hpp>
-#include <boost/type_traits/is_array.hpp>
 #include <boost/type_traits/is_arithmetic.hpp>
 #include <boost/type_traits/is_void.hpp>
 #if !defined(BOOST_NO_IS_ABSTRACT)
@@ -41,6 +39,10 @@
 #include <boost/type_traits/is_function.hpp>
 #include <boost/type_traits/is_same.hpp>
 #endif // BOOST_IS_CONVERTIBLE
+
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
+#include <boost/static_assert.hpp>
+#endif
 
 namespace boost {
 
@@ -477,7 +479,7 @@ template <class From> struct is_convertible_impl_dispatch<From, void volatile> :
 
 } // namespace detail
 
-template <class From, class To> 
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class From, class To>
 struct is_convertible : public integral_constant<bool, ::boost::detail::is_convertible_impl_dispatch<From, To>::value> 
 {
    BOOST_STATIC_ASSERT_MSG(boost::is_complete<To>::value || boost::is_void<To>::value || boost::is_array<To>::value, "Destination argument type to is_convertible must be a complete type");
@@ -486,7 +488,7 @@ struct is_convertible : public integral_constant<bool, ::boost::detail::is_conve
 
 #else
 
-template <class From, class To>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class From, class To>
 struct is_convertible : public integral_constant<bool, BOOST_IS_CONVERTIBLE(From, To)> 
 {
 #if defined(BOOST_MSVC)

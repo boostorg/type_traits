@@ -27,12 +27,12 @@ namespace boost {
       };
    }
 
-   template <class Base, class Derived> struct is_base_of
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_of
       : public integral_constant<bool, (::boost::detail::is_base_of_imp<Base, Derived>::value)> {};
 
-   template <class Base, class Derived> struct is_base_of<Base, Derived&> : false_type{};
-   template <class Base, class Derived> struct is_base_of<Base&, Derived&> : false_type{};
-   template <class Base, class Derived> struct is_base_of<Base&, Derived> : false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_of<Base, Derived&> : false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_of<Base&, Derived&> : false_type{};
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_base_of<Base&, Derived> : false_type{};
 
 } // namespace boost
 

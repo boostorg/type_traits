@@ -9,11 +9,16 @@
 #ifndef BOOST_TT_HAS_NEW_OPERATOR_HPP_INCLUDED
 #define BOOST_TT_HAS_NEW_OPERATOR_HPP_INCLUDED
 
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <new> // std::nothrow_t
 #include <cstddef> // std::size_t
+#include <boost/detail/workaround.hpp>
+#else
+#include <boost/type_traits/detail/config.hpp>
+#endif
+
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
-#include <boost/detail/workaround.hpp>
 
 #if defined(new) 
 #  if BOOST_WORKAROUND(BOOST_MSVC, >= 1310)
@@ -136,7 +141,7 @@ namespace detail {
     };
 } // namespace detail
 
-template <class T> struct has_new_operator : public integral_constant<bool, ::boost::detail::has_new_operator_impl<T>::value>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct has_new_operator : public integral_constant<bool, ::boost::detail::has_new_operator_impl<T>::value>{};
 
 } // namespace boost
 

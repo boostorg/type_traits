@@ -10,18 +10,18 @@
 #ifndef BOOST_TT_REMOVE_CV_REF_HPP_INCLUDED
 #define BOOST_TT_REMOVE_CV_REF_HPP_INCLUDED
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 #include <boost/type_traits/remove_cv.hpp>
 #include <boost/type_traits/remove_reference.hpp>
 
 namespace boost {
 
-   template <class T> struct remove_cv_ref: remove_cv<typename remove_reference<T>::type> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct remove_cv_ref: remove_cv<typename remove_reference<T>::type> {};
 
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using remove_cv_ref_t = typename remove_cv_ref<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using remove_cv_ref_t = typename remove_cv_ref<T>::type;
 
 #endif
 

@@ -10,8 +10,6 @@
 
 #ifndef BOOST_TT_DISABLE_INTRINSICS
 
-#include <boost/config.hpp>
-
 #ifndef BOOST_TT_CONFIG_HPP_INCLUDED
 #include <boost/type_traits/detail/config.hpp>
 #endif
@@ -172,7 +170,9 @@
 // we do not #include those here as it produces cyclic dependencies and
 // can cause the intrinsics to not even be used at all!
 //
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #   include <cstddef>
+#endif
 
 #   if __has_feature(is_union)
 #     define BOOST_IS_UNION(T) __is_union(T)

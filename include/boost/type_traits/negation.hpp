@@ -14,7 +14,7 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<class T>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T>
 struct negation
     : integral_constant<bool, !bool(T::value)> { };
 

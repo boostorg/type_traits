@@ -12,7 +12,9 @@
 #include <boost/type_traits/is_base_of.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/make_void.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <utility>
+#endif
 
 namespace boost {
    namespace detail {
@@ -50,7 +52,7 @@ namespace boost {
 
    } // namespace detail
 
-   template<class T, class U>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T, class U>
    struct is_virtual_base_of : public
       boost::integral_constant<
       bool,
@@ -129,13 +131,13 @@ namespace boost {
 
 } // namespace detail
 
-template <class Base, class Derived> struct is_virtual_base_of : public integral_constant<bool, (::boost::detail::is_virtual_base_of_impl2<Base, Derived>::value)> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_virtual_base_of : public integral_constant<bool, (::boost::detail::is_virtual_base_of_impl2<Base, Derived>::value)> {};
 
 #endif
 
-template <class Base, class Derived> struct is_virtual_base_of<Base&, Derived> : public false_type{};
-template <class Base, class Derived> struct is_virtual_base_of<Base, Derived&> : public false_type{};
-template <class Base, class Derived> struct is_virtual_base_of<Base&, Derived&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_virtual_base_of<Base&, Derived> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_virtual_base_of<Base, Derived&> : public false_type{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class Base, class Derived> struct is_virtual_base_of<Base&, Derived&> : public false_type{};
 
 #ifdef BOOST_MSVC
 #pragma warning( pop )

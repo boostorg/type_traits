@@ -17,14 +17,14 @@
 namespace boost {
 
 #ifdef BOOST_IS_UNION
-template <class T> struct is_union : public integral_constant<bool, BOOST_IS_UNION(T)> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_union : public integral_constant<bool, BOOST_IS_UNION(T)> {};
 #else
-template <class T> struct is_union : public integral_constant<bool, false> {};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_union : public integral_constant<bool, false> {};
 #endif
 
-template <class T> struct is_union<T const> : public is_union<T>{};
-template <class T> struct is_union<T volatile const> : public is_union<T>{};
-template <class T> struct is_union<T volatile> : public is_union<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_union<T const> : public is_union<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_union<T volatile const> : public is_union<T>{};
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct is_union<T volatile> : public is_union<T>{};
 
 } // namespace boost
 

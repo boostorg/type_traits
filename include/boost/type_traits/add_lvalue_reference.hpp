@@ -10,13 +10,13 @@
 
 namespace boost{
 
-template <class T> struct add_lvalue_reference
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct add_lvalue_reference
 {
    typedef typename boost::add_reference<T>::type type; 
 };
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-template <class T> struct add_lvalue_reference<T&&>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> struct add_lvalue_reference<T&&>
 {
    typedef T& type;
 };
@@ -24,7 +24,7 @@ template <class T> struct add_lvalue_reference<T&&>
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-   template <class T> using add_lvalue_reference_t = typename add_lvalue_reference<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using add_lvalue_reference_t = typename add_lvalue_reference<T>::type;
 
 #endif
 

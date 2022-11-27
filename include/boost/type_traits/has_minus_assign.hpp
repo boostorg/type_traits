@@ -9,7 +9,6 @@
 #ifndef BOOST_TT_has_minus_assign_ASSIGN_HPP_INCLUDED
 #define BOOST_TT_has_minus_assign_ASSIGN_HPP_INCLUDED
 
-#include <boost/config.hpp>
 #include <boost/type_traits/detail/config.hpp>
 
 // cannot include this header without getting warnings of the kind:
@@ -88,7 +87,7 @@ namespace boost
 
    }
 
-   template <class T, class U = T, class Ret = boost::binary_op_detail::dont_care>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U = T, class Ret = boost::binary_op_detail::dont_care>
    struct has_minus_assign :
       public boost::binary_op_detail::has_minus_assign_void_ptr_filter<
       T, U, Ret,

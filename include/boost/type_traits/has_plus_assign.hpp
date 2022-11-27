@@ -9,7 +9,6 @@
 #ifndef BOOST_TT_HAS_PLUS_ASSIGN_HPP_INCLUDED
 #define BOOST_TT_HAS_PLUS_ASSIGN_HPP_INCLUDED
 
-#include <boost/config.hpp>
 #include <boost/type_traits/detail/config.hpp>
 
 // cannot include this header without getting warnings of the kind:
@@ -91,7 +90,7 @@ namespace boost
 
    }
 
-   template <class T, class U = T, class Ret = boost::binary_op_detail::dont_care>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class U = T, class Ret = boost::binary_op_detail::dont_care>
    struct has_plus_assign : public boost::binary_op_detail:: has_plus_assign_filter_impossible <T, U, Ret, boost::is_arithmetic<typename boost::remove_reference<T>::type>::value && boost::is_pointer<typename remove_reference<U>::type>::value && !boost::is_same<bool, typename boost::remove_cv<typename remove_reference<T>::type>::type>::value> {};
 
 }

@@ -9,19 +9,19 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 //
 
-#include <boost/config.hpp>
+#include <boost/type_traits/detail/config.hpp>
 
 namespace boost
 {
 
-template<class T> struct type_identity
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<class T> struct type_identity
 {
     typedef T type;
 };
 
 #if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
 
-template <class T> using type_identity_t = typename type_identity<T>::type;
+BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T> using type_identity_t = typename type_identity<T>::type;
 
 #endif
 

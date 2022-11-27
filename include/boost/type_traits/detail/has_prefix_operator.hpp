@@ -6,7 +6,6 @@
 //
 //  See http://www.boost.org/libs/type_traits for most recent version including documentation.
 
-#include <boost/config.hpp>
 #include <boost/type_traits/detail/config.hpp>
 
 #if defined(BOOST_TT_HAS_ACCURATE_BINARY_OPERATOR_DETECTION)
@@ -16,7 +15,9 @@
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/type_traits/is_void.hpp>
 #include <boost/type_traits/add_reference.hpp>
+#ifndef BOOST_TYPE_TRAITS_AS_MODULE
 #include <utility>
+#endif
 
 #ifdef BOOST_GCC
 #pragma GCC diagnostic push
@@ -57,11 +58,11 @@ namespace boost
 
    }
 
-   template <class T, class Ret = boost::binary_op_detail::dont_care>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T, class Ret = boost::binary_op_detail::dont_care>
    struct BOOST_TT_TRAIT_NAME : public boost::binary_op_detail::BOOST_JOIN(BOOST_TT_TRAIT_NAME, _ret_imp) <T, Ret> {};
-   template <class T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
    struct BOOST_TT_TRAIT_NAME<T, void> : public boost::binary_op_detail::BOOST_JOIN(BOOST_TT_TRAIT_NAME, _void_imp) <T> {};
-   template <class T>
+   BOOST_TYPE_TRAITS_MODULE_EXPORT template <class T>
    struct BOOST_TT_TRAIT_NAME<T, boost::binary_op_detail::dont_care> : public boost::binary_op_detail::BOOST_JOIN(BOOST_TT_TRAIT_NAME, _dc_imp) <T> {};
 
 

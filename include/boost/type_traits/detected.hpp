@@ -15,7 +15,7 @@ or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 namespace boost {
 
-template<template<class...> class Op, class... Args>
+BOOST_TYPE_TRAITS_MODULE_EXPORT template<template<class...> class Op, class... Args>
 using detected_t = typename
     detail::detector<nonesuch, void, Op, Args...>::type;
 
