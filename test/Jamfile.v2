@@ -1,21 +1,21 @@
 # copyright John Maddock 2004
-# Use, modification and distribution are subject to the 
-# Boost Software License, Version 1.0. (See accompanying file 
+# Use, modification and distribution are subject to the
+# Boost Software License, Version 1.0. (See accompanying file
 # LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 # bring in the rules for testing
 import testing ;
 import os ;
 
-if [ os.environ CI ] 
+if [ os.environ CI ]
 {
-CI_DEFINES = <define>CI_SUPPRESS_KNOWN_ISSUES=1 ;
+    CI_DEFINES = <define>CI_SUPPRESS_KNOWN_ISSUES=1 ;
 }
 
 
 # type_traits in V1 seem to have two modes: standalone, triggered
 # by a command line option, and a regular. For now, just imitate
-# regular  
+# regular
 
 project : requirements
    # default to all warnings on:
@@ -32,7 +32,7 @@ project : requirements
    <toolset>msvc:<warnings-as-errors>on
    <include>libs/tt2/light/include
    $(CI_DEFINES)
-;             
+;
 
 rule all-tests {
      local result ;
@@ -51,9 +51,9 @@ rule all-tests {
      {
          result += [ run $(source).cpp : : : <define>BOOST_TT_DISABLE_INTRINSICS : $(source)_no_intrinsics ] ;
      }
-     return $(result) ;     
+     return $(result) ;
 }
-            
+
 test-suite type_traits : [ all-tests ] ;
 
 
