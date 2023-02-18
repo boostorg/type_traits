@@ -18,7 +18,6 @@
 
 // These conditions should be similar to those in is_nothrow_swappable.hpp
 #if defined(BOOST_NO_SFINAE_EXPR) || defined(BOOST_NO_CXX11_NOEXCEPT) || defined(BOOST_NO_CXX11_DECLTYPE) || defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) \
-    || BOOST_WORKAROUND(BOOST_GCC, < 40700) \
     || (defined(__GLIBCXX__) && __GLIBCXX__ <= 20120301) // built-in clang++ -std=c++11 on Travis, w/ libstdc++ 4.6
 #define BOOST_TYPE_TRAITS_IS_NOTHROW_SWAPPABLE_EMULATED
 #endif
