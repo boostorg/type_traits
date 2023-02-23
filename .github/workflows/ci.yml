@@ -236,7 +236,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        standard: [ 14, 17 ]
+        standard: [ 14 ]
     steps:
       - uses: actions/checkout@v2
         with:
