@@ -108,6 +108,7 @@
 [def __is_nothrow_move_constructible [link boost_typetraits.reference.is_nothrow_move_constructible is_nothrow_move_constructible]]
 [def __has_nothrow_assign [link boost_typetraits.reference.has_nothrow_assign has_nothrow_assign]]
 [def __is_nothrow_move_assignable [link boost_typetraits.reference.is_nothrow_move_assignable is_nothrow_move_assignable]]
+[def __is_swappable [link boost_typetraits.reference.is_swappable is_swappable]]
 [def __is_nothrow_swappable [link boost_typetraits.reference.is_nothrow_swappable is_nothrow_swappable]]
 
 [def __is_base_of [link boost_typetraits.reference.is_base_of is_base_of]]
@@ -440,6 +441,7 @@ See __has_trivial_constructor.
 [include is_scoped_enum.qbk]
 [include is_signed.qbk]
 [include is_stateless.qbk]
+[include is_swappable.qbk]
 [include is_trivially_copyable.qbk]
 [include is_unbounded_array.qbk]
 [include is_union.qbk]
