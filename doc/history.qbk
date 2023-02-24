@@ -1,4 +1,4 @@
-[/ 
+[/
   Copyright 2009 John Maddock.
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE_1_0.txt or copy at
@@ -6,6 +6,11 @@
 ]
 
 [section:history History]
+
+[h4 Boost-1.82.0]
+
+* Added __is_swappable trait.
+* Added a workaround for gcc 4.6 that allows __is_nothrow_swappable to work.
 
 [h4 Boost-1.70.0]
 
