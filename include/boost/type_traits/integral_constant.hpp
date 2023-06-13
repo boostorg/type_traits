@@ -61,7 +61,7 @@ namespace boost{
       {
          static const char data[sizeof(long)] = { 0 };
          static const void* pdata = data;
-         return *(reinterpret_cast<const mpl::integral_c<T, val>*>(pdata));
+         return *static_cast<const mpl::integral_c<T, val>*>(pdata);
       }
       BOOST_CONSTEXPR operator T()const { return val; }
    };
@@ -81,7 +81,7 @@ namespace boost{
       {
          static const char data[sizeof(long)] = { 0 };
          static const void* pdata = data;
-         return *(reinterpret_cast<const mpl::bool_<val>*>(pdata));
+         return *static_cast<const mpl::bool_<val>*>(pdata);
       }
       BOOST_CONSTEXPR operator bool()const { return val; }
    };
