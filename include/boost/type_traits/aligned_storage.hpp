@@ -42,21 +42,20 @@ struct aligned_storage_imp
 {
     union data_t
     {
-        char buf[size_];
-
+        unsigned char buf[size_];
         typename ::boost::type_with_alignment<alignment_>::type align_;
     } data_;
-    void* address() const { return const_cast<aligned_storage_imp*>(this); }
+    void* address() const { return const_cast<unsigned char*>(data_.buf); }
 };
 template <std::size_t size>
 struct aligned_storage_imp<size, std::size_t(-1)>
 {
    union data_t
    {
-      char buf[size];
+      unsigned char buf[size];
       ::boost::detail::max_align align_;
    } data_;
-   void* address() const { return const_cast<aligned_storage_imp*>(this); }
+   void* address() const { return const_cast<unsigned char*>(data_.buf); }
 };
 
 template< std::size_t alignment_ >
