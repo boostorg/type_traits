@@ -57,12 +57,8 @@ namespace boost{
       typedef integral_constant<T, val> type;
       static const T value = val;
 
-      operator const mpl::integral_c<T, val>& ()const
-      {
-         static const char data[sizeof(long)] = { 0 };
-         static const void* pdata = data;
-         return *(reinterpret_cast<const mpl::integral_c<T, val>*>(pdata));
-      }
+      BOOST_CONSTEXPR operator mpl::integral_c<T, val>()const
+      { return mpl::integral_c<T, val>(); }
       BOOST_CONSTEXPR operator T()const { return val; }
    };
 
@@ -77,12 +73,8 @@ namespace boost{
       typedef integral_constant<bool, val> type;
       static const bool value = val;
 
-      operator const mpl::bool_<val>& ()const
-      {
-         static const char data[sizeof(long)] = { 0 };
-         static const void* pdata = data;
-         return *(reinterpret_cast<const mpl::bool_<val>*>(pdata));
-      }
+      BOOST_CONSTEXPR operator mpl::bool_<val>()const
+      { return mpl::bool_<val>(); }
       BOOST_CONSTEXPR operator bool()const { return val; }
    };
 
