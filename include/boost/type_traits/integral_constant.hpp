@@ -63,7 +63,7 @@ namespace boost{
          const void* const pdata = data;
          return *static_cast<const mpl::integral_c<T, val>*>(pdata);
       }
-      BOOST_CONSTEXPR operator T()const { return val; }
+      BOOST_CONSTEXPR operator T()const BOOST_NOEXCEPT { return val; }
    };
 
    template <class T, T val>
@@ -83,7 +83,7 @@ namespace boost{
          const void* const pdata = data;
          return *static_cast<const mpl::bool_<val>*>(pdata);
       }
-      BOOST_CONSTEXPR operator bool()const { return val; }
+      BOOST_CONSTEXPR operator bool()const BOOST_NOEXCEPT { return val; }
    };
 
    template <bool val>
