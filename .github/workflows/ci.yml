@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: [ g++-12, g++-13, clang++-15 clang++-16 ]
+        compiler: [ g++-12, g++-13, clang++-15, clang++-16, clang++-17, clang++-18 ]
         standard: [ c++03, c++11, c++14, c++17, c++2a, gnu++03, gnu++11, gnu++14, gnu++17, gnu++2a ]
     steps:
       - uses: actions/checkout@v2
@@ -47,7 +47,7 @@ jobs:
         if: steps.retry1.outcome=='failure'
         run: sudo apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
       - name: Install packages
-        run: sudo apt install g++-12 g++-13 clang-15 clang-16
+        run: sudo apt install g++-12 g++-13 clang-15 clang-16 clang-17 clang-18
       - name: Checkout main boost
         run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
       - name: Update tools/boostdep
