@@ -20,12 +20,11 @@ git clone -b $TRAVIS_BRANCH --depth 1 https://github.com/boostorg/boost.git boos
 cd boost-root
 git submodule update --init tools/build
 git submodule update --init libs/config
-git submodule update --init libs/polygon
 git submodule update --init tools/boost_install
 git submodule update --init libs/headers
 git submodule update --init tools/boostdep
 cp -r $TRAVIS_BUILD_DIR/* libs/type_traits
-python tools/boostdep/depinst/depinst.py math
+python tools/boostdep/depinst/depinst.py type_traits
 ./bootstrap.sh
 ./b2 headers
 
