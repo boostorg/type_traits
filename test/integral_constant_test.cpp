@@ -11,6 +11,8 @@ int main ()
 {
     // [2025-01-07] Adapted from example in https://en.cppreference.com/w/cpp/types/integral_constant ...
 
+#ifndef BOOST_NO_CXX11_CONSTEXPR
+
     using two_t  = boost::integral_constant <int, 2>;
     using four_t = boost::integral_constant <int, 4>;
 
@@ -25,4 +27,5 @@ int main ()
     BOOST_STATIC_ASSERT ((c0::value != E::e1));
     BOOST_STATIC_ASSERT ((c0 () == E::e0));
     BOOST_STATIC_ASSERT ((boost::is_same <c1, c1>::value));
+#endif
 }
