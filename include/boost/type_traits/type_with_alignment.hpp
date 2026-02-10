@@ -111,8 +111,7 @@ template<> struct is_pod< ::boost::tt_align_ns::a32> : public true_type{};
 template<> struct is_pod< ::boost::tt_align_ns::a64> : public true_type{};
 template<> struct is_pod< ::boost::tt_align_ns::a128> : public true_type{};
 
-#endif
-#if (defined(BOOST_MSVC) || (defined(BOOST_INTEL) && defined(_MSC_VER))) && !defined(BOOST_TT_DISABLE_INTRINSICS)
+#elif (defined(BOOST_MSVC) || (defined(BOOST_INTEL) && defined(_MSC_VER))) && !defined(BOOST_TT_DISABLE_INTRINSICS)
 //
 // MSVC supports types which have alignments greater than the normal
 // maximum: these are used for example in the types __m64 and __m128
